@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wayfinder — how a re-timed bus could be shown</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --page:#f3f4f1; --surface:#fff; --line:#e3e5e0; --ink:#16202b;
+    --ink2:#4a5561; --ink3:#6c7681;
+    --over:#d1392e; --busy:#e8872a; --room:#8e979f; --unknown:#b3b9bf;
+    --good:#16794a; --focus:#2a6fd6;
+    --radius:10px; --shadow:0 1px 2px rgba(22,32,43,.06),0 2px 8px rgba(22,32,43,.04);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;
+       font-size:14px;color:var(--ink);background:var(--page);display:flex;flex-direction:column;overflow:hidden}
+  header{display:flex;align-items:center;gap:16px;padding:9px 18px;background:var(--surface);
+         border-bottom:1px solid var(--line);flex:none}
+  header h1{margin:0;font-size:16px;letter-spacing:-.01em}
+  header p{margin:0;color:var(--ink3);font-size:12px}
+  .spacer{flex:1}
+  .seg{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .seg button{border:0;background:var(--surface);padding:5px 11px;font:inherit;font-size:12.5px;
+              color:var(--ink2);cursor:pointer}
+  .seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+
+  main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;
+       padding:10px 18px 12px;min-height:0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow)}
+  #mapwrap{position:relative;overflow:hidden;min-height:0}
+  #map{position:absolute;inset:0;background:#dde7ec}
+
+  /* ---- map overlays ---- */
+  .overlay{position:absolute;z-index:500;background:var(--surface);border:1px solid var(--line);
+           border-radius:8px;box-shadow:var(--shadow);font-size:12px}
+  #clock{top:10px;left:58px;padding:7px 12px;display:flex;align-items:center;gap:10px}
+  #clock .t{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  #clock .k{color:var(--ink3);font-size:11px;line-height:1.25}
+  #legend{left:10px;bottom:10px;padding:8px 11px;color:var(--ink2);display:grid;gap:4px;font-size:11.5px}
+  #legend .row{display:flex;align-items:center;gap:7px}
+  .ln{width:24px;height:0;border-top:4px solid;border-radius:2px}
+  .ln.dash{border-top-style:dashed;border-top-width:3px}
+  .dot{width:9px;height:9px;border-radius:50%;border:2px solid var(--ink);background:#fff;flex:none}
+  .ring{width:11px;height:11px;border-radius:50%;border:2px solid var(--over);flex:none}
+  #note{right:10px;bottom:10px;padding:6px 10px;color:var(--ink3);font-size:11px;max-width:230px;
+        line-height:1.3}
+
+  /* ---- side panel ---- */
+  .side{display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto}
+  .side .card{padding:11px 13px;flex:none}
+  h2{margin:0 0 2px;font-size:13.5px;font-weight:650}
+  .sub{margin:0;color:var(--ink3);font-size:11.5px}
+  #scrub{width:100%;margin:11px 0 2px;accent-color:var(--ink)}
+  .ticks{display:flex;justify-content:space-between;color:var(--ink3);font-size:10px;
+         font-variant-numeric:tabular-nums}
+  .capture{font-size:11px;color:var(--ink3);margin-top:7px;line-height:1.3}
+
+  /* move rows */
+  .move{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:8px 0;
+        border-top:1px solid var(--line);align-items:start}
+  .move:first-of-type{border-top:0}
+  .move .hr{font-variant-numeric:tabular-nums;font-weight:700;font-size:12px;color:var(--ink)}
+  .move .hr small{display:block;font-weight:400;color:var(--ink3);font-size:10px}
+  .move .what{font-size:11.5px;line-height:1.35;color:var(--ink2)}
+  .move .what b{color:var(--ink)}
+  .move .flow{display:flex;align-items:center;gap:5px;margin:2px 0 3px;font-size:11.5px}
+  .chip{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:18px;
+        padding:0 5px;border-radius:5px;font-size:10.5px;font-weight:700;color:#fff}
+  .arrow{color:var(--ink3)}
+  .warn{color:var(--over);font-weight:600}
+  .ok{color:var(--good);font-weight:600}
+
+  /* proposed route block */
+  .prop{border-left:3px solid var(--focus);padding-left:9px;margin-top:8px;font-size:11.5px;
+        color:var(--ink2);line-height:1.35}
+  .tag{display:inline-block;background:#eef3fb;color:var(--focus);border:1px solid #cfe0f8;
+       border-radius:4px;padding:0 5px;font-size:10px;font-weight:700;letter-spacing:.03em;
+       text-transform:uppercase;margin-bottom:3px}
+  .unverified{color:var(--over)}
+
+  /* the pulse on the map */
+  .pulse{animation:pulse 1.9s ease-out infinite}
+  @keyframes pulse{0%{stroke-opacity:.85;stroke-width:2}70%{stroke-opacity:0;stroke-width:16}
+                   100%{stroke-opacity:0;stroke-width:16}}
+  .leaflet-container{font:inherit}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Wayfinder — showing a re-timed bus</h1>
+    <p>Mockup. Real geometry, real moves, real hourly demand. Nothing here is a new vehicle.</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="seg" role="group" aria-label="Timetable">
+    <button id="btnBefore" aria-pressed="false">As scheduled</button>
+    <button id="btnAfter" aria-pressed="true">After re-timing</button>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="mapwrap" aria-label="Route map">
+    <div id="map"></div>
+    <div class="overlay" id="clock">
+      <span class="t" id="clockText">16:00</span>
+      <span class="k" id="clockMeta">R1 unmet<br>128 passengers</span>
+    </div>
+    <div class="overlay" id="legend">
+      <div class="row"><span class="ln" style="border-color:#8e979f"></span> Route runs normally</div>
+      <div class="row"><span class="ln" style="border-color:#d1392e"></span> Pressure: riders left behind</div>
+      <div class="row"><span class="ring"></span> Stop with unmet demand this hour</div>
+      <div class="row"><span class="ln dash" style="border-color:#2a6fd6"></span> Moved trip (donor → receiver)</div>
+    </div>
+    <div class="overlay" id="note">Drag the hour. The map is the timetable.</div>
+  </section>
+
+  <aside class="side">
+    <section class="card">
+      <h2>Hour of day</h2>
+      <p class="sub">Demand and service, hour by hour, on the recorded Saturday.</p>
+      <input id="scrub" type="range" min="0" max="23" value="16" step="1" aria-label="Hour of day" />
+      <div class="ticks"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+      <p class="capture" id="captureNote"></p>
+    </section>
+
+    <section class="card">
+      <h2>What re-timing does at this hour</h2>
+      <p class="sub" id="movesSub">Six trips move route or hour. Same 162 trips, no new buses.</p>
+      <div id="moves"></div>
+    </section>
+
+    <section class="card">
+      <h2>Where a new route would go</h2>
+      <p class="sub">The other half of routing: destinations, not just crowding.</p>
+      <div class="prop">
+        <span class="tag">Proposed · unvalidated</span><br>
+        A <b>Hulhumalé Phase 2 internal loop</b> is drawn dashed. Anchor points come from
+        OSM amenity tags; the corridor itself is a hypothesis, not a measurement.
+        <br><br>
+        <span class="unverified">Cannot be scored yet.</span> OSM holds only
+        6 named POIs north of Phase 1, so no demand estimate here would be honest.
+      </div>
+    </section>
+  </aside>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="dynamic-data.js"></script>
+<script>
+const WF = window.WF;
+const COLOUR = { over:'#d1392e', busy:'#e8872a', room:'#8e979f', unknown:'#77828c' };
+const INK = '#16202b';
+
+const map = L.map('map', { zoomControl:true, scrollWheelZoom:true })
+  .fitBounds([[4.162,73.472],[4.244,73.560]], { padding:[26,26] });
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+/* ---------- static layers ---------- */
+const routeLayer = L.layerGroup().addTo(map);
+const stopLayer  = L.layerGroup().addTo(map);
+const pulseLayer = L.layerGroup().addTo(map);
+const moveLayer  = L.layerGroup().addTo(map);
+
+const routePaths = {};
+for (const [code, segs] of Object.entries(WF.lines)) {
+  const line = L.polyline(segs, { color:COLOUR.room, weight:4, opacity:.85,
+                                  lineCap:'round', lineJoin:'round' }).addTo(routeLayer);
+  line.on('mouseover', () => line.setStyle({ weight:7 }));
+  line.on('mouseout',  () => line.setStyle({ weight:4 }));
+  routePaths[code] = line;
+}
+
+for (const s of WF.stops) {
+  L.circleMarker(s.p, { radius:2.6, color:INK, weight:1.1, fillColor:'#fff',
+                        fillOpacity:1, opacity:.8, interactive:false }).addTo(stopLayer);
+}
+
+/* a proposed loop through the mapped Phase 2 anchors - a sketch, not a survey */
+const PROPOSED = [[4.2270,73.5420],[4.2310,73.5455],[4.2340,73.5480],
+                  [4.2320,73.5520],[4.2275,73.5505],[4.2255,73.5460],[4.2270,73.5420]];
+const proposed = L.polyline(PROPOSED, { color:'#2a6fd6', weight:3, dashArray:'8 7',
+                                       opacity:.95 }).addTo(map);
+proposed.bindTooltip('<b>Proposed loop</b><br>Unvalidated hypothesis — no demand estimate', 
+                     { sticky:true });
+
+/* ---------- the hour ---------- */
+const HOURS = 24;
+let hour = 16;
+let afterMode = true;
+const CAPTURE_FROM = 11;
+
+/* Pressure for a route at an hour. In "after" mode the receiver's unmet demand
+   is replaced by the value the model produces once the trip has moved, so the
+   toggle changes the map and not only the arrows. Everything else is the
+   measured baseline; nothing is smoothed. */
+function pressureAt(code, h) {
+  const base = WF.press[code]?.[h] ?? null;
+  if (!afterMode) return base;
+  const applied = WF.moves.filter(m => m.to === code && m.to_hour === h);
+  if (applied.length) return applied[applied.length - 1].recv_after;
+  return base;
+}
+
+function bandOf(u, cap) {
+  if (u === null) return 'unknown';
+  if (u <= 0) return 'room';
+  return u >= 40 ? 'over' : 'busy';
+}
+
+function movesAt(h) {
+  return WF.moves.filter(m => afterMode ? (m.from_hour === h || m.to_hour === h)
+                                        : false);
+}
+
+function render() {
+  document.getElementById('clockText').textContent = String(hour).padStart(2,'0') + ':00';
+
+  /* routes: recolour by whether THIS hour has riders left behind */
+  let worst = { code:null, u:0 };
+  for (const [code, line] of Object.entries(routePaths)) {
+    const u = pressureAt(code, hour);
+    const band = bandOf(u, null);
+    line.setStyle({
+      color: COLOUR[band],
+      weight: band === 'over' ? 6 : band === 'busy' ? 5 : 4,
+      opacity: hour < CAPTURE_FROM ? .35 : (band === 'unknown' ? .55 : .9),
+      dashArray: hour < CAPTURE_FROM ? '2 6' : null,
+    });
+    if (u !== null && u > worst.u) worst = { code, u };
+  }
+
+  const meta = document.getElementById('clockMeta');
+  meta.innerHTML = hour < CAPTURE_FROM
+    ? 'Not captured<br>service begins 11:00'
+    : worst.code
+      ? `<b>${worst.code}</b> worst hit<br>${Math.round(worst.u)} riders left behind`
+      : 'No riders<br>left behind';
+
+  /* pulses at the stops of routes under pressure this hour */
+  pulseLayer.clearLayers();
+  const hot = Object.keys(WF.press).filter(c => (pressureAt(c, hour) ?? 0) >= 25);
+  if (hour >= CAPTURE_FROM && hot.length) {
+    for (const s of WF.stops) {
+      if (!s.r.some(r => hot.includes(r))) continue;
+      L.circleMarker(s.p, { radius:6, color:COLOUR.over, weight:2, fill:false,
+                            className:'pulse', interactive:false }).addTo(pulseLayer);
+    }
+  }
+
+  /* the moved trips, drawn as arcs from donor to receiver */
+  moveLayer.clearLayers();
+  const shown = movesAt(hour);
+  for (const m of shown) {
+    const a = WF.lines[m.from]?.[0]?.[Math.floor(WF.lines[m.from][0].length/2)];
+    const b = WF.lines[m.to]?.[0]?.[Math.floor(WF.lines[m.to][0].length/2)];
+    if (!a || !b) continue;
+    const mid = [(a[0]+b[0])/2 + .006, (a[1]+b[1])/2];
+    L.polyline([a, mid, b], { color:'#2a6fd6', weight:2.5, dashArray:'6 6',
+                              opacity:.9, interactive:false }).addTo(moveLayer);
+    const isDonor = m.from_hour === hour;
+    L.circleMarker(a, { radius:5, color:'#2a6fd6', weight:2, fillColor:'#fff',
+                        fillOpacity:1, interactive:false }).addTo(moveLayer);
+    L.circleMarker(b, { radius:5, color:'#2a6fd6', weight:3, fillColor:'#2a6fd6',
+                        fillOpacity:1, interactive:false }).addTo(moveLayer);
+    L.circleMarker(mid, { radius:0, opacity:0, fillOpacity:0, interactive:false })
+      .bindTooltip(`${m.from} ${String(m.from_hour).padStart(2,'0')}:00 → ` +
+                   `${m.to} ${String(m.to_hour).padStart(2,'0')}:00` +
+                   (isDonor ? '<br>this trip leaves here' : '<br>this trip arrives here'),
+                   { permanent:true, direction:'top', className:'mtip' })
+      .addTo(moveLayer);
+  }
+
+  renderMoves();
+}
+
+function chip(code) {
+  const c = COLOUR[pressureAt(code, hour) >= 40 ? 'over'
+            : pressureAt(code, hour) > 0 ? 'busy' : 'room'];
+  return `<span class="chip" style="background:${c}">${code}</span>`;
+}
+
+function renderMoves() {
+  const el = document.getElementById('moves');
+  const all = WF.moves;
+  const relevant = all.filter(m => m.from_hour === hour || m.to_hour === hour);
+  document.getElementById('movesSub').textContent = afterMode
+    ? `${all.length} trips re-timed. Same 162 trips, no new buses.`
+    : 'Timetable as it runs today. Flip to "After re-timing" to see the moves.';
+
+  if (!afterMode) {
+    el.innerHTML = `<p class="sub" style="margin-top:9px">No trips have moved in this view.</p>`;
+    return;
+  }
+  if (!relevant.length) {
+    el.innerHTML = `<p class="sub" style="margin-top:9px">No move lands on ${String(hour).padStart(2,'0')}:00.
+      ${all.map(m=>String(m.from_hour).padStart(2,'0')).filter((v,i,a)=>a.indexOf(v)===i).length} other hours carry one —
+      drag the slider.</p>`;
+    return;
+  }
+  el.innerHTML = relevant.map(m => {
+    const leaving = m.from_hour === hour;
+    const donorFrom = m.donor_before, donorTo = m.donor_after;
+    return `<div class="move">
+      <div class="hr">${String(leaving ? m.from_hour : m.to_hour).padStart(2,'0')}:00
+        <small>${leaving ? 'donor' : 'receiver'}</small></div>
+      <div class="what">
+        <div class="flow">${chip(m.from)}<span class="arrow">→</span>${chip(m.to)}
+          <span class="arrow">·</span> 1 trip</div>
+        ${leaving
+          ? `Leaves <b>${m.from}</b>. That bus was <b>${donorFrom.toFixed(1)}%</b> full;
+             after the move it is <b>${donorTo.toFixed(1)}%</b> full
+             <span class="${donorTo > 85 ? 'warn' : 'ok'}">
+             (${donorTo > 85 ? 'tight — almost no spare seat' : 'still room'})</span>.`
+          : `Arrives on <b>${m.to}</b>. Riders left behind fall from
+             <b>${Math.round(m.recv_before)}</b> to <b>${Math.round(m.recv_after)}</b>
+             <span class="ok">(${Math.round(m.recv_before - m.recv_after)} fewer)</span>.`}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- controls ---------- */
+document.getElementById('scrub').addEventListener('input', (e) => {
+  hour = Number(e.target.value); render();
+});
+document.getElementById('btnBefore').addEventListener('click', () => {
+  afterMode = false; setMode();
+});
+document.getElementById('btnAfter').addEventListener('click', () => {
+  afterMode = true; setMode();
+});
+function setMode() {
+  document.getElementById('btnBefore').setAttribute('aria-pressed', String(!afterMode));
+  document.getElementById('btnAfter').setAttribute('aria-pressed', String(afterMode));
+  render();
+}
+
+document.getElementById('captureNote').innerHTML =
+  `<b>11:00–24:00 captured.</b> Earlier hours are drawn faded and dashed —
+   the RTL feed only returns trips from the moment it is called. They are a gap,
+   not an empty morning.`;
+
+render();
+</script>
+</body>
+</html>
