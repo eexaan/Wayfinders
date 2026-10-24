@@ -2,7 +2,7 @@
 ================================================================================
 Synthesise a GTFS feed for the Greater Male' RTL bus network
 ================================================================================
-Maldives Datathon 2026 | Team Wayfinders  |  Dev B task 4 (stretch)
+Maldives Datathon 2026 | Team Wayfinders  |  Falulaan task 4 (stretch)
 
 No public GTFS exists for Male'. This builds one from the official RTL 2026
 feed, which already carries per-stop scheduled timings for every trip.

@@ -158,37 +158,21 @@ Full links, licences and caveats: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
 The tool is a projection built on history: it answers whether the buses matched
 demand on the day we measured, not whether they match now.
 
-The step after is realtime — automated people-counting at stops, live vehicle
-positions over GTFS-Realtime, and a loop that reallocates trips as queues build.
-That closes the model's own weakest point: our stop-level load factors are
-allocated from taxi catchments, not measured, so the finding we most want acted
-on is the one that most needs ground truth. The plan, the sensor comparison, the
-pilot design, the costs and the claims we refuse to make are in
-**[docs/ROADMAP.md](docs/ROADMAP.md)**.
-
-**Events that move a city at once.** A match at the national stadium, a concert
-on Hulhumalé, a Friday market, a cancelled ferry — each creates a surge at a
-known place and time, and the current model cannot see it. The extension is an
-event calendar keyed to venue, date and expected attendance, feeding a
-short-lived demand uplift into the scenario engine: the same fleet-neutral
-reallocation, run against tonight instead of a typical Saturday. The precondition
-is modest — a public events feed, or a curated calendar where none exists. The
-hard part is calibration: uplift per attendee has to be estimated from observed
-loads, not assumed. GTFS already carries the output, since extra trips on a known
-date are just `calendar_dates` exceptions.
-
-**Routes chosen from where people will be.** The network we have was not designed
-from the data we now hold. The first step is already in the repository: 321
-schools, government offices, hospitals, mosques, markets and shops scraped from
-OpenStreetMap, each classified by demand curve and matched to its nearest stop
-and walking distance. What is still missing is population density below atoll
-level — by island and by Malé ward — and the opening date of new commercial and
-office space, because OSM shows what exists, not what is about to employ people.
-Combined with the taxi catchments, that gives a first-pass demand surface for a
-route that does not yet exist. One limit is structural: the scenario engine is
-deliberately fleet-neutral, so it can show that a new corridor would fill but
-cannot buy the bus — that is a capital decision, outside the tool. And density
-is not demand; a new office is not a commute until it opens.
+- **Realtime.** People-counting at stops, vehicle positions over GTFS-Realtime,
+  and a loop that reallocates trips as queues build. It closes the model's
+  weakest point: stop-level loads are allocated from taxi catchments, not
+  measured. Costs, sensor comparison, pilot design and preconditions:
+  **[docs/ROADMAP.md](docs/ROADMAP.md)**.
+- **Event-driven demand.** An event calendar keyed to venue, date and expected
+  attendance, applying a short uplift before reallocation. GTFS already carries
+  the output as `calendar_dates` exceptions; the hard part is calibration, which
+  needs at least two observed events.
+- **Routes from future demand.** The 321 OpenStreetMap trip generators are
+  already classified by demand curve and matched to their nearest stop.
+  Missing: population density by island and Malé ward, and opening dates for new
+  commercial and office space. Output is a candidate corridor, not a timetable —
+  and the fleet-neutral engine can show a route would fill but cannot fund the
+  bus.
 
 ## For readers who want the detail
 

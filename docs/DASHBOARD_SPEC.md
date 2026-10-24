@@ -221,7 +221,7 @@ This is the reference table. Use it for every route label in the UI.
 | `load_factor_peak_pct` | **The headline.** The fullest stop-to-stop segment in any captured hour, as a % of seats. |
 | `load_factor_avg_pct` | Mean across all captured segment-hours. |
 
-> ⚠️ **Changed on 2026-10-24 (Dev B task 1).** `load_factor_peak_pct` and
+> ⚠️ **Changed on 2026-10-24 (Falulaan task 1).** `load_factor_peak_pct` and
 > `load_factor_avg_pct` are **no longer the route-day band** — they are
 > segment-based. R1 moves from 104.4% / 44.7% to **90.1% / 63.2%**. The old
 > number is preserved in `load_factor_route_day_upper_pct`, so the two cannot be

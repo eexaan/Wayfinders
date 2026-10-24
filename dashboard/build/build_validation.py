@@ -2,7 +2,7 @@
 ================================================================================
 Validation: does the model predict measured ridership, and do the sources agree?
 ================================================================================
-Maldives Datathon 2026 | Team Wayfinders  |  Dev B task 2
+Maldives Datathon 2026 | Team Wayfinders  |  Falulaan task 2
 
 Turns "plausible" into "validated". Two independent tests, both reproducible:
 

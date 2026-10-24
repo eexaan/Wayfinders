@@ -2,7 +2,7 @@
 ================================================================================
 Stop-level demand allocation and segment load factors
 ================================================================================
-Maldives Datathon 2026 | Team Wayfinders  |  Dev B task 1
+Maldives Datathon 2026 | Team Wayfinders  |  Falulaan task 1
 
 WHY THIS EXISTS
     `route_load.load_factor_peak_pct` was  daily_boardings / (trips_per_day * seats).

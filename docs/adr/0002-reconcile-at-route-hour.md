@@ -47,7 +47,7 @@ whether it is observed, modelled, or absent.
 - **Route level is not the same as how full a bus is at a given point.**
   A route carrying 104% of its seats over a day may have a peak segment far
   above that, and a quiet segment far below. The hourly route series cannot
-  show that. The fix is stop-level allocation, which is Dev B's task.
+  show that. The fix is stop-level allocation, which is Falulaan's task.
 - Hourly capacity assumes departures are spread evenly within the hour. With
   1–3 trips per route-hour, "capacity per hour" is coarse. It is honest as a
   ratio but it is not a queueing model.
