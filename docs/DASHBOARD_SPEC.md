@@ -409,7 +409,35 @@ flights, hour = scheduled arrival, **passenger-weighted**.
 > is retained as the flight-weighted share for the audit. If your chart says
 > "35.5%", change it to 33.1% and state the weighting.
 
-### 2.24 Five traps that will silently break the UI
+### 2.24 `schedule_crosscheck.csv` — 14 rows, feed vs published timetable (NEW)
+
+Built by `dashboard/build/build_schedule_crosscheck.py`. Validates the supply
+side against MTCC's own published PDFs.
+
+`route_code`, `pdf_block_used`, `pdf_bands`, `pdf_vintage`,
+`pdf_trips_per_day`, `pdf_trips_after_midnight`, `feed_trips_per_day`,
+`diff_trips`, `diff_pct`, `pdf_trips_in_captured_window`,
+`feed_trips_in_captured_window`, `hourly_mae_captured`,
+`hourly_max_abs_diff`, `verdict`, `note`.
+
+> ⚠️ **Read `verdict`, not `diff_pct`.** `diff_pct` is the *daily* difference
+> and it is confounded: the PDFs are a Ramadan 2025 edition and the feed is a
+> regular October 2026 day, so they are meant to differ. The verdict is based on
+> `hourly_mae_captured` (≤ 1.0 trips/hour). All 11 checkable routes pass;
+> median error is 0.27 trips/hour.
+>
+> If you show a chart, show **hourly MAE per route** with the threshold line. A
+> daily-difference chart would look alarming and mean nothing.
+
+### 2.25 `schedule_crosscheck_hourly.csv` — 140 rows (NEW)
+
+`route_code`, `hour` (11–23 only), `pdf_departures`, `feed_departures`, `diff`.
+This is the comparable series and the honest way to visualise the check.
+
+> Only the captured window is present. Hours before 11:00 have no `feed` value,
+> so they are absent rather than zero — do not interpolate across the gap.
+
+### 2.26 Five traps that will silently break the UI
 
 Read this before you write the chart layer. Each one produces a plausible but
 wrong chart, which is worse than an error.

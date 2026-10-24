@@ -433,7 +433,7 @@ you still have a strong submission.
 |---|---|---|---|
 | **Holdout** — fit the hourly shape on 80% of days, predict route-day totals for the held-out 20%, report MAPE | the model predicts *measured* ridership | 1–2 h | **must** — ✅ done |
 | **Cross-source coherence** — Yearbook airport levels vs MACL vs Avas airport OD; MTCC boardings vs Avas corridor flows | the triangulation holds | 1 h | **must** — ✅ done |
-| **Schedule cross-check** — parsed PDF service vs the live per-stop timetable | the parser is right | 30 min | **must** — deferred |
+| **Schedule cross-check** — parsed PDF service vs the live per-stop timetable | the parser is right | 30 min | **must** — ✅ done |
 | **Camera spot-check** — 1 stop, 30 min video, pretrained detector, observed vs modelled | live ground truth at one point in space-time | 2–3 h | stretch |
 
 ### 10.1 Holdout accuracy
@@ -487,7 +487,51 @@ pre-booked transfers, resort boats and the RTL bus, while departing residents
 call a taxi. **Never assume Avas pickups and dropoffs are symmetric** — the
 stop-level allocation in §3 therefore uses each direction separately.
 
-### 10.3 What validation changed
+### 10.3 Schedule cross-check
+
+MTCC's published schedule PDFs (`data/raw/R1..R14.pdf`) parsed into frequency
+bands — `(start, end, headway)` — then expanded to trip departures and compared
+against the official RTL feed. Built by
+`dashboard/build/build_schedule_crosscheck.py`.
+
+**11 of 11 checkable routes pass, with a median hourly error of 0.27 trips per
+hour** (worst 0.92) across the captured window. That independently corroborates
+every capacity number in this project, which all inherit from that feed.
+
+**The verdict deliberately rests on the hourly test, not the daily one.** The
+PDFs are the **Ramadan 1446 edition (February–March 2025)**, which is precisely
+why they were dropped as the supply source (RESEARCH §2.4a). Comparing a
+Ramadan 2025 schedule to a regular October 2026 service day means a systematic
+divergence is *expected*:
+
+| | |
+|---|---|
+| Median \|daily difference\| | 5.3% |
+| Daily range | −31.9% (R13) to +70% (R5) |
+
+Those daily gaps are attributable, not mysterious:
+
+- **R13 (−31.9%)** is a service-day boundary artefact. Its published Saturday
+  band runs 06:00–02:30 at 10 minutes, which yields 16 trips after midnight out
+  of 135. The API counts service days, so those fall differently. Hourly, the
+  two agree to 0.27 trips/hour.
+- **R5 (+70%) and R2 (+22%)** are real service additions. R2's published
+  schedule has a 140-minute gap from 17:00 to 19:20 during which the 2026 feed
+  runs four trips an hour. A regular-season timetable adding evening peak and
+  removing a Ramadan-era pause is the expected direction.
+- **R10, R11, R12, R15** cannot be checked at all, because the feed returns no
+  timings for them. The PDFs *do* publish a frequency for three of them
+  (R10 55, R11 55, R12 40 trips/day). Those figures are reported in
+  `schedule_crosscheck.csv` but are **not** injected into `routes_master`: they
+  describe a Ramadan 2025 service, so filling the null with them would trade an
+  honest gap for a plausible error.
+
+Zero parse anomalies across all 14 PDFs. The band regex matches hyphen,
+en-dash and em-dash explicitly, because these documents use all three and a
+missed dash silently drops a band — the exact class of error this check exists
+to catch.
+
+### 10.4 What validation changed
 
 Two published claims did not survive contact with the data and were corrected
 rather than quietly kept:
