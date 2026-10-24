@@ -1,126 +1,126 @@
 route_code,from_stop,to_stop,median_segment_minutes,median_end_to_end_minutes,n_trips
-R1,Hulhumale' Cemetery OPP,Male' Swimming Track,20.0,70.0,11
-R1,STELCO,Hulhumale' Cemetery,20.0,70.0,10
-R1,Amin Avenue,MNDF Flat,2.0,70.0,12
-R1,Dharumavantha School,Maafannu Bus Terminal OPP,2.0,70.0,12
-R1,Dhiraagu,Hulhumale' Synthetic Track,2.0,70.0,11
-R1,Fehires Park,Flat No. 147,2.0,70.0,11
-R1,Flat No. 137,Fehires Park,2.0,70.0,11
-R1,Flat No. 147,Ruhgandu 1,2.0,70.0,11
-R1,Hulhumale' Cemetery,Skate Park,2.0,70.0,12
-R1,Hulhumale' Police Station,Amin Avenue,2.0,70.0,12
-R1,Hulhumale' Synthetic Track,Hulhumale' Police Station,2.0,70.0,11
-R1,MNDF Flat,Hulhumale' Cemetery OPP,2.0,70.0,12
-R1,Maafannu Bus Terminal,Tow Yard,2.0,70.0,10
-R1,Male' Swimming Track,Dharumavantha School,2.0,70.0,12
-R1,Ruhgandu 1,Dhiraagu,2.0,70.0,11
-R1,Skate Park,Flat No. 137,2.0,70.0,12
-R1,Tow Yard,STELCO,2.0,70.0,10
-R13,BML Villimale Branch,Muhyiddin School,1.0,10.0,24
-R13,Jumhooree Hingun,Villimale Beach,1.0,10.0,25
-R13,MNDF Flats,Sinaai Sarahadhu,1.0,10.0,24
-R13,Muhyiddin School,MNDF Flats,1.0,10.0,24
-R13,Salaam Miskiy,Boalha Dhandu,1.0,10.0,25
-R13,Sinaai Sarahadhu,Salaam Miskiy,1.0,10.0,25
-R13,Villimale Beach,Villimale Harbor,1.0,10.0,25
-R13,Villimale Ferry Terminal,BML Villimale Branch,1.0,10.0,24
-R13,Villimale Harbor,Villimale Hospital,1.0,10.0,24
-R13,Viludhooni Park,Jumhooree Hingun,1.0,10.0,25
-R13,Boalha Dhandu,Vaaru Hingun,0.0,10.0,25
-R13,Vaaru Hingun,Viludhooni Park,0.0,10.0,25
-R14,Boalha Dhandu,Salaam Miskiy,1.0,9.0,25
-R14,Edhuruvehi Bus Stop,Sinamale' Bus Stop,1.0,9.0,25
-R14,MNDF Flats,Edhuruvehi Bus Stop,1.0,9.0,25
-R14,Masjidh Al Ikhlaas Stop,Boalha Dhandu,1.0,9.0,25
-R14,Sinamale' Bus Stop,Villimale' Ferry Termial Op,1.0,9.0,25
-R14,Villimale Beach,Masjidh Al Ikhlaas Stop,1.0,9.0,24
-R14,Villimale Ferry Terminal,Villimale Hospital,1.0,9.0,24
-R14,Villimale Harbor,Villimale Beach,1.0,9.0,24
-R14,Villimale Hospital,Villimale Harbor,1.0,9.0,24
-R14,Salaam Miskiy,Sinaai Sarahadhu,0.0,9.0,25
-R14,Sinaai Sarahadhu,MNDF Flats,0.0,9.0,25
-R2,MNDF Flat,Hulhumale' Cemetery,20.0,67.0,11
-R2,Raalhugandu (Schedule Bus),Flat No. 120,20.0,67.0,10
-R2,Centro Mall,CHSE,7.0,67.0,11
-R2,Amin Avenue,MNDF Flat,3.0,67.0,11
-R2,Carnival,Raalhugandu (Schedule Bus),3.0,67.0,10
-R2,Flat No. 120,Flat No. 147,3.0,67.0,11
-R2,Flat No. 147,Centro Mall,3.0,67.0,12
-R2,Hulhumale' Cemetery,Senahiya,3.0,67.0,12
-R2,Senahiya,Artificial Beach,3.0,67.0,12
-R2,CHSE,Amin Avenue,2.0,67.0,11
-R3,VIA Domestic Terminal,MACL Office,15.0,44.0,3
-R3,VIA Domestic Terminal OPP,Male' Swimming Track,15.0,44.0,4
-R3,MACL Office,VIA Domestic Terminal OPP,3.0,44.0,4
-R3,Maafannu Bus Terminal,Tow Yard,3.0,44.0,4
-R3,Dharumavantha School,Maafannu Bus Terminal OPP,2.0,44.0,4
-R3,Male' Swimming Track,Dharumavantha School,2.0,44.0,4
-R3,STELCO,VIA Domestic Terminal,2.0,44.0,4
-R3,Tow Yard,STELCO,2.0,44.0,4
-R4,MACL Office,VIA Domestic Terminal OPP,15.0,46.0,7
-R4,VIA Domestic Terminal,MACL Office,10.0,46.0,8
-R4,Hulhumale' Cemetery OPP,Fehires Park,8.0,46.0,8
-R4,Amin Avenue,Hulhumale' Cemetery,3.0,46.0,8
-R4,Centro Mall,Amin Avenue Opp,3.0,46.0,8
-R4,Fehires Park,Centro Mall,3.0,46.0,8
-R4,Hulhumale' Cemetery,VIA Domestic Terminal,2.0,46.0,8
-R4,VIA Domestic Terminal OPP,Hulhumale' Cemetery OPP,2.0,46.0,8
-R5,H 16 Bus Stop,Hiya Flats Stop 2,3.0,31.0,3
-R5,Hiya Flats Stop 2,VINARES BUS STOP,3.0,31.0,3
-R5,Hulhumalé Ferry Terminal,Umar Zahir Building,3.0,31.0,3
-R5,MACL Flat Stop,CHSE,3.0,31.0,3
-R5,CHSE,Hulhumalé Ferry Terminal,2.0,31.0,3
-R5,Dhiraagu,Masjid Ameel Jaleel,2.0,31.0,3
-R5,Flat No. 137,Ruhgandu 1,2.0,31.0,3
-R5,Hiya Flats Stop 1,H 16 Bus Stop,2.0,31.0,3
-R5,Hulhumale' Cemetery,Flat No. 137,2.0,31.0,3
-R5,Orange Hiya Bus Stop,Hulhumale' Cemetery,2.0,31.0,3
-R5,Ruhgandu 1,Dhiraagu,2.0,31.0,3
-R5,Umar Zahir Building,Court Complex Bus Stop,2.0,31.0,3
-R5,VINARES BUS STOP,MACL Flat Stop,2.0,31.0,3
-R5,Court Complex Bus Stop,Orange Hiya Bus Stop,1.0,31.0,3
-R6,Hulhumalé Police Station,Amin Avenue,5.0,40.0,16
-R6,Amin Avenue,Tree Top Hospital,3.0,40.0,16
-R6,Fehires Park,Flat No. 147,3.0,40.0,16
-R6,Flat No. 2,Dhiraagu,3.0,40.0,16
-R6,Hiya Flats Stop 2,VINARES BUS STOP,3.0,40.0,16
-R6,MACL Flat Stop,Hulhumale' Synthetic Track,3.0,40.0,17
-R6,Tree Top Hospital,Flat No. 120,3.0,40.0,16
-R6,VINARES BUS STOP,MACL Flat Stop,3.0,40.0,16
-R6,Dhiraagu,Masjid Ameel Jaleel,2.0,40.0,16
-R6,Flat No. 120,Fehires Park,2.0,40.0,17
-R6,Flat No. 147,Ruhgandu 1,2.0,40.0,16
-R6,H 16 Bus Stop,Hiya Flats Stop 2,2.0,40.0,16
-R6,Hiya Flats Stop 1,H 16 Bus Stop,2.0,40.0,16
-R6,Hulhumale' Synthetic Track,Hulhumalé Police Station,2.0,40.0,16
-R6,Ruhgandu 1,Flat No. 2,2.0,40.0,16
-R7,MACL Flat Stop,Male' Swimming Track,20.0,40.0,10
-R7,Dharumavantha School,Maafannu Bus Terminal,2.0,40.0,11
-R7,Hiya Flats Stop 1,H 16 Bus Stop,2.0,40.0,11
-R7,Hiya Flats Stop 2,VINARES BUS STOP,2.0,40.0,10
-R7,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,2.0,40.0,11
-R7,Maafannu Bus Terminal,Tow Yard,2.0,40.0,10
-R7,Male' Swimming Track,Dharumavantha School,2.0,40.0,11
-R7,Masjid Ameel Jaleel,Hiya Flats Stop 1,2.0,40.0,11
-R7,STELCO,MWSC FLAT BUS STOP (DROP-OFF ONLY),2.0,40.0,10
-R7,Tow Yard,STELCO,2.0,40.0,10
-R7,VINARES BUS STOP,MACL Flat Stop,2.0,40.0,10
-R8,Raalhugandu (Schedule Bus),MWSC FLAT BUS STOP (DROP-OFF ONLY),15.0,36.0,10
-R8,Artificial Beach West,Carnival,4.0,36.0,10
-R8,Carnival,Raalhugandu (Schedule Bus),3.0,36.0,11
-R8,Hiya Flats Stop 1,H 16 Bus Stop,2.0,36.0,11
-R8,Hiya Flats Stop 2,VINARES BUS STOP,2.0,36.0,10
-R8,MACL Flat Stop,Senahiya,2.0,36.0,10
-R8,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,2.0,36.0,11
-R8,Masjid Ameel Jaleel,Hiya Flats Stop 1,2.0,36.0,11
-R8,Senahiya,Artificial Beach West,2.0,36.0,10
-R8,VINARES BUS STOP,MACL Flat Stop,2.0,36.0,10
-R9,MACL Office,VIA Domestic Terminal OPP,10.0,31.0,8
-R9,VIA Domestic Terminal OPP,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.0,31.0,9
-R9,Hiya Flats Stop 1,H 16 Bus Stop,3.0,31.0,8
-R9,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,3.0,31.0,8
-R9,VIA Domestic Terminal,MACL Office,3.0,31.0,8
-R9,H 16 Bus Stop,Hiya Flats Stop 2,2.0,31.0,8
-R9,Hiya Flats Stop 2,VINARES BUS STOP,2.0,31.0,8
-R9,MACL Flat Stop,VIA Domestic Terminal,2.0,31.0,8
-R9,VINARES BUS STOP,MACL Flat Stop,2.0,31.0,8
+R1,Hulhumale' Cemetery OPP,Male' Swimming Track,20.0,70.0,41
+R1,STELCO,Hulhumale' Cemetery,20.0,70.0,40
+R1,Amin Avenue,MNDF Flat,2.0,70.0,41
+R1,Dharumavantha School,Maafannu Bus Terminal OPP,2.0,70.0,42
+R1,Dhiraagu,Hulhumale' Synthetic Track,2.0,70.0,41
+R1,Fehires Park,Flat No. 147,2.0,70.0,41
+R1,Flat No. 137,Fehires Park,2.0,70.0,41
+R1,Flat No. 147,Ruhgandu 1,2.0,70.0,41
+R1,Hulhumale' Cemetery,Skate Park,2.0,70.0,41
+R1,Hulhumale' Police Station,Amin Avenue,2.0,70.0,41
+R1,Hulhumale' Synthetic Track,Hulhumale' Police Station,2.0,70.0,41
+R1,MNDF Flat,Hulhumale' Cemetery OPP,2.0,70.0,41
+R1,Maafannu Bus Terminal,Tow Yard,2.0,70.0,40
+R1,Male' Swimming Track,Dharumavantha School,2.0,70.0,42
+R1,Ruhgandu 1,Dhiraagu,2.0,70.0,41
+R1,Skate Park,Flat No. 137,2.0,70.0,42
+R1,Tow Yard,STELCO,2.0,70.0,40
+R13,BML Villimale Branch	,Muhyiddin School	,1.0,10.0,63
+R13,Jumhooree Hingun,Villimale Beach,1.0,10.0,64
+R13,MNDF Flats,Sinaai Sarahadhu	,1.0,10.0,63
+R13,Muhyiddin School	,MNDF Flats,1.0,10.0,63
+R13,Salaam Miskiy	,Boalha Dhandu,1.0,10.0,63
+R13,Sinaai Sarahadhu	,Salaam Miskiy	,1.0,10.0,63
+R13,Villimale Beach,Villimale Harbor,1.0,10.0,64
+R13,Villimale Ferry Terminal,BML Villimale Branch	,1.0,10.0,63
+R13,Villimale Harbor,Villimale Hospital	,1.0,10.0,63
+R13,Viludhooni Park	,Jumhooree Hingun,1.0,10.0,64
+R13,Boalha Dhandu,Vaaru Hingun,0.0,10.0,64
+R13,Vaaru Hingun,Viludhooni Park	,0.0,10.0,64
+R14,Boalha Dhandu,Salaam Miskiy	,1.0,9.0,77
+R14,Edhuruvehi Bus Stop,Sinamale' Bus Stop,1.0,9.0,78
+R14,MNDF Flats,Edhuruvehi Bus Stop,1.0,9.0,78
+R14,Masjidh Al Ikhlaas Stop,Boalha Dhandu,1.0,9.0,77
+R14,Sinamale' Bus Stop,Villimale' Ferry Termial Op,1.0,9.0,78
+R14,Villimale Beach,Masjidh Al Ikhlaas Stop,1.0,9.0,77
+R14,Villimale Ferry Terminal,Villimale Hospital	,1.0,9.0,77
+R14,Villimale Harbor,Villimale Beach,1.0,9.0,77
+R14,Villimale Hospital	,Villimale Harbor,1.0,9.0,77
+R14,Salaam Miskiy	,Sinaai Sarahadhu	,0.0,9.0,78
+R14,Sinaai Sarahadhu	,MNDF Flats,0.0,9.0,78
+R2,MNDF Flat,Hulhumale' Cemetery,20.0,67.0,40
+R2,Raalhugandu (Schedule Bus),Flat No. 120,20.0,67.0,40
+R2,Centro Mall,CHSE,7.0,67.0,41
+R2,Amin Avenue,MNDF Flat,3.0,67.0,41
+R2,Carnival ,Raalhugandu (Schedule Bus),3.0,67.0,40
+R2,Flat No. 120,Flat No. 147,3.0,67.0,41
+R2,Flat No. 147,Centro Mall,3.0,67.0,42
+R2,Hulhumale' Cemetery,Senahiya,3.0,67.0,41
+R2,Senahiya,Artificial Beach,3.0,67.0,41
+R2,CHSE,Amin Avenue,2.0,67.0,41
+R3,VIA Domestic Terminal,MACL Office,15.0,44.0,12
+R3,VIA Domestic Terminal OPP,Male' Swimming Track,15.0,44.0,12
+R3,MACL Office,VIA Domestic Terminal OPP,3.0,44.0,12
+R3,Maafannu Bus Terminal,Tow Yard,3.0,44.0,13
+R3,Dharumavantha School,Maafannu Bus Terminal OPP,2.0,44.0,13
+R3,Male' Swimming Track,Dharumavantha School,2.0,44.0,13
+R3,STELCO,VIA Domestic Terminal,2.0,44.0,13
+R3,Tow Yard,STELCO,2.0,44.0,13
+R4,MACL Office,VIA Domestic Terminal OPP,15.0,46.0,25
+R4,VIA Domestic Terminal,MACL Office,10.0,46.0,25
+R4,Hulhumale' Cemetery OPP,Fehires Park,8.0,46.0,25
+R4,Amin Avenue,Hulhumale' Cemetery,3.0,46.0,25
+R4,Centro Mall,Amin Avenue Opp,3.0,46.0,26
+R4,Fehires Park,Centro Mall,3.0,46.0,26
+R4,Hulhumale' Cemetery,VIA Domestic Terminal,2.0,46.0,25
+R4,VIA Domestic Terminal OPP,Hulhumale' Cemetery OPP,2.0,46.0,25
+R5,H 16 Bus Stop,Hiya Flats Stop 2,3.0,31.0,12
+R5,Hiya Flats Stop 2,VINARES BUS STOP,3.0,31.0,12
+R5,Hulhumalé Ferry Terminal,Umar Zahir Building,3.0,31.0,12
+R5,MACL Flat Stop,CHSE,3.0,31.0,12
+R5,CHSE,Hulhumalé Ferry Terminal,2.0,31.0,12
+R5,Dhiraagu,Masjid Ameel Jaleel,2.0,31.0,12
+R5,Flat No. 137,Ruhgandu 1,2.0,31.0,12
+R5,Hiya Flats Stop 1,H 16 Bus Stop,2.0,31.0,12
+R5,Hulhumale' Cemetery,Flat No. 137,2.0,31.0,12
+R5,Orange Hiya Bus Stop,Hulhumale' Cemetery,2.0,31.0,12
+R5,Ruhgandu 1,Dhiraagu,2.0,31.0,12
+R5,Umar Zahir Building,Court Complex Bus Stop,2.0,31.0,12
+R5,VINARES BUS STOP,MACL Flat Stop,2.0,31.0,12
+R5,Court Complex Bus Stop,Orange Hiya Bus Stop,1.0,31.0,12
+R6,Hulhumalé Police Station,Amin Avenue,5.0,40.0,51
+R6,Amin Avenue,Tree Top Hospital,3.0,40.0,51
+R6,Fehires Park,Flat No. 147,3.0,40.0,51
+R6,Flat No. 2,Dhiraagu,3.0,40.0,51
+R6,Hiya Flats Stop 2,VINARES BUS STOP,3.0,40.0,51
+R6,MACL Flat Stop,Hulhumale' Synthetic Track,3.0,40.0,52
+R6,Tree Top Hospital,Flat No. 120,3.0,40.0,52
+R6,VINARES BUS STOP,MACL Flat Stop,3.0,40.0,52
+R6,Dhiraagu,Masjid Ameel Jaleel,2.0,40.0,52
+R6,Flat No. 120,Fehires Park,2.0,40.0,52
+R6,Flat No. 147,Ruhgandu 1,2.0,40.0,51
+R6,H 16 Bus Stop,Hiya Flats Stop 2,2.0,40.0,51
+R6,Hiya Flats Stop 1,H 16 Bus Stop,2.0,40.0,51
+R6,Hulhumale' Synthetic Track,Hulhumalé Police Station,2.0,40.0,51
+R6,Ruhgandu 1,Flat No. 2,2.0,40.0,51
+R7,MACL Flat Stop,Male' Swimming Track,20.0,40.0,44
+R7,Dharumavantha School,Maafannu Bus Terminal,2.0,40.0,46
+R7,Hiya Flats Stop 1,H 16 Bus Stop,2.0,40.0,45
+R7,Hiya Flats Stop 2,VINARES BUS STOP,2.0,40.0,44
+R7,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,2.0,40.0,45
+R7,Maafannu Bus Terminal,Tow Yard,2.0,40.0,45
+R7,Male' Swimming Track,Dharumavantha School,2.0,40.0,45
+R7,Masjid Ameel Jaleel,Hiya Flats Stop 1,2.0,40.0,45
+R7,STELCO,MWSC FLAT BUS STOP (DROP-OFF ONLY),2.0,40.0,45
+R7,Tow Yard,STELCO,2.0,40.0,45
+R7,VINARES BUS STOP,MACL Flat Stop,2.0,40.0,44
+R8,Raalhugandu (Schedule Bus),MWSC FLAT BUS STOP (DROP-OFF ONLY),15.0,36.0,40
+R8,Artificial Beach West,Carnival ,4.0,36.0,41
+R8,Carnival ,Raalhugandu (Schedule Bus),3.0,36.0,41
+R8,Hiya Flats Stop 1,H 16 Bus Stop,2.0,36.0,41
+R8,Hiya Flats Stop 2,VINARES BUS STOP,2.0,36.0,40
+R8,MACL Flat Stop,Senahiya,2.0,36.0,40
+R8,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,2.0,36.0,41
+R8,Masjid Ameel Jaleel,Hiya Flats Stop 1,2.0,36.0,41
+R8,Senahiya,Artificial Beach West,2.0,36.0,41
+R8,VINARES BUS STOP,MACL Flat Stop,2.0,36.0,40
+R9,MACL Office,VIA Domestic Terminal OPP,10.0,31.0,26
+R9,VIA Domestic Terminal OPP,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.0,31.0,26
+R9,Hiya Flats Stop 1,H 16 Bus Stop,3.0,31.0,25
+R9,MWSC FLAT BUS STOP (DROP-OFF ONLY),Masjid Ameel Jaleel,3.0,31.0,25
+R9,VIA Domestic Terminal,MACL Office,3.0,31.0,26
+R9,H 16 Bus Stop,Hiya Flats Stop 2,2.0,31.0,25
+R9,Hiya Flats Stop 2,VINARES BUS STOP,2.0,31.0,25
+R9,MACL Flat Stop,VIA Domestic Terminal,2.0,31.0,26
+R9,VINARES BUS STOP,MACL Flat Stop,2.0,31.0,26

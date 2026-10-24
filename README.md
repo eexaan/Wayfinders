@@ -35,12 +35,12 @@ segment is a uniform 2 minutes. Internal Hulhumalé routes run 3–5 min per
 segment. A taxi does the same trip in 12.7 minutes. The bus is **4.4×
 slower than a taxi** and 8.5× cheaper — which is why people take taxis.
 
-**2. One corridor is over capacity; the airport buses are not.** Weekday
-peak load factor: **R1 at 102%** of an 84-seat double-decker, against
-**58% on R4** (the airport bus), which also has the *worst* headway.
-Meanwhile Friday demand falls 37% but Friday service falls only 9–22%, and
-the airport buses run a flat 30-minute headway all day while 35% of
-international arrivals land in a three-hour window.
+**2. One corridor carries nearly all the load; the airport buses do not.**
+On the captured Saturday, **R1 runs at 89.5%** of an 84-seat double-decker
+(weekday demand is 13.7% higher, which puts a weekday at ~102%), against
+**51% on R4**, the airport bus. **R3 is an hourly bus with a 30-minute
+expected wait**, and the airport buses run the same frequency at 03:00 as at
+08:00 while 35.5% of international arrivals land in a three-hour window.
 
 **3. The bus already wins on price and loses on time.** On fare alone,
 62–76% of taxi riders on every corridor would take the bus. On generalised
@@ -60,8 +60,8 @@ recomputes passenger-level KPIs for six named schedule changes, wrapped in an
 interactive GIS dashboard.
 
 ```
-S0 baseline            1,715 boardings over capacity   8.00% unmet   371 trips/day
-S5 recommended package    1,515                        7.07%          397 trips/day
+S0 baseline             360 boardings over capacity   3.68% unmet   162 trips
+S5 recommended package  242                           2.48%          176 trips
 ```
 
 Every change in S5 is a **re-timing**, not a new bus.
@@ -78,18 +78,32 @@ docs/
   DASHBOARD_SPEC.md         build contract for the dashboard team
   figures/F1..F6.png        the six report figures
 dashboard/
+  build/build_data.py       rebuilds every table from the official inputs
+  build/build_figures.py    rebuilds F1..F6
   data/                     the tables the dashboard reads (see DASHBOARD_SPEC §2)
+data/
+  raw/                      datathon release files (MTCC, Avas, MACL, Team Kandu)
+  official/
+    rtl/                    official RTL 2026 bus feed
+    mbs/                    MBS yearbook tables, population, LFS report
 ```
 
 ## Where the numbers come from
 
-Every figure in `SPEC.md` and `RESEARCH.md` is inlined as a table in those
-documents, so both can be checked by hand. The underlying derived tables are
-in `dashboard/data/`, and the public sources they were built from are listed
-with direct links in [DATA_SOURCES.md](DATA_SOURCES.md).
+Supply is the **official RTL 2026 bus feed** —
+`bo.rtl.mv:4455/maldives/api/booking/v2/bus/routedetails` — which is public and
+needs no key. It gives the official English and Dhivehi route names, colours,
+fares, and every stop's scheduled departure times. Demand is MTCC ridership,
+shape is Avas taxi OD, and airport arrivals are MACL plus MBS Yearbook 11.13.
 
-The MTCC schedule PDFs and the RTL route map are the only inputs that are not
-part of the datathon dataset release; both are public.
+> **Known gap:** the RTL feed is time-filtered from the moment of the call, so
+> our capture covers roughly 11:00–24:00 of one service day. The morning peak
+> and the Friday/weekday comparison are not captured. Hours outside the window
+> are emitted as null, never as zero. Re-running the build just after midnight
+> fixes it.
+
+Every figure in `SPEC.md` and `RESEARCH.md` is inlined as a table, so both can
+be checked by hand. Sources and licences: [DATA_SOURCES.md](DATA_SOURCES.md).
 
 ## Credits
 

@@ -26,7 +26,8 @@ scenario bar.
 
 ## 2. Data contract
 
-All files are in `dashboard/data/`, committed, CSVs, UTF-8, comma-separated.
+All files are in `dashboard/data/`, committed, CSVs, UTF-8, comma-separated,
+built by `dashboard/build/build_data.py`.
 
 ### 2.1 `route_lines.geojson` — the map geometry
 
@@ -57,125 +58,113 @@ design; snapping adds a dependency for no analytical gain.
 | `lon` | float | `73.504676` | marker position |
 | `corridors_served` | str | `male_airport,male_hm1,male_hm2` | which corridors reach this stop |
 
-### 2.3 `route_fleet_capacity.csv` — 15 rows, one per route
+### 2.3 `routes_master.csv` — 15 rows, one per route, OFFICIAL NAMING
 
-| Column | Type | Notes |
-|---|---|---|
-| `route_code` | str | `R1` … `R15` |
-| `bus_type` | str | `Double decker` / `Airport bus` / `Regular bus` / `Minibus` / `E-minibus` |
-| `seats` | int | 84 / 52 / 54 / 21 / 11 — **team-sourced, confirm with MTCC** |
-| `capacity_source` | str | provenance flag; render as a tooltip badge |
-| `live_trips_per_day_2026_10_10` | float | **may be null** (R10, R11, R12, R15) |
-| `fare_mvr` | float | bus fare |
-| `n_stops` | int | |
-| `corridor` | str | `male_hm1`, `male_hm2`, `hm1_hm2`, `hm1_airport`, `hm2_airport`, `male_airport`, `hm_internal`, `male_internal`, `villimale` |
-| `daily_seat_capacity` | float | trips × seats; null where trips are null |
+This is the reference table. Use it for every route label in the UI.
 
-### 2.4 `demand_supply_gap.csv` — 169 rows, the core table
+| Column | Type | Example | Notes |
+|---|---|---|---|
+| `route_code` | str | `R1` | official RTL route number |
+| `route_name` | str | `West Park to HM Phase 1` | **official English name** |
+| `route_name_dv` | str | `އެޗްއެމް ފޭސް 1` | **official Dhivehi name** (UTF-8) |
+| `colour` | str | `#e9222a` | official RTL route colour — use it on the map |
+| `fare_mvr` | float | `10.0` | official fare |
+| `is_minibus` | int | `0` | official flag (1 for R10–R15) |
+| `depot` | str | `Greater Male'` | |
+| `start_station` / `end_station` | str | `Maafannu Bus Terminal` | |
+| `n_stops` | int | `18` | |
+| `trips_per_day` | float | `61.0` | **official**; null for R10/R11/R12/R15 (feed returns no timings) |
+| `trips_captured` | int | `40` | trips inside the captured window |
+| `capture_first_departure` | str | `11:20:00` | null when nothing captured |
+| `capture_last_departure` | str | `23:30:00` | |
+| `bus_type` | str | `Double decker` | team-provided |
+| `seats` | int | `84` | team-provided — see `capacity_source` |
+| `capacity_source` | str | `psmnews.mv/en/106008 (team-provided)` | render as a tooltip badge |
+| `corridor` | str | `male_hm1` | |
+| `service_day` | str | `Saturday 2026-10-24 service day (feed is time-filtered)` | **render this somewhere visible** |
 
-Grain: **route × day-type × hour**. 12 columns.
-
-| Column | Type | Notes |
-|---|---|---|
-| `route_code` | str | join key |
-| `day_group` | str | `weekday` \| `friday` \| `sat_holiday` |
-| `hour` | int | 0–23 |
-| `corridor` | str | as above |
-| `trips_in_hour` | int | scheduled departures in that hour |
-| `headway_min` | float | scheduled headway for that hour |
-| `seats` | int | |
-| `seat_capacity_hour` | int | `trips_in_hour × seats` |
-| `demand_pax_est` | float | **modelled** — MTCC observed level × Avas observed shape |
-| `load_factor_pct` | float | `demand_pax_est / seat_capacity_hour × 100` |
-| `unmet_pax_est` | float | passengers who cannot board |
-| `demand_source` | str | always `"MTCC observed (level) x Avas shape (modelled)"` — **render this in a tooltip** |
-
-**Only 5 routes have demand data** (R1, R2, R3, R4, R7). The other 10 have
-`NO DEMAND DATA`. The gap table simply omits them. **Do not render them as
-zero** — render them as "no demand data" (grey, hatched, or omitted with a
-count in the coverage panel).
-
-### 2.5 `route_daytype_headline.csv` — 10 rows
-
-Route × day-type summary. Use for the route panel headline.
+### 2.4 `demand_supply_gap.csv` — route × hour, the core table
 
 | Column | Type | Notes |
 |---|---|---|
 | `route_code` | str | |
-| `bus_type` | str | |
+| `hour` | int | 0–23 |
+| `trips_in_hour` | int \| **null** | **null means "not captured", NOT zero** |
+| `capture_status` | str | `captured` \| `before_capture_window` |
 | `seats` | int | |
-| `day_type` | str | |
-| `trips_per_day` | float | scheduled trips for that day-type |
-| `daily_seat_capacity` | float | |
-| `boardings_per_day` | float | observed (MTCC) |
-| `pax_per_trip` | float | |
-| `load_factor_peak_pct` | float | **upper bound** — every boarding rides the full route |
-| `load_factor_avg_pct` | float | **lower bound** — uniform alighting |
-| `demand_source` | str | `MTCC observed` or `MTCC bus_monthly (observed) x daily-data day-type index` |
+| `seat_capacity_hour` | int \| null | `trips_in_hour × seats` |
+| `demand_pax_est` | float \| null | modelled: MTCC level × Avas shape |
+| `load_factor_pct` | float \| null | null where capacity is null |
+| `unmet_pax_est` | float \| null | |
+| `demand_source` | str | `NO DEMAND DATA` for the 10 routes without ridership |
 
-> ⚠️ **The two load-factor columns are a band, not a point estimate.** Render
-> both (a range bar or a shaded band). Never show one as "the" load factor.
+> ⚠️ **Render `capture_status` explicitly.** Hours before ~11:00 are null. If
+> you draw them as zero, the chart will claim there are no buses in the
+> morning, which is false — we simply did not capture it.
 
-### 2.6 `service_departures.csv` — 1,508 rows
+### 2.5 `route_load.csv` — 15 rows, route-level
 
-Grain: one row per **scheduled departure**. `route_code`, `day_group`,
-`departure_min` (minutes from midnight), `departure_hhmm` (`"0600"`),
-`hour`, `headway_min`, `corridor`.
+`route_code`, `route_name`, `bus_type`, `seats`, `fare_mvr`, `trips_per_day`,
+`seat_capacity_day`, `boardings_per_day`, `pax_per_trip`,
+`load_factor_peak_pct`, `load_factor_avg_pct`, `demand_source`,
+`service_capture` (e.g. `40 of 61.0 trips captured`).
 
-Use this to draw a **timetable ribbon** (a Gantt-style bar of departures per
-route per hour) and to compute real headways in the browser.
+> ⚠️ `load_factor_peak_pct` and `load_factor_avg_pct` are a **band**, not a
+> point estimate. Render both (range bar). Never show one as "the" load factor.
+> Routes with `demand_source = NO DEMAND DATA` must be shown as such, not as zero.
 
-### 2.7 `scenario_kpis.csv` — 6 rows
+### 2.6 `service_departures.csv` — one row per captured trip
 
-`scenario` (`S0_baseline` … `S5_recommended_package`), `mean_wait_min`,
-`p95_wait_min`, `boardings_over_capacity`, `unmet_share_pct`,
-`seat_capacity_per_hour`, `total_trips_per_day`, `demand_pax_per_day`, plus
-deltas vs baseline (`mean_wait_change_min`, `over_capacity_change`,
-`trips_change`).
+`route_code`, `trip_order` (official trip index, so you can see how many trips
+are missing), `departure_time` (`"11:20:00"`), `departure_min`, `hour`.
 
-**This is a lookup table, not a computation.** The scenario engine already ran
-offline. The dashboard's job is to let the user *pick* a scenario and show
-the row, plus let them *tweak* the headline parameters live.
+Use for the timetable ribbon. `trip_order` starting at 22 for R1 is the visual
+proof that the morning was not captured — show it, do not hide it.
 
-### 2.8 `scenario_corridor_kpis.csv`
+### 2.7 `route_service_by_hour.csv` — route × hour
 
-Same six scenarios × corridor, with `mean_wait_min`, `worst_hour_wait_min`,
-`boardings_over_capacity`, `unmet_share_pct`, `trips_per_day`. **Use this for
-the per-corridor before/after**, because the network-wide mean wait barely
-moves (11.6 min) and showing only that would misrepresent the result.
+`route_code`, `hour`, `departures` (null if not captured), `captured` (bool),
+`min_headway_min`.
 
-### 2.9 `friday_responsiveness.csv` — 4 rows
+### 2.8 `scenario_kpis.csv` — 5 rows
 
-`route_code`, `demand_friday_index_pct`, `service_friday_index_pct`,
-`service_minus_demand_pp`, `verdict` (prose string). This is the F3 chart.
+`scenario` (`S0_baseline`, `S2_airport_retimed`, `S3_rebalanced_to_corridor`,
+`S4_express_peak`, `S5_recommended_package`), `mean_wait_min_captured`,
+`boardings_over_capacity`, `unmet_share_pct`, `total_trips_captured`,
+`demand_pax_captured`, `over_capacity_change`, `wait_change_min`,
+`trips_change`.
 
-### 2.10 `bridge_segment_analysis.csv` — 125 rows
+> The Friday scenario (`S1`) has been **removed** — the feed returns a single
+> service day, so a Friday service pattern cannot be observed. Do not add it.
+
+### 2.9 `scenario_corridor_kpis.csv`
+
+`scenario` × `route_code`, with `boardings_over_capacity`, `trips_captured`,
+`mean_trips_per_hour`.
+
+### 2.10 `demand_by_daytype.csv` — the demand-only day-type table
+
+`route_code`, `day_type` (`weekday` \| `friday` \| `sat_holiday`),
+`boardings_per_day`, `demand_source`. This is the F3 chart. **Demand only** —
+say so in the caption; the matching service-side comparison is not available.
+
+### 2.11 `bridge_segment_analysis.csv`
 
 `route_code`, `from_stop`, `to_stop`, `median_segment_minutes`,
-`median_end_to_end_minutes`, `n_trips`. **The F1 chart.** The two 20-minute
-causeway rows for R1 and R2 are the story; highlight segments ≥ 10 min.
+`median_end_to_end_minutes`, `n_trips`. The F1 chart. Highlight segments
+≥ 10 min — they are the causeway crossings and the VIA terminal approach.
 
-### 2.11 `airport_demand_profile.csv` — 24 rows
+### 2.12 `airport_demand_profile.csv` — 24 rows
 
-`hour`, `macl_international_arrival_share`, `macl_share_pct`, plus the
-Yearbook level columns and `macl_coverage_of_intl_pct` (36.5). The F4 chart
-needs `macl_share_pct` against the scheduled service share for R4 — derive
-the latter from `service_departures.csv` by counting R4 weekday departures
-per hour.
+`hour`, `macl_share_pct`, plus the MBS Yearbook level columns and
+`macl_coverage_of_intl_pct` (36.5). For F4, pair `macl_share_pct` against the
+R4 departures share from `route_service_by_hour.csv`.
 
-### 2.12 `taxi_od_by_hour.csv` — 2,387 rows
+### 2.13 `taxi_od_by_hour.csv` — 2,387 rows
 
-`zone_o`, `zone_d`, `hour`, `dow`, `rides`, `mean_km`, `mean_min`. Zone names:
+`zone_o`, `zone_d`, `hour`, `dow`, `rides`, `mean_km`, `mean_min`. Zones:
 `Male City`, `Hulhumale Ph1`, `Hulhumale Ph2`, `Velana Airport`, `Villimale`,
 `Other`.
-
-### 2.13 `schedule_vintage_divergence.csv` — 14 rows
-
-`route_code`, `pdf_ramadan1446_trips_weekday`,
-`live_trips_per_day_2026_10_10`, `divergence_pct`. **Put this in the
-methodology/limitations panel.** It is a finding, not an embarrassment.
-
----
 
 ## 3. Layout
 
@@ -258,9 +247,9 @@ Populated on route click. Contains:
    - day-type switcher: `weekday` / `friday` / `sat_holiday`
 4. **Timetable ribbon:** for each hour, a small vertical tick per departure
    (from `service_departures.csv`), so the headway profile is visible.
-5. **Friday responsiveness strip** (if the route is in
-   `friday_responsiveness.csv`): demand index vs service index with the
-   gap in percentage points.
+5. **Day-type strip** (from `demand_by_daytype.csv`): boardings indexed to a
+   weekday. Label it "demand only" — the service-side comparison is not
+   available from a single-day capture.
 
 ### C3 — Scenario bar
 
@@ -284,7 +273,7 @@ Populated on route click. Contains:
 A collapsible drawer. Contents:
 - The dataset register (link to `DATA_SOURCES.md` in the repo).
 - The **load-factor band explanation** — why there are two numbers.
-- The **schedule vintage** table (`schedule_vintage_divergence.csv`).
+- The **capture window**: which hours were captured and which were not, and why (the feed is time-filtered).
 - The **coverage matrix**: route × what we have (demand data yes/no, live
   trip count yes/no, published schedule yes/no). This is a *feature* — the
   datathon asks for data-gap identification, so make the gaps visible.
@@ -298,11 +287,10 @@ A collapsible drawer. Contents:
 | Key | Label | What it does |
 |---|---|---|
 | S0 | Baseline | — |
-| S1 | Friday right-sized | Cut Friday service on R1, R2, R4 to match Friday demand (demand falls 37%, service was falling only 9–22%) |
-| S2 | Airport re-timed | R4/R9: 30→15 min during the 07:00–09:59 / 11:00 / 14:00 arrival peaks; R3: 60→30 min. Night service (22:00–06:00) halved, where 22:00–00:00 carries 0.25% of arrivals against 5.6% of service |
-| S3 | Rebalanced to corridor | Move 15% of airport-route weekday trips to the Malé–Hulhumale Ph1 corridor, weighted to the 16:00–18:00 peak |
-| S4 | Express added | Skip-stop Hulhumale service on R1/R2: journey 70→45 min, +15% departures |
-| S5 | **Recommended package** | S1 + S2 + S4. 200 fewer boardings over capacity, ~1 point less unmet demand, 26 more trips/day — all re-timings, no new buses |
+| S2 | Airport re-timed | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00. The peak-hour shift matters most for R3, which is currently an hourly bus |
+| S3 | Rebalanced to corridor | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 (fleet-neutral) |
+| S4 | Express peak | One extra R1/R2 departure in each hour 15:00–18:00, from the faster cycle a skip-stop service allows |
+| S5 | **Recommended package** | S2 + S4. 118 fewer boardings over capacity, 1.2 points less unmet demand, 14 more trips inside the captured window — all re-timings, no new buses |
 
 ---
 
@@ -356,7 +344,7 @@ Cut these without discussion. Time is the binding constraint.
 |---|---|---|
 | **A** | C1 Map + C2 Route panel | `route_lines.geojson`, `route_stops.csv`, `demand_supply_gap.csv` |
 | **B** | C3 Scenario bar + KPI tiles | `scenario_kpis.csv`, `scenario_corridor_kpis.csv`, `scenario_modal_shift_summary.csv` |
-| **C** | C4 Methodology drawer + the six F1–F6 figures as static images | `docs/figures/*.png`, `schedule_vintage_divergence.csv`, `DATA_SOURCES.md` |
+| **C** | C4 Methodology drawer + the six F1–F6 figures as static images | `docs/figures/*.png`, `DATA_SOURCES.md` |
 
 **Agree on the file names and column names before starting** — the tables
 above are the contract. If you need a column that is not there, add it to
@@ -392,9 +380,9 @@ The dashboard is done when:
 | Figure | Source table(s) |
 |---|---|
 | F1 bridge | `bridge_segment_analysis.csv` |
-| F2 load factors | `route_daytype_headline.csv` |
-| F3 Friday | `friday_responsiveness.csv` |
-| F4 airport | `airport_demand_profile.csv` + `service_departures.csv` |
+| F2 load factors | `route_load.csv` |
+| F3 day type | `demand_by_daytype.csv` |
+| F4 airport | `airport_demand_profile.csv` + `route_service_by_hour.csv` |
 | F5 scenarios | `scenario_kpis.csv` |
 | F6 generalised cost | `scenario_modal_shift.csv` |
 

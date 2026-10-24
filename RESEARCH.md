@@ -108,83 +108,100 @@ ID (= 61 for R1) and is therefore the **total number of trips that day**
 Useful anyway: it gives **per-stop arrival times for real trips**, which is
 how the bridge segmentation in §3.1 was found.
 
-### 2.2 The published schedule PDFs (the unlock)
+### 2.2 The official 2026 feed (the unlock)
 
-MTCC publishes the official timetable for every Greater Malé route:
-
-- index: <https://mtcc.mv/schedules-2/>
-- e.g. <https://mtcc.mv/wp-content/uploads/2025/02/R1-Shawwal-6.pdf>
-
-Each PDF encodes service as (day-group, time-window, headway) with **three
-day-groups** — Sun–Thu (+Sat), Friday, and Saturday & Public Holidays — and a
-**Friday prayer break**. Example (R1, p.2):
+The RTL customer portal publishes bus schedules through a public endpoint that
+needs **no authentication**:
 
 ```
-SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SATURDAY
-    0600 - 0700     30 MINUTES
-    0720 - 1400     20 MINUTES
-    1415 - 1900     15 MINUTES
-    1920 - 2200     20 MINUTES
-    2230 - 0030     30 MINUTES
+https://bo.rtl.mv:4455/maldives/api/booking/v2/bus/routedetails
 ```
 
-All 14 route PDFs were parsed with `pdftotext -layout` into 81 service
-windows (day-group × time-window × headway).
+It returns, for all 15 Greater Malé routes:
 
-**Note on fetching:** `mtcc.mv` sits behind a Cloudflare challenge that
-rejects plain `curl`. A normal browser User-Agent header is enough:
+| Field | Example (R1) |
+|---|---|
+| `routeNumber` | `R1` |
+| `name` — official English name | `West Park to HM Phase 1` |
+| `dvname` — official Dhivehi name | `އެޗްއެމް ފޭސް 1` |
+| `color` — official route colour | `#e9222a` |
+| `fare` | `10.0` MVR |
+| `isMiniBusRoute` | `0` |
+| `depotName` | `Greater Male'` |
+| `startStationName` / `endStationName` | `Maafannu Bus Terminal` / `Maafannu Bus Terminal OPP` |
+| `busRouteStopList` | 18 stops, each with `order`, `name`, `dvname`, `code`, `latitude`, `longitude` and `timings` |
 
-```bash
-curl -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 ... Chrome/126.0" \
-     -o R1.pdf "https://mtcc.mv/wp-content/uploads/2025/02/R1-Shawwal-6.pdf"
+`timings` carries the **scheduled departure time of every trip at that stop**.
+That is the full timetable in machine-readable form — no PDF parsing, no
+scraping of a rendered page, no Dhivehi font problems.
+
+**This replaces the MTCC schedule PDFs entirely.** Those PDFs were the only
+published timetable before this, and they were the "Ramadan 1446" edition
+(February 2025) — see §8 for why they were dropped.
+
+### 2.3 What the feed actually contains
+
+```
+route  name                        minibus  fare  stops  trips/day  captured
+R1     West Park to HM Phase 1          0    10.0     18         61        40
+R2     Carnival to HM Phase 1           0    10.0     11         61        40
+R3     West Park to VIA                 0    10.0      9         20        13
+R4     HM Phase 1 to VIA                0    10.0      9         38        25
+R5     HM Internal                      0     5.0     15         17        12
+R6     HM Phase 2 to HM Phase 1         0     5.0     16         75        51
+R7     HM Phase 2 to West Park          0    15.0     12         66        44
+R8     HM Phase 2 to Carnival           0    15.0     11         61        40
+R9     HM Phase 2 to VIA                0    15.0     10         38        25
+R10    Orchid                          1     7.0     13          -         0
+R11    Ameenee                         1     7.0     19          -         0
+R12    Sosun                           1     7.0      9          -         0
+R13    Villimale Internal              1     5.0     13         92        63
+R14    VILLIMALE INTERNAL 2            1     5.0     12        105        77
+R15    West Park to Orange Hiya        1    10.0      7          -         0
 ```
 
-### 2.3 Parsed service patterns
+Two things to notice:
 
-```
-route  weekday  friday  sat_holiday   Fri vs weekday
-R1         53      37            0            -30.2%
-R2         45      41            0             -8.9%
-R3          -      15           18      (no weekday pattern published)
-R4         37      31            0            -16.2%
-R5          8       8            8              0.0%
-R6         40      23           40            -42.5%
-R7         53      41            0            -22.6%
-R8         53      41            0            -22.6%
-R9         37      31            0            -16.2%
-R10        54      44            0            -18.5%
-R11        54      44            0            -18.5%
-R12        39      29            0            -25.6%
-R13       128     120          132             -6.2%
-R14       108      95            0            -12.0%
-```
+1. **R15 exists in the official list but returns no timings and has no
+   published PDF.** MTCC's own PDF index lists only R1–R14. R15 is a live
+   route with no published schedule.
+2. **The four minibus routes R10, R11, R12 and R15 return zero timings.** The
+   same four routes have no ridership data in the MTCC dataset. Two
+   independent sources agree that these routes are undocumented.
 
-`0` in the Saturday column means Saturday is published **inside** the
-weekday group for those routes — not that there is no Saturday service.
+### 2.4 The limitation of the feed — it is time-filtered
 
-### 2.4 The vintage problem, quantified
+The endpoint returns **each stop's departures from the moment of the call
+onwards**, not the whole service day. Our capture was taken at about 11:00 on
+Saturday 2026-10-24, so:
 
-The PDFs are the **Ramadan 1446 edition (February 2025)**. The live
-timetable is from **October 2026**. They disagree:
+| | |
+|---|---|
+| Captured window | roughly **11:00 – 24:00** |
+| Trips per day (R1) | **61** — the maximum trip `order`, complete and official |
+| Trips captured (R1) | **40** (orders 22–61) |
+| Missing | **06:00 – 11:00**, i.e. the morning peak |
 
-| Route | PDF (Ramadan 1446, weekday) | Live (2026-10-10) | Divergence |
-|---|---|---|---|
-| R5 | 8 | 17 | **+112.5%** |
-| R6 | 40 | 75 | **+87.5%** |
-| R2 | 45 | 61 | +35.6% |
-| R7 | 53 | 66 | +24.5% |
-| R1 | 53 | 61 | +15.1% |
-| R8 | 53 | 61 | +15.1% |
-| R4 | 37 | 38 | +2.7% |
-| R9 | 37 | 38 | +2.7% |
-| R14 | 108 | 105 | −2.8% |
-| R13 | 128 | 92 | **−28.1%** |
+Diagnosis: R1's origin stop returns orders 22–61 with no gaps, all times from
+11:20 onward. Downstream stops return slightly lower order numbers, because a
+trip that already left the origin is still due to arrive further along. So the
+filter is "upcoming events per stop", evaluated at request time.
 
-**Resolution adopted:** the live trip count is the *level*; the PDF is the
-*shape* (day-type ratios and time-window pattern), rescaled to that level.
-The divergence table is published rather than hidden. Caveat for the report:
-*the published schedules we can obtain are the Ramadan 1446 edition; we ask
-MTCC for the current one.*
+**Consequence, and the honest treatment.** Hours before the capture window are
+written to `demand_supply_gap.csv` with `trips_in_hour = null` and
+`capture_status = "before_capture_window"`. They are never written as 0, and
+they are excluded from every KPI. Re-running `dashboard/build/build_data.py`
+shortly after midnight captures a full service day; running it on a Friday and
+a weekday restores the day-type comparison.
+
+### 2.4a What it replaced
+
+Before finding this endpoint the supply side was built from the MTCC PDF
+schedules — the "Ramadan 1446" edition (February 2025), parsed with
+`pdftotext -layout` into day-group × time-window × headway. That approach
+worked, but it was a **2025 Ramadan edition being used as a 2026 service
+model**, and it diverged from the live timetable by −28% to +113% depending on
+route. It has been removed from the repository. The lesson is in §8.
 
 ### 2.5 The RTL public APIs
 
@@ -282,7 +299,7 @@ MTCC `total_pax` is undocumented. Two readings are possible:
 
 | Reading | R1 (5,212 boardings, 61 trips, 84 seats) | R4 (1,146, 38 trips, 52 seats) |
 |---|---|---|
-| One direction | **102%** of seats | 58% |
+| One direction | **89.5%** of seats (Saturday) | 51.3% |
 | Both directions | 51% | 29% |
 
 **One direction is the right reading.** Under the two-direction reading every
@@ -373,53 +390,65 @@ airport demand has no Friday effect, unlike the bus.
 
 ### 5.2 The gap table
 
-```
-route  bus_type       seats day_type trips/day  capacity  boardings  pax/trip  load_peak  load_avg
-R1     Double decker     84  weekday      61.0      5,124     5,212      85.4     101.7%     50.9%
-R1     Double decker     84  friday       42.6      3,577     3,192      74.9      89.2%     44.6%
-R2     Double decker     84  weekday      61.0      5,124     3,818      62.6      74.5%     37.3%
-R2     Double decker     84  friday       55.6      4,669     2,427      43.7      52.0%     26.0%
-R7     Double decker     84  weekday      66.0      5,544     4,185      63.4      75.5%     37.7%
-R7     Double decker     84  friday       51.1      4,289     2,602      51.0      60.7%     30.3%
-R3     Airport bus       52  friday       16.7        867       580      34.8      67.0%     33.5%
-R3     Airport bus       52  sat_holiday  20.0      1,040       828      41.4      79.7%     39.8%
-R4     Airport bus       52  weekday      38.0      1,976     1,146      30.1      58.0%     29.0%
-R4     Airport bus       52  friday       31.8      1,656       722      22.7      43.6%     21.8%
-```
+`dashboard/data/route_load.csv`, captured service day (Saturday):
 
-### 5.3 Is the schedule sized to demand?
+| Route | Official name | Bus type | Seats | Trips/day | Boardings/day | Pax/trip | Load peak | Load avg |
+|---|---|---|---|---|---|---|---|---|
+| R1 | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | 75.2 | **89.5%** | 44.7% |
+| R3 | West Park to VIA | Airport bus | 52 | 20 | 752 | 37.6 | 72.3% | 36.1% |
+| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 56.5 | 67.3% | 33.6% |
+| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 53.8 | 64.1% | 32.0% |
+| R4 | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | 26.7 | **51.3%** | 25.6% |
+| R5, R6, R8, R9, R10–R15 | — | — | — | — | **no data** | — | — | — |
 
-| Route | Demand, Fri vs wd | Service, Fri vs wd | Gap |
-|---|---|---|---|
-| R1 | 61.2% | 69.8% | **+8.6 pp** |
-| R2 | 63.6% | 91.1% | **+27.5 pp** |
-| R4 | 63.0% | 83.8% | **+20.8 pp** |
-| R7 | 62.2% | 77.4% | **+15.2 pp** |
+The pairing matters. Earlier drafts compared *weekday* boardings against a
+trip count that was fetched on a Saturday, which pushed R1 to 102%. The feed
+now gives Saturday service, so Saturday boardings are the correct pair — 89.5%.
+R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at the same 61 trips
+that is **~102%**, which is the number to quote for a weekday, and it needs a
+weekday capture to confirm (the service day may also be higher on a weekday,
+which would reduce it).
 
-The schedule *does* respond to Friday — it just responds by less than demand
-falls, so **Friday buses run emptier on every route**. R2 runs 91% of its
-weekday service on a Friday it loses 36% of its riders. This is free to fix.
+### 5.3 Does the schedule track demand?
+
+**Not answerable from one service day, and that is a finding.**
+
+MTCC demand by day type is unambiguous — Friday boardings are 61–64% of a
+weekday's on all three routes with daily data:
+
+| Route | Demand index, Friday (weekday = 100) |
+|---|---|
+| R1 | 61.2 |
+| R2 | 63.6 |
+| R4 | 63.0 |
+| R7 | 62.2 |
+
+What the *service* does on a Friday cannot be read from a feed that returns one
+service day. The earlier Ramadan-1446 PDF did contain separate Friday
+patterns, and using them produced a clean finding — R2 ran 91% of its weekday
+service on a Friday it lost 36% of its riders. **That finding is withdrawn**
+because it rests on a withdrawn source. It is the strongest candidate for the
+first follow-up capture, and the code path is one call.
 
 ### 5.4 The airport mismatch, quantified
 
-R4/R9 run a flat 30-minute headway 06:00–00:30. Comparing the share of daily
-arrivals to the share of daily service:
+Official RTL departures by hour, captured window:
 
-| Hour | Arrivals | Service | Ratio |
+| Route | Departures per hour | Headway | Expected wait |
 |---|---|---|---|
-| 07:00 | 12.27% | 5.56% | **2.21×** |
-| 08:00 | 11.68% | 5.56% | 2.10× |
-| 09:00 | 11.52% | 5.56% | 2.07× |
-| 11:00 | 10.31% | 5.56% | 1.86× |
-| 14:00 | 9.94% | 5.56% | 1.79× |
-| 16:00 | 1.78% | 5.56% | 0.32× |
-| 23:00 | 0.25% | 5.56% | **0.04×** |
-| 04:00–05:00 | 1.92% | **0%** | **∞** |
+| **R3** | **1, every hour**, 11:00–23:00 | **60 min** | **30 min** |
+| R4 | 2 per hour, 12:00–23:00 | 30 min | 15 min |
+| R9 | 2 per hour (same pattern as R4) | 30 min | 15 min |
+| R1 | 2–4 per hour | 15–30 min | 7.5–15 min |
 
-And R3 (Malé–Airport) runs **hourly** — a 60-minute headway and a
-**30-minute expected wait**.
+This is a sharper statement than the PDF version, because it is direct
+observation rather than inference: **R3 is an hourly bus.** A passenger landing
+at Malé airport without a booking faces a 30-minute expected wait for the
+airport bus, and the bus runs the same frequency at 03:00 as at 08:00.
 
----
+Against MACL's arrival profile (35.5% of international arrivals land between
+07:00 and 09:59, with secondary peaks at 11:00 and 14:00), the fixed headway is
+the mismatch. Nothing runs between 00:00 and 06:00, when 1.9% of arrivals land.
 
 ## 6. The mode-shift question, answered properly
 
@@ -494,35 +523,33 @@ Ordered by expected effect:
 
 ## 7. The scenario engine
 
-Scenarios edit the service pattern; the engine recomputes passenger KPIs.
+`dashboard/build/build_data.py`. Scenarios are **explicit trip moves**, not
+percentage factors — at 1–3 trips per route per hour, a 12% change rounds to
+zero and the "scenario" silently does nothing. Only captured hours are touched;
+hours before the window stay null and are excluded from every KPI.
 
 ```
-scenario                   mean_wait  p95_wait  over_cap  unmet%  seats/hr  trips/d
-S0_baseline                     11.6      30.0     1,715   8.00%   27,932    371
-S1_friday_right_sized           11.6      30.0     1,715   8.00%   27,344    364
-S2_airport_retimed              11.6      30.0     1,685   7.86%   29,336    398
-S3_rebalanced_to_corridor       11.6      30.0     1,715   8.00%   27,932    371
-S4_express_added                11.6      30.0     1,545   7.21%   28,436    377
-S5_recommended_package          11.6      30.0     1,515   7.07%   29,252    397
+scenario                   mean wait  over capacity  unmet%  trips  demand
+S0_baseline                     10.9            360   3.68%    162   9,805
+S2_airport_retimed              10.4            355   3.63%    168   9,786
+S3_rebalanced_to_corridor       10.6            349   3.61%    164   9,696
+S4_express_peak                 10.5            248   2.53%    170   9,805
+S5_recommended_package          10.0            242   2.48%    176   9,786
 ```
 
-Corridor-level, baseline → S5:
+| Scenario | Definition |
+|---|---|
+| S2 | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00 |
+| S3 | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 |
+| S4 | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skip-stopping) |
+| S5 | S2 + S4 |
 
-| Corridor | Mean wait | Worst-hour wait | Over capacity | Trips/day |
-|---|---|---|---|---|
-| Malé–Airport | 30.0 | 30.0 | 44 → **14** | 33 → 43 |
-| Malé↔HM Ph1 | 10.1 | 15.0 | 1,294 → **1,124** | 176 → 175 |
-| Malé↔HM Ph2 | 10.2 | 15.0 | 376 → 376 | 94 → 94 |
-| HM Ph1–Airport | 15.0 | 15.0 | 0 → 0 | 68 → 85 |
-
-**Honest caveat:** the network-wide mean wait barely moves (11.6 min) because
-the changes are concentrated. The corridor table is the honest one. A pitch
-that claims "wait time down 30%" from this model would be wrong.
-
-Mode shift: baseline captures 190.6 taxi rides/day (69,569/yr); S4/S5 capture
-210.2/day (76,723/yr); the mean GC gap falls from 136.7 to 119.3 MVR.
-
----
+**Honest reading.** S5 removes 118 boardings from over-capacity and cuts unmet
+demand by 1.2 points with 14 extra trips. That is a modest, credible gain inside
+a ~13-hour window — not a dramatic one. The Friday scenario is gone (no
+service-day data) and the morning peak is outside the window, which is exactly
+where the largest gains would be. **Say that in the pitch rather than inflating
+the number.**
 
 ## 8. Things that were tried and rejected
 
@@ -534,7 +561,7 @@ Mode shift: baseline captures 190.6 taxi rides/day (69,569/yr); S4/S5 capture
 | **Treating `total_pax` as a load factor directly** | 98 boardings/trip on an 84-seat bus is impossible without knowing the counting basis. Fixed by reporting a band and asking MTCC. |
 | **Assuming the Avas hourly shape is the bus hourly shape** | It is a proxy. Used explicitly as a *shape* with the level anchored to observed MTCC boardings, and the assumption is labelled in every output row. |
 | **Using the live per-stop timetable as the service pattern** | It is a single evening snapshot (19:54–23:59) with no morning peak. Demoted to per-stop run times only. |
-| **Using the PDF trip counts as the current level** | They are the Ramadan 1446 edition and diverge from the live timetable by −28% to +113%. |
+| **MTCC PDF schedules as the service basis** | They are the Ramadan 1446 edition (Feb 2025), diverge from the live 2026 timetable by −28% to +113% by route, need Dhivehi-aware parsing, and omit R15 entirely. Replaced by the official RTL JSON feed, which is current and machine-readable. |
 | **FollowMe (17.46M vessel GPS rows)** | Out of scope per the team decision; it is marine, and the problem statement is about Greater Malé buses. |
 | **A spatial "missing route" analysis** | 97.1% coverage kills it, and the network is already dense. |
 | **An LP/MILP fleet optimiser** | Overkill for the time budget and hard to explain in 5 minutes. A transparent reallocation model with a Pareto view is more defensible. |
@@ -544,9 +571,10 @@ Mode shift: baseline captures 190.6 taxi rides/day (69,569/yr); S4/S5 capture
 
 ## 9. Open questions and data requests for MBS / MTCC
 
-1. **Current (non-Ramadan) bus schedules.** The only published edition is
-   Ramadan 1446 (Feb 2025). This is the single biggest threat to the supply
-   model.
+1. **A weekday and a Friday capture of the RTL feed.** The endpoint is public
+   and needs no key; it only has to be called at different times. That closes
+   the 06:00–11:00 morning gap and restores the day-type comparison. This is
+   the single biggest gap in the project.
 2. **The fleet table** — vehicle type and seat capacity per route, and the
    number of buses in the MTCC Malé fleet. Currently team domain knowledge.
 3. **The `total_pax` definition** — one direction or two? Boardings or unique
@@ -570,8 +598,8 @@ Mode shift: baseline captures 190.6 taxi rides/day (69,569/yr); S4/S5 capture
 | File | Shows |
 |---|---|
 | `docs/figures/F1_bridge_share.png` | 40 of R1's 70 minutes are the two causeway crossings |
-| `docs/figures/F2_load_factors.png` | R1 at 102% of capacity; airport buses at 58–80% |
-| `docs/figures/F3_friday.png` | Demand falls 37%, service falls 9–22% |
+| `docs/figures/F2_load_factors.png` | R1 at 89.5% of capacity; the airport bus at 51% |
+| `docs/figures/F3_demand_daytype.png` | Friday demand is 37% below a weekday (demand only) |
 | `docs/figures/F4_airport_mismatch.png` | Flat 30-min airport service vs tri-peaked arrivals |
 | `docs/figures/F5_scenario_kpis.png` | Baseline vs the recommended package |
 | `docs/figures/F6_generalised_cost.png` | Break-even journey time per corridor |

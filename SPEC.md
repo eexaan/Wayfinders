@@ -49,12 +49,12 @@ Not a dataset with a slide attached.
 
 | Layer | Grain | Method | Data |
 |---|---|---|---|
-| **Supply** | route × day-type × hour | published service pattern × live trip count | MTCC schedule PDFs (S1) + Team Kandu live timetable (D5) |
+| **Supply** | route × hour | official RTL 2026 departures per stop | RTL `v2/bus/routedetails` (S1) |
 | **Demand — level** | route × day-type | observed boardings | MTCC `bus_daily` (R1/R2/R4, 2025) + `bus_monthly` (R3/R7) × day-type index |
 | **Demand — shape** | hour of day | revealed preference on the same corridor | Avas taxi OD × hour (D2) |
 | **Demand — airport** | hour of day | observed arrival profile | MACL hourly (D3) for shape; MBS Yearbook 11.13 (S4) for level, incl. **domestic** |
 | **Capacity** | route | vehicle type × seats | team domain knowledge (see §7) |
-| **Geometry** | stop | lat/lon, route order | Team Kandu stops (D5) + RTL route maps (S2/S3) |
+| **Geometry** | stop | lat/lon, route order | official RTL stop list (S1) |
 
 **Every output row carries `source` and `method`**, so a judge can audit any
 cell and see whether it is observed or modelled. This is deliberate: the
@@ -66,101 +66,118 @@ datathon's judges are statisticians.
 
 ### F1 — The causeway is the journey time
 
+From the official RTL 2026 feed, R1's end-to-end scheduled run
+(West Park → Hulhumalé Phase 1) is **70 minutes**:
+
 | | |
 |---|---|
-| R1 end-to-end run (Malé → Hulhumale Ph1) | **70 min** |
-| Of which: 2 × causeway crossing | **40 min (57%)** |
-| Of which: 14 stop-to-stop segments | 30 min |
-| Internal Hulhumale routes (R5, R6) | 3–5 min per segment |
-| Same journey by taxi (observed median) | **12.7 min** |
+| R1 end-to-end (18 stops) | **70 min** |
+| STELCO → Hulhumale' Cemetery (Malé → Hulhumalé crossing) | **20 min** |
+| Hulhumale' Cemetery OPP → Male' Swimming Track (return crossing) | **20 min** |
+| the other 16 stop-to-stop segments | mostly 2 min each |
+| **share of the journey spent in the two crossings** | **40 of 70 min = 57%** |
+| R2 end-to-end | 67 min, **40 min (60%) in the two crossings** |
+| R7 end-to-end | 40 min, one 20-min crossing |
+| same journey by taxi (observed median, Avas) | **12.7 min** |
 
-The bus is **4.4× slower than a taxi** on the corridor where it is also 8.5×
-cheaper. People are not choosing the taxi because they are being charged
-more; they are paying a premium to avoid 57 minutes of queueing at a bridge.
+Internal Hulhumalé routes that never cross (R5, R6) show 3–5 min per segment.
+The contrast is the evidence: the causeway, not the stop spacing, is the
+bottleneck. The bus is **4.4× slower than a taxi** on the corridor where it is
+also 8.5× cheaper.
 
-### F2 — One corridor is over capacity; the airport buses are not
+### F2 — One corridor carries nearly all the load; the airport buses do not
 
-Weekday, upper-bound load factor (every boarding rides the full route):
+Upper-bound load factor — every boarding rides the full route — on the
+**captured service day (Saturday)**:
 
-| Route | Bus type | Seats | Trips/day | Boardings/day | Pax/trip | Load |
-|---|---|---|---|---|---|---|
-| **R1** West Park–Hulhm Ph1 | Double decker | 84 | 61 | 5,212 | 85 | **102%** |
-| R7 | Double decker | 84 | 66 | 4,185 | 63 | 76% |
-| R2 | Double decker | 84 | 61 | 3,818 | 63 | 74% |
-| R3* | Airport bus | 52 | 20 | 828 | 41 | 80% |
-| **R4** HM Ph1–Airport | Airport bus | 52 | 38 | 1,146 | 30 | **58%** |
+| Route | Official RTL name | Bus type | Seats | Trips/day | Boardings/day | Load (peak) | Load (avg) |
+|---|---|---|---|---|---|---|---|
+| **R1** | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | **89.5%** | 44.7% |
+| R3 | West Park to VIA | Airport bus | 52 | 20 | 752 | 72.3% | 36.1% |
+| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 67.3% | 33.6% |
+| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 64.1% | 32.0% |
+| **R4** | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | **51.3%** | 25.6% |
 
-\* R3 has no published weekday pattern; Saturday/Public Holidays used.
+Ten routes have **no ridership data at all** (R5, R6, R8–R15) and are marked
+`NO DEMAND DATA` rather than zero-filled.
 
-85 people on an 84-seat double-decker means **people wait to board**. That is
-the problem statement, and it is one route.
+> **Read the load numbers with the service day in mind.** The captured feed is
+> one service day (Saturday), so boardings and trips are paired correctly.
+> Weekday boardings on R1 are 13.7% higher than Saturday (5,212 vs 4,585); at
+> the same 61 trips that is **~102% of seats**. A weekday capture is needed to
+> confirm — see §12.
 
-### F3 — The schedule does not track demand
+### F3 — Demand varies sharply; the service day cannot be compared from one capture
 
-| Route | Demand, Fri vs weekday | Service, Fri vs weekday | Gap |
+MTCC ridership, 2025, observed on the routes with daily data:
+
+| Route | Mon | Tue | Wed | Thu | **Fri** | Sat | Sun |
+|---|---|---|---|---|---|---|---|
+| R1 | 5,132 | 5,177 | 5,344 | 5,361 | **3,192** | 4,585 | 5,043 |
+| R2 | 3,756 | 3,908 | 3,908 | 3,859 | **2,427** | 3,447 | 3,655 |
+| R4 | 1,122 | 1,140 | 1,152 | 1,168 | **722** | 1,014 | 1,145 |
+
+**Friday demand is 37–38% below Thursday on every route**, and R1 swings +23%
+between February and July. Free-of-charge passengers (65+, PWD, infants) are
+27–35% of boardings, so a large share of demand cannot be flexed off-peak.
+
+**What this does not yet tell us.** Whether the *service* tracks those swings
+needs a timetable for each day-type. The RTL feed returns the current service
+day only, so the earlier Friday service-versus-demand comparison is withdrawn
+until a Friday and a weekday capture are taken. This is the clearest data gap
+in the project and the fix is one scheduled call (§12).
+
+### F4 — The airport buses run a flat frequency all day; arrivals are tri-peaked
+
+Official RTL 2026 departures, captured window:
+
+| Route | Departures per hour | Headway | Expected wait |
 |---|---|---|---|
-| R1 | 61.2% | 69.8% | **+8.6 pp** |
-| R2 | 63.6% | 91.1% | **+27.5 pp** |
-| R4 | 63.0% | 83.8% | **+20.8 pp** |
-| R7 | 62.2% | 77.4% | **+15.2 pp** |
+| **R3** (Malé ↔ Airport) | **1, every hour**, 11:00–23:00 | **60 min** | **30 min** |
+| R4 (HM Ph1 ↔ Airport) | 2 per hour, 12:00–23:00 | 30 min | 15 min |
+| R1 (Malé ↔ HM Ph1) | 2–4 per hour, building to 4 at 16:00–19:00 | 15–30 min | 7.5–15 min |
 
-The published schedule *does* respond to Friday — it just responds by less
-than demand falls, so Friday buses run emptier on every route. On R2 that is
-**27.5 points of over-provisioning**, and it is free to fix.
+R3 is literally an **hourly bus with a 30-minute expected wait**. Meanwhile
+MACL international arrivals (2019–25, 4.89M arrivals) peak hard:
 
-### F4 — The airport bus is scheduled flat while arrivals are tri-peaked
+| Hour | % of arrivals |
+|---|---|
+| 07:00 | 12.27% |
+| 08:00 | 11.68% |
+| 09:00 | 11.52% |
+| 11:00 | 10.31% |
+| 14:00 | 9.94% |
+| **07:00–09:59 combined** | **35.5%** |
 
-R4 and R9 run a **flat 30-minute headway, 06:00–00:30, every day**. MACL
-arrivals (2019–25, 4.89M international arrivals):
-
-| Hour | % of arrivals | % of R4 service | Ratio |
-|---|---|---|---|
-| 07:00 | 12.27% | 5.56% | **2.21× over-subscribed** |
-| 08:00 | 11.68% | 5.56% | 2.10× |
-| 09:00 | 11.52% | 5.56% | 2.07× |
-| 11:00 | 10.31% | 5.56% | 1.86× |
-| 14:00 | 9.94% | 5.56% | 1.79× |
-| 16:00 | 1.78% | 5.56% | 0.32× |
-| 23:00 | 0.25% | 5.56% | **0.04× (22× over-served)** |
-| 04:00–06:00 | 1.9% | **0%** | **no service at all** |
-
-R3 (Malé–Airport) is worse: **hourly service, 60-minute headway, 30-minute
-expected wait.** Fixable with **zero new buses**.
+**35.5% of arrivals land in a three-hour window**, and the airport buses run
+the same frequency at 03:00 as at 08:00. Nothing runs at all between 00:00 and
+06:00, when 1.9% of arrivals land.
 
 ### F5 — The bus already wins on price. It loses on time.
 
-Generalised cost, Malé↔Hulhumale Ph1, per trip, VOT 250 MVR/hour, taxi
-shared by 2:
+Generalised cost, Malé ↔ Hulhumalé Ph1, per trip, VOT 250 MVR/hour, taxi
+shared by two:
 
-| | Bus | Taxi | Gap |
+| | Bus | Taxi | Result |
 |---|---|---|---|
 | Fare | 10 MVR | 42.5 MVR/passenger | bus wins by 32.5 MVR |
 | Time cost | (9.9 wait + 70 ride) = 333 MVR | (5 hail + 12.7 ride) = 74 MVR | bus loses by 259 MVR |
-| **Total GC** | **343 MVR** | **116 MVR** | **bus is 227 MVR worse** |
+| **Total** | **343 MVR** | **116 MVR** | **bus is 227 MVR worse** |
 
-- On **price alone** (VOT→0): **70–75% of taxi riders on every corridor
-  would take the bus.**
+- On **price alone** (VOT→0): **62–76% of taxi riders on every corridor would
+  take the bus.**
 - On **generalised cost** (VOT 250 MVR/h): **0.05–9.3%** would switch.
 
-**Therefore a fare discount is the wrong instrument.** The binding constraint
-is journey time. The break-even ride time the bus needs to match a shared
-taxi:
+**A fare discount is therefore the wrong instrument** — it discounts the
+dimension where the bus already wins and leaves the binding constraint
+(journey time) untouched. Break-even ride time per corridor:
 
-| Corridor | Current ride | Break-even ride | **Minutes to shed** |
+| Corridor | Current ride | Break-even | **Minutes to shed** |
 |---|---|---|---|
 | HM Ph2 ↔ Airport (R9) | 31 min | 14.6 min | **16.4** ✅ reachable |
 | Malé ↔ HM Ph2 (R7/R8) | 40 min | 19.6 min | **20.4** ✅ reachable |
-| Malé ↔ HM Ph1 (R1/R2) | 70 min | 15.6 min | **54.4** ❌ needs the bridge |
-| Malé ↔ Airport (R3) | 44 min | 0 min | 44 ❌ needs the bridge |
-
-The corridor that carries 51% of all taxi rides (Malé↔Hulhumale Ph2, 2,662
-rides/day) is reachable with express service. The Malé↔HM Ph1 corridor is not
-reachable without solving the causeway.
-
-**This is the core policy finding: fix the bridge crossing for buses, and
-modal shift follows. Discount the bus, and nothing moves.**
-
----
+| Malé ↔ HM Ph1 (R1/R2) | 70 min | 15.6 min | **54.4** ❌ needs the causeway |
+| Malé ↔ Airport (R3) | 44 min | 0 min | 44 ❌ needs the causeway |
 
 ## 5. The scenario engine
 
@@ -178,18 +195,17 @@ A scenario edits the service pattern; the engine recomputes passenger KPIs.
 
 ### Scenarios and results
 
-| # | Scenario | What it does | Over-capacity | Unmet | Trips/day |
+| # | Scenario | What it does | Over-capacity | Unmet | Trips captured |
 |---|---|---|---|---|---|
-| S0 | Baseline | — | 1,715 | 8.00% | 371 |
-| S1 | Friday right-sized | cut Friday service on R1/R2/R4 to match Friday demand | 1,715 | 8.00% | **364 (−7)** |
-| S2 | Airport re-timed | 30→15 min for R4/R9 and 60→30 min for R3 during the 07:00–09:59 / 11:00 / 14:00 arrival peaks; halve the 22:00–06:00 night service | **1,685** | **7.86%** | 398 (+27) |
-| S3 | Rebalanced to the corridor | move 15% of airport trips to the Malé↔HM Ph1 corridor | 1,715 | 8.00% | 371 (0) |
-| S4 | Express service on R1/R2 | skip-stop Hulhumale service, 70→45 min, +15% departures | **1,545** | **7.21%** | 377 (+6) |
-| **S5** | **Recommended package** | **S1 + S2 + S4** | **1,515 (−200)** | **7.07%** | **397 (+26)** |
+| S0 | Baseline | — | 360 | 3.68% | 162 |
+| S2 | Airport re-timed | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00 | **355** | 3.63% | 168 |
+| S3 | Rebalanced to the corridor | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 | **349** | 3.61% | 164 |
+| S4 | Express peak | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skipping stops) | **248** | **2.53%** | 170 |
+| **S5** | **Recommended package** | **S2 + S4** | **242 (−118)** | **2.48%** | **176** |
 
-S5 moves **200 fewer passengers over capacity, with 26 more trips** and cuts
-the unmet share by ~1 point — and every one of those changes is a *re-timing*,
-not a new bus.
+S5 removes **118 boardings from over-capacity** and cuts the unmet share by
+1.2 points with 14 extra trips, all inside the captured window — every change
+is a *re-timing*, not a new bus.
 
 **Caveat to state honestly:** the network-wide mean wait barely moves
 (11.6 min) because the changes are concentrated on a few corridors. The
@@ -248,7 +264,7 @@ dashboard"*. Build to that spec.
 | E-minibus | 11 | R13, R14 | **ASSUMED — confirm** |
 
 > ⚠️ **Source:** reported bus capacity at <https://www.psmnews.mv/en/106008>
-> (linked in `exn-dt/notes.txt`) plus the `minibus` flag in Team Kandu's route
+> (linked in `data/official/notes.txt`) plus the `minibus` flag in Team Kandu's route
 > table. The article is behind a Cloudflare challenge and could not be
 > machine-read, so these figures are **team-provided, not automatically
 > verified**. They drive every absolute load-factor number. **Confirm the
@@ -257,11 +273,12 @@ dashboard"*. Build to that spec.
 > (F3, F4, F5) do not depend on them.
 
 **The other load-bearing assumption (A1):** MTCC `total_pax` is boardings in
-**one direction**. Under this reading R1 sits at 102% of an 84-seat bus,
-consistent with the problem statement. Under a two-direction reading every
-route sits at 28–51% and the stated problem would not exist. We report a
-**band** (`load_factor_peak_pct` = upper bound, `load_factor_avg_pct` = lower
-bound under uniform alighting) so the conclusion holds either way.
+**one direction**. Under this reading R1 sits at 89.5% of an 84-seat bus on the
+captured Saturday, rising to about 102% on a weekday when demand is 13.7%
+higher at the same trip count. Under a two-direction reading every route sits
+at 25–45% and the stated problem would not exist. We report a **band**
+(`load_factor_peak_pct` = upper bound, `load_factor_avg_pct` = lower bound
+under uniform alighting) so the ranking holds either way.
 
 ---
 
@@ -330,7 +347,7 @@ hardware, and beats a webcam for validating the supply model.
 | Risk | Severity | Mitigation |
 |---|---|---|
 | **Fleet capacities wrong** (team knowledge) | High | Confirm with MTCC; report a band; F3/F4/F5 do not depend on them |
-| **Schedules are the Ramadan 1446 edition (Feb 2025)** | High | Ask for a current edition; use the live trip count as the level; publish the divergence table (−28% to +113% by route) |
+| **The RTL feed returns one service day, time-filtered from the moment of the call** | High | Our capture covers ~11:00–24:00 on a Saturday; the morning peak is missing. Re-run `dashboard/build/build_data.py` shortly after 00:00 to capture a full day, and once on a Friday and a weekday to restore the day-type comparison. Hours not captured are emitted as null, never 0 |
 | **MTCC counts are "sample value"** per its own README | Medium | State it; use MTCC as the anchor and cross-check against Avas |
 | **MACL covers ≤36.5% of international arrivals, 0% of domestic** | Medium | Use Yearbook for levels, MACL for shape; publish the coverage table as a finding |
 | No ridership data for R5, R6, R8, R9, R10–R15 | Medium | Publish a coverage matrix; mark as `NO DEMAND DATA` rather than zero-filling |
@@ -341,8 +358,10 @@ hardware, and beats a webcam for validating the supply model.
 
 ## 12. Open questions to chase today
 
-1. **Current (non-Ramadan) MTCC schedules** — does a 2026 edition exist?
-   Biggest single risk to the supply model.
+1. **A weekday and a Friday capture of the RTL feed.** The endpoint is public
+   and needs no key; it just has to be called at different times. That closes
+   the morning gap and restores the day-type comparison. Biggest single gap in
+   the project.
 2. **Fleet table** — vehicle type and seat capacity per route, and the number
    of buses in the MTCC Malé fleet.
 3. **Census 2022 / HIES 2019** access link (the FAQ says MBS provides them).
@@ -366,10 +385,11 @@ hardware, and beats a webcam for validating the supply model.
 2. **0:40–1:40 — F1, the causeway.** 57% of the bus's journey is two bridge
    crossings. The bus is 4.4× slower than the taxi *and* 8.5× cheaper. That
    is why young Maldivians take taxis.
-3. **1:40–2:40 — F2, F3, F4, the misallocation.** R1 runs at 102% of
-   capacity; the airport bus runs at 58%. Friday demand falls 37% but service
-   falls 9–22%. The airport bus runs a flat 30-minute headway while 35% of
-   arrivals land in three hours, and nothing runs before 06:00.
+3. **1:40–2:40 — F2, F3, F4, the misallocation.** R1 carries about 90% of
+   its seats on a Saturday and would pass 100% on a weekday; the airport bus
+   R4 runs at 51%. R3 is an hourly bus with a 30-minute expected wait, the
+   airport buses run the same frequency at 03:00 as at 08:00, and 35.5% of
+   arrivals land in a three-hour window.
 4. **2:40–4:10 — the tool.** Live demo: move 6 trips, watch over-capacity
    fall by 200 passengers, unmet demand fall, and the taxi capture change.
    Six scenarios, one recommended package — all re-timings, zero new buses.
@@ -379,13 +399,15 @@ hardware, and beats a webcam for validating the supply model.
    table, and the count definition.*
 
 **Q&A preparation**
-- *"Your load factor says 102% on an 84-seat bus — how is that possible?"*
-  → It is a boardings-based upper bound; the band is 51–102% and the ranking
-  is robust. Our first ask to MTCC is the count definition.
-- *"How do you know the schedules are current?"* → We don't, and we publish
-  the divergence between the Ramadan-1446 PDF and the live October-2026
-  timetable (−28% to +113%). We use the live count as the level and the PDF
-  only for the shape, and we flag it.
+- *"Your load factor puts R1 at 90% but the problem says buses are full —
+  which is it?"* → 90% is the Saturday figure, with Saturday demand and
+  Saturday service paired correctly. Weekday demand is 13.7% higher, which
+  puts a weekday at about 102%. The band is 45–90% on Saturday and the ranking
+  is robust either way; a weekday capture settles it.
+- *"How current is the timetable?"* → It is the official RTL feed, fetched
+  today. It is time-filtered from the moment of the call, so we captured
+  roughly 11:00–24:00 of one service day; the morning peak is the known gap
+  and re-running the build after midnight closes it.
 - *"Is taxi demand really bus demand?"* → No, and we don't claim it is. We
   use taxi as a revealed-preference *shape* and an *upper bound* on total
   demand. The bus ridership is the anchor.

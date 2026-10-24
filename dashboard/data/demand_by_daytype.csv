@@ -1,0 +1,16 @@
+route_code,day_type,boardings_per_day,demand_source
+R1,friday,3191.5384615384614,MTCC bus_daily 2025 (observed)
+R1,sat_holiday,4585.038461538462,MTCC bus_daily 2025 (observed)
+R1,weekday,5211.827586206897,MTCC bus_daily 2025 (observed)
+R2,friday,2427.25,MTCC bus_daily 2025 (observed)
+R2,sat_holiday,3447.403846153846,MTCC bus_daily 2025 (observed)
+R2,weekday,3817.681992337165,MTCC bus_daily 2025 (observed)
+R4,friday,721.5769230769231,MTCC bus_daily 2025 (observed)
+R4,sat_holiday,1013.6153846153846,MTCC bus_daily 2025 (observed)
+R4,weekday,1145.5172413793102,MTCC bus_daily 2025 (observed)
+R3,weekday,786.2500202393297,MTCC bus_monthly x daily-data day-type index
+R3,friday,669.0094639903267,MTCC bus_monthly x daily-data day-type index
+R3,sat_holiday,751.7291799827839,MTCC bus_monthly x daily-data day-type index
+R7,weekday,3708.610990195552,MTCC bus_monthly x daily-data day-type index
+R7,friday,3180.802269164889,MTCC bus_monthly x daily-data day-type index
+R7,sat_holiday,3552.1888536575507,MTCC bus_monthly x daily-data day-type index
