@@ -1,0 +1,185 @@
+route_code,stop_order,stop_code,stop_name,lat,lon,daily_boardings,daily_alightings,avas_rides_per_day,boarding_share_pct,stop_role,method,demand_source,catchment_m
+R1,1,103,Maafannu Bus Terminal,4.169366,73.504676,584.3,646.3,194.6,12.74,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,2,304,Tow Yard,4.169349,73.510249,323.0,311.0,107.6,7.04,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,3,105,STELCO,4.17001,73.514746,717.4,770.1,238.9,15.65,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,4,106,Hulhumale' Cemetery,4.207528,73.539788,169.5,176.8,56.4,3.7,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,5,107,Skate Park,4.207421,73.541765,113.4,94.1,37.8,2.47,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,6,121,Flat No. 137,4.209958,73.542596,124.8,107.8,41.6,2.72,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,7,108,Fehires Park,4.211553,73.543088,96.4,78.1,32.1,2.1,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,8,109,Flat No. 147,4.213077,73.543635,152.5,116.5,50.8,3.33,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,9,110,Ruhgandu 1,4.216186,73.54459,171.8,163.2,57.2,3.75,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,10,111,Dhiraagu,4.219882,73.545734,390.7,323.7,130.1,8.52,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,11,112,Hulhumale' Synthetic Track,4.219455,73.542702,534.2,463.8,177.9,11.65,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,12,113,Hulhumale' Police Station,4.21678,73.542108,130.1,162.5,43.3,2.84,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,13,114,Amin Avenue,4.21442,73.540352,251.6,238.6,83.8,5.49,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,14,115,MNDF Flat,4.210681,73.539804,277.3,332.7,92.3,6.05,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,15,11106,Hulhumale' Cemetery OPP,4.207528,73.539788,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,16,117,Male' Swimming Track,4.169881,73.514446,232.9,229.2,77.6,5.08,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,17,118,Dharumavantha School,4.169257,73.509328,315.0,370.7,104.9,6.87,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R1,18,11103,Maafannu Bus Terminal OPP,4.169366,73.504676,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,1,201,Carnival ,4.176984,73.517896,501.2,565.3,173.8,14.54,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,2,20002,Raalhugandu (Schedule Bus),4.172973,73.517814,66.7,63.1,23.1,1.93,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,3,203,Flat No. 120,4.210903,73.541829,181.4,153.5,62.9,5.26,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,4,109,Flat No. 147,4.213077,73.543635,165.4,128.5,57.3,4.8,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,5,401,Centro Mall,4.21635,73.542565,255.7,253.8,88.7,7.42,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,6,11201,CHSE,4.220615,73.541345,669.8,586.5,232.2,19.43,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,7,114,Amin Avenue,4.21442,73.540352,180.4,194.9,62.6,5.23,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,8,115,MNDF Flat,4.210681,73.539804,167.6,208.3,58.1,4.86,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,9,106,Hulhumale' Cemetery,4.207528,73.539788,197.4,199.3,68.4,5.73,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,10,204,Senahiya,4.172344,73.516718,866.9,877.2,300.6,25.15,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R2,11,1011,Artificial Beach,4.17513,73.518064,194.9,217.0,67.6,5.65,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,1,103,Maafannu Bus Terminal,4.169366,73.504676,177.0,15.5,66.1,23.55,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,2,304,Tow Yard,4.169349,73.510249,118.7,11.3,44.3,15.79,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,3,105,STELCO,4.17001,73.514746,216.6,22.6,80.9,28.81,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,4,306,VIA Domestic Terminal,4.190044,73.527056,64.6,673.2,24.1,8.59,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,5,307,MACL Office,4.191667,73.526898,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,6,11306,VIA Domestic Terminal OPP,4.190516,73.526887,0.3,12.8,0.1,0.04,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,7,117,Male' Swimming Track,4.169881,73.514446,89.8,6.5,33.6,11.95,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,8,118,Dharumavantha School,4.169257,73.509328,84.8,9.8,31.7,11.28,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R3,9,11103,Maafannu Bus Terminal OPP,4.169366,73.504676,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,1,114,Amin Avenue,4.21442,73.540352,111.0,22.4,32.4,10.95,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,2,106,Hulhumale' Cemetery,4.207528,73.539788,223.6,40.7,65.3,22.06,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,3,306,VIA Domestic Terminal,4.190044,73.527056,129.6,858.1,37.9,12.79,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,4,307,MACL Office,4.191667,73.526898,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,5,11306,VIA Domestic Terminal OPP,4.190516,73.526887,0.0,6.8,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,6,11106,Hulhumale' Cemetery OPP,4.207528,73.539788,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,7,108,Fehires Park,4.211553,73.543088,233.4,35.4,68.2,23.03,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,8,401,Centro Mall,4.21635,73.542565,315.9,50.2,92.3,31.17,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R4,9,11401,Amin Avenue Opp,4.21442,73.540352,0.0,0.0,0.0,0.0,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R5,1,601,Hiya Flats Stop 1,4.23139,73.548899,,,30.7,20.72,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,2,11309,H 16 Bus Stop,4.234245,73.547805,,,22.6,15.24,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,3,602,Hiya Flats Stop 2,4.231865,73.546356,,,41.0,27.7,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,4,32001,VINARES BUS STOP,4.227847160312973,73.54408542858819,,,31.7,21.4,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,5,11003,MACL Flat Stop,4.22371,73.544066,,,15.0,10.14,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,6,11201,CHSE,4.220615,73.541345,,,3.9,2.63,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,7,507,Hulhumalé Ferry Terminal,4.216739,73.537853,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,8,509,Umar Zahir Building,4.213758,73.538511,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,9,33035,Court Complex Bus Stop,4.211813,73.538368,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,10,1207,Orange Hiya Bus Stop,4.20656,73.536385,,,1.8,1.2,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,11,106,Hulhumale' Cemetery,4.207528,73.539788,,,1.3,0.9,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,12,121,Flat No. 137,4.209958,73.542596,,,0.1,0.08,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,13,110,Ruhgandu 1,4.216186,73.54459,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,14,111,Dhiraagu,4.219882,73.545734,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R5,15,604,Masjid Ameel Jaleel,4.224619,73.547014,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,1,601,Hiya Flats Stop 1,4.23139,73.548899,,,28.9,22.39,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,2,11309,H 16 Bus Stop,4.234245,73.547805,,,20.1,15.59,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,3,602,Hiya Flats Stop 2,4.231865,73.546356,,,37.3,28.94,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,4,32001,VINARES BUS STOP,4.227847160312973,73.54408542858819,,,27.2,21.1,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,5,11003,MACL Flat Stop,4.22371,73.544066,,,12.6,9.73,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,6,112,Hulhumale' Synthetic Track,4.219455,73.542702,,,1.6,1.21,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,7,503,Hulhumalé Police Station,4.217746,73.542216,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,8,114,Amin Avenue,4.21442,73.540352,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,9,606,Tree Top Hospital,4.211256,73.54048,,,0.9,0.69,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,10,203,Flat No. 120,4.210903,73.541829,,,0.4,0.34,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,11,108,Fehires Park,4.211553,73.543088,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,12,109,Flat No. 147,4.213077,73.543635,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,13,110,Ruhgandu 1,4.216186,73.54459,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,14,610,Flat No. 2,4.217841,73.545131,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,15,111,Dhiraagu,4.219882,73.545734,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R6,16,604,Masjid Ameel Jaleel,4.224619,73.547014,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R7,1,602,Hiya Flats Stop 2,4.231865,73.546356,235.6,281.4,80.7,6.63,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,2,32001,VINARES BUS STOP,4.227847160312973,73.54408542858819,353.7,342.0,121.1,9.96,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,3,11003,MACL Flat Stop,4.22371,73.544066,229.8,194.7,78.7,6.47,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,4,117,Male' Swimming Track,4.169881,73.514446,167.8,154.5,57.4,4.72,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,5,118,Dharumavantha School,4.169257,73.509328,263.5,291.7,90.2,7.42,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,6,103,Maafannu Bus Terminal,4.169366,73.504676,550.4,557.5,188.4,15.49,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,7,304,Tow Yard,4.169349,73.510249,251.2,224.9,86.0,7.07,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,8,105,STELCO,4.17001,73.514746,531.6,560.1,182.0,14.96,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,9,32000,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.223651,73.543878,508.8,459.5,174.2,14.32,interchange,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,10,604,Masjid Ameel Jaleel,4.224619,73.547014,149.6,126.9,51.2,4.21,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,11,601,Hiya Flats Stop 1,4.23139,73.548899,196.0,237.2,67.1,5.52,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R7,12,11309,H 16 Bus Stop,4.234245,73.547805,114.2,121.7,39.1,3.22,,"Avas OD snapped to stop, scaled to MTCC daily total",MTCC bus_daily 2025 Saturday,600.0
+R8,1,602,Hiya Flats Stop 2,4.231865,73.546356,,,48.9,5.8,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,2,32001,VINARES BUS STOP,4.227847160312973,73.54408542858819,,,81.9,9.71,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,3,11003,MACL Flat Stop,4.22371,73.544066,,,56.2,6.67,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,4,204,Senahiya,4.172344,73.516718,,,215.3,25.53,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,5,208,Artificial Beach West,4.174101,73.517817,,,62.0,7.35,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,6,201,Carnival ,4.176984,73.517896,,,132.7,15.73,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,7,20002,Raalhugandu (Schedule Bus),4.172973,73.517814,,,10.2,1.21,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,8,32000,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.223651,73.543878,,,135.7,16.08,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,9,604,Masjid Ameel Jaleel,4.224619,73.547014,,,34.9,4.14,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,10,601,Hiya Flats Stop 1,4.23139,73.548899,,,41.4,4.91,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R8,11,11309,H 16 Bus Stop,4.234245,73.547805,,,24.2,2.87,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,1,601,Hiya Flats Stop 1,4.23139,73.548899,,,26.4,15.9,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,2,11309,H 16 Bus Stop,4.234245,73.547805,,,13.3,8.02,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,3,602,Hiya Flats Stop 2,4.231865,73.546356,,,36.2,21.78,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,4,32001,VINARES BUS STOP,4.227847160312973,73.54408542858819,,,51.1,30.73,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,5,11003,MACL Flat Stop,4.22371,73.544066,,,30.7,18.44,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,6,306,VIA Domestic Terminal,4.190044,73.527056,,,8.6,5.14,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,7,307,MACL Office,4.191667,73.526898,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,8,11306,VIA Domestic Terminal OPP,4.190516,73.526887,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,9,32000,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.223651,73.543878,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R9,10,604,Masjid Ameel Jaleel,4.224619,73.547014,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,1,1004,Maaveyo Maizaan,4.175851,73.505883,,,2.8,45.45,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,2,1005,Hilaaleege,4.177532,73.507219,,,0.1,1.82,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,3,1006,Justice Building,4.178385,73.508454,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,4,1007,Jumhooree Maidhaan,4.17892,73.51104,,,0.1,1.82,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,5,1008,Jetty NO5,4.178784,73.513422,,,0.1,1.82,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,6,1009,MTCC Tower,4.178174,73.515595,,,0.3,5.45,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,7,201,Carnival ,4.176984,73.517896,,,0.3,5.45,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,8,1011,Artificial Beach,4.17513,73.518064,,,0.1,1.82,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,9,1012,Muni Ufaa,4.174327,73.516835,,,0.3,5.45,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,10,1013,Ibrahim Mosque,4.174664,73.514333,,,0.6,9.09,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,11,1014,Olympus,4.174948,73.511412,,,0.2,3.64,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,12,1106,City Square (North Side),4.175205,73.509847,,,0.9,14.55,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R10,13,1016,Maaveyo Magu,4.175418,73.507406,,,0.2,3.64,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,1,202,Raalhugandu (Mini Bus),4.17331,73.517863,,,0.2,2.08,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,2,1111,Dharubaaruge,4.170695,73.516314,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,3,1112,Kudakudhinge Bageecha,4.170928,73.514235,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,4,1113,Male' Hiya Flat,4.171185,73.512209,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,5,1114,Rehendhi Flat,4.17137,73.510187,,,0.7,6.25,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,6,1115,MIRA,4.171568,73.508277,,,0.7,6.25,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,7,1116,Maafannu Stadium,4.171871,73.505627,,,0.6,5.21,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,8,1117,Ministry of Environment,4.17199,73.504227,,,1.6,14.58,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,9,1101,Maafannu Ferry Terminal,4.172281,73.50206,,,2.0,18.75,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,10,120,Dharumavantha Hospital (West Side),4.172781,73.500813,,,0.4,4.17,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,11,1102,Maafannu Madharusa,4.175986,73.502422,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,12,1103,Maafannu Sahara,4.175881,73.503956,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,13,1104,Odeon,4.175564,73.506684,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,14,1105,Zikura Mosque,4.175373,73.508185,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,15,1015,City Square,4.17513,73.509529,,,0.1,1.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,16,1107,Billoori Jehige,4.175024,73.511556,,,0.4,4.17,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,17,1119,Heenaamage,4.17478,73.513774,,,0.8,7.29,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,18,1108,Dhamanaveshi,4.174643,73.515062,,,1.1,10.42,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R11,19,1109,Henveiru Stadium,4.174467,73.517145,,,1.6,14.58,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,1,1201,MTCC Sawmill,4.176728,73.517862,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,2,1202,Ministry of Foreign Affairs,4.178512,73.514082,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,3,1007,Jumhooree Maidhaan,4.17892,73.51104,,,0.1,12.5,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,4,1204,Velaanaage,4.17832,73.513278,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,5,32006,ISRAHVEHINGE NAADHEE STOP,4.178033,73.514222,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,6,1205,Majeedhiyya School,4.177506,73.515282,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,7,1206,Islamic University of Maldives,4.175993,73.514973,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,8,1108,Dhamanaveshi,4.174643,73.515062,,,0.6,62.5,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R12,9,1109,Henveiru Stadium,4.174467,73.517145,,,0.2,25.0,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,1,1301,Villimale Ferry Terminal,4.175107,73.486942,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,2,1302,BML Villimale Branch	,4.174545,73.48597,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,3,1303,Muhyiddin School	,4.173209,73.485865,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,4,1304,MNDF Flats,4.17234,73.485594,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,5,1305,Sinaai Sarahadhu	,4.171731,73.485121,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,6,1306,Salaam Miskiy	,4.172177,73.484309,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,7,1307,Boalha Dhandu,4.173065,73.484268,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,8,1308,Vaaru Hingun,4.173555,73.483706,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,9,1309,Viludhooni Park	,4.174031,73.483217,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,10,1310,Jumhooree Hingun,4.174845,73.48366,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,11,1311,Villimale Beach,4.175424,73.484172,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,12,1312,Villimale Harbor,4.176026,73.484502,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R13,13,1313,Villimale Hospital	,4.176059,73.48547,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,1,1301,Villimale Ferry Terminal,4.175107,73.486942,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,2,1313,Villimale Hospital	,4.176059,73.48547,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,3,1312,Villimale Harbor,4.176026,73.484502,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,4,1311,Villimale Beach,4.175424,73.484172,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,5,32003,Masjidh Al Ikhlaas Stop,4.174233,73.484285,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,6,1307,Boalha Dhandu,4.173065,73.484268,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,7,1306,Salaam Miskiy	,4.172177,73.484309,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,8,1305,Sinaai Sarahadhu	,4.171731,73.485121,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,9,1304,MNDF Flats,4.17234,73.485594,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,10,33051,Edhuruvehi Bus Stop,4.172797,73.486062,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,11,33052,Sinamale' Bus Stop,4.174216,73.486783,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R14,12,32005,Villimale' Ferry Termial Op,4.175078,73.486891,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,1,103,Maafannu Bus Terminal,4.169366,73.504676,,,30.0,14.57,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,2,304,Tow Yard,4.169349,73.510249,,,14.4,7.02,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,3,105,STELCO,4.17001,73.514746,,,31.0,15.06,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,4,1207,Orange Hiya Bus Stop,4.20656,73.536385,,,109.3,53.1,interchange,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,5,117,Male' Swimming Track,4.169881,73.514446,,,8.7,4.21,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,6,118,Dharumavantha School,4.169257,73.509328,,,12.4,6.04,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0
+R15,7,11103,Maafannu Bus Terminal OPP,4.169366,73.504676,,,0.0,0.0,,Avas OD snapped to stop (no ridership level available),NO DEMAND DATA,600.0

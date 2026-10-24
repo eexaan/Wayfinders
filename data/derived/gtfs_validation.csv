@@ -1,0 +1,19 @@
+check,result,detail
+required_files_present,PASS,all present
+unique_stop_ids,PASS,61 stops
+unique_route_ids,PASS,11 routes
+unique_trip_ids,PASS,450 trips
+trip_route_fk,PASS,
+trip_service_fk,PASS,
+stop_time_trip_fk,PASS,
+stop_time_stop_fk,PASS,
+every_trip_has_2plus_stop_times,PASS,0 short trips
+stop_sequence_contiguous,PASS,0 trips out of order
+arrival_times_non_decreasing,PASS,0 trips
+arrival_equals_departure,PASS,no dwell time is modelled
+calendar_single_service_day,PASS,20261024..20261024
+route_type_is_bus,PASS,route_type=3
+coordinates_in_greater_male,PASS,0 outside envelope
+all_stops_used,PASS,0 unused: []
+zip_readable,PASS,first bad member: None
+zip_contains_required,PASS,7 members

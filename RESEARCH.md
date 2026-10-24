@@ -340,7 +340,7 @@ available as clean CSV in `ajmals/maldives-statistics`):
 | International flights | 2,699,225 | **7,395** |
 | Total | 4,154,381 | **11,381** |
 
-**MACL coverage: 984,629 adult international arrivals in 2025 = ≤ 36.5% of the
+**MACL coverage: 984,629 adult international arrivals in 2025 = ≈ 40% of the
 Yearbook's international figure, and 0% of domestic.** So MACL is used for
 the *shape* of the arrival profile only; the *level* comes from 11.13.
 
@@ -368,9 +368,16 @@ MACL international arrivals by hour, 2019–2025 (4.89M arrivals):
 13:00  4.43%
 ```
 
-**35.5% of arrivals land between 07:00 and 09:59**, with secondary peaks at
-11:00 and 14:00. The weekday pattern is flat (14.0–14.5% each day) — so
+**33.1% of arriving passengers land between 07:00 and 09:59**, with secondary
+peaks at 11:00 and 14:00. The weekday pattern is flat (14.0–14.5% each day) — so
 airport demand has no Friday effect, unlike the bus.
+
+> **Corrected 2026-10-24 in validation.** The figure was 35.5%, from an
+> unspecified 2019–25 basket. Rebuilt from a stated definition — 2025,
+> international, passenger-weighted — it is 33.1%. The difference is a 2.8-point
+> drift and does not change the finding. The weighting matters more than the
+> year: flight-weighted the morning share is 25.3% and the peak window moves to
+> midday, because the morning is a widebody bank and midday is many narrowbodies.
 
 ---
 
@@ -392,22 +399,31 @@ airport demand has no Friday effect, unlike the bus.
 
 `dashboard/data/route_load.csv`, captured service day (Saturday):
 
-| Route | Official name | Bus type | Seats | Trips/day | Boardings/day | Pax/trip | Load peak | Load avg |
-|---|---|---|---|---|---|---|---|---|
-| R1 | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | 75.2 | **89.5%** | 44.7% |
-| R3 | West Park to VIA | Airport bus | 52 | 20 | 752 | 37.6 | 72.3% | 36.1% |
-| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 56.5 | 67.3% | 33.6% |
-| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 53.8 | 64.1% | 32.0% |
-| R4 | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | 26.7 | **51.3%** | 25.6% |
-| R5, R6, R8, R9, R10–R15 | — | — | — | — | **no data** | — | — | — |
+| Route | Official name | Model | Seats | Max | Trips/day | Boardings/day | Pax/trip | Load on seats | Load on max |
+|---|---|---|---|---|---|---|---|---|---|
+| **R1** | West Park to HM Phase 1 | ZK6116HGS | 72 | 84 | 61 | 4,585 | 75.2 | **104.4%** | 89.5% |
+| R2 | Carnival to HM Phase 1 | ZK6116HGS | 72 | 84 | 61 | 3,447 | 56.5 | 78.5% | 67.3% |
+| R7 | HM Phase 2 to West Park | ZK6116HGS | 72 | 84 | 66 | 3,552 | 53.8 | 74.8% | 64.1% |
+| R3 | West Park to VIA | ZK6122H9 | 55 | 55 | 20 | 752 | 37.6 | 68.3% | 68.3% |
+| R4 | HM Phase 1 to VIA | ZK6122H9 | 55 | 55 | 38 | 1,014 | 26.7 | 48.5% | 48.5% |
+| R5, R6 | — | ZK6126HGA | 33 | ? | 17 / 75 | **no data** | — | **not comparable** | — |
+| R8, R9, R10–R15 | — | — | — | — | — | **no data** | — | — | — |
 
-The pairing matters. Earlier drafts compared *weekday* boardings against a
-trip count that was fetched on a Saturday, which pushed R1 to 102%. The feed
-now gives Saturday service, so Saturday boardings are the correct pair — 89.5%.
-R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at the same 61 trips
-that is **~102%**, which is the number to quote for a weekday, and it needs a
-weekday capture to confirm (the service day may also be higher on a weekday,
-which would reduce it).
+**R1 exceeds its seat capacity on a Saturday.** 4,585 boardings against 61
+trips × 72 seats = 4,392 seat-slots. That is 104.4% — people are standing or
+waiting for the next bus, which is the problem statement stated numerically.
+On seats *plus* permitted standing it is 89.5%. Both are reported; the seats
+figure is the headline (ADR-0003).
+
+R5 and R6 have no load factor at all: the operator gave a seated capacity (33)
+but did not state standing capacity, so `load_factor_comparable` is false.
+
+The pairing matters too. Earlier drafts compared *weekday* boardings against a
+trip count fetched on a Saturday, which gave 102% on a 84-seat bus — wrong on
+both counts. The feed now supplies Saturday service, so Saturday boardings are
+the correct pair. R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at
+the same 61 trips that is ~119% of seats, and it needs a weekday capture to
+confirm, since the weekday trip count may also be higher.
 
 ### 5.3 Does the schedule track demand?
 
@@ -446,9 +462,10 @@ observation rather than inference: **R3 is an hourly bus.** A passenger landing
 at Malé airport without a booking faces a 30-minute expected wait for the
 airport bus, and the bus runs the same frequency at 03:00 as at 08:00.
 
-Against MACL's arrival profile (35.5% of international arrivals land between
+Against MACL's arrival profile (33.1% of arriving passengers land between
 07:00 and 09:59, with secondary peaks at 11:00 and 14:00), the fixed headway is
-the mismatch. Nothing runs between 00:00 and 06:00, when 1.9% of arrivals land.
+the mismatch. Nothing runs between 00:00 and 06:00, when 4.3% of passengers
+arrive.
 
 ## 6. The mode-shift question, answered properly
 
@@ -530,12 +547,15 @@ hours before the window stay null and are excluded from every KPI.
 
 ```
 scenario                   mean wait  over capacity  unmet%  trips  demand
-S0_baseline                     10.9            360   3.68%    162   9,805
-S2_airport_retimed              10.4            355   3.63%    168   9,786
-S3_rebalanced_to_corridor       10.6            349   3.61%    164   9,696
-S4_express_peak                 10.5            248   2.53%    170   9,805
-S5_recommended_package          10.0            242   2.48%    176   9,786
+S0_baseline                     10.9            845   8.62%    162   9,805
+S2_airport_retimed              10.4            844   8.62%    168   9,786
+S3_rebalanced_to_corridor       10.6            738   7.62%    164   9,696
+S4_express_peak                 10.5            610   6.23%    170   9,805
+S5_recommended_package          10.0            609   6.23%    176   9,786
 ```
+
+The over-capacity count roughly doubled when the real seated capacity arrived
+(72 seats, not 84): **8.62% of demand in the captured window cannot board.**
 
 | Scenario | Definition |
 |---|---|
@@ -544,8 +564,8 @@ S5_recommended_package          10.0            242   2.48%    176   9,786
 | S4 | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skip-stopping) |
 | S5 | S2 + S4 |
 
-**Honest reading.** S5 removes 118 boardings from over-capacity and cuts unmet
-demand by 1.2 points with 14 extra trips. That is a modest, credible gain inside
+**Honest reading.** S5 removes 236 boardings from over-capacity and cuts unmet
+demand by 2.4 points with 14 extra trips. That is a modest, credible gain inside
 a ~13-hour window — not a dramatic one. The Friday scenario is gone (no
 service-day data) and the morning peak is outside the window, which is exactly
 where the largest gains would be. **Say that in the pitch rather than inflating
@@ -556,7 +576,7 @@ the number.**
 | Idea | Why it was dropped |
 |---|---|
 | **Spatial bus-stop gap map** | 97.1% of taxi pickups are within 300 m of a stop; 0% are more than 800 m. Malé is 4 km long. The map would show nothing. |
-| **MACL filtered to domestic flights** | MACL contains no domestic flights at all — it is ≤36.5% of international traffic and 0% of domestic. Domestic data comes from MBS Yearbook 11.13. |
+| **MACL filtered to domestic flights** | MACL contains no domestic flights at all — it is ≈40% of international traffic and 0% of domestic. Domestic data comes from MBS Yearbook 11.13. |
 | **Using MACL as the airport demand level** | Would understate airport demand by ~2.7×. |
 | **Treating `total_pax` as a load factor directly** | 98 boardings/trip on an 84-seat bus is impossible without knowing the counting basis. Fixed by reporting a band and asking MTCC. |
 | **Assuming the Avas hourly shape is the bus hourly shape** | It is a proxy. Used explicitly as a *shape* with the level anchored to observed MTCC boardings, and the assumption is labelled in every output row. |
