@@ -1,4 +1,4 @@
-hour,macl_international_arrival_share,macl_share_pct,mbs_yeardomestic_arrivals_2025,mbs_yearintl_arrivals_2025,macl_intl_adult_arrivals_2025,macl_coverage_of_intl_pct,mbs_yeardomestic_arrivals_per_day,mbs_yearintl_arrivals_per_day
+hour,macl_international_arrival_share,macl_share_pct,mbs_year_domestic_arrivals_2025,mbs_year_intl_arrivals_2025,macl_intl_adult_arrivals_2025,macl_coverage_of_intl_pct,mbs_year_domestic_arrivals_per_day,mbs_year_intl_arrivals_per_day
 0,0.00282,0.17,1455156,2699225,984439,40.2,3987,7395
 1,0.00156,0.15,1455156,2699225,984439,40.2,3987,7395
 2,0.00063,0.08,1455156,2699225,984439,40.2,3987,7395

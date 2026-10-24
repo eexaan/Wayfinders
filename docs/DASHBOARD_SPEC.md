@@ -31,7 +31,7 @@ dashboard/
   build/              <- the scripts that produced data/. ignore them.
 ```
 
-`dashboard/data/` currently holds **18 files, 280 KB total**. Copy nothing,
+`dashboard/data/` currently holds **31 files, 756 KB total**. Copy nothing,
 compute nothing: load them with `fetch('./data/<name>.csv')` and parse with
 `d3-dsv` or `PapaParse` (both on CDN).
 
@@ -74,7 +74,7 @@ build_stop_demand.py     -> demand_supply_gap.csv, route_load.csv, §2.16-2.19
 build_validation.py      -> validation_*.csv, airport_demand_profile.csv
 build_schedule_crosscheck.py -> schedule_crosscheck*.csv
 build_gtfs.py            -> data/derived/rtl_greater_male_gtfs.zip
-build_figures.py         -> docs/figures/F1..F6.png
+build_figures.py         -> docs/figures/F1..F7.png
 ```
 
 **`demand_supply_gap.csv` and `route_load.csv` each have exactly one writer**
@@ -83,7 +83,7 @@ it alone can no longer revert the refined demand and segment load factors. An
 earlier version did exactly that, silently.
 
 Verify the committed numbers reproduce from the raw sources with **`make check`**
-(`build/verify_claims.py`, 54 independent checks, exit code 0 = all hold).
+(`build/verify_claims.py`, 92 independent checks, exit code 0 = all hold).
 
 ### 2.1 `route_lines.geojson` — the map geometry
 
@@ -166,8 +166,8 @@ This is the reference table. Use it for every route label in the UI.
 | `hour` | int | 0–23 |
 | `trips_in_hour` | int \| **null** | **null means "not captured", NOT zero** |
 | `capture_status` | str | `captured` \| `before_capture_window` |
-| `seats` | int | |
-| `seat_capacity_hour` | int \| null | `trips_in_hour × seats` |
+| `seated_capacity` | int | seats per bus on this route |
+| `seated_capacity_hour` | int \| null | `trips_in_hour × seated_capacity` |
 | `demand_pax_est` | float \| null | modelled: MTCC level × Avas OD, **stop-allocated** (see §2.17) |
 | `load_factor_pct` | float \| null | null where capacity is null |
 | `unmet_pax_est` | float \| null | |
@@ -179,8 +179,9 @@ This is the reference table. Use it for every route label in the UI.
 
 ### 2.5 `route_load.csv` — 15 rows, route-level
 
-`route_code`, `route_name`, `bus_type`, `seats`, `fare_mvr`, `trips_per_day`,
-`seat_capacity_day`, `boardings_per_day`, `pax_per_trip`,
+`route_code`, `route_name`, `bus_type`, `seated_capacity`, `max_passengers`,
+`load_factor_comparable`, `fare_mvr`, `trips_per_day`,
+`seated_capacity_day`, `boardings_per_day`, `pax_per_trip`,
 `load_factor_peak_pct`, `load_factor_avg_pct`,
 `load_factor_route_day_upper_pct`, `peak_segment_id`, `peak_segment`,
 `peak_segment_hour`, `demand_source`,
@@ -196,7 +197,7 @@ This is the reference table. Use it for every route label in the UI.
 
 > ⚠️ **Changed on 2026-10-24 (Dev B task 1).** `load_factor_peak_pct` and
 > `load_factor_avg_pct` are **no longer the route-day band** — they are
-> segment-based. R1 moves from 89.5% / 44.7% to **77.3% / 54.2%**. The old
+> segment-based. R1 moves from 104.4% / 44.7% to **90.1% / 63.2%**. The old
 > number is preserved in `load_factor_route_day_upper_pct`, so the two cannot be
 > confused. Use `peak_segment` + `peak_segment_hour` for the caption
 > (`Hulhumale' Police Station → Amin Avenue, 22:00`).
@@ -283,7 +284,8 @@ say so in the caption; the matching service-side comparison is not available.
 ### 2.12 `airport_demand_profile.csv` — 24 rows
 
 `hour`, `macl_share_pct`, plus the MBS Yearbook level columns and
-`macl_coverage_of_intl_pct` (40.16, adult-only figure is 36.47). For F4, pair `macl_share_pct` against the
+`macl_coverage_of_intl_pct` (40.2; the adult-only figure is 36.47 and lives in
+`validation_airport.csv`, not here). For F4, pair `macl_share_pct` against the
 R4 departures share from `route_service_by_hour.csv`.
 
 ### 2.13 `taxi_od_by_hour.csv` — 2,387 rows
@@ -292,14 +294,29 @@ R4 departures share from `route_service_by_hour.csv`.
 `Male City`, `Hulhumale Ph1`, `Hulhumale Ph2`, `Velana Airport`, `Villimale`,
 `Other`.
 
-### 2.14 `scenario_modal_shift.csv` — 36 rows (6 corridors × 6 scenarios)
+### 2.14 `scenario_modal_shift.csv` — 36 rows (6 corridors × 6 labels)
 
 The per-corridor generalised-cost comparison. Drives the F6 figure and the
 "taxi capture" tile.
 
+> ⚠️ **The `scenario` keys do NOT match §2.8.** This file predates the
+> fleet-neutral rebuild and still carries two labels that no longer exist in
+> `scenario_kpis.csv`:
+>
+> | label in this file | status |
+> |---|---|
+> | `S0_baseline`, `S2_airport_retimed`, `S3_rebalanced_to_corridor` | current — safe to join |
+> | `S4_express_added` | **superseded** by `S4_express_peak`; it assumed *added* trips, so its probabilities are not comparable to the fleet-neutral scenario |
+> | `S1_friday_right_sized` | **withdrawn** (ADR-0009) — a Friday service pattern cannot be observed from a one-day capture |
+>
+> **Do not join S4 or S1 from this file to the scenario bar.** Show the S0
+> row for the taxi-capture tile (190.6 rides/day). The two keys are a known gap:
+> the file has no build script (see `DATA_SOURCES.md` §2b), so it cannot be
+> regenerated on the current definitions without one.
+
 | Column | Type | Example | Notes |
 |---|---|---|---|
-| `scenario` | str | `S0_baseline` | six values, same keys as §2.8 |
+| `scenario` | str | `S0_baseline` | six labels — see the warning above |
 | `corridor` | str | `male_hm1` | |
 | `mean_wait_min` | float | `9.9` | demand-weighted |
 | `bus_fare_mvr` | float | `10.0` | |
@@ -326,8 +343,12 @@ The per-corridor generalised-cost comparison. Drives the F6 figure and the
 
 `scenario`, `taxi_rides_capturable_per_day`, `taxi_rides_capturable_price_only`,
 `mean_gc_gap_mvr`, `min_ride_min_to_shed`, `taxi_rides_capturable_per_year`.
-Use this for the "taxi capture" KPI tile: read
-`taxi_rides_capturable_per_day` for the selected scenario.
+Same six labels and the same caveat as §2.14: read the `S0_baseline` row
+(190.6 rides/day) for the "taxi capture" tile; `S1` and `S4` are stale keys.
+
+> The 190.6 and 210.2 figures in this table bracket the **taxi capture** claim
+> (12–3,001 rides/day across the VOT × sharing sensitivity in METHODS §5), not
+> the 62–76% price share, which comes from §2.14's probability columns.
 
 ### 2.16 `demand_by_stop.csv` — 184 rows, stop-level boardings (NEW)
 
@@ -362,7 +383,7 @@ route × segment × hour. This is what "load factor" should have meant.
 | `segment_km` | float | great-circle length |
 | `hour` | int | 0–23 |
 | `passengers` | float \| null | null where no ridership level exists |
-| `seat_capacity_hour` | float \| **null** | **null = not captured** |
+| `seated_capacity_hour` | float \| **null** | **null = not captured** |
 | `load_factor_pct` | float \| null | null where either side is null |
 | `capacity_basis` | str | `observed` \| `not_captured` |
 | `demand_source` | str | |
@@ -386,7 +407,7 @@ taxi rides on the same corridor. It is a sanity check, not a result.
 
 `route_code`, `catchment_m` (400/600/800), `topology`, `rides_in_catchment`,
 `peak_segment_load_pct`. Use this if a judge asks whether the 600 m catchment
-drove the answer. It did not: R1 is 76.4 / 77.3 / 77.6%.
+drove the answer. It did not: R1 is 89.2 / 90.1 / 90.5%.
 
 ### 2.20 `validation_holdout.csv` — 13 rows, does the model predict reality (NEW)
 
@@ -519,7 +540,7 @@ it. Six things it does that we should copy:
 1. **Hero numbers as plain text, not charts.** Three or four large figures
    (`30.3B`, `16.5M`, `124.7M`, `26,468`) with a one-line caption each. Our
    equivalent: **104.4%** of R1's seats · **39%** of demand in working hours ·
-   **60 min** R3 headway · **8.62%** unmet demand.
+   **60 min** R3 headway · **10.04%** unmet demand.
 2. **A narrative sentence per chart**, not a bare axis. Every panel gets a line
    of plain English saying what it shows and why it matters.
 3. **Source under every figure.** The pension portal writes
@@ -557,7 +578,7 @@ label the capacity series as partial.
 **3. Load factor is a segment, not a route.**
 `route_load.load_factor_peak_pct` is now the fullest **stop-to-stop segment**,
 not a route-day average. It is generally *lower* than
-`load_factor_route_day_upper_pct` (R1: 77.3% vs 89.5%), because passengers get
+`load_factor_route_day_upper_pct` (R1: 90.1% vs 104.4%), because passengers get
 off along the way. Do not add the two, average them, or treat the old bound as
 a range — the upper bound is a superseded figure kept only for reconciliation.
 For the "where is the bus full?" story use `load_by_segment.csv` and name the
@@ -607,7 +628,7 @@ a ridership *level*, a different reason).
 │                                            │  │ ▓▓▓▓▓▓▓▓▓░░░░  90%   │  │
 │   • 15 route polylines                    │  │ load factor band      │  │
 │     coloured by load factor               │  │ 45% ──────── 90%      │  │
-│   • 194 stop markers                       │  └───────────────────────┘  │
+│   • 184 route-stop records                 │  └───────────────────────┘  │
 │   • causeway segments highlighted          │  Trips/day 61  Boardings    │
 │     (≥10 min, thick red)                  │  5,212   Fare 10 MVR        │
 │                                            │                             │
@@ -623,7 +644,7 @@ a ridership *level*, a different reason).
 │  SCENARIO BAR                                                                  │
 │  [S0 Baseline] [S2 Airport] [S3 Rebalance] [S4 Express] [S5 Package]        │
 │                                                                             │
-│  Over-capacity ▓ 360   Unmet ▓ 3.68%   Mean wait ▓ 10.9 min   Trips ▓ 162   │
+│  Over-capacity ▓ 1,009  Unmet ▓ 10.04%  Mean wait ▓ 10.8 min  Trips ▓ 162  │
 │  [───────────────●────────────────]  (trips slider)    Taxi capture ▓ 191/day │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
@@ -727,10 +748,10 @@ A collapsible drawer. Contents:
 | Key | Label | What it does |
 |---|---|---|
 | S0 | Baseline | — |
-| S2 | Airport re-timed | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00. The peak-hour shift matters most for R3, which is currently an hourly bus |
-| S3 | Rebalanced to corridor | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 (fleet-neutral) |
-| S4 | Express peak | One extra R1/R2 departure in each hour 15:00–18:00, from the faster cycle a skip-stop service allows |
-| S5 | **Recommended package** | S2 + S4. 118 fewer boardings over capacity, 1.2 points less unmet demand, 14 more trips inside the captured window — all re-timings, no new buses |
+| S2 | Airport re-timed | 2 trips from the airport routes' late-night hours into their own under-served hours (R4 22:00/23:00 → R4 11:00, R3 13:00). Measures near-null at route-hour level: the crowding is on one segment |
+| S3 | Rebalanced to corridor | 5 trips off the airport routes' afternoon lull onto R1 wherever it is over capacity (fleet-neutral) |
+| S4 | Express peak | Corridor off-peak trips re-timed into the corridor peak — but with the donor ceiling enforced only **one** move is safe (R2 12:00 → R1 16:00), because every other R1/R2 off-peak hour is already at 83–166% load |
+| S5 | **Recommended package** | S3 + S4. 404 fewer boardings over capacity (1,009 → 605), unmet demand 10.0% → 6.0%, six trips re-timed — no new buses |
 
 ---
 
@@ -757,7 +778,7 @@ A collapsible drawer. Contents:
 component.
 
 **Do not use:** any React-leaflet wrapper that pulls in a heavy GIS stack
-(Mapbox GL needs a token; Deck.gl is overkill for 15 lines and 194 points).
+(Mapbox GL needs a token; Deck.gl is overkill for 15 lines and 184 route-stop points).
 
 ---
 
@@ -785,7 +806,7 @@ Cut these without discussion. Time is the binding constraint.
 |---|---|---|
 | **A** | C1 Map + C2 Route panel | `route_lines.geojson`, `route_stops.csv`, `demand_supply_gap.csv` |
 | **B** | C3 Scenario bar + KPI tiles | `scenario_kpis.csv`, `scenario_corridor_kpis.csv`, `scenario_modal_shift_summary.csv` |
-| **C** | C4 Methodology drawer + the six F1–F6 figures as static images | `docs/figures/*.png`, `DATA_SOURCES.md` |
+| **C** | C4 Methodology drawer + the seven F1–F7 figures as static images | `docs/figures/*.png`, `DATA_SOURCES.md` |
 
 **Agree on the file names and column names before starting** — the tables
 above are the contract. If you need a column that is not there, add it to
@@ -802,7 +823,7 @@ The dashboard is done when:
    and local data files.
 2. Clicking a route fills the route panel within 100 ms.
 3. Switching the day-type updates the demand-vs-service chart.
-4. Clicking each of the six scenario buttons updates every KPI tile, with
+4. Clicking each of the five scenario buttons updates every KPI tile, with
    deltas.
 5. The live "trips reassigned" slider moves the over-capacity tile and is
    labelled as an interpolation.

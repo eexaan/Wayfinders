@@ -52,6 +52,9 @@ committed verbatim.
 
 **It is reproducible byte-for-byte.** Rebuilding produces an identical zip, so
 the artefact in the repository is provably the artefact the build script makes.
+That is only true because the members are stored rather than deflated:
+deflate output depends on the zlib build, so the same feed zipped on two
+machines used to produce two different blobs.
 
 **It is the substrate for realtime.** GTFS-Realtime does not replace GTFS — it
 *extends* it, adding vehicle positions and trip updates as separate protobuf
@@ -101,7 +104,7 @@ minibus routes, which appear in the live route list without a published
 timetable. They are absent from the feed rather than invented, matching the
 `NO DEMAND DATA` treatment of the same routes in the demand tables.
 
-### 112 drop-off-only stops encoded as `pickup_type=1`
+### One drop-off-only stop, on 112 stop-times
 
 Some stops are served in one direction only. GTFS distinguishes "you cannot
 board here" from "you cannot alight here", so these are encoded with

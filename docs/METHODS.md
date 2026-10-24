@@ -165,8 +165,9 @@ Three decisions follow from the source's limits rather than from preference:
 - **32 partially-timed trips** ship with the stop-times they actually have, not
   with interpolated times that would look precise and be wrong.
 
-112 stops that cannot be boarded are encoded `pickup_type=1` rather than
-dropped, so the route geometry stays correct. The feed is validated twice: 19
+One stop that cannot be boarded (`MWSC Flat Bus Stop`) is encoded
+`pickup_type=1` on the 112 stop-time rows that call there, rather than dropped,
+so the route geometry stays correct. The feed is validated twice: 18
 structural checks re-asserted by `verify_claims.py`, and MobilityData
 `gtfs-validator` 6.0.0 reporting **0 errors** and 2 warnings, both inherent to a
 one-day feed. See [GTFS.md](GTFS.md).
@@ -289,7 +290,7 @@ make check
 make test
 ```
 
-`make check` must report **57/57**. If it does not, the committed numbers and the
+`make check` must report **92/92**. If it does not, the committed numbers and the
 prose disagree, and the prose is wrong.
 
 `make test` runs `tests/test_reallocator.py`, which pins the two rules that keep

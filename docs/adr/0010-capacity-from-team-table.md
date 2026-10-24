@@ -40,7 +40,8 @@ given a default.
 - `load_factor_comparable = FALSE` lets R5/R6 be excluded honestly instead of
   producing a meaningless ratio.
 - Load factors moved materially: R1 89.5% → **104.4%** of seats; unmet demand in
-  the captured window 3.68% → **8.62%**.
+  the captured window 3.68% → **8.62%** on the corridor-shape demand then in use
+  (the stop-allocated model that superseded it puts the figure at 10.04%).
 
 **Bad**
 - Capacity is still a **fleet-class assumption**, not a per-departure record.

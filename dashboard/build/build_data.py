@@ -220,8 +220,12 @@ def build_master(
             maxpax = int(c["max_passengers"])
             comparable = bool(c["load_factor_comparable"])
             cap_source = c["capacity_source"]
+            # Blank where the operator did not state it, which is not zero.
+            bays = str(c.get("wheelchair_bays", "")).strip()
+            wheelchair = int(float(bays)) if bays.replace(".", "", 1).isdigit() else None
         else:
             bus_type, bus_model, seated, maxpax, comparable = "?", None, 0, 0, False
+            wheelchair = None
             cap_source = "NOT IN CAPACITY TABLE"
 
         seats = seated  # kept for the hourly gap table, which is seats-based
@@ -247,7 +251,7 @@ def build_master(
                 "bus_type": bus_type,
                 "bus_model": bus_model,
                 "seated_capacity": seated,
-                "wheelchair_bays": None,
+                "wheelchair_bays": wheelchair,
                 "max_passengers": maxpax,
                 "load_factor_comparable": comparable,
                 "seats": seated,
@@ -285,6 +289,9 @@ def build_master(
     master = pd.DataFrame(master_rows).sort_values(
         "route_code", key=lambda s: s.map(route_sort_key)
     )
+    # Keep the bay count integral, with blanks preserved as blanks rather than
+    # turning "not stated" into 0.0.
+    master["wheelchair_bays"] = master["wheelchair_bays"].astype("Int64")
     stops_df = pd.DataFrame(stop_rows).sort_values(["route_code", "stop_order"])
     deps = pd.DataFrame(dep_rows).sort_values(["route_code", "trip_order"])
     return master, stops_df, deps

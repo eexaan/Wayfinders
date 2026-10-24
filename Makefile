@@ -2,7 +2,7 @@
 #
 #   make setup    create .venv and install dependencies (once)
 #   make data     rebuild every derived table from the raw inputs
-#   make figures  rebuild F1..F6 into docs/figures/
+#   make figures  rebuild F1..F7 into docs/figures/
 #   make gtfs     rebuild the GTFS feed
 #   make check    verify the committed outputs against the raw sources
 #   make test     run the unit tests (the reallocator guards)

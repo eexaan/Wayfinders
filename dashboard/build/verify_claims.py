@@ -22,6 +22,7 @@ Exit code is 0 only when every claim holds, so it can gate a commit.
 from __future__ import annotations
 
 import pathlib
+import re
 import sys
 
 import numpy as np
@@ -417,6 +418,78 @@ def check_gtfs() -> None:
 
 
 # ---------------------------------------------------------------------------
+# Prose checks. Every number that has ever drifted in this project drifted the
+# same way: the data was right and the sentence quoting it was stale. A table
+# cannot be edited by accident, so the tables stay correct; a hand-typed figure
+# in a README can, and did (R1 was quoted as 77.3% in four documents after the
+# data said 90.1%, and S5 as "18 trips / 290 boardings" after the fix said
+# 6 / 404). These anchors are deliberately blunt substring checks on the
+# figures that move when the model moves.
+# ---------------------------------------------------------------------------
+def _readme_fragment(path: str) -> str:
+    return (ROOT / path).read_text()
+
+
+def check_prose() -> None:
+    load = pd.read_csv(DATA / "route_load.csv").set_index("route_code")
+    summary = pd.read_csv(DATA / "route_segment_summary.csv").set_index("route_code")
+    k = pd.read_csv(DATA / "scenario_kpis.csv").set_index("scenario")
+    shift = pd.read_csv(DATA / "scenario_modal_shift.csv")
+
+    r1, s0, s5 = load.loc["R1"], k.loc["S0_baseline"], k.loc["S5_recommended_package"]
+    peak = round(float(summary.loc["R1", "load_factor_at_demand_peak_pct"]))
+    base_over = int(s0["boardings_over_capacity"])
+    s5_over = int(s5["boardings_over_capacity"])
+    s5_cut = int(abs(s5["over_capacity_change"]))
+    s5_moved = int(s5["trips_moved"])
+
+    gc = shift[(shift["scenario"] == "S0_baseline") & (shift["corridor"] == "male_hm1")].iloc[0]
+    ratio = float(gc["bus_ride_min"]) / float(gc["taxi_ride_min"])
+
+    anchors = [
+        # file, needle, what it pins
+        ("README.md", f"**{int(r1['load_factor_peak_pct'])}% full**", "R1 peak segment"),
+        ("README.md", f"**{peak}%**", "R1 load at the demand peak"),
+        ("README.md", f"{s5_cut} fewer boardings", "S5 effect"),
+        ("README.md", f"{base_over:,} down to {s5_over:,}", "S5 baseline -> package"),
+        ("README.md", f"moving {s5_moved} existing trips", "S5 trip count"),
+        ("README.md", f"{ratio:.1f} times slower", "bus/taxi journey-time ratio"),
+        ("README.md", "92/92", "claim count"),
+        ("SPEC.md", f"| {r1['load_factor_route_day_upper_pct']}% | "
+                    f"**{r1['load_factor_peak_pct']}%** |", "SPEC F2 table, R1 row"),
+        ("SPEC.md", f"**{s5_over} (−{s5_cut})**", "SPEC scenario table, S5 row"),
+        ("docs/TEAM.md", f"({base_over:,} → {s5_over:,})", "canonical sheet, S5 effect"),
+        ("docs/METHODS.md", "**92/92**", "methods note"),
+        ("docs/DASHBOARD_SPEC.md", "92 independent checks", "dashboard contract"),
+        ("docs/DASHBOARD_SPEC.md",
+         f"R1: {r1['load_factor_peak_pct']}% vs "
+         f"{r1['load_factor_route_day_upper_pct']}%", "dashboard trap 3"),
+    ]
+    for path, needle, label in anchors:
+        text = _readme_fragment(path)
+        claim(f"prose: {label} ({path})", needle in text,
+              f"expected '{needle}'")
+
+
+def check_claim_count() -> None:
+    """The README's self-reported score must equal this file's real claim count.
+
+    A stale "54/54" survived three merges because the number was only ever
+    checked by a human reading it. This makes the document's own arithmetic
+    an assertion.
+    """
+    text = _readme_fragment("README.md")
+    match = re.search(r"passes (\d+)/\1", text)
+    total = len(results) + 1  # include this claim itself
+    claim(
+        "README state the real claim count",
+        bool(match) and int(match.group(1)) == total,
+        f"README says {match.group(1) if match else '?'}/{match.group(1) if match else '?'}"
+        f", verifier has {total}/{total}",
+    )
+
+
+# ---------------------------------------------------------------------------
 def main() -> int:
     checks = [
         ("demand level", check_demand_level),
@@ -428,6 +501,7 @@ def main() -> int:
         ("documented gaps", check_documented_gaps),
         ("deliverables", check_deliverables),
         ("gtfs", check_gtfs),
+        ("prose", check_prose),
     ]
 
     for label, fn in checks:
@@ -436,6 +510,8 @@ def main() -> int:
             fn()
         except Exception as exc:  # noqa: BLE001 - reported as a failure
             claim(f"{label} raised", False, f"{type(exc).__name__}: {exc}")
+
+    check_claim_count()
 
     print("\n" + "=" * 96)
     passed = sum(1 for _, ok, _ in results if ok)

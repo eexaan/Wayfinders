@@ -53,7 +53,7 @@ and are the analytical backbone of the project.
 | T7 | [`notes.txt`](data/official/notes.txt) | Team | Source links, including the **bus capacity** reference |
 
 **Bus capacity source (team-provided).** The seat capacities in
-`dashboard/data/route_fleet_capacity.csv` come from
+`data/raw/mtcc_bus_capacity.csv` come from
 <https://www.psmnews.mv/en/106008> (linked in `data/official/notes.txt`), combined
 with the `minibus` flag in Team Kandu's route table. That article is behind a
 Cloudflare challenge and could not be machine-read here, so the capacities are
