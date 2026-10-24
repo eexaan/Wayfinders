@@ -196,3 +196,27 @@ not be redistributed as MTCC's official timetable.
 The basemap, road network and any OSM-derived geometry in `route_lines.geojson`
 are © OpenStreetMap contributors, licensed **ODbL 1.0**. Any redistributed map
 must carry that attribution.
+
+---
+
+## 7. The reroute network (added after the submitted build)
+
+The `#reroute` tab needs two inputs the submitted build did not use. Both are
+public, and both are cached and committed so nothing is fetched at runtime.
+
+| # | Source | Direct link | Used for | Licence |
+|---|---|---|---|---|
+| R1 | **OSM building footprints** | Overpass API, bbox `4.165,73.500,4.245,73.560` | Residential population surface: footprint area × storeys, calibrated per island to the census | **ODbL** — © OpenStreetMap contributors |
+| R2 | **OSM POIs** (hospital, clinic, doctors, school, college, university, marketplace, courthouse, townhall, police, fire station, office, hotel, guest house) | same query | The attractor surface stops are forced to cover | **ODbL** |
+| R3 | **OSM landuse** (`residential`, `commercial`, `retail`, `industrial`, `construction`) | same query | Multiplier on the residential weight inside each polygon | **ODbL** |
+| R4 | **MBS Census 2022, table 3.3** | via `data/raw/observations.csv` (`census_population`) | Island population totals: the calibration target | Public |
+| R5 | **Avas night-time pickups** | `data/raw/avas_rides_aug_sep_2026.csv`, 22:00–06:00 | Second, independent residential signal | Public (datathon D2) |
+| R6 | **Today's road graph** | `dashboard/data/basemap.geojson` | Routing: Dijkstra over committed OSM roads, so no route crosses water | **ODbL** |
+
+Cached output: `data/derived/osm/greater_male_surface.json` (3,771 buildings, 364
+POIs, 72 landuse polygons, queried 2026-10-24). Re-fetch only by passing a raw
+Overpass response to `build_population.py`.
+
+**Scope note.** Villimalé is not fetched and not scored: it is out of scope
+(ADR-0015) because it has no road link to the modelled islands and Avas contains
+no trips there.

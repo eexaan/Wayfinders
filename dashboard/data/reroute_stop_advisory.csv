@@ -1,0 +1,71 @@
+stop_id,stop_name,lat,lon,island,routes,population_400m,hotspots_400m,first_bus_time,first_bus_min,first_bus_route,first_bus_direction,boardings_served,alightings,peak_queue,long_waits,peak_load_pct,extra_buses,extra_bus_required,extra_bus_windows,reason
+K103,Maafannu Bus Terminal,4.169366,73.504676,Malé,R1 R3 R7,19424,3,05:00,300,R1,outbound,781,534,20,282,83.3,0,no,,
+K304,Tow Yard,4.169349,73.510249,Malé,R1 R3 R7,19033,18,05:02,302,R1,outbound,750,455,26,323,83.3,0,yes,,peak queue 26; 323 waited over 10 min
+K105,STELCO,4.17001,73.514746,Malé,R1 R3 R7,14726,11,05:04,304,R1,outbound,335,186,21,139,83.3,0,no,,
+K106,Hulhumale' Cemetery,4.207528,73.539788,Hulhumalé,L1 R1 R2 R4,4200,9,05:03,303,R4,outbound,2235,167,95,1158,100,0,yes,,peak queue 95; 1158 waited over 10 min
+K107,Skate Park,4.207421,73.541765,Hulhumalé,L1 R1,4740,13,05:26,326,R1,outbound,290,194,18,156,100,0,no,,
+K121,Flat No. 137,4.209958,73.542596,Hulhumalé,L1 R1,8185,20,05:27,327,L1,outbound,228,179,14,122,100,0,no,,
+K108,Fehires Park,4.211553,73.543088,Hulhumalé,L1 R1 R4,7116,18,05:18,318,R4,inbound,211,118,11,118,100,0,no,,
+K109,Flat No. 147,4.213077,73.543635,Hulhumalé,L1 R1 R2,7616,21,05:22,322,L1,outbound,188,126,10,109,100,0,no,,
+K110,Ruhgandu 1,4.216186,73.54459,Hulhumalé,L1 R1,6913,30,05:18,318,L1,outbound,146,102,10,82,100,0,no,,
+K111,Dhiraagu,4.219882,73.545734,Hulhumalé,L1 R1,4646,17,05:14,314,L1,outbound,239,135,10,137,100,0,no,,
+K112,Hulhumale' Synthetic Track,4.219455,73.542702,Hulhumalé,L1 R1,9556,14,05:18,318,L1,inbound,327,94,16,149,100,0,no,,
+K113,Hulhumale' Police Station,4.21678,73.542108,Hulhumalé,L1 R1,6949,18,05:21,321,L1,inbound,17,18,4,12,100,0,no,,
+K114,Amin Avenue,4.21442,73.540352,Hulhumalé,L1 R1 R2 R4,4705,9,05:00,300,R4,outbound,478,191,27,318,100,0,yes,,peak queue 27; 318 waited over 10 min
+K115,MNDF Flat,4.210681,73.539804,Hulhumalé,L1 R1 R2,6689,3,05:26,326,R1,inbound,269,174,18,154,100,0,no,,
+K11106,Hulhumale' Cemetery OPP,4.207528,73.539788,Hulhumalé,L1 R1 R4,4200,9,05:24,324,R1,inbound,30,0,3,24,100,0,no,,
+K117,Male' Swimming Track,4.169881,73.514446,Malé,R1 R3 R7,13634,12,05:04,304,R1,inbound,522,388,17,190,83.3,0,no,,
+K118,Dharumavantha School,4.169257,73.509328,Malé,R1 R3 R7,15201,22,05:02,302,R1,inbound,557,598,17,177,83.3,0,no,,
+K11103,Maafannu Bus Terminal OPP,4.169366,73.504676,Malé,R1 R3,19424,3,05:00,300,R1,inbound,0,0,0,0,78.2,0,no,,
+K201,Carnival,4.176984,73.517896,Malé,R2 R8,10953,39,05:00,300,R2,outbound,938,849,31,341,75,0,yes,,peak queue 31; 341 waited over 10 min
+K20002,Raalhugandu (Schedule Bus),4.172973,73.517814,Malé,R2 R8,16070,25,05:03,303,R2,outbound,113,64,6,40,75,0,no,,
+K203,Flat No. 120,4.210903,73.541829,Hulhumalé,L1 R2,9114,17,05:23,323,R2,outbound,216,41,16,137,100,0,no,,
+K401,Centro Mall,4.21635,73.542565,Hulhumalé,L1 R2 R4,6155,21,05:15,315,R4,inbound,151,113,10,77,100,0,no,,
+K11201,CHSE,4.220615,73.541345,Hulhumalé,L1 R2,8517,7,05:17,317,L1,inbound,118,115,7,58,100,0,no,,
+K204,Senahiya,4.172344,73.516718,Malé,R2 R8,21154,23,05:03,303,R2,inbound,1584,761,62,704,75,0,yes,,peak queue 62; 704 waited over 10 min
+K1011,Artificial Beach,4.17513,73.518064,Malé,R2,18402,35,05:00,300,R2,inbound,282,223,26,162,75,0,yes,,peak queue 26; 162 waited over 10 min
+K306,VIA Domestic Terminal,4.190044,73.527056,Hulhulé,R3 R4 R9,113,7,05:05,305,R4,outbound,888,2504,38,486,100,0,yes,,peak queue 38; 486 waited over 10 min
+K307,MACL Office,4.191667,73.526898,Hulhulé,R3 R4 R9,104,1,05:14,314,R9,outbound,675,0,30,330,100,0,yes,,peak queue 30; 330 waited over 10 min
+K11306,VIA Domestic Terminal OPP,4.190516,73.526887,Hulhulé,R3 R4 R9,127,8,05:20,320,R3,inbound,26,41,6,16,100,0,no,,
+K11401,Amin Avenue Opp,4.21442,73.540352,Hulhumalé,L1 R4,4705,9,05:12,312,R4,inbound,258,0,22,160,100,0,no,,
+K601,Hiya Flats Stop 1,4.23139,73.548899,Hulhumalé,L1 R7 R8 R9,18389,4,05:00,300,R9,outbound,540,263,21,211,100,0,no,,
+K11309,H 16 Bus Stop,4.234245,73.547805,Hulhumalé,L3 R7 R8 R9,7041,2,05:02,302,L3,outbound,274,207,13,112,94.5,0,no,,
+K602,Hiya Flats Stop 2,4.231865,73.546356,Hulhumalé,L1 L2 L3 L4 L5 R7 R8 R9,19236,3,05:00,300,R7,outbound,834,353,32,349,100,0,yes,,peak queue 32; 349 waited over 10 min
+K32001,VINARES BUS STOP,4.227847,73.544085,Hulhumalé,L1 R7 R8 R9,5779,0,05:02,302,R7,outbound,559,265,19,264,100,0,no,,
+K11003,MACL Flat Stop,4.22371,73.544066,Hulhumalé,L1 R7 R8 R9,6550,3,05:04,304,R7,outbound,2667,143,85,1386,100,0,yes,,peak queue 85; 1386 waited over 10 min
+K507,Hulhumalé Ferry Terminal,4.216739,73.537853,Hulhumalé,L2 R4 R9,2130,3,05:00,300,R9,inbound,87,99,7,49,100,0,no,,
+K509,Umar Zahir Building,4.213758,73.538511,Hulhumalé,L1,3572,7,05:28,328,L1,inbound,73,107,4,32,100,0,no,,
+K33035,Court Complex Bus Stop,4.211813,73.538368,Hulhumalé,L1,4709,5,05:32,332,L1,inbound,112,319,9,62,100,0,no,,
+K1207,Orange Hiya Bus Stop,4.20656,73.536385,Hulhumalé,L2,2112,3,05:18,318,L2,inbound,78,74,6,52,33.3,0,no,,
+K604,Masjid Ameel Jaleel,4.224619,73.547014,Hulhumalé,L1 R7 R8 R9,3712,1,05:10,310,L1,outbound,2230,110,85,903,100,0,yes,,peak queue 85; 903 waited over 10 min
+K503,Hulhumalé Police Station,4.217746,73.542216,Hulhumalé,L1,6766,19,05:20,320,L1,inbound,58,27,5,34,100,0,no,,
+K606,Tree Top Hospital,4.211256,73.54048,Hulhumalé,L1,8196,5,05:30,330,L1,inbound,108,90,8,54,100,0,no,,
+K610,Flat No. 2,4.217841,73.545131,Hulhumalé,L1,5718,28,05:16,316,L1,outbound,145,117,9,90,100,0,no,,
+K32000,MWSC FLAT BUS STOP (DROP-OFF ONLY),4.223651,73.543878,Hulhumalé,L1 R7 R8 R9,6372,3,05:12,312,L1,inbound,1984,76,117,1222,100,0,yes,,peak queue 117; 1222 waited over 10 min
+K208,Artificial Beach West,4.174101,73.517817,Malé,R8,16828,29,05:08,308,R8,outbound,358,429,13,114,69.4,0,no,,
+H001,ހުޅުމާލެ ހޮސްޕިޓަލް,4.214782,73.543608,Hulhumalé,L1,7638,28,05:20,320,L1,outbound,182,109,11,108,100,0,no,,
+H002,Hulhumalé stop 2,4.229902,73.546325,Hulhumalé,L1 R7 R8,17546,1,05:05,305,L1,inbound,256,266,16,138,100,0,no,,
+H003,ރެހެންދި ސްކޫލް,4.209109,73.540915,Hulhumalé,L1,7908,15,05:28,328,L1,outbound,200,167,11,119,100,0,no,,
+H004,Hot n Spicy,4.221465,73.543361,Hulhumalé,L1,6049,7,05:15,315,L1,inbound,164,89,10,85,100,0,no,,
+H005,Masjid Al Asdiqaa,4.212334,73.536698,Hulhumalé,L2,2204,6,05:19,319,L2,outbound,54,30,5,35,33.3,0,no,,
+H006,Hulhumalé stop 6,4.225857,73.543716,Hulhumalé,L1 R7 R8,7474,0,05:00,300,R7,inbound,279,210,21,173,100,0,no,,
+H007,Ajiyal International School,4.2193,73.540209,Hulhumalé,L2 R4 R9,7114,5,05:03,303,R9,inbound,353,253,19,184,100,0,no,,
+H008,Masjid Al-Iman,4.23381,73.549412,Hulhumalé,L4,4564,3,05:03,303,L4,outbound,9,0,2,1,6.1,0,no,,
+H009,STELCO Office,4.205149,73.538141,Hulhumalé,L1,1267,2,05:38,338,L1,outbound,22,40,3,6,100,0,no,,
+H010,Ooredoo Headquarters,4.216199,73.540433,Hulhumalé,L1,5998,12,05:24,324,L1,inbound,42,79,4,19,100,0,no,,
+H011,Sparks 2 Showroom,4.20891,73.53726,Hulhumalé,L2,4257,5,05:16,316,L2,inbound,44,57,3,23,33.3,0,no,,
+H012,WAMCO Hulhumalé,4.223,73.53966,Hulhumalé,L2 R4 R9,4273,3,05:03,303,R4,inbound,198,63,11,91,100,0,no,,
+H013,Hulhumalé stop 13,4.222011,73.546657,Hulhumalé,L1,3121,7,05:12,312,L1,outbound,36,31,4,30,100,0,no,,
+H014,Hulhumalé stop 14,4.23344,73.54577,Hulhumalé,L1,10918,1,05:02,302,L1,inbound,19,21,4,12,100,0,no,,
+H015,Hulhumalé stop 15,4.229537,73.543987,Hulhumalé,L1 R7 R8,5870,0,05:04,304,R7,inbound,53,46,6,39,100,0,no,,
+H016,Hulhumalé stop 16,4.226782,73.545699,Hulhumalé,L1,6266,1,05:07,307,L1,outbound,99,88,8,46,100,0,no,,
+H017,Malé Water and Sewerage Company,4.20305,73.54042,Hulhumalé,L1,1012,2,05:33,333,L1,outbound,6,4,2,4,100,0,no,,
+H018,Hulhumalé stop 18,4.237068,73.545647,Hulhumalé,L5,1324,0,05:04,304,L5,outbound,0,0,0,0,0,0,no,,
+H019,Hulhumalé stop 19,4.22497,73.54148,Hulhumalé,L2 R4 R9,4797,1,05:00,300,R4,inbound,429,180,26,204,100,0,yes,,peak queue 26; 204 waited over 10 min
+H020,ކާމިލް ދީދީ ޕްރީސްކޫލް,4.229041,73.548886,Hulhumalé,L1,8732,2,05:04,304,L1,outbound,59,82,5,37,100,0,no,,
+H021,Hulhumalé stop 21,4.227839,73.541014,Hulhumalé,L2,2676,0,05:05,305,L2,outbound,119,92,11,64,33.3,0,no,,
+H022,Hulhumalé stop 22,4.237231,73.542271,Hulhumalé,L3,391,0,05:06,306,L3,inbound,0,1,0,0,3,0,no,,
+H023,Hulhumalé stop 23,4.238734,73.543818,Hulhumalé,L3,717,0,05:08,308,L3,outbound,0,0,0,0,3,0,no,,
+H024,Hulhumalé stop 24,4.238488,73.548172,Hulhumalé,L3,641,0,05:05,305,L3,outbound,1,0,1,0,3,0,no,,
+H025,Hulhumalé stop 25,4.200799,73.540423,Hulhumalé,L1,434,1,05:35,335,L1,outbound,1,0,1,1,100,0,no,,
+H026,Hulhumalé stop 26,4.234383,73.543134,Hulhumalé,L3,503,0,05:04,304,L3,inbound,0,0,0,0,3,0,no,,

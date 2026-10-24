@@ -1,0 +1,226 @@
+{
+  "seed": 20261024,
+  "seeds": [
+    20261024,
+    7,
+    99
+  ],
+  "day": "05:00-00:00",
+  "fleet_held": 55,
+  "demand": {
+    "daily_boardings": 14033
+  },
+  "rows": [
+    {
+      "key": "baseline",
+      "label": "The original network",
+      "note": "the 9 routes with a recorded timetable, their own stops, their own schedule",
+      "change": "",
+      "kpis": {
+        "completed": 12874,
+        "boarded": 22767,
+        "meanWaitMin": 19.24204963562032,
+        "p90WaitMin": 36.565883724950254,
+        "meanJourneyMin": 33.21967896605375,
+        "leftBehindPct": 1.3484156116563037,
+        "peakLoadPct": 100,
+        "buses": 55,
+        "busHours": 705.6833333330202,
+        "tripsRun": 906
+      },
+      "delta": {
+        "completed": null,
+        "boarded": null,
+        "meanWaitMin": null,
+        "p90WaitMin": null,
+        "meanJourneyMin": null,
+        "leftBehindPct": null,
+        "peakLoadPct": null,
+        "buses": null,
+        "busHours": null,
+        "tripsRun": null
+      }
+    },
+    {
+      "key": "dispatch",
+      "label": "+ buses sent when needed",
+      "note": "same routes, same 55 buses: depart when demand or a full bus calls, not on a clock",
+      "change": "dispatch",
+      "kpis": {
+        "completed": 12952,
+        "boarded": 23044,
+        "meanWaitMin": 15.795803375076645,
+        "p90WaitMin": 31.67701965663582,
+        "meanJourneyMin": 27.54367506860051,
+        "leftBehindPct": 0.6779402803168799,
+        "peakLoadPct": 100,
+        "buses": 55,
+        "busHours": 874.849999999533,
+        "tripsRun": 1220
+      },
+      "delta": {
+        "completed": 78,
+        "boarded": 277,
+        "meanWaitMin": -3.4,
+        "p90WaitMin": -4.9,
+        "meanJourneyMin": -5.7,
+        "leftBehindPct": -0.7,
+        "peakLoadPct": 0,
+        "buses": 0,
+        "busHours": 169.2,
+        "tripsRun": 314
+      }
+    },
+    {
+      "key": "loops",
+      "label": "+ Hulhumalé on loops",
+      "note": "same 55 buses: the island’s local routes become circuits, cross-island buses run through",
+      "change": "topology",
+      "kpis": {
+        "completed": 12862,
+        "boarded": 25232,
+        "meanWaitMin": 25.758157540717203,
+        "p90WaitMin": 52.60708328988403,
+        "meanJourneyMin": 39.53447537620158,
+        "leftBehindPct": 1.3855054811205847,
+        "peakLoadPct": 100,
+        "buses": 55,
+        "busHours": 971.3666666661119,
+        "tripsRun": 1304
+      },
+      "delta": {
+        "completed": -90,
+        "boarded": 2188,
+        "meanWaitMin": 10,
+        "p90WaitMin": 20.9,
+        "meanJourneyMin": 12,
+        "leftBehindPct": 0.7,
+        "peakLoadPct": 0,
+        "buses": 0,
+        "busHours": 96.5,
+        "tripsRun": 84
+      }
+    },
+    {
+      "key": "plus",
+      "label": "+ the buses the crowded stops need",
+      "note": "the only row allowed to exceed the fleet: one extra bus on each route the stop table flags",
+      "change": "fleet",
+      "kpis": {
+        "completed": 12884,
+        "boarded": 25281,
+        "meanWaitMin": 20.813795818359647,
+        "p90WaitMin": 39.95093544386327,
+        "meanJourneyMin": 34.59623915893711,
+        "leftBehindPct": 1.0553294135383688,
+        "peakLoadPct": 100,
+        "buses": 63,
+        "busHours": 1084.4666666660091,
+        "tripsRun": 1561
+      },
+      "delta": {
+        "completed": 22,
+        "boarded": 49,
+        "meanWaitMin": -4.9,
+        "p90WaitMin": -12.7,
+        "meanJourneyMin": -4.9,
+        "leftBehindPct": -0.3,
+        "peakLoadPct": 0,
+        "buses": 8,
+        "busHours": 113.1,
+        "tripsRun": 257
+      }
+    }
+  ],
+  "cases": {
+    "baseline": {
+      "completed": 12874,
+      "boarded": 22767,
+      "meanWaitMin": 19.24204963562032,
+      "p90WaitMin": 36.565883724950254,
+      "meanJourneyMin": 33.21967896605375,
+      "leftBehindPct": 1.3484156116563037,
+      "peakLoadPct": 100,
+      "buses": 55,
+      "busHours": 705.6833333330202,
+      "tripsRun": 906
+    },
+    "dispatch": {
+      "completed": 12952,
+      "boarded": 23044,
+      "meanWaitMin": 15.795803375076645,
+      "p90WaitMin": 31.67701965663582,
+      "meanJourneyMin": 27.54367506860051,
+      "leftBehindPct": 0.6779402803168799,
+      "peakLoadPct": 100,
+      "buses": 55,
+      "busHours": 874.849999999533,
+      "tripsRun": 1220
+    },
+    "loops": {
+      "completed": 12862,
+      "boarded": 25232,
+      "meanWaitMin": 25.758157540717203,
+      "p90WaitMin": 52.60708328988403,
+      "meanJourneyMin": 39.53447537620158,
+      "leftBehindPct": 1.3855054811205847,
+      "peakLoadPct": 100,
+      "buses": 55,
+      "busHours": 971.3666666661119,
+      "tripsRun": 1304
+    },
+    "plus": {
+      "completed": 12884,
+      "boarded": 25281,
+      "meanWaitMin": 20.813795818359647,
+      "p90WaitMin": 39.95093544386327,
+      "meanJourneyMin": 34.59623915893711,
+      "leftBehindPct": 1.0553294135383688,
+      "peakLoadPct": 100,
+      "buses": 63,
+      "busHours": 1084.4666666660091,
+      "tripsRun": 1561
+    }
+  },
+  "scope": {
+    "baseline_routes": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9"
+    ],
+    "reroute_routes": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R7",
+      "R8",
+      "R9",
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "excluded": [
+      "R10",
+      "R11",
+      "R12"
+    ],
+    "excluded_reason": "no captured departures and no ridership count, so replaying them would mean inventing a schedule. Excluded from both sides."
+  },
+  "assumptions": {
+    "fleet": "held at 55 buses for rows 1-3; row 4 adds the advisory's extras",
+    "dispatch": "row 1 uses the published timetable; rows 2-4 depart on demand or at 90% of seats",
+    "demand": "identical in every row: the same passengers, re-projected onto whichever stop set is in use",
+    "transfers": "up to two changes; chosen by travel time plus expected wait",
+    "operating_day": "05:00-24:00"
+  },
+  "generated_by": "web/scripts/run-sim.mjs (same engine as the browser)"
+}

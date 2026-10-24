@@ -1,0 +1,13 @@
+route_id,name,service_class,kind,replaces_routes,length_km,seats,buses_allocated,boardings,departures,mean_headway_min,peak_load_pct
+R1,Maafannu Bus Terminal - Maafannu Bus Terminal OPP,cross_bridge,kept,R1,18.21,72,7,1406,114,10,50
+R2,Carnival - Artificial Beach,cross_bridge,kept,R2,17.39,72,5,1731,85,13,75
+R3,Maafannu Bus Terminal - Maafannu Bus Terminal OPP,airport,kept,R3,9.61,55,5,1098,122,9,78.2
+R4,Amin Avenue - Hulhumalé stop 19,airport,through,R4,16.84,55,4,1915,76,15,100
+R7,Hiya Flats Stop 2 - Hulhumalé stop 6,cross_bridge,through,R7,22.83,72,8,4188,152,8,83.3
+R8,Hiya Flats Stop 2 - Hulhumalé stop 6,cross_bridge,through,R8,21.89,72,7,3897,152,8,69.4
+R9,Hiya Flats Stop 1 - Hulhumalé Ferry Terminal,airport,through,R9,20.83,55,5,3647,125,9,94.5
+L1,Hiya Flats Stop 2 - Hiya Flats Stop 2,local,loop,"R5,R6",9.82,33,7,7143,105,11,100
+L2,Hiya Flats Stop 2 - Hiya Flats Stop 2,local,loop,"R5,R6",7.43,33,3,548,83,14,33.3
+L3,Hiya Flats Stop 2 - Hiya Flats Stop 2,local,loop,"R5,R6",2.7,33,2,2,136,8,3
+L4,Hiya Flats Stop 2 - Hiya Flats Stop 2,local,loop,"R5,R6",1.31,33,1,9,77,15,6.1
+L5,Hiya Flats Stop 2 - Hiya Flats Stop 2,local,loop,"R5,R6",1.72,33,1,0,77,15,0
