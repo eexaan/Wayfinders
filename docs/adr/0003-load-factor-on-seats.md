@@ -100,3 +100,39 @@ R1 must read 72 / 84 / 104.4 / 89.5 / True.
 
 - ADR-0010 (where the capacity numbers come from), ADR-0002 (the band).
   `SPEC.md` §7.
+
+---
+
+## Amendment — 2026-10-24: the segment model supersedes this as the headline
+
+The stop-level allocation (ADR-0002's known gap, since closed) shows that the
+route-day upper bound used above is **not achievable**: it assumes every
+boarding rides the whole route, and the segment data proves nobody does.
+
+Peak segment load factors, captured hours, seats basis:
+
+| Route | Route-day upper bound | **Peak segment** | Where |
+|---|---|---|---|
+| R1 | 104.4% | **90.1%** | Hulhumale' Police Stn → Amin Ave, 22:00 |
+| R2 | 78.5% | 67.7% | Centro Mall → CHSE, 22:00 |
+| **R3** | 68.3% | **98.4%** | STELCO → VIA Domestic Terminal, 13:00 |
+| **R4** | 48.5% | **84.3%** | Hulhumale' Cemetery → VIA Domestic Terminal, 11:00 |
+| R7 | 74.8% | 74.4% | STELCO → MWSC flat, 22:00 |
+
+**Consequences for how the numbers are quoted:**
+
+- **The headline is the peak segment, not the route-day bound.** Quoting 104%
+  for R1 overstates it: at its busiest demand hour (16:00) R1 is **81.6%**, and
+  its busiest observed segment is 90.1%.
+- **The earlier "airport buses run half empty" conclusion is withdrawn.** R1's
+  104% and R4's 48% are both route-day averages that hide the airport approach:
+  **R3 reaches 98% and R4 84% on the final segment into the airport.** The
+  airport buses are full where it matters, and R3 does it while running hourly.
+- The seats-vs-capacity distinction in the body above still holds and still
+  matters — the segment figures are also seats-based.
+- R1's 90.1% lands at 22:00, when service has thinned to two trips an hour. The
+  load at the *demand* peak (16:00) is 81.6%. Both are published because a
+  single number invites the wrong reading.
+
+`verify_claims.py` pins both the route-day bound and the peak segment for all
+five routes, so neither can drift.

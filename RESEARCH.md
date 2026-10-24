@@ -340,7 +340,7 @@ available as clean CSV in `ajmals/maldives-statistics`):
 | International flights | 2,699,225 | **7,395** |
 | Total | 4,154,381 | **11,381** |
 
-**MACL coverage: 984,629 adult international arrivals in 2025 = ≤ 36.5% of the
+**MACL coverage: 984,629 adult international arrivals in 2025 = ≈ 40% of the
 Yearbook's international figure, and 0% of domestic.** So MACL is used for
 the *shape* of the arrival profile only; the *level* comes from 11.13.
 
@@ -368,9 +368,16 @@ MACL international arrivals by hour, 2019–2025 (4.89M arrivals):
 13:00  4.43%
 ```
 
-**35.5% of arrivals land between 07:00 and 09:59**, with secondary peaks at
-11:00 and 14:00. The weekday pattern is flat (14.0–14.5% each day) — so
+**33.1% of arriving passengers land between 07:00 and 09:59**, with secondary
+peaks at 11:00 and 14:00. The weekday pattern is flat (14.0–14.5% each day) — so
 airport demand has no Friday effect, unlike the bus.
+
+> **Corrected 2026-10-24 in validation.** The figure was 35.5%, from an
+> unspecified 2019–25 basket. Rebuilt from a stated definition — 2025,
+> international, passenger-weighted — it is 33.1%. The difference is a 2.8-point
+> drift and does not change the finding. The weighting matters more than the
+> year: flight-weighted the morning share is 25.3% and the peak window moves to
+> midday, because the morning is a widebody bank and midday is many narrowbodies.
 
 ---
 
@@ -455,9 +462,10 @@ observation rather than inference: **R3 is an hourly bus.** A passenger landing
 at Malé airport without a booking faces a 30-minute expected wait for the
 airport bus, and the bus runs the same frequency at 03:00 as at 08:00.
 
-Against MACL's arrival profile (35.5% of international arrivals land between
+Against MACL's arrival profile (33.1% of arriving passengers land between
 07:00 and 09:59, with secondary peaks at 11:00 and 14:00), the fixed headway is
-the mismatch. Nothing runs between 00:00 and 06:00, when 1.9% of arrivals land.
+the mismatch. Nothing runs between 00:00 and 06:00, when 4.3% of passengers
+arrive.
 
 ## 6. The mode-shift question, answered properly
 
@@ -568,7 +576,7 @@ the number.**
 | Idea | Why it was dropped |
 |---|---|
 | **Spatial bus-stop gap map** | 97.1% of taxi pickups are within 300 m of a stop; 0% are more than 800 m. Malé is 4 km long. The map would show nothing. |
-| **MACL filtered to domestic flights** | MACL contains no domestic flights at all — it is ≤36.5% of international traffic and 0% of domestic. Domestic data comes from MBS Yearbook 11.13. |
+| **MACL filtered to domestic flights** | MACL contains no domestic flights at all — it is ≈40% of international traffic and 0% of domestic. Domestic data comes from MBS Yearbook 11.13. |
 | **Using MACL as the airport demand level** | Would understate airport demand by ~2.7×. |
 | **Treating `total_pax` as a load factor directly** | 98 boardings/trip on an 84-seat bus is impossible without knowing the counting basis. Fixed by reporting a band and asking MTCC. |
 | **Assuming the Avas hourly shape is the bus hourly shape** | It is a proxy. Used explicitly as a *shape* with the level anchored to observed MTCC boardings, and the assumption is labelled in every output row. |

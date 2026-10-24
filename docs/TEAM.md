@@ -47,9 +47,12 @@ else is derived.
 
 | # | Statement | Value | Verify with |
 |---|---|---|---|
-| 1 | R1 load factor on **seats** | **104.4%** | §4 command A |
-| 2 | R1 load factor on seats + standing | 89.5% | §4 command A |
-| 3 | R4 load factor on seats | 48.5% | §4 command A |
+| 1 | R1 **peak-segment** load factor (the real number) | **90.1%** at 22:00 | §4 command A |
+| 2 | R1 route-day upper bound on seats | 104.4% — an artefact, everyone rides end-to-end | §4 command A |
+| 3 | R1 load factor at its busiest **demand** hour (16:00) | 81.6% | §4 command A |
+| 3a | **R3 peak segment** — airport approach, 13:00 | **98.4%** | §4 command A |
+| 3b | R4 peak segment — airport approach, 11:00 | 84.3% | §4 command A |
+| 3c | R4 route-day upper bound | 48.5% | §4 command A |
 | 4 | R3 airport bus headway | **60 min** (hourly, all captured hours) | §4 command B |
 | 5 | Expected wait on R3 | 30 min | 60 ÷ 2 |
 | 6 | R1 end-to-end scheduled run | **70 min** | §4 command C |
@@ -61,8 +64,10 @@ else is derived.
 | 12 | Ride minutes the bus must shed, Malé↔HM Ph1 | **54.4** | `scenario_modal_shift.csv` |
 | 13 | Friday demand vs weekday | **61–64%** (all 4 routes) | §4 command D |
 | 14 | International arrivals landing 07:00–09:59 | **35.5%** | `airport_demand_profile.csv` |
-| 15 | MACL coverage of international arrivals | ≤ 36.5% | `airport_demand_profile.csv` |
+| 15 | MACL coverage of international arrivals | ≈ 40% | `airport_demand_profile.csv` |
 | 16 | Malé airport arrivals per day, 2025 | 3,987 domestic + 7,395 international | `airport_demand_profile.csv` |
+| 16a | Holdout MAPE (model vs naive baseline) | **9.91%** vs 16.27% | `validation_holdout.csv` |
+| 16b | Morning-peak arrivals, passenger-weighted | **33.07%** (flight-weighted only 25.31%) | `validation_airport.csv` |
 | 17 | Captured service window | ~11:00–24:00, one Saturday | `routes_master.csv` |
 | 18 | Routes with any ridership data | **5 of 15** (R1, R2, R3, R4, R7) | `route_load.csv` |
 | 19 | Baseline unmet demand, captured window | 8.62% | §4 command E |
@@ -79,6 +84,9 @@ else is derived.
 | "Friday service falls only 9–22%" | Rest on the withdrawn Ramadan PDFs. ADR-0009 |
 | "R2 runs 91% of weekday service on a Friday" | Same. Withdrawn |
 | "R1 at 102% of capacity" | Wrong pairing: weekday demand against a Saturday trip count |
+| "R1 runs at 104% of its seats" as a headline | That is a route-day upper bound assuming everyone rides end-to-end. The real peak segment is 90%. Say "104% upper bound, 90% at the busiest segment" |
+| "The airport buses run half empty" | **Wrong after the segment model.** R3 is 98% full on its airport approach while running hourly. This inverted an earlier finding |
+| "MACL covers 36.5%" | That is the adult-only figure. Gross coverage is 40.16% |
 | "1,715 boardings over capacity" | Pre-capacity-correction figure |
 | "371 trips/day" | Pre-capacity-correction figure |
 | "613 bus stops" | Now 184 route-stop records, 97 unique stops |

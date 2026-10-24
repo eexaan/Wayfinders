@@ -1,0 +1,2 @@
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+SAT_20261024,0,0,0,0,0,1,0,20261024,20261024

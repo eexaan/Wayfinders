@@ -1,0 +1,16 @@
+check,scope,metric,value,baseline,verdict
+holdout_mape,R1,MAPE (%),7.89,14.87,PASS
+holdout_mape,R2,MAPE (%),11.93,18.63,PASS
+holdout_mape,R4,MAPE (%),9.92,15.32,PASS
+holdout_mape,ALL,MAPE (%),9.91,16.27,PASS
+A1_intl_coverage,MACL,MACL 2025 arrivals as % of Yearbook intl arrivals,40.16,100.0,FLAG
+A2_domestic_coverage,MACL,MACL turboprop arrivals as % of Yearbook domestic arrivals,0.32,100.0,FAIL
+A3_adult_only,MACL,MACL adult arrivals as % of Yearbook intl arrivals,36.47,100.0,INFO
+A4_seasonality,MACL,correlation of MACL monthly volume with Yearbook monthly intl arrivals,0.21,1.0,FAIL
+B1_mode_share_dep,Avas,Avas airport dropoffs as % of Yearbook intl departures per day,15.34,,PLAUSIBLE
+B2_mode_share_arr,Avas,Avas airport pickups as % of Yearbook intl arrivals per day,2.23,,FLAG
+C1_window_flight_wt,MACL,"share of 2025 arrivals in 07:00-09:00, flight-weighted",25.31,,INFO
+C2_window_pax_wt,MACL,"share of 2025 arrivals in 07:00-09:00, passenger-weighted",33.07,,PASS
+C3_window_widebody,MACL,"share of 2025 arrivals in 07:00-09:00, widebody passenger-weighted",43.7,,INFO
+C4_peak_window_flight,MACL,"largest 3-hour arrival window, flight-weighted",27.88,,INFO
+C5_peak_window_pax,MACL,"largest 3-hour arrival window, passenger-weighted",33.07,,PASS

@@ -12,7 +12,6 @@ Draws every figure directly from dashboard/data/. No number is typed by hand.
     F4_airport_mismatch.png    hourly airport bus vs tri-peaked arrivals
     F5_scenario_kpis.png       baseline vs the recommended package
     F6_generalised_cost.png    break-even journey time per corridor
-    F7_usage_by_period.png     share of bus demand by period + working-hours band
 """
 
 from __future__ import annotations
@@ -69,24 +68,36 @@ def fig_bridge() -> None:
 
 
 def fig_load() -> None:
-    d = pd.read_csv(DATA / "route_load.csv").dropna(subset=["load_factor_seats_upper_pct"])
-    d = d.sort_values("load_factor_seats_upper_pct", ascending=False).reset_index(drop=True)
+    """F2 — route-day upper bound vs measured peak-segment load factor.
+
+    The two bars exist to make the reconciliation visible: the old figure
+    assumed every passenger rode the whole route, which is why it disagreed
+    with what a segment actually carries.
+    """
+    d = pd.read_csv(DATA / "route_load.csv").dropna(subset=["load_factor_peak_pct"])
+    d = d.sort_values("load_factor_peak_pct", ascending=False).reset_index(drop=True)
     x = np.arange(len(d))
-    fig, ax = plt.subplots(figsize=(7.4, 3.4))
-    ax.bar(x, d["load_factor_seats_upper_pct"],
-           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_seats_upper_pct"]])
-    for i, v in enumerate(d["load_factor_seats_upper_pct"]):
-        ax.text(i, v + 1.5, f"{v:.0f}%", ha="center", fontsize=8)
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(7.6, 3.6))
+    ax.bar(x - w / 2, d["load_factor_route_day_upper_pct"], w,
+           color="#c9ced6", label="Route-day upper bound (every pax rides end-to-end)")
+    ax.bar(x + w / 2, d["load_factor_peak_pct"], w,
+           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_peak_pct"]],
+           label="Peak stop-to-stop segment, captured hours")
+    for i, (u, p) in enumerate(zip(d["load_factor_route_day_upper_pct"], d["load_factor_peak_pct"])):
+        ax.text(i - w / 2, u + 1.5, f"{u:.0f}", ha="center", fontsize=7.5, color="#666666")
+        ax.text(i + w / 2, p + 1.5, f"{p:.0f}", ha="center", fontsize=8, fontweight="bold")
     ax.axhline(100, color="black", ls="--", lw=1)
-    ax.text(len(d) - 0.4, 101.5, "capacity", ha="right", fontsize=8)
+    ax.text(len(d) - 0.45, 101.5, "capacity", ha="right", fontsize=8)
     ax.set_xticks(x, d["route_code"])
-    ax.set_ylim(0, 112)
-    ax.set_ylabel("% of seats (upper bound)")
-    ax.set_title("F2  Load factor on seats, captured Saturday: R1 is over 100%, the airport bus R4 at 49%",
+    ax.set_ylim(0, 118)
+    ax.set_ylabel("% of seats")
+    ax.legend(frameon=False, fontsize=7.5, loc="upper right")
+    ax.set_title("F2  Load factor is a segment, not a route: R1 is 89.5% only if nobody gets off",
                  loc="left", fontweight="bold")
-    ax.text(0, -0.22,
-            "Seats only. On seats + permitted standing R1 is 89.5% and R4 is 48.5%. "
-            "R5/R6 excluded: standing capacity not stated (not comparable).",
+    ax.text(0, -0.24,
+            "Peak segment: R1 77% (Hulhumalé Police Stn\u2192Amin Ave, 22:00); R3 104% (STELCO\u2192VIA, 13:00). "
+            "Hours before 11:00 are not captured by the RTL feed.",
             transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F2_load_factors.png")
     plt.close(fig)
@@ -130,7 +141,7 @@ def fig_airport() -> None:
     fig, ax = plt.subplots(figsize=(8.4, 3.4))
     arr = ap.set_index("hour")["macl_share_pct"]
     ax.bar(arr.index, arr.values, color=BLUE, alpha=0.85,
-           label="international arrivals, % of day (MACL 2019–25)")
+           label="arriving passengers, % of day (MACL 2025, pax-weighted)")
     ax2 = ax.twinx()
     ax2.plot(share.index, share.values, color=RED, lw=2, marker="o", ms=3,
              label="R4 scheduled departures, % of captured day")
@@ -141,8 +152,11 @@ def fig_airport() -> None:
     h1, l1 = ax.get_legend_handles_labels()
     h2, l2 = ax2.get_legend_handles_labels()
     ax.legend(h1 + h2, l1 + l2, frameon=False, fontsize=8, loc="upper left")
-    ax.set_title("F4  Airport buses run a flat headway; 35.5% of arrivals land between 07:00 and 09:59",
+    ax.set_title("F4  Airport buses run a flat headway; a third of passengers land between 07:00 and 09:59",
                  loc="left", fontweight="bold")
+    ax.text(0, -0.22,
+            "Passenger-weighted. Flight-weighted the morning share is 25.3%, so the weighting is stated on the chart.",
+            transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F4_airport_mismatch.png")
     plt.close(fig)
 
@@ -160,8 +174,17 @@ def fig_scenarios() -> None:
     axes[1].set_xticks(x, labels)
     axes[1].set_ylabel("% of demand unmet")
     axes[1].set_title("unmet demand", loc="left", fontweight="bold")
-    fig.suptitle("F5  Scenarios on the captured service window (S5 = airport re-timing + express peak)",
+    for ax in axes:
+        ax.set_xlabel("trips moved (no new buses)")
+    for i, n in enumerate(k["trips_moved"]):
+        axes[0].text(i, k["boardings_over_capacity"].iloc[i] + 6, f"{int(n)}",
+                     ha="center", fontsize=7.5, color="#333333")
+    fig.suptitle("F5  Every scenario moves trips, none adds one (S5 = reallocate + express peak)",
                  x=0.02, ha="left", fontweight="bold")
+    fig.text(0.02, 0.005,
+             "Total trips are 162 in all five scenarios; the number above each bar is trips moved. "
+             "Trips are taken from low-load hours and given to over-capacity ones.",
+             fontsize=7, color="#555555")
     fig.savefig(FIGS / "F5_scenario_kpis.png")
     plt.close(fig)
 
@@ -188,44 +211,6 @@ def fig_gc() -> None:
     plt.close(fig)
 
 
-def fig_period_usage() -> None:
-    d = pd.read_csv(DATA / "usage_by_period.csv")
-    net = d[d["route_code"] == "ALL"].copy()
-    order = ["night", "am_commute", "working_hours", "pm_commute", "evening", "late"]
-    label = {
-        "night": "00-06", "am_commute": "06-08", "working_hours": "08-16",
-        "pm_commute": "16-19", "evening": "19-22", "late": "22-24",
-    }
-    net["o"] = net["period"].map({p: i for i, p in enumerate(order)})
-    net = net.sort_values("o")
-
-    fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.3),
-                             gridspec_kw={"width_ratios": [1.5, 1]})
-    colours = [GREY, BLUE, RED, ORANGE, "#8c8c8c", "#bdbdbd"]
-    axes[0].bar([label[p] for p in net["period"]], net["share_of_route_demand_pct"],
-                color=colours)
-    for i, v in enumerate(net["share_of_route_demand_pct"]):
-        axes[0].text(i, v + 0.6, f"{v:.0f}%", ha="center", fontsize=8)
-    axes[0].set_ylabel("% of daily bus boardings")
-    axes[0].set_xlabel("hour of day")
-    axes[0].set_ylim(0, 46)
-    axes[0].set_title("share of bus demand by period", loc="left", fontweight="bold")
-
-    sens = pd.read_csv(DATA / "working_hours_sensitivity.csv")
-    axes[1].barh(sens["working_window"], sens["share_of_daily_demand_pct"], color=BLUE)
-    for i, v in enumerate(sens["share_of_daily_demand_pct"]):
-        axes[1].text(v + 0.6, i, f"{v:.0f}%", va="center", fontsize=8)
-    axes[1].set_xlabel("% of daily boardings")
-    axes[1].set_xlim(0, 62)
-    axes[1].set_title("sensitivity to the working-hours window", loc="left",
-                      fontweight="bold")
-    fig.suptitle("F7  Working hours (08:00-16:00, assumed) carry 39% of daily bus demand",
-                 x=0.02, y=1.06, ha="left", fontweight="bold", fontsize=10)
-    fig.subplots_adjust(top=0.80, wspace=0.28)
-    fig.savefig(FIGS / "F7_usage_by_period.png")
-    plt.close(fig)
-
-
 def main() -> None:
     fig_bridge()
     fig_load()
@@ -233,8 +218,7 @@ def main() -> None:
     fig_airport()
     fig_scenarios()
     fig_gc()
-    fig_period_usage()
-    print(f"wrote 7 figures to {FIGS}")
+    print(f"wrote 6 figures to {FIGS}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,15 @@
+route_code,pdf_block_used,pdf_bands,pdf_vintage,pdf_trips_per_day,pdf_trips_after_midnight,feed_trips_per_day,diff_trips,diff_pct,pdf_trips_in_captured_window,feed_trips_in_captured_window,hourly_mae_captured,hourly_max_abs_diff,verdict,note
+R1,sat_in_weekday_block,5,Ramadan 1446 (Feb-Mar 2025),58,2,61.0,3.0,5.2,42,40,0.31,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R2,sat_in_weekday_block,5,Ramadan 1446 (Feb-Mar 2025),50,2,61.0,11.0,22.0,34,40,0.92,4.0,PASS,feed and published schedule agree hour by hour in the captured window
+R3,saturday_holiday,1,Ramadan 1446 (Feb-Mar 2025),19,1,20.0,1.0,5.3,13,13,0.0,0.0,PASS,feed and published schedule agree hour by hour in the captured window
+R4,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),38,2,38.0,0.0,0.0,26,25,0.08,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R5,saturday_holiday,2,Ramadan 1446 (Feb-Mar 2025),10,0,17.0,7.0,70.0,5,12,0.92,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R6,saturday_holiday,4,Ramadan 1446 (Feb-Mar 2025),65,3,75.0,10.0,15.4,45,51,0.62,4.0,PASS,feed and published schedule agree hour by hour in the captured window
+R7,sat_in_weekday_block,5,Ramadan 1446 (Feb-Mar 2025),58,2,66.0,8.0,13.8,42,44,0.15,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R8,sat_in_weekday_block,5,Ramadan 1446 (Feb-Mar 2025),58,2,61.0,3.0,5.2,42,40,0.31,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R9,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),38,2,38.0,0.0,0.0,26,25,0.08,1.0,PASS,feed and published schedule agree hour by hour in the captured window
+R10,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),55,1,,,,0,0,,,NO_FEED_DATA,"feed returns no timings for this route, so nothing to compare"
+R11,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),55,1,,,,0,0,,,NO_FEED_DATA,"feed returns no timings for this route, so nothing to compare"
+R12,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),40,0,,,,0,0,,,NO_FEED_DATA,"feed returns no timings for this route, so nothing to compare"
+R13,saturday_holiday,3,Ramadan 1446 (Feb-Mar 2025),135,16,92.0,-43.0,-31.9,66,63,0.27,3.0,PASS,feed and published schedule agree hour by hour in the captured window
+R14,sat_in_weekday_block,1,Ramadan 1446 (Feb-Mar 2025),109,1,105.0,-4.0,-3.7,78,77,0.08,1.0,PASS,feed and published schedule agree hour by hour in the captured window

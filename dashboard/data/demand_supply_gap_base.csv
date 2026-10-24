@@ -1,0 +1,361 @@
+route_code,hour,trips_in_hour,capture_status,seated_capacity,seated_capacity_hour,demand_pax_est,load_factor_pct,unmet_pax_est,demand_source
+R1,0,,before_capture_window,72,,126.5,,,MTCC observed (level) x Avas shape (modelled)
+R1,1,,before_capture_window,72,,61.6,,,MTCC observed (level) x Avas shape (modelled)
+R1,2,,before_capture_window,72,,32.8,,,MTCC observed (level) x Avas shape (modelled)
+R1,3,,before_capture_window,72,,19.8,,,MTCC observed (level) x Avas shape (modelled)
+R1,4,,before_capture_window,72,,15.8,,,MTCC observed (level) x Avas shape (modelled)
+R1,5,,before_capture_window,72,,33.5,,,MTCC observed (level) x Avas shape (modelled)
+R1,6,,before_capture_window,72,,88.5,,,MTCC observed (level) x Avas shape (modelled)
+R1,7,,before_capture_window,72,,183.4,,,MTCC observed (level) x Avas shape (modelled)
+R1,8,,before_capture_window,72,,169.7,,,MTCC observed (level) x Avas shape (modelled)
+R1,9,,before_capture_window,72,,166.8,,,MTCC observed (level) x Avas shape (modelled)
+R1,10,,before_capture_window,72,,161.7,,,MTCC observed (level) x Avas shape (modelled)
+R1,11,2.0,captured,72,144.0,165.2,114.7,21.2,MTCC observed (level) x Avas shape (modelled)
+R1,12,3.0,captured,72,216.0,192.7,89.2,0.0,MTCC observed (level) x Avas shape (modelled)
+R1,13,3.0,captured,72,216.0,225.9,104.6,9.9,MTCC observed (level) x Avas shape (modelled)
+R1,14,3.0,captured,72,216.0,270.8,125.4,54.8,MTCC observed (level) x Avas shape (modelled)
+R1,15,3.0,captured,72,216.0,321.9,149.0,105.9,MTCC observed (level) x Avas shape (modelled)
+R1,16,4.0,captured,72,288.0,378.6,131.5,90.6,MTCC observed (level) x Avas shape (modelled)
+R1,17,4.0,captured,72,288.0,315.1,109.4,27.1,MTCC observed (level) x Avas shape (modelled)
+R1,18,4.0,captured,72,288.0,325.5,113.0,37.5,MTCC observed (level) x Avas shape (modelled)
+R1,19,4.0,captured,72,288.0,303.2,105.3,15.2,MTCC observed (level) x Avas shape (modelled)
+R1,20,3.0,captured,72,216.0,303.5,140.5,87.5,MTCC observed (level) x Avas shape (modelled)
+R1,21,3.0,captured,72,216.0,257.0,119.0,41.0,MTCC observed (level) x Avas shape (modelled)
+R1,22,2.0,captured,72,144.0,255.4,177.4,111.4,MTCC observed (level) x Avas shape (modelled)
+R1,23,2.0,captured,72,144.0,210.1,145.9,66.1,MTCC observed (level) x Avas shape (modelled)
+R2,0,,before_capture_window,72,,95.1,,,MTCC observed (level) x Avas shape (modelled)
+R2,1,,before_capture_window,72,,46.3,,,MTCC observed (level) x Avas shape (modelled)
+R2,2,,before_capture_window,72,,24.7,,,MTCC observed (level) x Avas shape (modelled)
+R2,3,,before_capture_window,72,,14.9,,,MTCC observed (level) x Avas shape (modelled)
+R2,4,,before_capture_window,72,,11.8,,,MTCC observed (level) x Avas shape (modelled)
+R2,5,,before_capture_window,72,,25.2,,,MTCC observed (level) x Avas shape (modelled)
+R2,6,,before_capture_window,72,,66.6,,,MTCC observed (level) x Avas shape (modelled)
+R2,7,,before_capture_window,72,,137.9,,,MTCC observed (level) x Avas shape (modelled)
+R2,8,,before_capture_window,72,,127.6,,,MTCC observed (level) x Avas shape (modelled)
+R2,9,,before_capture_window,72,,125.4,,,MTCC observed (level) x Avas shape (modelled)
+R2,10,,before_capture_window,72,,121.5,,,MTCC observed (level) x Avas shape (modelled)
+R2,11,2.0,captured,72,144.0,124.2,86.2,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,12,3.0,captured,72,216.0,144.9,67.1,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,13,3.0,captured,72,216.0,169.8,78.6,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,14,3.0,captured,72,216.0,203.6,94.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,15,3.0,captured,72,216.0,242.0,112.0,26.0,MTCC observed (level) x Avas shape (modelled)
+R2,16,4.0,captured,72,288.0,284.7,98.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,17,4.0,captured,72,288.0,236.9,82.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,18,4.0,captured,72,288.0,244.7,85.0,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,19,4.0,captured,72,288.0,228.0,79.2,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,20,3.0,captured,72,216.0,228.2,105.6,12.2,MTCC observed (level) x Avas shape (modelled)
+R2,21,3.0,captured,72,216.0,193.3,89.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R2,22,2.0,captured,72,144.0,192.0,133.3,48.0,MTCC observed (level) x Avas shape (modelled)
+R2,23,2.0,captured,72,144.0,158.0,109.7,14.0,MTCC observed (level) x Avas shape (modelled)
+R3,0,,before_capture_window,55,,5.9,,,MTCC observed (level) x Avas shape (modelled)
+R3,1,,before_capture_window,55,,2.1,,,MTCC observed (level) x Avas shape (modelled)
+R3,2,,before_capture_window,55,,2.9,,,MTCC observed (level) x Avas shape (modelled)
+R3,3,,before_capture_window,55,,8.2,,,MTCC observed (level) x Avas shape (modelled)
+R3,4,,before_capture_window,55,,13.8,,,MTCC observed (level) x Avas shape (modelled)
+R3,5,,before_capture_window,55,,44.5,,,MTCC observed (level) x Avas shape (modelled)
+R3,6,,before_capture_window,55,,54.6,,,MTCC observed (level) x Avas shape (modelled)
+R3,7,,before_capture_window,55,,50.2,,,MTCC observed (level) x Avas shape (modelled)
+R3,8,,before_capture_window,55,,52.0,,,MTCC observed (level) x Avas shape (modelled)
+R3,9,,before_capture_window,55,,53.7,,,MTCC observed (level) x Avas shape (modelled)
+R3,10,,before_capture_window,55,,51.1,,,MTCC observed (level) x Avas shape (modelled)
+R3,11,1.0,captured,55,55.0,39.9,72.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,12,1.0,captured,55,55.0,42.0,76.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,13,1.0,captured,55,55.0,53.4,97.1,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,14,1.0,captured,55,55.0,56.1,102.0,1.1,MTCC observed (level) x Avas shape (modelled)
+R3,15,1.0,captured,55,55.0,43.1,78.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,16,1.0,captured,55,55.0,29.3,53.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,17,1.0,captured,55,55.0,27.3,49.6,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,18,1.0,captured,55,55.0,27.5,50.0,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,19,1.0,captured,55,55.0,23.7,43.1,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,20,1.0,captured,55,55.0,24.4,44.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,21,1.0,captured,55,55.0,26.7,48.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,22,1.0,captured,55,55.0,12.5,22.7,0.0,MTCC observed (level) x Avas shape (modelled)
+R3,23,1.0,captured,55,55.0,6.8,12.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,0,,before_capture_window,55,,11.2,,,MTCC observed (level) x Avas shape (modelled)
+R4,1,,before_capture_window,55,,3.6,,,MTCC observed (level) x Avas shape (modelled)
+R4,2,,before_capture_window,55,,3.8,,,MTCC observed (level) x Avas shape (modelled)
+R4,3,,before_capture_window,55,,17.9,,,MTCC observed (level) x Avas shape (modelled)
+R4,4,,before_capture_window,55,,24.2,,,MTCC observed (level) x Avas shape (modelled)
+R4,5,,before_capture_window,55,,67.9,,,MTCC observed (level) x Avas shape (modelled)
+R4,6,,before_capture_window,55,,63.1,,,MTCC observed (level) x Avas shape (modelled)
+R4,7,,before_capture_window,55,,91.5,,,MTCC observed (level) x Avas shape (modelled)
+R4,8,,before_capture_window,55,,76.1,,,MTCC observed (level) x Avas shape (modelled)
+R4,9,,before_capture_window,55,,62.3,,,MTCC observed (level) x Avas shape (modelled)
+R4,10,,before_capture_window,55,,57.4,,,MTCC observed (level) x Avas shape (modelled)
+R4,11,1.0,captured,55,55.0,36.3,66.0,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,12,2.0,captured,55,110.0,45.1,41.0,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,13,2.0,captured,55,110.0,69.7,63.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,14,2.0,captured,55,110.0,71.4,64.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,15,2.0,captured,55,110.0,66.6,60.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,16,2.0,captured,55,110.0,53.8,48.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,17,2.0,captured,55,110.0,34.4,31.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,18,2.0,captured,55,110.0,33.1,30.1,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,19,2.0,captured,55,110.0,25.8,23.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,20,2.0,captured,55,110.0,29.6,26.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,21,2.0,captured,55,110.0,36.9,33.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,22,2.0,captured,55,110.0,19.3,17.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R4,23,2.0,captured,55,110.0,12.8,11.6,0.0,MTCC observed (level) x Avas shape (modelled)
+R5,0,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,1,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,2,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,3,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,4,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,5,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,6,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,7,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,8,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,9,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,10,,before_capture_window,33,,,,,NO DEMAND DATA
+R5,11,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,12,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,13,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,14,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,15,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,16,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,17,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,18,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,19,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,20,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,21,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,22,1.0,captured,33,33.0,,,,NO DEMAND DATA
+R5,23,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,0,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,1,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,2,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,3,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,4,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,5,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,6,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,7,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,8,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,9,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,10,,before_capture_window,33,,,,,NO DEMAND DATA
+R6,11,3.0,captured,33,99.0,,,,NO DEMAND DATA
+R6,12,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,13,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,14,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,15,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,16,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,17,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,18,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,19,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,20,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,21,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,22,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R6,23,4.0,captured,33,132.0,,,,NO DEMAND DATA
+R7,0,,before_capture_window,72,,85.8,,,MTCC observed (level) x Avas shape (modelled)
+R7,1,,before_capture_window,72,,39.0,,,MTCC observed (level) x Avas shape (modelled)
+R7,2,,before_capture_window,72,,21.4,,,MTCC observed (level) x Avas shape (modelled)
+R7,3,,before_capture_window,72,,13.4,,,MTCC observed (level) x Avas shape (modelled)
+R7,4,,before_capture_window,72,,9.8,,,MTCC observed (level) x Avas shape (modelled)
+R7,5,,before_capture_window,72,,23.2,,,MTCC observed (level) x Avas shape (modelled)
+R7,6,,before_capture_window,72,,58.0,,,MTCC observed (level) x Avas shape (modelled)
+R7,7,,before_capture_window,72,,159.1,,,MTCC observed (level) x Avas shape (modelled)
+R7,8,,before_capture_window,72,,166.6,,,MTCC observed (level) x Avas shape (modelled)
+R7,9,,before_capture_window,72,,146.6,,,MTCC observed (level) x Avas shape (modelled)
+R7,10,,before_capture_window,72,,146.7,,,MTCC observed (level) x Avas shape (modelled)
+R7,11,3.0,captured,72,216.0,150.9,69.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,12,4.0,captured,72,288.0,150.9,52.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,13,4.0,captured,72,288.0,179.5,62.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,14,4.0,captured,72,288.0,205.3,71.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,15,4.0,captured,72,288.0,244.2,84.8,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,16,4.0,captured,72,288.0,280.2,97.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,17,4.0,captured,72,288.0,241.5,83.9,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,18,4.0,captured,72,288.0,240.5,83.5,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,19,3.0,captured,72,216.0,232.2,107.5,16.2,MTCC observed (level) x Avas shape (modelled)
+R7,20,3.0,captured,72,216.0,234.6,108.6,18.6,MTCC observed (level) x Avas shape (modelled)
+R7,21,3.0,captured,72,216.0,193.8,89.7,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,22,2.0,captured,72,144.0,181.9,126.3,37.9,MTCC observed (level) x Avas shape (modelled)
+R7,23,2.0,captured,72,144.0,146.9,102.0,2.9,MTCC observed (level) x Avas shape (modelled)
+R8,0,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,1,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,2,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,3,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,4,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,5,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,6,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,7,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,8,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,9,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,10,,before_capture_window,72,,,,,NO DEMAND DATA
+R8,11,2.0,captured,72,144.0,,,,NO DEMAND DATA
+R8,12,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,13,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,14,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,15,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,16,4.0,captured,72,288.0,,,,NO DEMAND DATA
+R8,17,4.0,captured,72,288.0,,,,NO DEMAND DATA
+R8,18,4.0,captured,72,288.0,,,,NO DEMAND DATA
+R8,19,4.0,captured,72,288.0,,,,NO DEMAND DATA
+R8,20,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,21,3.0,captured,72,216.0,,,,NO DEMAND DATA
+R8,22,2.0,captured,72,144.0,,,,NO DEMAND DATA
+R8,23,2.0,captured,72,144.0,,,,NO DEMAND DATA
+R9,0,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,1,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,2,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,3,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,4,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,5,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,6,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,7,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,8,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,9,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,10,,before_capture_window,55,,,,,NO DEMAND DATA
+R9,11,1.0,captured,55,55.0,,,,NO DEMAND DATA
+R9,12,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,13,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,14,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,15,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,16,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,17,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,18,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,19,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,20,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,21,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,22,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R9,23,2.0,captured,55,110.0,,,,NO DEMAND DATA
+R10,0,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,1,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,2,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,3,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,4,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,5,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,6,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,7,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,8,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,9,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,10,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,11,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,12,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,13,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,14,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,15,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,16,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,17,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,18,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,19,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,20,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,21,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,22,,before_capture_window,24,,,,,NO DEMAND DATA
+R10,23,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,0,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,1,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,2,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,3,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,4,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,5,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,6,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,7,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,8,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,9,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,10,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,11,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,12,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,13,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,14,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,15,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,16,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,17,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,18,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,19,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,20,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,21,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,22,,before_capture_window,24,,,,,NO DEMAND DATA
+R11,23,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,0,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,1,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,2,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,3,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,4,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,5,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,6,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,7,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,8,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,9,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,10,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,11,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,12,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,13,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,14,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,15,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,16,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,17,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,18,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,19,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,20,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,21,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,22,,before_capture_window,24,,,,,NO DEMAND DATA
+R12,23,,before_capture_window,24,,,,,NO DEMAND DATA
+R13,0,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,1,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,2,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,3,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,4,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,5,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,6,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,7,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,8,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,9,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,10,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,11,3.0,captured,11,33.0,,,,NO DEMAND DATA
+R13,12,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,13,,before_capture_window,11,,,,,NO DEMAND DATA
+R13,14,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,15,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,16,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,17,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,18,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,19,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,20,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,21,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,22,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R13,23,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,0,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,1,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,2,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,3,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,4,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,5,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,6,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,7,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,8,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,9,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,10,,before_capture_window,11,,,,,NO DEMAND DATA
+R14,11,5.0,captured,11,55.0,,,,NO DEMAND DATA
+R14,12,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,13,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,14,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,15,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,16,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,17,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,18,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,19,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,20,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,21,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,22,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R14,23,6.0,captured,11,66.0,,,,NO DEMAND DATA
+R15,0,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,1,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,2,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,3,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,4,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,5,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,6,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,7,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,8,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,9,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,10,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,11,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,12,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,13,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,14,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,15,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,16,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,17,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,18,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,19,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,20,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,21,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,22,,before_capture_window,24,,,,,NO DEMAND DATA
+R15,23,,before_capture_window,24,,,,,NO DEMAND DATA

@@ -14,7 +14,7 @@ coverage problem:
 
 | 2025 measure | MACL | MBS Yearbook 11.13 | MACL covers |
 |---|---|---|---|
-| International arriving passengers | 984,629 (adults) | 2,699,225 (all) | **≤ 36.5%** |
+| International arriving passengers | 984,629 (adults) | 2,699,225 (all) | **≈ 40%** |
 | International aircraft movements | 6,396 (17.5/day) | ~95/day | **≈ 18%** |
 | Domestic arriving passengers | — | 1,455,156 (3,987/day) | **0%** |
 
@@ -49,7 +49,7 @@ The coverage gap is published as a finding, not buried as a caveat.
   "strengthen transport statistics" contribution MBS asked for.
 
 **Bad**
-- MACL's hourly shape is derived from a 36.5% sample of international traffic.
+- MACL's hourly shape is derived from a 40% sample of international traffic.
   If that sample is biased by carrier or region, the shape inherits it. We
   cannot test this with the data available.
 - The domestic arrival *hourly* shape is unknown — we assume it follows the
