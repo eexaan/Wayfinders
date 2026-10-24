@@ -90,6 +90,15 @@ which is what lets the app run with no tiles and no key.
 |---|---|---|---|
 | `basemap.geojson` | `dashboard/build/build_basemap.py` | OSM via Overpass API | island outlines + roads for Malé, the airport island and Hulhumalé. **© OpenStreetMap contributors, ODbL** |
 | `route_segments.geojson` | `dashboard/build/snap_routes.py` | OSRM on OSM roads | one LineString per stop-to-stop leg, so routes follow the Sinamalé Bridge instead of crossing open water |
+| `data/derived/greater_male_pois.csv` | `scripts/build_pois.py` | OSM via Overpass API | 321 named trip generators (schools, government offices, hospitals, mosques, markets) classified into seven demand-curve categories, each with its nearest bus stop and walking distance. **© OpenStreetMap contributors, ODbL** |
+| `data/derived/poi_access_gaps.csv` | `scripts/build_pois.py` | derived from the above | per category and island: how many POIs are beyond a 400 m walk of the nearest stop |
+
+> **Known limit of `greater_male_pois.csv`.** OSM's mapping of the newest
+> Hulhumalé Phase 2 blocks (Aman Dhoadhi and neighbours) is thin — only 6 named
+> POIs exist north of Phase 1 in the whole extract. The file therefore cannot
+> prove or disprove the anecdotal "no buses in new Phase 2" claim: absence of a
+> POI here means *unmapped*, not *no such place*. Do not report a coverage
+> figure for that area from this file.
 | `stop_snap_qa.csv` | `dashboard/build/snap_routes.py` | same | distance from each stop to the nearest road; QA only |
 
 Rebuilding them requires those two services to be reachable and may return
