@@ -205,9 +205,23 @@ Stated plainly, because a reader is entitled to know.
 - drafting this note and the public README
 - reviewing and resolving the merge conflicts when two analysts' branches
   diverged
+- later work on the map: route geometry from the official RTL feed, the 97 stop
+  markers, the OSM trip-generator scrape, and the tile/data caching
+- the `AGENTS.md` / `SCOPE.md` working rules, and the bus capacity dataset and
+  its generator script
 
-The analysis and pipeline work ran through an assistant in OpenCode; the
-interface and other code were written with Cursor and Claude Code.
+**How it was used.** Mostly one assistant — an agent in VS Code's Copilot, backed
+by DeepSeek models (`deepseek-flash` for most turns, `deepseek-v4-pro` for the
+longer ones) — across many short sessions rather than one long run: 13 separate
+sessions on 24 October 2026 alone. It was used as a pair, not autonomously: a
+team member set each task, read the output, and owned the commit. The analysis
+and pipeline work also ran through an assistant in OpenCode in earlier sessions;
+parts of the interface and other code were written with Cursor and Claude Code.
+
+**Same rules as anything else.** The assistant was held to this note's standards:
+no invented numbers, every figure traceable to a source, and nothing claimed
+without running it. Where it could not verify something it was required to say
+so rather than fill the gap.
 
 **What AI was not used for.** Collecting primary data, making scope decisions,
 and supplying the fleet capacity figures and the MBS documents, which came from
@@ -235,9 +249,10 @@ weakness. Any claim that survived is one that either an independent check or a
 second analyst could not overturn.
 
 **Per-member confirmation.** Each team member is responsible for disclosing their
-own tool use. The account above is team-level: OpenCode, Cursor and Claude Code
-were used across the analysis, the interface and other code. Where an
-individual's use differs, that member should add it here.
+own tool use. The account above is team-level: a DeepSeek-backed agent in VS
+Code's Copilot (most of the later work, over ~13 sessions on 24 October),
+OpenCode (earlier analysis), and Cursor and Claude Code (interface and other
+code). Where an individual's use differs, that member should add it here.
 
 **Recommendation to readers.** Treat this as an analyst's draft: the arithmetic
 is reproducible and machine-checked, but the framing and the policy
