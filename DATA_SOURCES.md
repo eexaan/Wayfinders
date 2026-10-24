@@ -45,8 +45,8 @@ and are the analytical backbone of the project.
 | # | File | Original source | Used for |
 |---|---|---|---|
 | T1 | [`11.13.xlsx`](data/official/mbs/11.13.xlsx) | MBS Statistical Yearbook 2026, table 11.13 | Local copy of S4 — Velana passengers, domestic vs international |
-| T2 | [`3.15.xlsx`](data/official/mbs/3.15.xlsx) | MBS Census 2022 | Population by locality — demand denominators |
-| T3 | [`3.16.xlsx`](data/official/mbs/3.16.xlsx) | MBS Census 2022 | Population by locality (companion table) |
+| T2 | [`3.15.xlsx`](data/official/mbs/3.15.xlsx) | MBS Census 2022 | Population by locality — the scale of each catchment; context, not a model input |
+| T3 | [`3.16.xlsx`](data/official/mbs/3.16.xlsx) | MBS Census 2022 | Population by locality (companion table, same use) |
 | T4 | [`Population-Projection-2022-2026-16-Feb-2026.pdf`](data/official/mbs/Population-Projection-2022-2026-16-Feb-2026.pdf) | <https://statisticsmaldives.gov.mv/maldives-population-projection-2022-2062/> | Forward population for the Greater Malé catchments |
 | T5 | [`LFS-Report-2024-2025.pdf`](data/official/mbs/LFS-Report-2024-2025.pdf) | MBS Labour Force Survey | Employment and youth commuting context |
 | T6 | [`1.5.xlsx`](data/official/mbs/1.5.xlsx) | MBS Statistical Yearbook 2026, table 1.5 | Geography reference (not used in the model) |

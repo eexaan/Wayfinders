@@ -28,6 +28,8 @@ so zooming back over ground you have already covered costs no requests.
 
 ## The tool
 
+![The Pathways dashboard: the Greater Malé network coloured by load, the route ranking, and hourly demand against seats](docs/figures/dashboard-overview.png)
+
 | Panel | What it shows | What it is for |
 |---|---|---|
 | **Map** | All 15 routes as polylines on OpenStreetMap (Malé, airport island, Hulhumalé, Villimalé), coloured by how full each one runs, with all 97 bus stops marked | Find the corridors in trouble without reading a table, and see where a passenger can actually board |
@@ -42,6 +44,25 @@ The interface enforces two rules, because the data does:
   buses would be a lie about Malé.
 - **Unknown is not zero.** Ten of the 15 routes have no ridership data at all.
   They are marked unknown rather than drawn at 0%.
+
+## How this meets the challenge
+
+The datathon asks for an interactive, GIS-powered statistical dashboard that
+uses open data to support transport decisions. This is how the submitted tool
+answers that brief:
+
+- **GIS across the region.** Four islands — Malé, Hulhulé, Hulhumalé and
+  Villimalé — 15 routes and 97 stops, drawn on OpenStreetMap road geometry.
+- **Open data filling a gap.** 321 schools, offices, hospitals, mosques, markets
+  and shops scraped from OSM and classified by demand curve, then matched to the
+  nearest stop. Only 3 are more than 400 m from service; the blind spot is
+  documented, not hidden.
+- **Movement patterns, measured and modelled.** 371,788 taxi trips supply the
+  hourly shape; MTCC counts supply the level. The split is labelled on screen.
+- **An intervention, not just a chart.** Five fleet-neutral scenarios re-time
+  existing trips. S5 removes 404 over-capacity boardings by moving six trips.
+- **A reusable output.** A GTFS feed any journey planner can read, and a build
+  that re-derives all 92 claims from the raw sources.
 
 ## What the tool shows you
 
@@ -76,6 +97,8 @@ re-timing airport buses on their own relieves only 2 boardings, and the
 almost no spare capacity to donate. A donor may only give up a trip if it stays
 within 100% of seats afterwards ([ADR-0014](docs/adr/0014-donor-ceiling.md)).
 The tool shows the null results rather than hiding them.
+
+![F5: every scenario moves trips, none adds one](docs/figures/F5_scenario_kpis.png)
 
 ## What the tool cannot show
 
@@ -116,11 +139,11 @@ stored rather than deflated so the archive is bit-identical on any machine.
 
 ## The GTFS feed
 
-We publish **the first GTFS feed for the Greater Malé bus network** — the
+We publish **a GTFS feed for the Greater Malé bus network** — the
 standard format every journey planner already reads.
 
-**No public GTFS existed for Malé.** We built one from the official RTL
-timetable, so it describes the real 2026 schedule — and its stop times are the
+**We could not find a public GTFS for Malé**, so we built one from the official
+RTL timetable. It describes the real 2026 schedule — and its stop times are the
 observed schedule, not interpolated from an assumed bus speed.
 
 | | |
@@ -148,8 +171,24 @@ Every figure traces to a public source. Nothing private or restricted was used.
 | Bus passenger counts | MTCC via MBS | Daily passengers on R1, R2, R3, R4, R7 |
 | Taxi trips | Avas via MBS | 371,788 trips, August–September 2026 |
 | Airport arrivals | MACL via MBS | Hourly international arrivals, 2012–2026 |
-| Statistical Yearbook | MBS | Airport totals including domestic; population; labour force |
-| Map data | OpenStreetMap contributors | Basemap and road network (ODbL) |
+| Census 2022 | MBS | Population by locality — the scale of each catchment, used as context rather than a model input |
+| Statistical Yearbook | MBS | Airport totals including domestic; labour force |
+| Map data | OpenStreetMap contributors | Basemap, road network and trip generators (ODbL) |
+
+Access by island, from the OpenStreetMap scrape (`data/derived/poi_access_gaps.csv`):
+
+| Island | Mapped trip generators | More than 400 m from a stop |
+|---|---|---|
+| Malé | 239 | 0 |
+| Hulhumalé | 65 | 1 |
+| Hulhulé (airport) | 13 | 1 |
+| Villimalé | 3 | 0 |
+| Outside the mapped islands | 1 | 1 |
+| **Total** | **321** | **3** |
+
+The scrape records its own blind spot: north of Hulhumalé Phase 1, OSM holds
+6 named POIs against roughly 2,900 mapped buildings. Absence of a POI means
+unmapped, not vacant.
 
 Full links, licences and caveats: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
 
@@ -179,6 +218,7 @@ demand on the day we measured, not whether they match now.
 - **[docs/METHODS.md](docs/METHODS.md)** — data sources, methods, assumptions, AI use and limits
 - **[docs/GTFS.md](docs/GTFS.md)** — the feed, its design decisions, and how to load it
 - **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, two extensions beyond it, and the costs and preconditions
+- **[docs/mockups/](docs/mockups/README.md)** — two design sketches: proposed new routes, and hour-by-hour re-timing
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost
