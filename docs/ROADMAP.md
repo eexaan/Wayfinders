@@ -113,7 +113,7 @@ JWT), noted in `SPEC.md` §12 as a cheap and high-value win.
 
 What it adds that the timetable cannot:
 
-- **Actual** running times, including causeway delay — the binding constraint
+- **Actual** running times, including bridge delay — the binding constraint
   identified in F1
 - real headway and **bunching** (two buses arriving together after a gap)
 - dwell time at stops, which our current model assumes is zero

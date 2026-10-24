@@ -427,7 +427,11 @@ def check_gtfs() -> None:
 # figures that move when the model moves.
 # ---------------------------------------------------------------------------
 def _readme_fragment(path: str) -> str:
-    return (ROOT / path).read_text()
+    """File contents with runs of whitespace collapsed.
+
+    Prose wraps; assertions should not depend on where a line happens to break.
+    """
+    return re.sub(r"\s+", " ", (ROOT / path).read_text())
 
 
 def check_prose() -> None:
@@ -467,7 +471,7 @@ def check_prose() -> None:
     ]
     for path, needle, label in anchors:
         text = _readme_fragment(path)
-        claim(f"prose: {label} ({path})", needle in text,
+        claim(f"prose: {label} ({path})", re.sub(r"\s+", " ", needle) in text,
               f"expected '{needle}'")
 
 
@@ -479,7 +483,7 @@ def check_claim_count() -> None:
     an assertion.
     """
     text = _readme_fragment("README.md")
-    match = re.search(r"passes (\d+)/\1", text)
+    match = re.search(r"passes\s+\**(\d+)/\1", text)
     total = len(results) + 1  # include this claim itself
     claim(
         "README state the real claim count",

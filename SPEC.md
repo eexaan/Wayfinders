@@ -3,7 +3,8 @@
 
 **Maldives Datathon 2026 · Team Wayfinders (3 dev + 1 report) · 10-hour build**
 
-> *Raajje* is the Maldivian name for the Hulhumalé causeway. It is the
+> *Raajje* is the Dhivehi name for the Maldives. The bottleneck under most of
+> what follows is the **Sinamalé Bridge**. It is the
 > bottleneck under every number in this document, and it is the reason this
 > project is not about fares.
 
@@ -21,7 +22,7 @@ simultaneously:
    a weekday, but Friday service falls only 9–22%.
 3. **The journey itself is the competitive problem.** A taxi is 8.5× the fare
    and still wins, because the bus spends 57% of its journey time in two
-   causeway crossings.
+   Sinamalé Bridge crossings.
 
 The deliverable is a **decision tool**: an operator can move buses between
 routes, hours and days, and see the passenger-level consequences before
@@ -94,7 +95,7 @@ datathon's judges are statisticians.
 
 ## 4. Findings (all computed, all reproducible)
 
-### F1 — The causeway is the journey time
+### F1 — The bridge crossing is the journey time
 
 From the official RTL 2026 feed, R1's end-to-end scheduled run
 (West Park → Hulhumalé Phase 1) is **70 minutes**:
@@ -111,7 +112,7 @@ From the official RTL 2026 feed, R1's end-to-end scheduled run
 | same journey by taxi (observed median, Avas) | **12.7 min** |
 
 Internal Hulhumalé routes that never cross (R5, R6) show 3–5 min per segment.
-The contrast is the evidence: the causeway, not the stop spacing, is the
+The contrast is the evidence: the bridge crossing, not the stop spacing, is the
 bottleneck. The bus is **5.5× slower than a taxi** on the corridor where it is
 also 8.5× cheaper.
 
@@ -255,8 +256,8 @@ dimension where the bus already wins and leaves the binding constraint
 |---|---|---|---|
 | HM Ph2 ↔ Airport (R9) | 31 min | 14.6 min | **16.4** ✅ reachable |
 | Malé ↔ HM Ph2 (R7/R8) | 40 min | 19.6 min | **20.4** ✅ reachable |
-| Malé ↔ HM Ph1 (R1/R2) | 70 min | 15.6 min | **54.4** ❌ needs the causeway |
-| Malé ↔ Airport (R3) | 44 min | 0 min | 44 ❌ needs the causeway |
+| Malé ↔ HM Ph1 (R1/R2) | 70 min | 15.6 min | **54.4** ❌ needs the Sinamalé Bridge |
+| Malé ↔ Airport (R3) | 44 min | 0 min | 44 ❌ needs the Sinamalé Bridge |
 
 ## 5. The scenario engine
 
@@ -363,7 +364,7 @@ the acceptance criteria. This section is the summary.
 
 **Must have**
 1. **Map** (Leaflet/MapLibre): OSM basemap, 15 route polylines in the official
-   RTL colours, 184 route-stop records (97 unique stops), the causeway
+   RTL colours, 184 route-stop records (97 unique stops), the bridge crossings
    segments — every segment ≥ 10 min — highlighted.
 2. **Route panel**: click a route → demand vs capacity by hour, the load-factor
    **band** (`load_factor_peak_pct` and `load_factor_avg_pct`), the official
@@ -646,7 +647,7 @@ the supply half of any realtime phase. It is also the cheaper half.
    Nobody can answer "how many passengers does this bus carry, on which
    route, at which hour, and is that matched to the buses running?" We joined
    them, and we publish the result with per-row provenance.
-2. **0:40–1:40 — F1, the causeway.** 57% of the bus's journey is two bridge
+2. **0:40–1:40 — F1, the bridge.** 57% of the bus's journey is two
    crossings. The bus is 5.5× slower than the taxi *and* 8.5× cheaper. That
    is why young Maldivians take taxis.
 3. **1:40–2:40 — F2, F3, F4, the misallocation.** Load factor is measured per
@@ -681,7 +682,7 @@ the supply half of any realtime phase. It is also the cheaper half.
 - *"What would actually move young people off taxis?"* → Not a discount. On
   price the bus already wins — 70–75% would switch. It loses on time by
   227 MVR per trip. The break-even table says which corridors express service
-  can fix, and that the biggest one needs the causeway.
+  can fix, and that the biggest one needs the Sinamalé Bridge.
 - *"Can this scale beyond Malé?"* → Yes. The recipe is: a published
   timetable, a taxi or ride-hail feed, and a ridership series. That is a
   template any city can apply.

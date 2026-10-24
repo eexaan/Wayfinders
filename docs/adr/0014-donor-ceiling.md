@@ -71,7 +71,7 @@ deletes a service.
 - The result is a finding, not just a fix. With the ceiling in place the
   "express peak" scenario (S4) finds exactly **one** safe move, because every
   other R1/R2 off-peak hour is already at 83–166%. **The corridor has no spare
-  buses; the airport routes do.** That is F1's conclusion — the causeway is the
+  buses; the airport routes do.** That is F1's conclusion — the bridge is the
   problem — arrived at from the supply side.
 
 **Bad**
