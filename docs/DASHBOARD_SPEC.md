@@ -295,7 +295,37 @@ captured (the feed is server-clock filtered), so this bounds them instead.
 > "inferred". Putting it beside captured hourly bars would imply a resolution
 > that does not exist. See ADR-0011.
 
-### 2.17 Five traps that will silently break the UI
+### 2.17 `usage_by_period.csv` — route × period, plus an `ALL` row per period
+
+Bus usage split by day period. Periods are non-overlapping and sum to the day.
+
+| Column | Example | Notes |
+|---|---|---|
+| `route_code` | `R1` \| `ALL` | `ALL` is the network total |
+| `period` | `working_hours` | `night`, `am_commute`, `working_hours`, `pm_commute`, `evening`, `late` |
+| `hours_in_period` | `8` | |
+| `hours_captured` | `5` | **service** hours observed in that period |
+| `hours_not_captured` | `3` | demand exists, service does not |
+| `boardings_est` | `1420.5` | modelled from the MTCC level × Avas shape |
+| `trips_captured` | `41.0` | captured departures only |
+| `seated_capacity` | `2952.0` | |
+| `load_factor_seats_pct` | `48.1` | null where nothing was captured |
+| `share_of_route_demand_pct` | `39.0` | share of that route's (or the network's) day |
+
+> ⚠️ The **demand** side of every period is complete (24 hours modelled). The
+> **service** side is not: `hours_captured` < `hours_in_period` before ~11:00.
+> Do not compute a load factor for a period with `hours_captured = 0`.
+
+### 2.18 `working_hours_sensitivity.csv` — 5 rows
+
+`working_window`, `share_of_daily_demand_pct`, `hours_captured_in_window`,
+`hours_in_window`, `trips_captured_in_window`.
+
+Use this to caption F7. The headline is 08:00–16:00 = **39%**, and the point
+of the table is that 07:00–15:00 and 09:00–17:00 give 37% and 42% — the claim
+survives an hour of slop either way.
+
+### 2.19 Five traps that will silently break the UI
 
 Read this before you write the chart layer. Each one produces a plausible but
 wrong chart, which is worse than an error.
@@ -340,6 +370,34 @@ no zero-padding. `departure_time` is `"11:20:00"` (H:MM:SS), so slice it for
 display.
 
 ---
+
+## 2.20 Design precedent to follow
+
+`https://data.pension.gov.mv/` is the Maldives Pension Administration Office
+data portal — a Looker Studio dashboard embedded in a page. It is the nearest
+thing to a house style for Maldives government data, and judges will recognise
+it. Six things it does that we should copy:
+
+1. **Hero numbers as plain text, not charts.** Three or four large figures
+   (`30.3B`, `16.5M`, `124.7M`, `26,468`) with a one-line caption each. Our
+   equivalent: **104.4%** of R1's seats · **39%** of demand in working hours ·
+   **60 min** R3 headway · **8.62%** unmet demand.
+2. **A narrative sentence per chart**, not a bare axis. Every panel gets a line
+   of plain English saying what it shows and why it matters.
+3. **Source under every figure.** The pension portal writes
+   *"Census Source: Maldives Bureau of Statistics (2022), Table EC6"* directly
+   beneath the chart. We already carry provenance in the data; surface it in
+   the UI. This is the single strongest credibility signal available.
+4. **A data-vintage line at the top.** Theirs: *"Data is updated on the 10th of
+   each month."* Ours must say: *"Service captured 11:00–24:00, Saturday
+   2026-10-24. Demand 2025."*
+5. **Simple chart types only** — donut for composition, bar/line for series.
+   No sankey, no radar, no 3D.
+6. **Visible data access.** They have a "Request for Data" affordance. Our
+   equivalent is the link to `DATA_SOURCES.md` and the repo.
+
+**Do not copy** their lack of interactivity. Their charts are static images;
+ours must respond to scenario selection, because that is the whole product.
 
 ## 3. Layout
 
@@ -427,15 +485,19 @@ Populated on route click. Contains:
    `load_factor_seats_avg_pct` → `load_factor_seats_upper_pct`, with 100%
    marked. Label
    both ends. **Never render a single value.**
-3. **Demand vs service chart** (the F2 chart, per route): dual-series bar
+3. **Demand by day period** — a small bar using `usage_by_period.csv`
+   (night / 06–08 / **08–16** / 16–19 / 19–22 / 22–24), with the working-hours
+   bar highlighted. Caption: *"39% of demand falls in assumed working hours
+   08:00–16:00; 21% falls in the three-hour evening commute."*
+4. **Demand vs service chart** (the F2 chart, per route): dual-series bar
    chart by hour of day for the selected day-type:
    - bar 1 = `demand_pax_est` from `demand_supply_gap.csv`
    - bar 2 = `seated_capacity_hour` from the same table
    - a horizontal line at the point where demand exceeds capacity
    - day-type switcher: `weekday` / `friday` / `sat_holiday`
-4. **Timetable ribbon:** for each hour, a small vertical tick per departure
+5. **Timetable ribbon:** for each hour, a small vertical tick per departure
    (from `service_departures.csv`), so the headway profile is visible.
-5. **Day-type strip** (from `demand_by_daytype.csv`): boardings indexed to a
+6. **Day-type strip** (from `demand_by_daytype.csv`): boardings indexed to a
    weekday. Label it "demand only" — the service-side comparison is not
    available from a single-day capture.
 

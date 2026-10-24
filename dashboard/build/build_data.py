@@ -117,6 +117,35 @@ AIRCRAFT_DAY_NOTE = "Saturday 2026-10-24 service day (feed is time-filtered)"
 # assumed service start we get a bounded AVERAGE morning headway. That is a
 # route-day statistic, not an hourly series, and it is emitted separately so it
 # can never be mistaken for observed data (ADR-0011).
+# ---------------------------------------------------------------------------
+# Day periods for "bus usage by working hours".
+#
+# There is no published workforce or working-hours dataset for the Maldives, so
+# 08:00-16:00 is an ASSUMPTION supplied by the team. It is a parameter, not a
+# constant: build_period_usage() also emits a sensitivity table over 07-15,
+# 08-16 and 09-17 so a reader can see how much the answer moves.
+# See docs/adr/0012-working-hours-assumption.md.
+# ---------------------------------------------------------------------------
+WORKING_HOURS_START = 8
+WORKING_HOURS_END = 16
+
+PERIODS = [
+    ("night", 0, 6),
+    ("am_commute", 6, 8),
+    ("working_hours", WORKING_HOURS_START, WORKING_HOURS_END),
+    ("pm_commute", 16, 19),
+    ("evening", 19, 22),
+    ("late", 22, 24),
+]
+
+
+def _period_of(hour: int) -> str:
+    for name, a, b in PERIODS:
+        if a <= hour < b:
+            return name
+    return "late"
+
+
 SERVICE_START_ASSUMED_MIN = 6 * 60      # 06:00, the assumption
 SERVICE_START_LOW_MIN = 5 * 60 + 30     # 05:30 -> upper bound on headway
 SERVICE_START_HIGH_MIN = 6 * 60 + 30    # 06:30 -> lower bound on headway
@@ -616,6 +645,92 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 # ---------------------------------------------------------------------------
+def build_period_usage(gap: pd.DataFrame, master: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Bus usage and service by day period, per route plus a network total.
+
+    Demand per period is the sum of the hourly demand estimate, which is the
+    MTCC daily level distributed by the Avas shape. Service per period is the
+    sum of captured departures only, so `hours_captured` exposes partial
+    coverage - 3 of the 8 working hours fall before the capture window.
+    """
+    g = gap.copy()
+    g["period"] = g["hour"].map(_period_of)
+
+    rows = []
+    for (route, period), grp in g.groupby(["route_code", "period"]):
+        seats = int(grp["seated_capacity"].iloc[0]) if grp["seated_capacity"].notna().any() else 0
+        demand = grp["demand_pax_est"].sum(min_count=1)
+        cap_hours = grp["trips_in_hour"].notna()
+        trips = grp.loc[cap_hours, "trips_in_hour"].sum()
+        cap = trips * seats if seats else None
+        total_hours = len(grp)
+        captured_hours = int(cap_hours.sum())
+        rows.append(
+            {
+                "route_code": route,
+                "period": period,
+                "hours_in_period": total_hours,
+                "hours_captured": captured_hours,
+                "hours_not_captured": total_hours - captured_hours,
+                "boardings_est": round(demand, 1) if pd.notna(demand) else None,
+                "trips_captured": float(trips) if captured_hours else None,
+                "seated_capacity": cap,
+                "load_factor_seats_pct": round(demand / cap * 100, 1)
+                if (pd.notna(demand) and cap) else None,
+            }
+        )
+    per_route = pd.DataFrame(rows)
+    # share of that route's own daily demand
+    route_daily = per_route.groupby("route_code")["boardings_est"].transform("sum")
+    per_route["share_of_route_demand_pct"] = (
+        per_route["boardings_est"] / route_daily * 100
+    ).round(1)
+
+    # network total per period
+    net = (
+        g.groupby("period")
+        .agg(boardings_est=("demand_pax_est", "sum"),
+             trips_captured=("trips_in_hour", "sum"),
+             hours_captured=("trips_in_hour", "count"),
+             hours_in_period=("hour", "size"))
+        .reset_index()
+    )
+    daily = net["boardings_est"].sum()
+    net["share_of_route_demand_pct"] = (net["boardings_est"] / daily * 100).round(1)
+    net["route_code"] = "ALL"
+    net["hours_not_captured"] = net["hours_in_period"] - net["hours_captured"]
+    net["seated_capacity"] = None
+    net["load_factor_seats_pct"] = None
+    cols = list(per_route.columns)
+    for c in cols:
+        if c not in net.columns:
+            net[c] = None
+    net = net[cols]
+    out = pd.concat([per_route, net], ignore_index=True)
+    out["period_order"] = out["period"].map({n: i for i, (n, _, _) in enumerate(PERIODS)})
+    out = out.sort_values(["route_code", "period_order"]).drop(columns="period_order")
+    out.to_csv(OUT / "usage_by_period.csv", index=False)
+
+    # sensitivity on the working-hours definition
+    sens = []
+    for start, end in [(7, 15), (8, 16), (9, 17), (7, 17), (8, 18)]:
+        in_win = g["hour"].between(start, end - 1)
+        dem = g.loc[in_win, "demand_pax_est"].sum()
+        cap_hours = in_win & g["trips_in_hour"].notna()
+        sens.append(
+            {
+                "working_window": f"{start:02d}:00-{end:02d}:00",
+                "share_of_daily_demand_pct": round(dem / daily * 100, 1),
+                "hours_captured_in_window": int(cap_hours.sum()),
+                "hours_in_window": int(in_win.sum()),
+                "trips_captured_in_window": float(g.loc[cap_hours, "trips_in_hour"].sum()),
+            }
+        )
+    pd.DataFrame(sens).to_csv(OUT / "working_hours_sensitivity.csv", index=False)
+    return out, pd.DataFrame(sens)
+
+
+# ---------------------------------------------------------------------------
 def main() -> None:
     routes = load_routes()
     capacity = load_capacity()
@@ -664,6 +779,8 @@ def main() -> None:
         )
     pd.DataFrame(morning_rows).to_csv(OUT / "morning_service_inferred.csv", index=False)
 
+    usage, wh_sens = build_period_usage(gap, master)
+
     kpis, corr = build_scenarios(gap)
     kpis.to_csv(OUT / "scenario_kpis.csv", index=False)
     corr.to_csv(OUT / "scenario_corridor_kpis.csv", index=False)
@@ -683,6 +800,14 @@ def main() -> None:
     print("ROUTE LOAD (daily)")
     print("=" * 100)
     print(load.to_string(index=False))
+    print()
+    print("=" * 100)
+    print("USAGE BY PERIOD (network)")
+    print("=" * 100)
+    print(usage[usage.route_code == "ALL"].to_string(index=False))
+    print()
+    print("working-hours sensitivity")
+    print(wh_sens.to_string(index=False))
     print()
     print("=" * 100)
     print("SCENARIOS")

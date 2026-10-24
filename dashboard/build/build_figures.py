@@ -12,6 +12,7 @@ Draws every figure directly from dashboard/data/. No number is typed by hand.
     F4_airport_mismatch.png    hourly airport bus vs tri-peaked arrivals
     F5_scenario_kpis.png       baseline vs the recommended package
     F6_generalised_cost.png    break-even journey time per corridor
+    F7_usage_by_period.png     share of bus demand by period + working-hours band
 """
 
 from __future__ import annotations
@@ -187,6 +188,44 @@ def fig_gc() -> None:
     plt.close(fig)
 
 
+def fig_period_usage() -> None:
+    d = pd.read_csv(DATA / "usage_by_period.csv")
+    net = d[d["route_code"] == "ALL"].copy()
+    order = ["night", "am_commute", "working_hours", "pm_commute", "evening", "late"]
+    label = {
+        "night": "00-06", "am_commute": "06-08", "working_hours": "08-16",
+        "pm_commute": "16-19", "evening": "19-22", "late": "22-24",
+    }
+    net["o"] = net["period"].map({p: i for i, p in enumerate(order)})
+    net = net.sort_values("o")
+
+    fig, axes = plt.subplots(1, 2, figsize=(9.8, 3.3),
+                             gridspec_kw={"width_ratios": [1.5, 1]})
+    colours = [GREY, BLUE, RED, ORANGE, "#8c8c8c", "#bdbdbd"]
+    axes[0].bar([label[p] for p in net["period"]], net["share_of_route_demand_pct"],
+                color=colours)
+    for i, v in enumerate(net["share_of_route_demand_pct"]):
+        axes[0].text(i, v + 0.6, f"{v:.0f}%", ha="center", fontsize=8)
+    axes[0].set_ylabel("% of daily bus boardings")
+    axes[0].set_xlabel("hour of day")
+    axes[0].set_ylim(0, 46)
+    axes[0].set_title("share of bus demand by period", loc="left", fontweight="bold")
+
+    sens = pd.read_csv(DATA / "working_hours_sensitivity.csv")
+    axes[1].barh(sens["working_window"], sens["share_of_daily_demand_pct"], color=BLUE)
+    for i, v in enumerate(sens["share_of_daily_demand_pct"]):
+        axes[1].text(v + 0.6, i, f"{v:.0f}%", va="center", fontsize=8)
+    axes[1].set_xlabel("% of daily boardings")
+    axes[1].set_xlim(0, 62)
+    axes[1].set_title("sensitivity to the working-hours window", loc="left",
+                      fontweight="bold")
+    fig.suptitle("F7  Working hours (08:00-16:00, assumed) carry 39% of daily bus demand",
+                 x=0.02, y=1.06, ha="left", fontweight="bold", fontsize=10)
+    fig.subplots_adjust(top=0.80, wspace=0.28)
+    fig.savefig(FIGS / "F7_usage_by_period.png")
+    plt.close(fig)
+
+
 def main() -> None:
     fig_bridge()
     fig_load()
@@ -194,7 +233,8 @@ def main() -> None:
     fig_airport()
     fig_scenarios()
     fig_gc()
-    print(f"wrote 6 figures to {FIGS}")
+    fig_period_usage()
+    print(f"wrote 7 figures to {FIGS}")
 
 
 if __name__ == "__main__":

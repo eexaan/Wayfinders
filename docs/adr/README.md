@@ -20,8 +20,9 @@ one, add a new ADR that supersedes it; do not silently edit.
 | [0009](0009-withdraw-friday-service-comparison.md) | The Friday service-vs-demand finding is withdrawn | Accepted | report, pitch |
 | [0010](0010-capacity-from-team-table.md) | Capacity comes from the team capacity table, not the news article | Accepted | model, report |
 | [0011](0011-inferred-morning-service.md) | The morning is a bounded route-day **inference**, never hourly data | Accepted | report, pitch |
+| [0012](0012-working-hours-assumption.md) | Working hours assumed 08:00–16:00, published as a **band** | Accepted | report, dashboard |
 
-## The five decisions most likely to be questioned
+## The six decisions most likely to be questioned
 
 If you only read five, read these. Each is a place where a reasonable person
 could have gone the other way, and the record explains why we did not.
@@ -32,6 +33,8 @@ could have gone the other way, and the record explains why we did not.
 3. **ADR-0009** — why a finding that appeared in an earlier draft is gone.
 4. **ADR-0006** — why MACL is not used for airport demand levels.
 5. **ADR-0004** — why taxi data shapes bus demand but does not set its level.
+6. **ADR-0012** — where the 08:00–16:00 working window comes from, and how much
+   the answer moves if it is wrong.
 
 ## Numbering
 

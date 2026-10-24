@@ -67,6 +67,10 @@ else is derived.
 | 18 | Routes with any ridership data | **5 of 15** (R1, R2, R3, R4, R7) | `route_load.csv` |
 | 19 | Baseline unmet demand, captured window | 8.62% | §4 command E |
 | 20 | S5 effect | −236 boardings over capacity, 6.23% unmet | §4 command E |
+| 21 | Share of bus demand in assumed working hours (08:00–16:00) | **39%** | §4 command F |
+| 22 | Same, for 07:00–15:00 / 09:00–17:00 | 37% / 42% | §4 command F |
+| 23 | Employed people in Greater Malé (LFS 2024–25) | **141,039** | `data/official/mbs/LFS-Report-2024-2025.pdf` Table 1 |
+| 24 | R3 airport bus headway vs working-hours service | 60 min, and 3 of 8 working hours uncaptured | §4 command B |
 
 ### Numbers that are **withdrawn** — do not use
 
@@ -79,6 +83,8 @@ else is derived.
 | "371 trips/day" | Pre-capacity-correction figure |
 | "613 bus stops" | Now 184 route-stop records, 97 unique stops |
 | "MACL shows domestic flights" | It contains none. ADR-0006 |
+| "Working hours are 08:00–16:00" stated as fact | It is an assumption; say "assumed" and give the band. ADR-0012 |
+| "X% of commuters take the bus" from boardings ÷ 141,039 | Demand covers 5 of 15 routes. Not a mode share. ADR-0012 |
 
 ---
 
@@ -117,6 +123,14 @@ import pandas as pd
 d=pd.read_csv('dashboard/data/demand_by_daytype.csv')
 print(d.pivot(index='route_code',columns='day_type',
       values='boardings_per_day').to_string())"
+
+# F - usage by period and the working-hours band
+python -c "
+import pandas as pd
+u=pd.read_csv('dashboard/data/usage_by_period.csv')
+print(u[u.route_code=='ALL'][['period','share_of_route_demand_pct',
+      'hours_captured','hours_in_period']].to_string(index=False))
+print(pd.read_csv('dashboard/data/working_hours_sensitivity.csv').to_string(index=False))"
 
 # E - scenarios
 python -c "

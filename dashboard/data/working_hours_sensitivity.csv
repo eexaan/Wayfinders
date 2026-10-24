@@ -1,0 +1,6 @@
+working_window,share_of_daily_demand_pct,hours_captured_in_window,hours_in_window,trips_captured_in_window
+07:00-15:00,36.7,42,120,117.0
+08:00-16:00,39.0,53,120,152.0
+09:00-17:00,42.2,64,120,190.0
+07:00-17:00,51.3,64,150,190.0
+08:00-18:00,53.1,75,150,228.0
