@@ -54,28 +54,41 @@ OUT = ROOT / "dashboard" / "data"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
-# Fleet: bus type and seat capacity per route.
-# Source: reported capacity at https://www.psmnews.mv/en/106008 (team-provided,
-# see data/official/notes.txt) plus the official isMiniBusRoute flag.
-# Routes marked ASSUMED still need confirmation from MTCC.
+# Fleet: bus type and capacity per route, loaded from the team's capacity table.
+#
+# Source: data/raw/mtcc_bus_capacity.csv (team fleet guidance, 2026-10-24).
+# It carries TWO capacity numbers per route, and the difference matters:
+#   seated_capacity  - seats only
+#   max_passengers   - seats + permitted standing
+# For R1 they are 72 and 84, so the same ridership is 104% of seats but 89.5%
+# of total capacity. See docs/adr/0003-load-factor-on-seats.md for why the
+# headline is the seats figure.
+#
+# `load_factor_comparable` is False where the operator gave seats but not
+# standing capacity (R5, R6): a load factor cannot be formed there.
 # ---------------------------------------------------------------------------
-FLEET = {
-    "R1": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R2": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R6": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R7": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R8": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R4": ("Airport bus", 52, "psmnews.mv/en/106008 (team-provided, 50-54)"),
-    "R9": ("Airport bus", 52, "psmnews.mv/en/106008 (team-provided, 50-54)"),
-    "R3": ("Airport bus", 52, "ASSUMED - confirm with MTCC"),
-    "R5": ("Regular bus", 54, "ASSUMED - confirm with MTCC"),
-    "R10": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R11": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R12": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R15": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R13": ("E-minibus", 11, "ASSUMED eco e-minibus - confirm"),
-    "R14": ("E-minibus", 11, "ASSUMED eco e-minibus - confirm"),
-}
+CAPACITY_CSV = RAW / "mtcc_bus_capacity.csv"
+
+
+def load_capacity() -> pd.DataFrame:
+    cap = pd.read_csv(CAPACITY_CSV)
+    cap = cap[cap["area"] == "Greater Malé"].copy()
+    cap = cap.rename(columns={"route_number": "route_code"})
+    keep = [
+        "route_code", "bus_type", "bus_model", "seated_capacity", "wheelchair_bays",
+        "max_passengers", "capacity_basis", "load_factor_comparable", "confidence",
+        "seated_capacity_source", "notes",
+    ]
+    cap = cap[[c for c in keep if c in cap.columns]]
+    # max_passengers is blank where standing capacity was not stated: fall back
+    # to seats so the column is always usable, but keep the flag honest.
+    cap["max_passengers"] = cap["max_passengers"].fillna(cap["seated_capacity"])
+    cap["load_factor_comparable"] = (
+        cap["load_factor_comparable"].astype(str).str.upper().eq("TRUE")
+    )
+    cap["capacity_source"] = "data/raw/mtcc_bus_capacity.csv (team, 2026-10-24)"
+    return cap
+
 
 # Which corridor each route serves -> used to attach the Avas demand shape.
 ROUTE_CORRIDOR = {
@@ -106,9 +119,12 @@ def route_sort_key(code: str) -> tuple[int, str]:
 
 
 # ---------------------------------------------------------------------------
-def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def build_master(
+    routes: list[dict], capacity: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """routes_master.csv, route_stops.csv, service_departures.csv"""
     master_rows, stop_rows, dep_rows = [], [], []
+    cap = capacity.set_index("route_code")
 
     for r in routes:
         code = r["routeNumber"]
@@ -121,7 +137,19 @@ def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.Dat
         trips_captured = len(dep_times)
         trips_total = max((t["order"] for t in dep_times), default=None)
 
-        bus_type, seats, cap_source = FLEET.get(code, ("?", 0, "unknown"))
+        if code in cap.index:
+            c = cap.loc[code]
+            bus_type = c["bus_type"]
+            bus_model = c.get("bus_model")
+            seated = int(c["seated_capacity"])
+            maxpax = int(c["max_passengers"])
+            comparable = bool(c["load_factor_comparable"])
+            cap_source = c["capacity_source"]
+        else:
+            bus_type, bus_model, seated, maxpax, comparable = "?", None, 0, 0, False
+            cap_source = "NOT IN CAPACITY TABLE"
+
+        seats = seated  # kept for the hourly gap table, which is seats-based
 
         master_rows.append(
             {
@@ -142,7 +170,12 @@ def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.Dat
                 "capture_first_departure": dep_times[0]["timing"] if dep_times else None,
                 "capture_last_departure": dep_times[-1]["timing"] if dep_times else None,
                 "bus_type": bus_type,
-                "seats": seats,
+                "bus_model": bus_model,
+                "seated_capacity": seated,
+                "wheelchair_bays": None,
+                "max_passengers": maxpax,
+                "load_factor_comparable": comparable,
+                "seats": seated,
                 "capacity_source": cap_source,
                 "corridor": ROUTE_CORRIDOR.get(code),
                 "service_day": AIRCRAFT_DAY_NOTE,
@@ -382,8 +415,8 @@ def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFram
                     "hour": hour,
                     "trips_in_hour": trips,
                     "capture_status": "captured" if trips is not None else "before_capture_window",
-                    "seats": seats,
-                    "seat_capacity_hour": cap,
+                    "seated_capacity": seats,
+                    "seated_capacity_hour": cap,
                     "demand_pax_est": demand_h,
                     "load_factor_pct": round(demand_h / cap * 100, 1) if (demand_h is not None and cap) else None,
                     "unmet_pax_est": round(max(0.0, demand_h - cap), 1) if (demand_h is not None and cap) else None,
@@ -391,21 +424,43 @@ def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFram
                 }
             )
 
+        # Two denominators per ADR-0003: seats (primary) and seats+standing.
+        maxpax = int(getattr(r, "max_passengers", seats) or seats)
+        comparable = bool(getattr(r, "load_factor_comparable", False))
         cap_day = (r.trips_per_day or 0) * seats if r.trips_per_day else None
+        cap_day_max = (r.trips_per_day or 0) * maxpax if r.trips_per_day else None
+        usable = has_demand and comparable and cap_day
         load_rows.append(
             {
                 "route_code": code,
                 "route_name": r.route_name,
                 "bus_type": r.bus_type,
-                "seats": seats,
+                "bus_model": getattr(r, "bus_model", None),
+                "seated_capacity": seats,
+                "max_passengers": maxpax,
+                "load_factor_comparable": comparable,
                 "fare_mvr": r.fare_mvr,
                 "trips_per_day": r.trips_per_day,
-                "seat_capacity_day": cap_day,
+                "seated_capacity_day": cap_day,
+                "capacity_day_max": cap_day_max,
                 "boardings_per_day": round(daily_pax, 0) if has_demand else None,
                 "pax_per_trip": round(daily_pax / r.trips_per_day, 1) if (has_demand and r.trips_per_day) else None,
-                "load_factor_peak_pct": round(daily_pax / cap_day * 100, 1) if (has_demand and cap_day) else None,
-                "load_factor_avg_pct": round(daily_pax * 0.5 / cap_day * 100, 1) if (has_demand and cap_day) else None,
-                "demand_source": "MTCC observed" if has_demand else "NO DEMAND DATA",
+                # Primary: load on SEATS. Upper bound assumes every boarding rides
+                # the full route; avg assumes uniform alighting (halved).
+                "load_factor_seats_upper_pct": round(daily_pax / cap_day * 100, 1) if usable else None,
+                "load_factor_seats_avg_pct": round(daily_pax * 0.5 / cap_day * 100, 1) if usable else None,
+                # Secondary: load on seats + permitted standing.
+                "load_factor_capacity_upper_pct": round(daily_pax / cap_day_max * 100, 1)
+                if (has_demand and comparable and cap_day_max) else None,
+                "load_factor_capacity_avg_pct": round(daily_pax * 0.5 / cap_day_max * 100, 1)
+                if (has_demand and comparable and cap_day_max) else None,
+                "demand_source": (
+                    "MTCC observed" if has_demand
+                    else "NO DEMAND DATA"
+                ) if comparable else (
+                    "CAPACITY NOT COMPARABLE (standing capacity not stated)"
+                    if not comparable else "MTCC observed"
+                ),
                 "service_capture": f"{r.trips_captured} of {r.trips_per_day} trips captured"
                 if r.trips_captured
                 else "no timings returned",
@@ -441,7 +496,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     def kpis(df, label):
         d = df.dropna(subset=["trips_in_hour", "demand_pax_est"]).copy()
         d = d[d["trips_in_hour"] > 0]
-        d["capacity"] = d["trips_in_hour"] * d["seats"]
+        d["capacity"] = d["trips_in_hour"] * d["seated_capacity"]
         d["over"] = (d["demand_pax_est"] - d["capacity"]).clip(lower=0)
         w = d["demand_pax_est"].clip(lower=0)
         tot = float(w.sum())
@@ -501,7 +556,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         d = df.dropna(subset=["trips_in_hour", "demand_pax_est"])
         d = d[d["trips_in_hour"] > 0]
         for route, g in d.groupby("route_code"):
-            cap = g["trips_in_hour"] * g["seats"]
+            cap = g["trips_in_hour"] * g["seated_capacity"]
             over = (g["demand_pax_est"] - cap).clip(lower=0)
             corr.append(
                 {
@@ -518,7 +573,8 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 # ---------------------------------------------------------------------------
 def main() -> None:
     routes = load_routes()
-    master, stops_df, deps = build_master(routes)
+    capacity = load_capacity()
+    master, stops_df, deps = build_master(routes, capacity)
     master.to_csv(OUT / "routes_master.csv", index=False)
     stops_df.to_csv(OUT / "route_stops.csv", index=False)
     deps.to_csv(OUT / "service_departures.csv", index=False)

@@ -21,9 +21,12 @@ This repository joins them and turns the answer into decisions.
 
 | Document | What it is |
 |---|---|
-| **[SPEC.md](SPEC.md)** | The build plan: architecture, findings, scenarios, dashboard spec, team roles, timeline, risks, pitch |
-| **[RESEARCH.md](RESEARCH.md)** | The full research log — what was tested, what was rejected and why, with every number reproducible |
+| **[docs/TEAM.md](docs/TEAM.md)** | **Start here.** Who owns what, the canonical numbers to quote, and how to verify any of them |
+| **[SPEC.md](SPEC.md)** | The build plan: architecture, findings, scenarios, team roles, timeline, risks, pitch |
+| **[RESEARCH.md](RESEARCH.md)** | The full research log — what was tested, what was rejected and why |
 | **[DATA_SOURCES.md](DATA_SOURCES.md)** | Every dataset with a direct link, publisher, use, licence, and caveats |
+| **[docs/adr/](docs/adr/)** | Why each decision was made, and what it costs |
+| **[docs/DASHBOARD_SPEC.md](docs/DASHBOARD_SPEC.md)** | The dashboard build contract |
 
 ---
 
@@ -36,9 +39,8 @@ segment. A taxi does the same trip in 12.7 minutes. The bus is **4.4×
 slower than a taxi** and 8.5× cheaper — which is why people take taxis.
 
 **2. One corridor carries nearly all the load; the airport buses do not.**
-On the captured Saturday, **R1 runs at 89.5%** of an 84-seat double-decker
-(weekday demand is 13.7% higher, which puts a weekday at ~102%), against
-**51% on R4**, the airport bus. **R3 is an hourly bus with a 30-minute
+On the captured Saturday **R1 runs at 104.4% of its 72 seats** — people stand
+or wait — against **48.5% on R4**, the airport bus. **R3 is an hourly bus with a 30-minute
 expected wait**, and the airport buses run the same frequency at 03:00 as at
 08:00 while 35.5% of international arrivals land in a three-hour window.
 
@@ -60,8 +62,8 @@ recomputes passenger-level KPIs for six named schedule changes, wrapped in an
 interactive GIS dashboard.
 
 ```
-S0 baseline             360 boardings over capacity   3.68% unmet   162 trips
-S5 recommended package  242                           2.48%          176 trips
+S0 baseline             845 boardings over capacity   8.62% unmet   162 trips
+S5 recommended package  609                           6.23%          176 trips
 ```
 
 Every change in S5 is a **re-timing**, not a new bus.
@@ -76,6 +78,8 @@ RESEARCH.md                 research log: what was tested, what was rejected and
 DATA_SOURCES.md             every source, with links, publisher and licence
 docs/
   DASHBOARD_SPEC.md         build contract for the dashboard team
+  TEAM.md                   who owns what, canonical numbers, how to cross-check
+  adr/                      architecture decision records (10 + index)
   figures/F1..F6.png        the six report figures
 dashboard/
   build/build_data.py       rebuilds every table from the official inputs

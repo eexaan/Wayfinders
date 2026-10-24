@@ -135,9 +135,12 @@ This is the reference table. Use it for every route label in the UI.
 | `trips_captured` | int | `40` | trips inside the captured window |
 | `capture_first_departure` | str | `11:20:00` | null when nothing captured |
 | `capture_last_departure` | str | `23:30:00` | |
-| `bus_type` | str | `Double decker` | team-provided |
-| `seats` | int | `84` | team-provided — see `capacity_source` |
-| `capacity_source` | str | `psmnews.mv/en/106008 (team-provided)` | render as a tooltip badge |
+| `bus_type` | str | `double decker bus` | from the team capacity table |
+| `bus_model` | str | `Yutong ZK6116HGS` | |
+| `seated_capacity` | int | `72` | **seats only** — the primary denominator |
+| `max_passengers` | int | `84` | seats + permitted standing |
+| `load_factor_comparable` | bool | `true` | `false` for R5/R6 (standing not stated) |
+| `capacity_source` | str | `data/raw/mtcc_bus_capacity.csv (team, 2026-10-24)` | render as a tooltip badge |
 | `corridor` | str | `male_hm1` | |
 | `service_day` | str | `Saturday 2026-10-24 service day (feed is time-filtered)` | **render this somewhere visible** |
 
@@ -149,8 +152,8 @@ This is the reference table. Use it for every route label in the UI.
 | `hour` | int | 0–23 |
 | `trips_in_hour` | int \| **null** | **null means "not captured", NOT zero** |
 | `capture_status` | str | `captured` \| `before_capture_window` |
-| `seats` | int | |
-| `seat_capacity_hour` | int \| null | `trips_in_hour × seats` |
+| `seated_capacity` | int | seats only — this table is seats-based |
+| `seated_capacity_hour` | int \| null | `trips_in_hour × seated_capacity` |
 | `demand_pax_est` | float \| null | modelled: MTCC level × Avas shape |
 | `load_factor_pct` | float \| null | null where capacity is null |
 | `unmet_pax_est` | float \| null | |
@@ -162,14 +165,23 @@ This is the reference table. Use it for every route label in the UI.
 
 ### 2.5 `route_load.csv` — 15 rows, route-level
 
-`route_code`, `route_name`, `bus_type`, `seats`, `fare_mvr`, `trips_per_day`,
-`seat_capacity_day`, `boardings_per_day`, `pax_per_trip`,
-`load_factor_peak_pct`, `load_factor_avg_pct`, `demand_source`,
-`service_capture` (e.g. `40 of 61.0 trips captured`).
+`route_code`, `route_name`, `bus_type`, `bus_model`, `seated_capacity`,
+`max_passengers`, `load_factor_comparable`, `fare_mvr`, `trips_per_day`,
+`seated_capacity_day`, `capacity_day_max`, `boardings_per_day`, `pax_per_trip`,
+`load_factor_seats_upper_pct`, `load_factor_seats_avg_pct`,
+`load_factor_capacity_upper_pct`, `load_factor_capacity_avg_pct`,
+`demand_source`, `service_capture`.
 
-> ⚠️ `load_factor_peak_pct` and `load_factor_avg_pct` are a **band**, not a
-> point estimate. Render both (range bar). Never show one as "the" load factor.
-> Routes with `demand_source = NO DEMAND DATA` must be shown as such, not as zero.
+> ⚠️ **Two denominators, and they disagree by a lot.** See ADR-0003.
+> Lead with `load_factor_seats_*` (R1 = 104.4%). Show
+> `load_factor_capacity_*` as secondary (R1 = 89.5%).
+>
+> Each pair is also a **band**: `_upper` assumes every boarding rides the full
+> route, `_avg` assumes uniform alighting. Render the band, never one value.
+>
+> Where `load_factor_comparable` is `false` (R5, R6) all four load columns are
+> null — show "not comparable", not zero. Routes with
+> `demand_source = NO DEMAND DATA` likewise.
 
 ### 2.6 `service_departures.csv` — one row per captured trip
 
@@ -278,10 +290,10 @@ means you can legitimately show **24 hours of demand against 13 hours of
 service** — and that juxtaposition is the clearest way to show the gap. Just
 label the capacity series as partial.
 
-**3. Load factor is a band, not a number.**
-`route_load` gives `load_factor_peak_pct` and `load_factor_avg_pct`. They differ
-by roughly 2×. Render both (range bar or a shaded band) and never present one
-as "the" load factor.
+**3. Load factor is a band, and there are two of them.**
+`route_load` gives `load_factor_seats_upper_pct` / `_avg_pct` (seats, the
+primary) and `load_factor_capacity_upper_pct` / `_avg_pct` (seats + standing).
+Each pair differs by roughly 2×. Lead with seats; never present a single value.
 
 **4. Ten routes have no ridership data at all.**
 `demand_source = 'NO DEMAND DATA'` for R5, R6, R8, R9, R10, R11, R12, R13,
@@ -360,9 +372,10 @@ re-render the whole page.
   fare, seats, trip counts.
 - **Route lines:** from `route_lines.geojson` (which already carries
   `route_name` and the official `colour`). Default colour scheme:
-  - `load_factor_peak_pct` ≥ 100 → red `#e9222a` (over capacity)
+  - `load_factor_seats_upper_pct` ≥ 100 → red `#e9222a` (over seat capacity)
   - 60–100 → orange `#ff7f0e`
   - < 60 → grey `#9aa0a6`
+  - `NO DEMAND DATA` / not comparable → light grey, dashed
   - no demand data → light grey, dashed
 - **Line weight:** 4 px for the selected route, 2 px otherwise.
 - **Stops:** circle markers, radius 3 (2 when zoomed out), white fill, grey
@@ -389,12 +402,13 @@ re-render the whole page.
 Populated on route click. Contains:
 1. **Header:** route code, official name, bus type, seats, fare, trips/day.
 2. **Load-factor band:** a horizontal range bar showing
-   `load_factor_avg_pct` → `load_factor_peak_pct`, with 100% marked. Label
+   `load_factor_seats_avg_pct` → `load_factor_seats_upper_pct`, with 100%
+   marked. Label
    both ends. **Never render a single value.**
 3. **Demand vs service chart** (the F2 chart, per route): dual-series bar
    chart by hour of day for the selected day-type:
    - bar 1 = `demand_pax_est` from `demand_supply_gap.csv`
-   - bar 2 = `seat_capacity_hour` from the same table
+   - bar 2 = `seated_capacity_hour` from the same table
    - a horizontal line at the point where demand exceeds capacity
    - day-type switcher: `weekday` / `friday` / `sat_holiday`
 4. **Timetable ribbon:** for each hour, a small vertical tick per departure
@@ -519,8 +533,9 @@ The dashboard is done when:
 5. The live "trips reassigned" slider moves the over-capacity tile and is
    labelled as an interpolation.
 6. Every modelled number carries a tooltip explaining it is modelled, and
-   the load factor is shown as a **band** (both `load_factor_peak_pct` and
-   `load_factor_avg_pct`), never as a single number.
+   the load factor is shown as a **band on seats** (`load_factor_seats_upper_pct`
+   and `_avg_pct`), with the seats+standing pair as secondary, never as a
+   single number, and R5/R6 shown as "not comparable".
 7. Routes without demand data are visibly marked as such — not drawn as 0%.
 8. Hours outside the capture window are visibly marked as "not captured", not
    drawn as zero, and the captured window is stated on screen somewhere.

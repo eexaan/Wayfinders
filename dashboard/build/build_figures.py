@@ -68,22 +68,24 @@ def fig_bridge() -> None:
 
 
 def fig_load() -> None:
-    d = pd.read_csv(DATA / "route_load.csv").dropna(subset=["load_factor_peak_pct"])
-    d = d.sort_values("load_factor_peak_pct", ascending=False).reset_index(drop=True)
+    d = pd.read_csv(DATA / "route_load.csv").dropna(subset=["load_factor_seats_upper_pct"])
+    d = d.sort_values("load_factor_seats_upper_pct", ascending=False).reset_index(drop=True)
     x = np.arange(len(d))
     fig, ax = plt.subplots(figsize=(7.4, 3.4))
-    ax.bar(x, d["load_factor_peak_pct"],
-           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_peak_pct"]])
-    for i, v in enumerate(d["load_factor_peak_pct"]):
+    ax.bar(x, d["load_factor_seats_upper_pct"],
+           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_seats_upper_pct"]])
+    for i, v in enumerate(d["load_factor_seats_upper_pct"]):
         ax.text(i, v + 1.5, f"{v:.0f}%", ha="center", fontsize=8)
     ax.axhline(100, color="black", ls="--", lw=1)
     ax.text(len(d) - 0.4, 101.5, "capacity", ha="right", fontsize=8)
     ax.set_xticks(x, d["route_code"])
     ax.set_ylim(0, 112)
     ax.set_ylabel("% of seats (upper bound)")
-    ax.set_title("F2  Load factor, captured Saturday: R1 at 89.5%, the airport bus R4 at 51%",
+    ax.set_title("F2  Load factor on seats, captured Saturday: R1 is over 100%, the airport bus R4 at 49%",
                  loc="left", fontweight="bold")
-    ax.text(0, -0.2, "Weekday demand on R1 is 13.7% higher; at the same 61 trips that is ~102%.",
+    ax.text(0, -0.22,
+            "Seats only. On seats + permitted standing R1 is 89.5% and R4 is 48.5%. "
+            "R5/R6 excluded: standing capacity not stated (not comparable).",
             transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F2_load_factors.png")
     plt.close(fig)

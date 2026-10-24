@@ -392,22 +392,31 @@ airport demand has no Friday effect, unlike the bus.
 
 `dashboard/data/route_load.csv`, captured service day (Saturday):
 
-| Route | Official name | Bus type | Seats | Trips/day | Boardings/day | Pax/trip | Load peak | Load avg |
-|---|---|---|---|---|---|---|---|---|
-| R1 | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | 75.2 | **89.5%** | 44.7% |
-| R3 | West Park to VIA | Airport bus | 52 | 20 | 752 | 37.6 | 72.3% | 36.1% |
-| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 56.5 | 67.3% | 33.6% |
-| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 53.8 | 64.1% | 32.0% |
-| R4 | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | 26.7 | **51.3%** | 25.6% |
-| R5, R6, R8, R9, R10–R15 | — | — | — | — | **no data** | — | — | — |
+| Route | Official name | Model | Seats | Max | Trips/day | Boardings/day | Pax/trip | Load on seats | Load on max |
+|---|---|---|---|---|---|---|---|---|---|
+| **R1** | West Park to HM Phase 1 | ZK6116HGS | 72 | 84 | 61 | 4,585 | 75.2 | **104.4%** | 89.5% |
+| R2 | Carnival to HM Phase 1 | ZK6116HGS | 72 | 84 | 61 | 3,447 | 56.5 | 78.5% | 67.3% |
+| R7 | HM Phase 2 to West Park | ZK6116HGS | 72 | 84 | 66 | 3,552 | 53.8 | 74.8% | 64.1% |
+| R3 | West Park to VIA | ZK6122H9 | 55 | 55 | 20 | 752 | 37.6 | 68.3% | 68.3% |
+| R4 | HM Phase 1 to VIA | ZK6122H9 | 55 | 55 | 38 | 1,014 | 26.7 | 48.5% | 48.5% |
+| R5, R6 | — | ZK6126HGA | 33 | ? | 17 / 75 | **no data** | — | **not comparable** | — |
+| R8, R9, R10–R15 | — | — | — | — | — | **no data** | — | — | — |
 
-The pairing matters. Earlier drafts compared *weekday* boardings against a
-trip count that was fetched on a Saturday, which pushed R1 to 102%. The feed
-now gives Saturday service, so Saturday boardings are the correct pair — 89.5%.
-R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at the same 61 trips
-that is **~102%**, which is the number to quote for a weekday, and it needs a
-weekday capture to confirm (the service day may also be higher on a weekday,
-which would reduce it).
+**R1 exceeds its seat capacity on a Saturday.** 4,585 boardings against 61
+trips × 72 seats = 4,392 seat-slots. That is 104.4% — people are standing or
+waiting for the next bus, which is the problem statement stated numerically.
+On seats *plus* permitted standing it is 89.5%. Both are reported; the seats
+figure is the headline (ADR-0003).
+
+R5 and R6 have no load factor at all: the operator gave a seated capacity (33)
+but did not state standing capacity, so `load_factor_comparable` is false.
+
+The pairing matters too. Earlier drafts compared *weekday* boardings against a
+trip count fetched on a Saturday, which gave 102% on a 84-seat bus — wrong on
+both counts. The feed now supplies Saturday service, so Saturday boardings are
+the correct pair. R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at
+the same 61 trips that is ~119% of seats, and it needs a weekday capture to
+confirm, since the weekday trip count may also be higher.
 
 ### 5.3 Does the schedule track demand?
 
@@ -530,12 +539,15 @@ hours before the window stay null and are excluded from every KPI.
 
 ```
 scenario                   mean wait  over capacity  unmet%  trips  demand
-S0_baseline                     10.9            360   3.68%    162   9,805
-S2_airport_retimed              10.4            355   3.63%    168   9,786
-S3_rebalanced_to_corridor       10.6            349   3.61%    164   9,696
-S4_express_peak                 10.5            248   2.53%    170   9,805
-S5_recommended_package          10.0            242   2.48%    176   9,786
+S0_baseline                     10.9            845   8.62%    162   9,805
+S2_airport_retimed              10.4            844   8.62%    168   9,786
+S3_rebalanced_to_corridor       10.6            738   7.62%    164   9,696
+S4_express_peak                 10.5            610   6.23%    170   9,805
+S5_recommended_package          10.0            609   6.23%    176   9,786
 ```
+
+The over-capacity count roughly doubled when the real seated capacity arrived
+(72 seats, not 84): **8.62% of demand in the captured window cannot board.**
 
 | Scenario | Definition |
 |---|---|
@@ -544,8 +556,8 @@ S5_recommended_package          10.0            242   2.48%    176   9,786
 | S4 | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skip-stopping) |
 | S5 | S2 + S4 |
 
-**Honest reading.** S5 removes 118 boardings from over-capacity and cuts unmet
-demand by 1.2 points with 14 extra trips. That is a modest, credible gain inside
+**Honest reading.** S5 removes 236 boardings from over-capacity and cuts unmet
+demand by 2.4 points with 14 extra trips. That is a modest, credible gain inside
 a ~13-hour window — not a dramatic one. The Friday scenario is gone (no
 service-day data) and the morning peak is outside the window, which is exactly
 where the largest gains would be. **Say that in the pitch rather than inflating
