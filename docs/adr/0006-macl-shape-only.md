@@ -15,7 +15,7 @@ coverage problem:
 | 2025 measure | MACL | MBS Yearbook 11.13 | MACL covers |
 |---|---|---|---|
 | International arriving passengers | 984,629 (adults) | 2,699,225 (all) | **≈ 40%** |
-| International aircraft movements | 6,396 (17.5/day) | ~95/day | **≈ 18%** |
+| International aircraft movements (arrivals) | 6,395 (17.5/day) | ~95/day | **≈ 18%** |
 | Domestic arriving passengers | — | 1,455,156 (3,987/day) | **0%** |
 
 Four tests established that **MACL contains no domestic flights at all**:

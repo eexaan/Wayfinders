@@ -53,7 +53,7 @@ and are the analytical backbone of the project.
 | T7 | [`notes.txt`](data/official/notes.txt) | Team | Source links, including the **bus capacity** reference |
 
 **Bus capacity source (team-provided).** The seat capacities in
-`dashboard/data/route_fleet_capacity.csv` come from
+`data/raw/mtcc_bus_capacity.csv` come from
 <https://www.psmnews.mv/en/106008> (linked in `data/official/notes.txt`), combined
 with the `minibus` flag in Team Kandu's route table. That article is behind a
 Cloudflare challenge and could not be machine-read here, so the capacities are
@@ -83,8 +83,8 @@ Yearbook (S4/S5) and found a material coverage gap:
 
 | Measure (2025) | MACL (D3) | MBS Yearbook (S4) | MACL coverage |
 |---|---|---|---|
-| International arriving passengers | 984,629 (adults) | 2,699,225 (all) | **≈ 40%** |
-| International aircraft movements | 6,396 (17.5/day) | 34,808 (95/day) | **≈ 18%** |
+| International arriving passengers | **1,084,115** (of whom 984,439 adults) | 2,699,225 (all) | **40.16%** (adult-only 36.47%) |
+| International aircraft movements (arrivals) | 6,395 (17.5/day) | 34,808 (95/day) | **≈ 18%** |
 | Domestic arriving passengers | — | 1,455,156 (3,987/day) | **0%** |
 
 **MACL contains no domestic flights.** We tested four hypotheses to establish
@@ -139,3 +139,18 @@ yearbook tables the team uploaded).
 | `scenario_modal_shift*.csv` | D2 taxi OD + Avas fare matrix + observed bus ride times |
 | `airport_demand_profile.csv` | D3 (hourly shape) + S4 (levels, incl. domestic) |
 | `taxi_od_by_hour.csv` | D2 |
+| `data/derived/rtl_greater_male_gtfs.zip` | S1 per-stop timings, converted to GTFS — see [docs/GTFS.md](docs/GTFS.md) |
+| `data/derived/gtfs_validation.csv` | the GTFS feed itself, 18 structural checks |
+| `data/derived/gtfs_validator_report.json` | the GTFS feed itself, MobilityData `gtfs-validator` 6.0.0 |
+
+### Attribution for the GTFS feed and basemap
+
+The GTFS feed is a **derived artefact**, not an official MTCC publication. It is
+our conversion of the official RTL timetable, published under the same terms as
+the underlying schedule, with the publisher recorded as *Team Wayfinders, MBS
+Maldives Datathon 2026* and a version string that names the source date. It must
+not be redistributed as MTCC's official timetable.
+
+The basemap, road network and any OSM-derived geometry in `route_lines.geojson`
+are © OpenStreetMap contributors, licensed **ODbL 1.0**. Any redistributed map
+must carry that attribution.

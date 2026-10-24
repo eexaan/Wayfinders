@@ -7,11 +7,12 @@ Maldives Datathon 2026 | Team Wayfinders
 Draws every figure directly from dashboard/data/. No number is typed by hand.
 
     F1_bridge_share.png        the causeway is 57% of R1's journey
-    F2_load_factors.png        R1 at 89.5% of seats; the airport bus at 51%
-    F3_demand_daytype.png      Friday demand is 37% below a weekday (demand only)
+    F2_load_factors.png        route-day upper bound vs the fullest segment
+    F3_demand_daytype.png      Friday demand vs a weekday (demand only)
     F4_airport_mismatch.png    hourly airport bus vs tri-peaked arrivals
     F5_scenario_kpis.png       baseline vs the recommended package
     F6_generalised_cost.png    break-even journey time per corridor
+    F7_usage_by_period.png     bus use by day period, and the working-hours band
 """
 
 from __future__ import annotations
@@ -43,7 +44,9 @@ plt.rcParams.update(
 )
 
 RED, BLUE, GREY, GREEN, ORANGE = "#e9222a", "#1f77b4", "#9aa0a6", "#2ca02c", "#ff7f0e"
-DAY_LABEL = {"weekday": "Mon–Thu", "friday": "Friday", "sat_holiday": "Saturday"}
+# MTCC day types as the pipeline defines them: Sunday is a working day in
+# Malé, so it is grouped with Mon–Thu rather than with the weekend.
+DAY_LABEL = {"weekday": "weekday (Mon–Thu, Sun)", "friday": "Friday", "sat_holiday": "Saturday"}
 
 
 def fig_bridge() -> None:
@@ -88,15 +91,26 @@ def fig_load() -> None:
         ax.text(i - w / 2, u + 1.5, f"{u:.0f}", ha="center", fontsize=7.5, color="#666666")
         ax.text(i + w / 2, p + 1.5, f"{p:.0f}", ha="center", fontsize=8, fontweight="bold")
     ax.axhline(100, color="black", ls="--", lw=1)
-    ax.text(len(d) - 0.45, 101.5, "capacity", ha="right", fontsize=8)
+    ax.text(-0.45, 101.5, "capacity", ha="left", fontsize=8)
     ax.set_xticks(x, d["route_code"])
-    ax.set_ylim(0, 118)
+    ax.set_ylim(0, 140)
+    ax.set_yticks([0, 20, 40, 60, 80, 100])
+    ax.set_xlim(-0.6, len(d) - 0.4)
     ax.set_ylabel("% of seats")
     ax.legend(frameon=False, fontsize=7.5, loc="upper right")
-    ax.set_title("F2  Load factor is a segment, not a route: R1 is 89.5% only if nobody gets off",
-                 loc="left", fontweight="bold")
+    # Caption is derived from the table, never typed: a hard-coded version had
+    # drifted to "R1 77% / R3 104%" while the CSV said 90.1% / 98.4%.
+    r1 = d[d["route_code"] == "R1"].iloc[0]
+    r3 = d[d["route_code"] == "R3"].iloc[0]
+    ax.set_title(
+        f"F2  Load factor is a segment, not a route: R1 is {r1['load_factor_route_day_upper_pct']:.1f}% "
+        "only if nobody gets off",
+        loc="left", fontweight="bold",
+    )
     ax.text(0, -0.24,
-            "Peak segment: R1 77% (Hulhumalé Police Stn\u2192Amin Ave, 22:00); R3 104% (STELCO\u2192VIA, 13:00). "
+            f"Peak segment: R1 {r1['load_factor_peak_pct']:.1f}% ({r1['peak_segment']}, "
+            f"{int(r1['peak_segment_hour'])}:00); R3 {r3['load_factor_peak_pct']:.1f}% "
+            f"({r3['peak_segment']}, {int(r3['peak_segment_hour'])}:00). "
             "Hours before 11:00 are not captured by the RTL feed.",
             transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F2_load_factors.png")
@@ -106,7 +120,10 @@ def fig_load() -> None:
 def fig_daytype() -> None:
     d = pd.read_csv(DATA / "demand_by_daytype.csv")
     piv = d.pivot_table(index="route_code", columns="day_type", values="boardings_per_day")
-    routes = [r for r in ["R1", "R2", "R4", "R7"] if r in piv.index]
+    # Only the routes MTCC counts daily are plotted. R3 and R7 do have a Friday
+    # figure, but it is derived from these three by the day-type index, so
+    # plotting it beside them would present an assumption as an observation.
+    routes = [r for r in ["R1", "R2", "R4"] if r in piv.index]
     piv = piv.loc[routes]
     fig, ax = plt.subplots(figsize=(6.8, 3.2))
     x = np.arange(len(routes))
@@ -125,8 +142,10 @@ def fig_daytype() -> None:
     ax.set_ylabel("boardings, weekday = 100")
     ax.set_ylim(0, 115)
     ax.legend(frameon=False, fontsize=8, loc="upper right")
-    ax.set_title("F3  Friday demand is 37% below a weekday (MTCC boardings, 2025)",
-                 loc="left", fontweight="bold")
+    fri = piv["friday"] / piv["weekday"] * 100
+    lo, hi = fri.min(), fri.max()
+    ax.set_title(f"F3  Friday demand is {100 - hi:.0f}-{100 - lo:.0f}% below a weekday "
+                 "(MTCC boardings, 2025)", loc="left", fontweight="bold")
     fig.savefig(FIGS / "F3_demand_daytype.png")
     plt.close(fig)
 
@@ -174,16 +193,24 @@ def fig_scenarios() -> None:
     axes[1].set_xticks(x, labels)
     axes[1].set_ylabel("% of demand unmet")
     axes[1].set_title("unmet demand", loc="left", fontweight="bold")
-    for ax in axes:
-        ax.set_xlabel("trips moved (no new buses)")
     for i, n in enumerate(k["trips_moved"]):
-        axes[0].text(i, k["boardings_over_capacity"].iloc[i] + 6, f"{int(n)}",
-                     ha="center", fontsize=7.5, color="#333333")
+        axes[0].text(i, k["boardings_over_capacity"].iloc[i] + 20, f"{int(n)}",
+                     ha="center", fontsize=8, color="#333333", fontweight="bold")
+        axes[1].text(i, k["unmet_share_pct"].iloc[i] + 0.2, f"{int(n)}",
+                     ha="center", fontsize=8, color="#333333", fontweight="bold")
+    axes[0].set_ylim(0, k["boardings_over_capacity"].max() * 1.18)
+    axes[1].set_ylim(0, k["unmet_share_pct"].max() * 1.18)
+    fig.subplots_adjust(top=0.70, bottom=0.30, wspace=0.28)
     fig.suptitle("F5  Every scenario moves trips, none adds one (S5 = reallocate + express peak)",
-                 x=0.02, ha="left", fontweight="bold")
-    fig.text(0.02, 0.005,
-             "Total trips are 162 in all five scenarios; the number above each bar is trips moved. "
-             "Trips are taken from low-load hours and given to over-capacity ones.",
+                 x=0.02, y=0.98, ha="left", fontweight="bold")
+    base, rec = k.iloc[0], k.iloc[-1]
+    fig.text(0.02, 0.015,
+             f"Bold number above each bar = trips moved. Total trips are "
+             f"{int(base['total_trips_captured'])} in all {len(k)} scenarios. "
+             "Trips move from low-load hours into over-capacity ones; no vehicle is added.\n"
+             f"S5 moves {int(rec['trips_moved'])} trips: {int(base['boardings_over_capacity'])} "
+             f"boardings over capacity become {int(rec['boardings_over_capacity'])}, and unmet "
+             f"demand falls from {base['unmet_share_pct']:.1f}% to {rec['unmet_share_pct']:.1f}%.",
              fontsize=7, color="#555555")
     fig.savefig(FIGS / "F5_scenario_kpis.png")
     plt.close(fig)
@@ -211,6 +238,48 @@ def fig_gc() -> None:
     plt.close(fig)
 
 
+def fig_usage() -> None:
+    """Bus use by day period, with the working-hours assumption made visible."""
+    u = pd.read_csv(DATA / "usage_by_period.csv")
+    net = u[u["route_code"] == "ALL"].copy()
+    order = ["night", "am_commute", "working_hours", "pm_commute", "evening", "late"]
+    label = {
+        "night": "00-06", "am_commute": "06-08", "working_hours": "08-16",
+        "pm_commute": "16-19", "evening": "19-22", "late": "22-24",
+    }
+    net["period"] = pd.Categorical(net["period"], order, ordered=True)
+    net = net.sort_values("period")
+    sens = pd.read_csv(DATA / "working_hours_sensitivity.csv")
+    # The band is the three eight-hour windows (07-15, 08-16, 09-17). The
+    # table also carries 10-hour windows, which are a different question.
+    band = sens[sens["hours_in_window"] == 8 * 15]  # 8 h x 15 routes = 120 route-hours
+    win = sens[sens["working_window"] == "08:00-16:00"].iloc[0]
+
+    fig, ax = plt.subplots(figsize=(7.4, 3.1))
+    colours = [RED if p == "working_hours" else GREY for p in net["period"]]
+    ax.bar(net["period"].astype(str), net["share_of_route_demand_pct"], color=colours)
+    for i, (_, r) in enumerate(net.iterrows()):
+        ax.text(i, r["share_of_route_demand_pct"] + 0.8,
+                f"{r['share_of_route_demand_pct']:.0f}%", ha="center", fontsize=8,
+                fontweight="bold" if r["period"] == "working_hours" else "normal")
+    ax.set_xticks(range(len(net)),
+                  [f"{label[p]}\n{p.replace('_', ' ')}" for p in net["period"]],
+                  fontsize=7.5)
+    ax.set_ylabel("% of modelled daily demand")
+    ax.set_ylim(0, max(net["share_of_route_demand_pct"]) * 1.25)
+    lo = band["share_of_daily_demand_pct"].min()
+    hi = band["share_of_daily_demand_pct"].max()
+    ax.set_title("F7  Most bus travel falls outside the assumed working day",
+                 loc="left", fontweight="bold")
+    ax.text(0, -0.34,
+            f"Working day assumed 08:00-16:00 = {win['share_of_daily_demand_pct']:.0f}% "
+            f"of demand; shifting it an hour either way gives {lo:.0f}-{hi:.0f}% (ADR-0012). "
+            "Demand is modelled for 24 hours; service was captured from ~11:00 only.",
+            transform=ax.transAxes, fontsize=7, color="#555555")
+    fig.savefig(FIGS / "F7_usage_by_period.png")
+    plt.close(fig)
+
+
 def main() -> None:
     fig_bridge()
     fig_load()
@@ -218,7 +287,8 @@ def main() -> None:
     fig_airport()
     fig_scenarios()
     fig_gc()
-    print(f"wrote 6 figures to {FIGS}")
+    fig_usage()
+    print(f"wrote 7 figures to {FIGS}")
 
 
 if __name__ == "__main__":

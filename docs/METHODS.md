@@ -20,6 +20,12 @@ Airport, and Villimalé.
 
 Out of scope: marine transport, ferries, inter-atoll travel, and fares policy.
 
+Also out of scope by explicit decision: the **realtime layer** — sensor-based
+people counting at stops, live vehicle positions, and closed-loop reallocation.
+Nothing of that kind is implemented here. It is planned as a later phase with
+stated entry conditions, documented in [ROADMAP.md](ROADMAP.md) and recorded as
+[ADR-0013](adr/0013-realtime-layer-deferred.md).
+
 ---
 
 ## 2. Data sources
@@ -38,7 +44,7 @@ disclosure was used.
 | 7 | Fleet capacity by route | Team field knowledge | `data/raw/mtcc_bus_capacity.csv` | 24 Oct 2026 | **Capacity** |
 | 8 | Basemap and road network | OpenStreetMap contributors | `openstreetmap.org` | — | Map rendering (ODbL) |
 
-Full links, licences and per-file provenance: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
+Full links, licences and per-file provenance: **[DATA_SOURCES.md](../DATA_SOURCES.md)**.
 
 **One source we deliberately did not use.** MTCC publishes route timetables as
 PDFs, but the only edition available online is "Ramadan 1446" (February 2025) —
@@ -60,9 +66,9 @@ Each step is a script; the order is load-bearing.
 | 4 | `dashboard/build/build_schedule_crosscheck.py` | Feed vs published timetable comparison |
 | 5 | `dashboard/build/build_figures.py` | Figures F1–F7 |
 | 6 | `dashboard/build/build_gtfs.py` | GTFS feed for the network |
-| 7 | `dashboard/build/verify_claims.py` | **54 assertions re-derived from raw sources** |
+| 7 | `dashboard/build/verify_claims.py` | **57 assertions re-derived from raw sources** |
 
-`make data && make figures && make check` reproduces everything. The rebuild is
+`make data && make figures && make check && make test` reproduces everything. The rebuild is
 deterministic: a second run produces no diff.
 
 ---
@@ -107,6 +113,21 @@ fleet-neutral: no scenario adds a vehicle. Percentage scaling was tried first an
 abandoned because at one to three trips per route-hour it rounds to no change
 (ADR-0008).
 
+Two rules keep a scenario honest, and both are asserted in the build:
+
+- **A donor must still fit its own passengers.** A trip is taken only from an
+  hour that stays within 100% of seats after losing it. Without this rule the
+  model took a bus out of a 3-trip hour running at 83%, left it at 125% with
+  35 passengers behind, and logged the move as a relief.
+- **A cancelled move is not counted.** A move that is later reversed exactly is
+  removed from the log before the KPIs are computed, so `trips_moved` equals the
+  net change in the fleet.
+
+The effect is a much smaller, much more honest set of moves: the recommended
+package moves 6 trips, not 18, and two of the three terms now report
+near-null results — the airport routes have the spare vehicles, and the
+corridor does not.
+
 ### 4.5 Validation
 
 Held-out prediction, not assertion. The demand model is fitted on a
@@ -127,6 +148,29 @@ and **no domestic flights**, and carries no seasonal signal.
 No published working-hours data exists. We assume **08:00–16:00** and publish the
 band rather than the point: 07:00–15:00 gives 37%, 08:00–16:00 **39%**,
 09:00–17:00 42% (ADR-0012).
+
+### 4.7 GTFS construction
+
+The RTL payload carries per-stop timings for each trip, so the feed's
+`stop_times` are **the observed schedule, rounded — not interpolated from an
+assumed speed**, which is how most synthesised feeds are produced.
+
+Three decisions follow from the source's limits rather than from preference:
+
+- **One service day.** `calendar.txt` contains Saturday 2026-10-24 only, because
+  the endpoint returns only the remainder of the day from the moment it is
+  called. We did not extrapolate a weekday we never observed.
+- **11 of 15 routes.** R10, R11, R12 and R15 return no timings; they are absent
+  rather than invented.
+- **32 partially-timed trips** ship with the stop-times they actually have, not
+  with interpolated times that would look precise and be wrong.
+
+One stop that cannot be boarded (`MWSC Flat Bus Stop`) is encoded
+`pickup_type=1` on the 112 stop-time rows that call there, rather than dropped,
+so the route geometry stays correct. The feed is validated twice: 18
+structural checks re-asserted by `verify_claims.py`, and MobilityData
+`gtfs-validator` 6.0.0 reporting **0 errors** and 2 warnings, both inherent to a
+one-day feed. See [GTFS.md](GTFS.md).
 
 ---
 
@@ -167,7 +211,7 @@ the MBS documents, which came from the team.
 
 **How the output was controlled.** Three mechanisms, in order of importance:
 
-1. **Machine verification.** `verify_claims.py` re-derives **54 claims** from the
+1. **Machine verification.** `verify_claims.py` re-derives **57 claims** from the
    raw sources and fails the build if the committed numbers disagree. No figure
    in the report is taken on trust from the assistant.
 2. **Human review.** Every merge was reviewed and approved by a team member.
@@ -243,10 +287,17 @@ recommendations require human judgement.
 make setup
 make data figures gtfs
 make check
+make test
 ```
 
-`make check` must report **54/54**. If it does not, the committed numbers and the
+`make check` must report **92/92**. If it does not, the committed numbers and the
 prose disagree, and the prose is wrong.
+
+`make test` runs `tests/test_reallocator.py`, which pins the two rules that keep
+a scenario honest: a donor hour must still fit its own passengers after giving
+up a trip, and a move that is later undone is not counted as relief. Both were
+violated by an earlier version of the reallocator, which produced a "recommended
+package" that partly cancelled itself.
 
 The team accepts responsibility for the framing, the assumptions and the
 recommendations in this submission. The data and the code are published so that

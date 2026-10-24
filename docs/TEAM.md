@@ -62,20 +62,24 @@ else is derived.
 | 10 | Taxi riders who would switch on price alone | 62–76% | `scenario_modal_shift.csv` |
 | 11 | Taxi riders who would switch on generalised cost | 0.05–9.3% | `scenario_modal_shift.csv` |
 | 12 | Ride minutes the bus must shed, Malé↔HM Ph1 | **54.4** | `scenario_modal_shift.csv` |
-| 13 | Friday demand vs weekday | **61–64%** (all 4 routes) | §4 command D |
-| 14 | International arrivals landing 07:00–09:59 | **35.5%** | `airport_demand_profile.csv` |
+| 13 | Friday demand vs weekday | **61–64%** (R1, R2, R4 — the three routes with daily data) | §4 command D |
+| 14 | International arrivals landing 07:00–09:59 | **33.07%** passenger-weighted (25.31% flight-weighted) | `validation_airport.csv` |
 | 15 | MACL coverage of international arrivals | ≈ 40% | `airport_demand_profile.csv` |
 | 16 | Malé airport arrivals per day, 2025 | 3,987 domestic + 7,395 international | `airport_demand_profile.csv` |
 | 16a | Holdout MAPE (model vs naive baseline) | **9.91%** vs 16.27% | `validation_holdout.csv` |
 | 16b | Morning-peak arrivals, passenger-weighted | **33.07%** (flight-weighted only 25.31%) | `validation_airport.csv` |
 | 17 | Captured service window | ~11:00–24:00, one Saturday | `routes_master.csv` |
 | 18 | Routes with any ridership data | **5 of 15** (R1, R2, R3, R4, R7) | `route_load.csv` |
-| 19 | Baseline unmet demand, captured window | 8.62% | §4 command E |
-| 20 | S5 effect | −236 boardings over capacity, 6.23% unmet | §4 command E |
+| 19 | Baseline unmet demand, captured window | 10.04% (1,009 boardings over capacity) | §4 command E |
+| 20 | S5 effect | **−404** boardings over capacity (1,009 → 605), 6.01% unmet, 6 trips moved | §4 command E |
 | 21 | Share of bus demand in assumed working hours (08:00–16:00) | **39%** | §4 command F |
 | 22 | Same, for 07:00–15:00 / 09:00–17:00 | 37% / 42% | §4 command F |
 | 23 | Employed people in Greater Malé (LFS 2024–25) | **141,039** | `data/official/mbs/LFS-Report-2024-2025.pdf` Table 1 |
 | 24 | R3 airport bus headway vs working-hours service | 60 min, and 3 of 8 working hours uncaptured | §4 command B |
+| 25 | GTFS feed coverage | 11 of 15 routes, 61 stops | `gtfs_validation.csv` |
+| 26 | GTFS trips and stop times | 450 trips, 5,538 stop_times | `gtfs_validation.csv` |
+| 27 | GTFS canonical validator | **0 errors**, 2 warnings (both inherent to a one-day feed) | `gtfs_validator_report.json` |
+| 28 | GTFS structural checks | **18 of 18** pass, re-asserted by `make check` | `gtfs_validation.csv` |
 
 ### Numbers that are **withdrawn** — do not use
 
@@ -93,6 +97,9 @@ else is derived.
 | "MACL shows domestic flights" | It contains none. ADR-0006 |
 | "Working hours are 08:00–16:00" stated as fact | It is an assumption; say "assumed" and give the band. ADR-0012 |
 | "X% of commuters take the bus" from boardings ÷ 141,039 | Demand covers 5 of 15 routes. Not a mode share. ADR-0012 |
+| "The GTFS feed is a production feed" | It is a validated **one-day snapshot**, 11 of 15 routes. Do not present it as MTCC's official timetable |
+| "The tool is realtime" | It is an offline projection on historical data. The realtime layer is deferred — `ROADMAP.md`, ADR-0013 |
+| "The cameras count passengers" | Nothing is instrumented. Stop-level load is allocated from taxi catchments (ADR-0002) |
 
 ---
 
@@ -149,13 +156,16 @@ print(pd.read_csv('dashboard/data/scenario_kpis.csv').to_string(index=False))"
 ### Rebuild everything from source
 
 ```bash
-python dashboard/build/build_data.py
-python dashboard/build/build_figures.py
-git diff --stat dashboard/data docs/figures   # should be empty if nothing changed
+make all                                      # data, figures, gtfs, check, tests
+git diff --stat dashboard/data docs/figures data/derived/gtfs
 ```
 
 That last line is the real cross-check: **a clean rebuild must produce no diff.**
 If it does, something is being edited by hand and will drift.
+
+The GTFS zip is included in that check: its members are stored rather than
+deflated, precisely so the archive is bit-identical on any machine (see
+`build_gtfs.py`).
 
 ---
 

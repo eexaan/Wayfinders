@@ -11,6 +11,11 @@ Companion documents: [`SPEC.md`](SPEC.md) (the build plan) ·
 
 ## 0. How to read this
 
+**Canonical numbers live in [`docs/TEAM.md`](docs/TEAM.md) §3.** This is the
+working record: each section states what was believed when it was written, and
+several findings were later corrected (the corrections are marked inline). If a
+figure here disagrees with `TEAM.md` or with `dashboard/data/`, the data wins.
+
 Sections are ordered as the investigation actually happened, not as the story
 reads best. Dead ends are kept, with the reason, because several of them are
 the difference between a defensible finding and a plausible-sounding wrong
@@ -297,21 +302,26 @@ be flexed into off-peak.
 
 MTCC `total_pax` is undocumented. Two readings are possible:
 
-| Reading | R1 (5,212 boardings, 61 trips, 84 seats) | R4 (1,146, 38 trips, 52 seats) |
+| Reading | R1 (4,585 boardings, 61 trips, 72 seats) | R4 (1,014, 38 trips, 55 seats) |
 |---|---|---|
-| One direction | **89.5%** of seats (Saturday) | 51.3% |
-| Both directions | 51% | 29% |
+| One direction | **104.4%** of seats (Saturday) | 48.5% |
+| Both directions | 52% | 24% |
 
 **One direction is the right reading.** Under the two-direction reading every
-route sits at 28–51% and the problem statement ("some commuters waiting
+route sits at 24–52% and the problem statement ("some commuters waiting
 while other buses run under capacity") would not be true. Under the
 one-direction reading R1 is over capacity and R4 is not, which is exactly
 what is observed and what the problem describes.
 
-We still report a **band**: `load_factor_peak_pct` (every boarding rides the
-full route) and `load_factor_avg_pct` (uniform alighting). **The ranking of
-routes is identical under both bounds**, and the relative findings (F3, F4,
-F5) do not depend on the interpretation at all.
+Capacity here is the team table (ADR-0010), not the 84/52-seat figures in
+earlier drafts: 72 seats (84 including standing) on a double decker and 55 on
+a coach. On seats plus standing, R1 sits at 89.5%.
+
+The route-day figure assumes every boarding rides the whole route, so it is an
+**upper bound**. The headline is now the fullest stop-to-stop segment, from
+the stop-level allocation in §5.5 (R1: 90.1%). **The ranking of routes is
+identical under every one of these readings**, and the relative findings (F3,
+F4, F5) do not depend on the interpretation at all.
 
 **This is our first ask to MTCC:** does `total_pax` count one direction or
 two, and boardings or unique passengers?
@@ -419,7 +429,8 @@ R5 and R6 have no load factor at all: the operator gave a seated capacity (33)
 but did not state standing capacity, so `load_factor_comparable` is false.
 
 The pairing matters too. Earlier drafts compared *weekday* boardings against a
-trip count fetched on a Saturday, which gave 102% on a 84-seat bus — wrong on
+trip count fetched on a Saturday, which gave 102% on a bus whose capacity was
+wrong too — wrong on
 both counts. The feed now supplies Saturday service, so Saturday boardings are
 the correct pair. R1's weekday boardings are 13.7% higher (5,212 vs 4,585); at
 the same 61 trips that is ~119% of seats, and it needs a weekday capture to
@@ -430,14 +441,17 @@ confirm, since the weekday trip count may also be higher.
 **Not answerable from one service day, and that is a finding.**
 
 MTCC demand by day type is unambiguous — Friday boardings are 61–64% of a
-weekday's on all three routes with daily data:
+weekday's on the three routes with daily data:
 
 | Route | Demand index, Friday (weekday = 100) |
 |---|---|
 | R1 | 61.2 |
 | R2 | 63.6 |
 | R4 | 63.0 |
-| R7 | 62.2 |
+
+R3 and R7 also have a Friday figure in `demand_by_daytype.csv`, but it is
+**derived**, not measured: their ridership is monthly only, so the day-type
+split is applied from this index. Do not quote 85% for them as an observation.
 
 What the *service* does on a Friday cannot be read from a feed that returns one
 service day. The earlier Ramadan-1446 PDF did contain separate Friday
@@ -545,28 +559,35 @@ percentage factors — at 1–3 trips per route per hour, a 12% change rounds to
 zero and the "scenario" silently does nothing. Only captured hours are touched;
 hours before the window stay null and are excluded from every KPI.
 
-```
-scenario                   mean wait  over capacity  unmet%  trips  demand
-S0_baseline                     10.9            845   8.62%    162   9,805
-S2_airport_retimed              10.4            844   8.62%    168   9,786
-S3_rebalanced_to_corridor       10.6            738   7.62%    164   9,696
-S4_express_peak                 10.5            610   6.23%    170   9,805
-S5_recommended_package          10.0            609   6.23%    176   9,786
+```bash
+python -c "import pandas as pd; print(pd.read_csv('dashboard/data/scenario_kpis.csv').to_string(index=False))"
 ```
 
-The over-capacity count roughly doubled when the real seated capacity arrived
-(72 seats, not 84): **8.62% of demand in the captured window cannot board.**
+| Scenario | Mean wait | Over capacity | Unmet | Trips moved |
+|---|---|---|---|---|
+| S0 baseline | 10.8 | 1,009 | 10.04% | 0 |
+| S2 airport re-timed | 10.7 | 1,007 (−2) | 10.01% | 2 |
+| S3 rebalanced to corridor | 10.7 | 661 (−348) | 6.57% | 5 |
+| S4 express peak | 10.8 | 937 (−72) | 9.32% | 1 |
+| S5 recommended package | 10.7 | **605 (−404)** | **6.01%** | **6** |
+
+Total trips stay at 162 in every scenario. The over-capacity count roughly
+tripled when the real seated capacity arrived (72 seats, not 84): **10.04% of
+demand in the captured window cannot board a seat.**
 
 | Scenario | Definition |
 |---|---|
-| S2 | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00 |
-| S3 | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 |
-| S4 | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skip-stopping) |
-| S5 | S2 + S4 |
+| S2 | 2 airport trips out of the late-night hours into the same routes' under-served hours |
+| S3 | 5 trips off the airport routes' afternoon lull onto R1 where it is over capacity |
+| S4 | corridor off-peak trips into the corridor peak — only 1 move is safe |
+| S5 | S3 then S4 |
 
-**Honest reading.** S5 removes 236 boardings from over-capacity and cuts unmet
-demand by 2.4 points with 14 extra trips. That is a modest, credible gain inside
-a ~13-hour window — not a dramatic one. The Friday scenario is gone (no
+**Honest reading.** S5 removes 404 boardings from over-capacity and cuts unmet
+demand by 4 points by re-timing **six** trips. That is a modest, credible gain
+inside a ~13-hour window — because the corridor has almost no spare buses, not
+because the change is weak. A donor may only give up a trip if it stays within
+100% of seats afterwards (ADR-0014), which is why the counts collapsed from 18
+to 6 and why the "express peak" scenario finds one safe move. The Friday scenario is gone (no
 service-day data) and the morning peak is outside the window, which is exactly
 where the largest gains would be. **Say that in the pitch rather than inflating
 the number.**
@@ -578,14 +599,14 @@ the number.**
 | **Spatial bus-stop gap map** | 97.1% of taxi pickups are within 300 m of a stop; 0% are more than 800 m. Malé is 4 km long. The map would show nothing. |
 | **MACL filtered to domestic flights** | MACL contains no domestic flights at all — it is ≈40% of international traffic and 0% of domestic. Domestic data comes from MBS Yearbook 11.13. |
 | **Using MACL as the airport demand level** | Would understate airport demand by ~2.7×. |
-| **Treating `total_pax` as a load factor directly** | 98 boardings/trip on an 84-seat bus is impossible without knowing the counting basis. Fixed by reporting a band and asking MTCC. |
+| **Treating `total_pax` as a load factor directly** | 75 boardings/trip on a 72-seat bus is impossible without knowing the counting basis. Fixed by reporting a band and asking MTCC. |
 | **Assuming the Avas hourly shape is the bus hourly shape** | It is a proxy. Used explicitly as a *shape* with the level anchored to observed MTCC boardings, and the assumption is labelled in every output row. |
 | **Using the live per-stop timetable as the service pattern** | It is a single evening snapshot (19:54–23:59) with no morning peak. Demoted to per-stop run times only. |
 | **MTCC PDF schedules as the service basis** | They are the Ramadan 1446 edition (Feb 2025), diverge from the live 2026 timetable by −28% to +113% by route, need Dhivehi-aware parsing, and omit R15 entirely. Replaced by the official RTL JSON feed, which is current and machine-readable. |
 | **FollowMe (17.46M vessel GPS rows)** | Out of scope per the team decision; it is marine, and the problem statement is about Greater Malé buses. |
 | **A spatial "missing route" analysis** | 97.1% coverage kills it, and the network is already dense. |
 | **An LP/MILP fleet optimiser** | Overkill for the time budget and hard to explain in 5 minutes. A transparent reallocation model with a Pareto view is more defensible. |
-| **Building the camera crowd detector as a product** | Not reproducible, not actionable by a planner, and it would consume 3 hours. Reframed as a 90-minute validation appendix. |
+| **Building the camera crowd detector as a product** | Not reproducible inside the build window, and it would have consumed 3 hours. Reframed as a validation appendix at the time; **since revised** — it is now a planned Phase 2 feature with stated entry conditions (ADR-0013, `docs/ROADMAP.md`), because it closes ADR-0002's allocation-not-measurement gap. |
 
 ---
 
@@ -600,7 +621,7 @@ the number.**
 3. **The `total_pax` definition** — one direction or two? Boardings or unique
    passengers? Free-of-charge passengers included?
 4. **Ridership for the 10 routes with none** (R5, R6, R8, R9, R10–R15). The
-   coverage matrix in `dashboard/data/route_fleet_capacity.csv` shows exactly
+   coverage matrix in `data/raw/mtcc_bus_capacity.csv` shows exactly
    what is missing.
 5. **R3's weekday pattern** — only Friday and Saturday/Public Holidays are
    published.
@@ -618,7 +639,7 @@ the number.**
 | File | Shows |
 |---|---|
 | `docs/figures/F1_bridge_share.png` | 40 of R1's 70 minutes are the two causeway crossings |
-| `docs/figures/F2_load_factors.png` | R1 at 89.5% of capacity; the airport bus at 51% |
+| `docs/figures/F2_load_factors.png` | R1 at 104.4% of seats and 90.1% at its fullest segment; R3 at 98.4% on the airport approach |
 | `docs/figures/F3_demand_daytype.png` | Friday demand is 37% below a weekday (demand only) |
 | `docs/figures/F4_airport_mismatch.png` | Flat 30-min airport service vs tri-peaked arrivals |
 | `docs/figures/F5_scenario_kpis.png` | Baseline vs the recommended package |

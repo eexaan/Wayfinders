@@ -257,11 +257,17 @@ def build() -> dict:
     # Member timestamps are pinned to the service date: zipfile would otherwise
     # stamp "now", so an unchanged feed would produce a new blob on every run
     # and dirty the working tree for no reason.
+    #
+    # STORED, not DEFLATED, for the same reason. Deflate output depends on the
+    # zlib build, so the same feed zipped on two machines produced two
+    # different blobs and "rebuilds byte-for-byte" was only true of the machine
+    # that committed it. Storing the members costs ~215 KiB and makes the
+    # archive bit-identical everywhere.
     stamp = (2026, 10, 24, 0, 0, 0)
-    with zipfile.ZipFile(ZIPPATH, "w", zipfile.ZIP_DEFLATED) as zf:
+    with zipfile.ZipFile(ZIPPATH, "w", zipfile.ZIP_STORED) as zf:
         for name in sorted(counts):
             info = zipfile.ZipInfo(name, date_time=stamp)
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o644 << 16
             zf.writestr(info, (OUTDIR / name).read_bytes())
 

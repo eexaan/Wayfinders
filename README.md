@@ -39,9 +39,9 @@ We also tested the result against measured ridership rather than asserting it.
 
 **1. The causeway is the journey.** The bus from Malé to Hulhumalé Phase 1 is
 scheduled at 70 minutes. **Forty of those minutes — 57% — are two crossings of
-the causeway.** A taxi covers the same trip in about 13 minutes. The bus is four
-times slower and eight times cheaper. People are not buying speed; they are
-paying to avoid an hour in a queue.
+the causeway.** A taxi covers the same trip in a median of 12.7 minutes. The bus
+is **5.5 times slower and 8.5 times cheaper**. People are not buying speed; they
+are paying to avoid an hour in a queue.
 
 **2. The airport bus is full, and it runs once an hour.** Route R3 from Malé to
 the airport looks lightly used over a whole day — 68% of its seats. But on the
@@ -72,15 +72,24 @@ causeway can.**
 
 1. **Add trips to the airport buses, not fewer.** R3 is 98% full on its airport
    approach and runs hourly. Re-timing it to the arrival peaks costs no new
-   buses and is the clearest single win in the dataset.
-2. **Give buses priority at the causeway.** Journey time is the binding
+   buses. Note the limit of our own measure: at *route-hour* level the airport
+   routes never breach capacity, because the crush is on one segment, so the
+   re-timing scenario measures near-null (−2 boardings). That is a property of
+   the KPI, not evidence the bus is fine.
+2. **Move trips off the airport lull onto the corridor.** With a fixed fleet the
+   measurable win is the five trips the airport routes can spare in their
+   afternoon lull, moved to R1 where the demand actually is: −348 boardings
+   over capacity on its own.
+3. **Give buses priority at the causeway.** Journey time is the binding
    constraint on modal shift; nothing else changes it.
-3. **Run a skip-stop service on R1 and R2.** The two crossings dominate the
+4. **Run a skip-stop service on R1 and R2.** The two crossings dominate the
    journey, so trimming the twelve intermediate Hulhumalé stops yields a real
-   time saving.
+   time saving. Do not expect it to free many vehicles: with the donor ceiling
+   enforced, the corridor has almost no spare capacity to re-time.
 
-Under our recommended package, **290 fewer passengers are left behind** in the
-period we measured, by moving 18 existing trips — no new vehicles.
+Under our recommended package, **404 fewer boardings are over capacity** in the
+period we measured — 1,009 down to 605, unmet demand 10.0% down to 6.0% — by
+moving 6 existing trips. No new vehicles.
 
 ## How much to trust this
 
@@ -88,8 +97,8 @@ We validated rather than assumed. The demand model predicts held-out ridership
 with **9.9% mean absolute percentage error**, against **16.3%** for a naive
 baseline — on 219 held-out days it had never seen.
 
-`make check` re-derives 54 claims from the raw sources and fails if the
-committed numbers disagree. It passes 54/54.
+`make check` re-derives 92 claims from the raw sources and fails if the
+committed numbers disagree. It passes 92/92.
 
 ## What we could not measure
 
@@ -122,6 +131,37 @@ python -m http.server 8000     # then open http://localhost:8000
 It runs entirely in the browser from committed data files — no server, no
 account, nothing to install.
 
+## The GTFS feed
+
+We publish **the first GTFS feed for the Greater Malé bus network** — the
+standard format every journey planner in the world already reads.
+
+**No public GTFS existed for Malé.** We built one from the official RTL
+timetable, so it describes the real 2026 schedule.
+
+| | |
+|---|---|
+| Routes | 11 (R1–R9, R13, R14) |
+| Stops | 61 |
+| Trips | 450 |
+| Stop times | 5,538 |
+| Validator errors | **0** (MobilityData `gtfs-validator` 6.0.0) |
+
+The timetable payload carries per-stop timings for each trip, so **our stop
+times are the observed schedule, not interpolated from an assumed bus speed.**
+The feed rebuilds byte-for-byte identically, and 18 structural checks are
+re-asserted on every `make check`.
+
+Why it matters beyond the file: it makes the network portable. OpenTripPlanner,
+MOTIS, Transitland, Google Transit and most trip-planning apps can route on it
+with no bespoke code — and GTFS is the format **GTFS-Realtime extends**, so it
+is the foundation for the live phase described in the roadmap.
+
+It is an honest snapshot, not a production feed: one Saturday, 11 of 15 routes,
+no minibus timings. Those limits are visible in the feed rather than hidden.
+
+Details, design decisions and how to load it: **[docs/GTFS.md](docs/GTFS.md)**.
+
 ## Data
 
 Every figure traces to a public source. Nothing private or restricted was used.
@@ -137,12 +177,26 @@ Every figure traces to a public source. Nothing private or restricted was used.
 
 Full links, licences and caveats: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
 
-We also publish the first **GTFS feed** for the Greater Malé bus network, so the
-network can be loaded into standard journey-planning tools.
+## Where this goes next
+
+The tool is a projection built on history: it answers whether the buses matched
+demand on the day we measured, not whether they match now.
+
+The step after is realtime — automated people-counting at stops, live vehicle
+positions over GTFS-Realtime, and a loop that reallocates trips as queues build.
+That closes the model's own weakest point: our stop-level load factors are
+**allocated from taxi catchments, not measured**, so the finding we most want
+acted on is the one that most needs ground truth.
+
+It is deliberately not in this build. The plan, the sensor comparison, the pilot
+design, the costs and the claims we refuse to make are in
+**[docs/ROADMAP.md](docs/ROADMAP.md)**.
 
 ## For readers who want the detail
 
 - **[docs/METHODS.md](docs/METHODS.md)** — data sources, methods, assumptions, AI use and limits
+- **[docs/GTFS.md](docs/GTFS.md)** — the feed, its design decisions, and how to load it
+- **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, with costs and preconditions
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost

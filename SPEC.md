@@ -112,7 +112,7 @@ From the official RTL 2026 feed, R1's end-to-end scheduled run
 
 Internal Hulhumalé routes that never cross (R5, R6) show 3–5 min per segment.
 The contrast is the evidence: the causeway, not the stop spacing, is the
-bottleneck. The bus is **4.4× slower than a taxi** on the corridor where it is
+bottleneck. The bus is **5.5× slower than a taxi** on the corridor where it is
 also 8.5× cheaper.
 
 ### F2 — One corridor carries nearly all the load; the airport buses do not
@@ -121,25 +121,27 @@ also 8.5× cheaper.
 
 | Route | Official RTL name | Bus type | Seats | Trips/day | Boardings/day | Route-day upper bound | **Peak segment** | Where |
 |---|---|---|---|---|---|---|---|---|
-| **R1** | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | 89.5% | **77.3%** | Hulhumalé Police Stn → Amin Ave, 22:00 |
-| **R3** | West Park to VIA | Airport bus | 52 | 20 | 752 | 72.3% | **104.1%** | STELCO → VIA, 13:00 |
-| R4 | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | 51.3% | 89.2% | HM Cemetery → VIA, 11:00 |
-| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 64.1% | 63.7% | STELCO → MWSC Flat, 22:00 |
-| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 67.3% | 58.0% | Centro Mall → CHSE, 22:00 |
+| **R1** | West Park to HM Phase 1 | Double decker | 72 | 61 | 4,585 | 104.4% | **90.1%** | Hulhumalé Police Stn → Amin Ave, 22:00 |
+| **R3** | West Park to VIA | Airport bus | 55 | 20 | 752 | 68.3% | **98.4%** | STELCO → VIA, 13:00 |
+| R4 | HM Phase 1 to VIA | Airport bus | 55 | 38 | 1,014 | 48.5% | 84.3% | HM Cemetery → VIA, 11:00 |
+| R7 | HM Phase 2 to West Park | Double decker | 72 | 66 | 3,552 | 74.8% | 74.4% | STELCO → MWSC Flat, 22:00 |
+| R2 | Carnival to HM Phase 1 | Double decker | 72 | 61 | 3,447 | 78.5% | 67.7% | Centro Mall → CHSE, 22:00 |
 
 Ten routes have **no ridership data at all** (R5, R6, R8–R15) and are marked
 `NO DEMAND DATA` rather than zero-filled.
 
-> **The 89.5% figure was an upper bound, and it was labelled "peak". It is now
-> reconciled.** `daily_boardings ÷ (trips_per_day × seats)` assumes every
+> **The 104.4% figure is an upper bound, and it was once labelled "peak". It is
+> now reconciled.** `daily_boardings ÷ (trips_per_day × seats)` assumes every
 > passenger rides the whole route. Distributing each route's measured boardings
 > across its own stops using the Avas catchment, then accumulating on-minus-off
 > along the stop order, gives a peak **segment** load factor instead.
 >
-> For R1 that is **77.3%** — lower than the bound, as it must be, because
+> For R1 that is **90.1%** — lower than the bound, as it must be, because
 > passengers alight along the way. The route-day number overstated crowding on
-> R1 by about 12 points. It *understated* crowding on R3, whose airport segment
-> genuinely exceeds 100% while its route-day average is 72%.
+> R1 by about 14 points. It *understated* crowding on R3, whose airport segment
+> reaches **98.4%** against a route-day 68.3% — the one route here where the
+> segment peak sits above the route-day bound, and therefore the one where the
+> average was most misleading.
 >
 > Both figures are kept side by side (`load_factor_route_day_upper_pct` vs
 > `load_factor_peak_pct`) so the correction is auditable rather than silent.
@@ -147,7 +149,7 @@ Ten routes have **no ridership data at all** (R5, R6, R8–R15) and are marked
 > **The peak hour is late, and that is a service finding, not a demand one.**
 > R1's demand peaks at 16:00, but its fullest segment occurs at 22:00 when the
 > timetable thins to 2 trips/hour. `route_segment_summary.csv` reports
-> `load_factor_at_demand_peak_pct` (R1: 69.9%) separately so the two cannot be
+> `load_factor_at_demand_peak_pct` (R1: 81.6%) separately so the two cannot be
 > conflated.
 
 > **Read the load numbers with the service day in mind.** The captured feed is
@@ -165,7 +167,8 @@ MTCC ridership, 2025, observed on the routes with daily data:
 | R2 | 3,756 | 3,908 | 3,908 | 3,859 | **2,427** | 3,447 | 3,655 |
 | R4 | 1,122 | 1,140 | 1,152 | 1,168 | **722** | 1,014 | 1,145 |
 
-**Friday demand is 37–38% below Thursday on every route**, and R1 swings +23%
+**Friday demand is 36–39% below a weekday on every route with daily data**
+(R1 is the steepest, at 40% below Thursday), and R1 swings +23%
 between February and July. Free-of-charge passengers (65+, PWD, infants) are
 27–35% of boardings, so a large share of demand cannot be flexed off-peak.
 
@@ -279,44 +282,62 @@ than a result.
 
 | # | Scenario | What moves | Trips moved | Over-capacity | Unmet |
 |---|---|---|---|---|---|
-| S0 | Baseline | — | 0 | 381 | 3.79% |
-| S2 | Airport re-timed | 3 late-night airport trips → airport hours with unmet demand | 3 | 372 (−9) | 3.70% |
-| S3 | Rebalanced to the corridor | 8 trips off the airport afternoon lull → R1/R2 wherever it is over capacity | 8 | **95 (−286)** | 0.94% |
-| S4 | Express peak | 10 off-peak R1/R2 trips → R1/R2 peak hours | 10 | 132 (−249) | 1.31% |
-| **S5** | **Recommended package** | **S3 then S4** | **18** | **91 (−290)** | **0.91%** |
+| S0 | Baseline | — | 0 | 1009 | 10.04% |
+| S2 | Airport re-timed | 2 late-night airport trips → airport hours with unmet demand | 2 | 1007 (−2) | 10.01% |
+| S3 | Rebalanced to the corridor | 5 trips off the airport afternoon lull → R1 wherever it is over capacity | 5 | 661 (−348) | 6.57% |
+| S4 | Express peak | 1 off-peak R2 trip → the R1 peak | 1 | 937 (−72) | 9.32% |
+| **S5** | **Recommended package** | **S3 then S4** | **6** | **605 (−404)** | **6.01%** |
 
 Total trips stay at **162 in every scenario** (430 network-wide; the KPI is
-scoped to the five routes with ridership data). No donor is ever taken above
-79% load, and every move is logged in `scenario_moves.csv` with the unmet
-demand at the receiver before and after — so the effect of each individual trip
-is auditable, not just the aggregate.
+scoped to the five routes with ridership data). Every move is logged in
+`scenario_moves.csv` with the receiver's unmet demand before and after, so the
+effect of each individual trip is auditable, not just the aggregate.
+
+**A donor must still fit its own passengers after giving up the trip.** The
+ceiling is 100% of seats: a trip is only taken from an hour that stays within
+capacity once it loses that trip. The highest donor load is **66.3% before**
+and **99.5% after**, so no move creates a new over-capacity hour. The build
+asserts this, and `tests/test_reallocator.py` pins it.
 
 **Donors are chosen by lowest load, receivers by largest unmet demand, one trip
 at a time, with the load recomputed after every move.** Receivers are chosen by
 the data, not by a hand-picked hour window: an earlier version restricted them
-to 15:00–20:00 and therefore refused to relieve R1 at 22:00, where the load is
-152%. The model was hiding its own best answer.
+to 15:00–20:00 and therefore refused to relieve R1 at 22:00, where the route-hour
+load is 166%. The model was hiding its own best answer.
 
-> **Two findings came out of enforcing fleet neutrality.**
+**A move that is undone is not counted.** The greedy loop could previously take
+a trip from one hour and give it back on a later pass, logging the reversal as
+a second improvement. `net_moves()` cancels such pairs before the KPIs are
+computed, so `trips_moved` now equals the net change in the fleet.
+
+> **Four findings came out of enforcing fleet neutrality.**
 >
-> **1. Re-timing the airport buses alone barely helps (−9 boardings).** At
+> **1. Re-timing the airport buses alone barely helps (−2 boardings).** At
 > route-hour level the airport routes are *not* over capacity — their crowding
-> is concentrated on one segment (STELCO→VIA at 104%), and adding a trip to an
+> is concentrated on one segment (STELCO→VIA at 98%), and adding a trip to an
 > hour whose route average is 70% removes almost no unmet demand as measured
 > here. This is a limitation of a route-hour KPI, not evidence that the airport
 > bus is fine. It is why S3/S4 carry the capacity story and S2 is reported as a
 > near-null result rather than dropped.
 >
-> **2. The recommended package changed.** It used to be S2 + S4, which relieved
-> 118 boardings on an additive model. Under a fixed fleet the two changes that
-> do measurable work are **S3 and S4**, and S2 is no longer part of it.
+> **2. The recommended package changed.** It used to be S2 + S4, on a model that
+> added trips and so was not fleet-neutral. Under a fixed fleet the two changes
+> that do measurable work are **S3 and S4**, and S2 is no longer part of it.
 >
-> **3. You cannot fine-tune with an 84-seat vehicle.** One trip into an hour
+> **3. You cannot fine-tune with an 84-passenger vehicle.** One trip into an hour
 > with 70 unmet passengers overshoots it to zero. The optimum is a small number
 > of large moves, not many small ones — which is also what a depot faces.
+>
+> **4. The corridor cannot bail itself out.** With the donor ceiling enforced,
+> S4 — the "express peak" scenario that re-times corridor trips into the
+> corridor peak — finds exactly **one** safe move. Every other R1 and R2
+> off-peak hour is already at 83–166% load, so taking a bus out of it would
+> strand passengers. The slack is on the airport routes, not the corridor. That
+> is the same finding as F1 arriving from the supply side: the corridor's
+> problem is journey time, not spare vehicles.
 
 **Caveat to state honestly:** the network-wide mean wait barely moves
-(10.8 → 10.8 min) because the changes are concentrated on a few corridors. The
+(10.8 → 10.7 min) because the changes are concentrated on a few corridors. The
 corridor-level table is the one that matters, and it is reported separately
 (`scenario_corridor_kpis.csv`).
 
@@ -387,7 +408,7 @@ factor is formed at all. Capacity remains a **fleet-class** assumption: it is
 per route, not per departure.
 
 **The other load-bearing assumption (A1):** MTCC `total_pax` is boardings in
-**one direction**. Under this reading R1 sits at 89.5% of an 84-seat bus on the
+**one direction**. Under this reading R1 sits at 89.5% of an 84-passenger bus on the
 captured Saturday, rising to about 102% on a weekday when demand is 13.7%
 higher at the same trip count. Under a two-direction reading every route sits
 at 25–45% and the stated problem would not exist. We report a **band**
@@ -417,7 +438,7 @@ schema in the first 20 minutes and treat it as frozen for the dashboard.
 | 09:00–09:40 | Freeze scope, agree schema, assign roles, dataset register | all |
 | 09:40–11:00 | Verify fleet capacities with MTCC; extend data layer; route-ID crosswalk | Dev 1 |
 | 11:00–13:00 | Demand model final, gap table frozen, stop-level allocation | Dev 2 |
-| 13:00–14:00 | **Findings + figures locked** (F1–F5 + 6 figures) | Dev 2 + Dev 4 |
+| 13:00–14:00 | **Findings + figures locked** (F1–F5, 7 figures in total) | Dev 2 + Dev 4 |
 | 14:00–15:30 | Scenario engine tuned, S5 confirmed | Dev 2 |
 | 15:30–18:30 | Dashboard (map, route panel, scenario sliders) | Dev 3 |
 | 18:30–19:30 | Holdout validation; camera spot-check *if* time | Dev 3 |
@@ -551,21 +572,37 @@ rather than quietly kept:
    weighting, because a planner reading "33% of passengers" and a planner
    reading "25% of flights" would draw different conclusions.
 
-### On the camera crowd detector (important)
+### On the camera crowd detector — deferred to Phase 2, with conditions
 
-**Do not build it as a product feature.** It is not reproducible, it produces
-numbers no planner can act on, and it will eat 3 hours you do not have.
+This was raised during the build and is **not** in the submitted codebase. The
+decision is recorded in [ADR-0013](docs/adr/0013-realtime-layer-deferred.md) and the
+plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-**Build it as a validation appendix instead:** one stop, one 30-minute window,
-observed people vs modelled boardings, one slide reporting MAPE. That
-converts "our model is plausible" into "our model is **validated**", which is
-worth far more to a judging panel than a live webcam demo. If time remains
-afterwards, productise it.
+**Why it was not built today:** it is not reproducible within the build window,
+and a live webcam demo would have cost the validation work that actually
+supports our numbers. One stop, one 30-minute window, observed people vs
+modelled boardings, would have converted "our model is plausible" into "our
+model is validated" — but the held-out test (MAPE 9.91% vs a 16.27% baseline)
+already does that more cheaply, on 219 days instead of 30 minutes.
 
-**Prefer the RTL live GPS API** if a token can be obtained
-(`https://bo.rtl.mv:4455/maldives/api/v2/bus/routedetails`, needs a JWT) —
-it gives observed running times and headways across all 14 routes with zero
-hardware, and beats a webcam for validating the supply model.
+**Why it is the right next step rather than a nice-to-have:** the stop-level
+load factor is an *allocation, not a measurement* (ADR-0002) — boardings are
+distributed across stops using taxi catchments and scaled 2.7–3.4×. The
+project's most actionable finding, R3 at 98.4% of seats on the airport approach,
+is therefore the least directly observed number we publish. Sensors settle it.
+
+**Sensor choice matters more than the plan does.** IR break-beam counts
+*crossings* and ultrasonic measures *proximity*; neither reports how many people
+are standing on the kerb. ROADMAP §2.1 compares seven options and recommends a
+**thermal or edge-blurred camera at three stops**, calibrated against manual
+counts, with accuracy reported **by queue band** — because crowd counters are
+accurate when a stop is quiet and degrade exactly when it is busy.
+
+**A prerequisite, not an afterthought:** demand without vehicle position is not
+a control loop. The RTL live endpoint
+(`https://bo.rtl.mv:4455/maldives/api/v2/bus/routedetails`, needs a JWT) gives
+observed running times and headways across all routes with zero hardware, and is
+the supply half of any realtime phase. It is also the cheaper half.
 
 ---
 
@@ -578,7 +615,7 @@ hardware, and beats a webcam for validating the supply model.
 | **MTCC counts are "sample value"** per its own README | Medium | State it; use MTCC as the anchor and cross-check against Avas |
 | **MACL covers ≈40% of international arrivals, 0% of domestic** | Medium | Use Yearbook for levels, MACL for shape; publish the coverage table as a finding |
 | No ridership data for R5, R6, R8, R9, R10–R15 | Medium | Publish a coverage matrix; mark as `NO DEMAND DATA` rather than zero-filling |
-| Camera model inaccurate in dense crowds | Low | Validation only, not a product claim |
+| Camera model inaccurate in dense crowds (Phase 2) | Medium | Edge-blurred camera or thermal; accuracy reported by queue band; calibrated against manual counts (ROADMAP §2.2) |
 | Scope creep into FollowMe / marine transport | Medium | Excluded by decision — do not reopen |
 
 ---
@@ -610,18 +647,19 @@ hardware, and beats a webcam for validating the supply model.
    route, at which hour, and is that matched to the buses running?" We joined
    them, and we publish the result with per-row provenance.
 2. **0:40–1:40 — F1, the causeway.** 57% of the bus's journey is two bridge
-   crossings. The bus is 4.4× slower than the taxi *and* 8.5× cheaper. That
+   crossings. The bus is 5.5× slower than the taxi *and* 8.5× cheaper. That
    is why young Maldivians take taxis.
 3. **1:40–2:40 — F2, F3, F4, the misallocation.** Load factor is measured per
-   stop-to-stop segment, not per route: R1's fullest segment is 77% of an
-   84-seat double-decker, but the airport segment STELCO→VIA hits **104%** on a
-   52-seat bus, because every airport passenger funnels through it. R3 is an
+   stop-to-stop segment, not per route: R1's fullest segment is 90% of a
+   72-seat double-decker, but the airport segment STELCO→VIA hits **98%** on a
+   55-seat coach, because every airport passenger funnels through it. R3 is an
    hourly bus with a 30-minute expected wait, the airport buses run the same
    frequency at 03:00 as at 08:00, and a third of arriving passengers (33.1%)
    land in a three-hour window.
 4. **2:40–4:10 — the tool.** Live demo: move 6 trips, watch over-capacity
-   fall by 200 passengers, unmet demand fall, and the taxi capture change.
-   Six scenarios, one recommended package — all re-timings, zero new buses.
+   fall by 404 passengers, unmet demand fall from 10.0% to 6.0%, and the taxi
+   capture change. Five scenarios, one recommended package — all re-timings,
+   zero new buses.
 5. **4:10–5:00 — deliverable and ask.** The reconciled dataset, a
    holdout-validated model, a first-ever GTFS feed for Greater Malé, and a
    2-page policy brief. *What we need from MTCC: current schedules, the fleet

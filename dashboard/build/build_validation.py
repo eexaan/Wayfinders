@@ -416,12 +416,12 @@ def rebuild_airport_profile() -> pd.DataFrame:
         "hour": range(24),
         "macl_international_arrival_share": (flight_share / 100).round(5).to_numpy(),
         "macl_share_pct": pax_share.round(2).to_numpy(),
-        "mbs_yeardomestic_arrivals_2025": yb["dom_arrivals"],
-        "mbs_yearintl_arrivals_2025": yb["intl_arrivals"],
+        "mbs_year_domestic_arrivals_2025": yb["dom_arrivals"],
+        "mbs_year_intl_arrivals_2025": yb["intl_arrivals"],
         "macl_intl_adult_arrivals_2025": macl["arr_adults"],
         "macl_coverage_of_intl_pct": round(macl["arr_pax"] / yb["intl_arrivals"] * 100, 1),
-        "mbs_yeardomestic_arrivals_per_day": round(yb["dom_arrivals"] / 365),
-        "mbs_yearintl_arrivals_per_day": round(yb["intl_arrivals"] / 365),
+        "mbs_year_domestic_arrivals_per_day": round(yb["dom_arrivals"] / 365),
+        "mbs_year_intl_arrivals_per_day": round(yb["intl_arrivals"] / 365),
     })
 
     path = OUT / "airport_demand_profile.csv"
