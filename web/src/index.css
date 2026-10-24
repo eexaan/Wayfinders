@@ -258,6 +258,10 @@ main {
   color: var(--ink-3);
   margin-right: 2px;
 }
+/* the colour switch sits under the basemap switch, same right edge */
+.map-tools-colour {
+  top: 52px;
+}
 .map-tools button {
   border: 1px solid var(--line);
   background: var(--surface);

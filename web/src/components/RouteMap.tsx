@@ -4,14 +4,46 @@ import L from 'leaflet'
 
 import { BAND_LABEL, fmtHour, type Band, type Data, type Route, type Segment, type Stop } from '../data'
 import { HOME_BOUNDS, MAX_ZOOM, MIN_ZOOM, PAN_BOUNDS, TILE_ATTRIBUTION, TILE_URL } from '../mapArea'
-import { BAND_COLOUR as COLOUR } from '../colours'
+import { BAND_COLOUR as COLOUR, ROUTE_COLOUR } from '../colours'
 
 type Basemap = 'osm' | 'outline'
+type ColourBy = 'band' | 'route'
 
 // worst on top: where routes share a road, the fullest one is what you see
 const ORDER: Record<Band, number> = { unknown: 0, room: 1, busy: 2, over: 3 }
 const INK = '#16202b'
 const LINE = { lineCap: 'round' as const, lineJoin: 'round' as const }
+
+// Stroke widths are CSS px and Leaflet does NOT scale them with zoom, so a
+// fixed pixel width covers more ground as you zoom out. At the app's default
+// z13 that made the selected route's casing ~230 m of "road" over an island
+// whose streets are 7-15 m - it read as a ribbon until you zoomed in.
+//
+// The map is a scale model, so the line has to be anchored to the ground, not
+// the screen: W below is the width at SCALE_ZOOM (z16 = 2.38 m/px), where a
+// 3 px route is ~7 m, about one lane. groundWidth() multiplies by 2^(zoom-16)
+// so that real width - and therefore the line-to-road ratio the eye judges -
+// stays constant at every zoom. The clamps exist because below ~1 px a stroke
+// cannot be drawn and above ~7 px it covers the street it sits on.
+const SCALE_ZOOM = 16
+const groundWidth = (base: number, zoom: number, min = 1, max = 7) =>
+  Math.min(max, Math.max(min, base * Math.pow(2, zoom - SCALE_ZOOM)))
+
+// Current Leaflet zoom, re-read on zoomend so styles follow the scale.
+function useZoom(): number {
+  const map = useMap()
+  const [zoom, setZoom] = useState(() => map.getZoom())
+  useEffect(() => {
+    const sync = () => setZoom(map.getZoom())
+    map.on('zoomend', sync)
+    return () => {
+      map.off('zoomend', sync)
+    }
+  }, [map])
+  return zoom
+}
+
+const W = { segment: 4.5, route: 3, routeHot: 5, unknown: 2.5, unknownHot: 3.5 }
 
 // offline fallback (dashboard/build/build_basemap.py): sea = container background.
 // Used when OSM tiles cannot be fetched, so the demo still works without a network.
@@ -74,6 +106,54 @@ function Label({ at, dir, className, children }: {
   )
 }
 
+// The selected route's own layers: a dark casing plus one coloured line per
+// segment. A separate component because it needs the map's zoom, and useMap()
+// is only valid inside <MapContainer>. The casing is a fixed +2 px outline
+// rather than a scaled width, so it stays a hairline at overview and a border
+// at street level instead of growing into a slab.
+const FocusLines = memo(function FocusLines({
+  segments,
+  identity,
+}: {
+  segments: Segment[]
+  identity?: string
+}) {
+  const zoom = useZoom()
+  const segWeight = groundWidth(W.segment, zoom)
+  return (
+    <>
+      <Polyline
+        positions={segments.map((s) => s.coords)}
+        pathOptions={{ ...LINE, color: INK, weight: segWeight + 2, interactive: false }}
+      />
+      {segments.map((sg, j) => (
+        <Polyline
+          key={j}
+          positions={sg.coords}
+          pathOptions={{
+            ...LINE,
+            // A route with an identity hue is drawn in it edge to edge, so the
+            // selected route still reads as one route; load stays legible in
+            // the tooltip, the panel gauge and the hourly chart.
+            color: identity ?? (sg.peakPct === null ? '#ffffff' : COLOUR[sg.band]),
+            weight: segWeight,
+          }}
+        >
+          <Tooltip sticky>
+            <b>
+              {sg.from} → {sg.to}
+            </b>
+            <br />
+            {sg.peakPct !== null
+              ? `${Math.round(sg.peakPct)}% of seats filled at its busiest (${fmtHour(sg.peakHour!)})`
+              : 'no passenger counts'}
+          </Tooltip>
+        </Polyline>
+      ))}
+    </>
+  )
+})
+
 // One route's whole line as a single multi-polyline. Memoised on primitive
 // props: hovering a route re-renders two lines, not the whole map.
 const RouteLine = memo(function RouteLine({
@@ -82,6 +162,7 @@ const RouteLine = memo(function RouteLine({
   hot,
   dimmed,
   hidden,
+  colourBy,
   onSelect,
   onHover,
 }: {
@@ -90,22 +171,32 @@ const RouteLine = memo(function RouteLine({
   hot: boolean
   dimmed: boolean
   hidden: boolean
+  colourBy: ColourBy
   onSelect: (code: string) => void
   onHover: (code: string | null) => void
 }) {
   const counted = route.peakPct !== null
+  const zoom = useZoom()
+  // In "By route" only the counted routes get an identity hue; the rest keep
+  // grey and dashes so the five measured routes stay the loud ones.
+  const identity = colourBy === 'route' ? ROUTE_COLOUR[route.code] : undefined
   const pathOptions = useMemo<L.PathOptions>(
     () =>
       counted
-        ? { ...LINE, color: COLOUR[route.band], weight: hot ? 8 : 5, opacity: hidden ? 0 : dimmed ? 0.15 : 1 }
+        ? {
+            ...LINE,
+            color: identity ?? COLOUR[route.band],
+            weight: groundWidth(hot ? W.routeHot : W.route, zoom),
+            opacity: hidden ? 0 : dimmed ? 0.15 : 1,
+          }
         : {
             ...LINE,
             color: COLOUR.unknown,
-            weight: hot ? 6 : 3.5,
+            weight: groundWidth(hot ? W.unknownHot : W.unknown, zoom),
             opacity: hidden ? 0 : dimmed ? 0.2 : 0.95,
             dashArray: '7 5',
           },
-    [counted, hot, dimmed, hidden, route.band],
+    [counted, hot, dimmed, hidden, route.band, identity, zoom],
   )
   const eventHandlers = useMemo(
     () => ({
@@ -139,6 +230,10 @@ const Stops = memo(function Stops({
   stops: Stop[]
   selectedCode: string | null
 }) {
+  // Stops shrink with the lines, or they would dominate the thinner routes at
+  // overview; the selected route's stops stay big enough to hit.
+  const zoom = useZoom()
+  const scale = Math.min(1, Math.max(0.8, Math.pow(2, zoom - SCALE_ZOOM)))
   return (
     <>
       {stops.map((s) => {
@@ -147,10 +242,10 @@ const Stops = memo(function Stops({
           <CircleMarker
             key={s.code}
             center={[s.lat, s.lon]}
-            radius={mine ? 4 : 2.5}
+            radius={mine ? 4 * scale : 2.5 * scale}
             pathOptions={{
               color: INK,
-              weight: mine ? 2 : 1.2,
+              weight: mine ? Math.max(1, 2 * scale) : Math.max(0.8, 1.2 * scale),
               fillColor: mine ? '#fff' : '#dfe3e6',
               fillOpacity: 1,
               opacity: mine ? 1 : 0.75,
@@ -189,6 +284,7 @@ export function RouteMap({
 }) {
   const [hover, setHover] = useState<string | null>(null)
   const [basemap, setBasemap] = useState<Basemap>('osm')
+  const [colourBy, setColourBy] = useState<ColourBy>('band')
   const mapRef = useRef<L.Map | null>(null)
   const tiles = useRef({ loaded: 0, errors: 0 })
 
@@ -281,7 +377,12 @@ export function RouteMap({
             attribution={TILE_ATTRIBUTION}
             maxZoom={MAX_ZOOM}
             maxNativeZoom={19}
-            detectRetina
+            // NO detectRetina. Leaflet implements it by halving tileSize and
+            // doing zoomOffset++ / maxZoom--, so on any display with
+            // devicePixelRatio > 1 (or browser zoom above 100%) the layer's
+            // maxZoom silently becomes 18 and _setView bails out at map zoom
+            // 19, loading no tiles at all - a blank map at full zoom.
+            // OSM serves no @2x raster anyway, so it only fetched extra tiles.
             // keep the zoom animation smooth: no tile requests mid-zoom, and
             // hold the neighbouring levels so a zoom-out never shows blank
             updateWhenZooming={false}
@@ -314,37 +415,25 @@ export function RouteMap({
             hot={hover === route.code && !selected}
             dimmed={!!selected}
             hidden={selected?.code === route.code}
+            colourBy={colourBy}
             onSelect={onSelect}
             onHover={setHover}
           />
         ))}
 
-        <Stops stops={data.stops} selectedCode={selected?.code ?? null} />
+        {/* Stops live in their own pane above the overlay pane, not inline with
+            the routes. Every Polyline shares Leaflet's single SVG renderer, so
+            stacking was decided by insertion order: the selected route's
+            casing and segment lines are added after the stops and painted on
+            top of all 97 of them. A separate pane makes the order explicit, so
+            a stop is never hidden by a line regardless of which route is open. */}
+        <Pane name="stops" style={{ zIndex: 450 }}>
+          <Stops stops={data.stops} selectedCode={selected?.code ?? null} />
+        </Pane>
 
         {focus && selected && (
           <>
-            <Polyline
-              key={`${selected.code}-casing`}
-              positions={focus.segs.map((s) => s.coords)}
-              pathOptions={{ ...LINE, color: INK, weight: 12, interactive: false }}
-            />
-            {focus.segs.map((sg, j) => (
-              <Polyline
-                key={`${selected.code}-${j}`}
-                positions={sg.coords}
-                pathOptions={{ ...LINE, color: sg.peakPct === null ? '#ffffff' : COLOUR[sg.band], weight: 7 }}
-              >
-                <Tooltip sticky>
-                  <b>
-                    {sg.from} → {sg.to}
-                  </b>
-                  <br />
-                  {sg.peakPct !== null
-                    ? `${Math.round(sg.peakPct)}% of seats filled at its busiest (${fmtHour(sg.peakHour!)})`
-                    : 'no passenger counts'}
-                </Tooltip>
-              </Polyline>
-            ))}
+            <FocusLines segments={focus.segs} identity={colourBy === 'route' ? ROUTE_COLOUR[selected.code] : undefined} />
             <Label at={focus.start.at} dir="left" className="end-label">
               <b>{focus.start.label}:</b> {focus.start.name}
             </Label>
@@ -407,16 +496,46 @@ export function RouteMap({
         </button>
       </div>
 
+      {/* Two meanings for one hue is the trap here: on this map colour normally
+          means load, so the switch is explicit rather than automatic. */}
+      <div className="card map-tools map-tools-colour">
+        <span className="map-tools-label">Colour</span>
+        <button
+          className={colourBy === 'band' ? 'on' : ''}
+          onClick={() => setColourBy('band')}
+          title="Colour each line by how full the buses are"
+        >
+          How full
+        </button>
+        <button
+          className={colourBy === 'route' ? 'on' : ''}
+          onClick={() => setColourBy('route')}
+          title="Give each route with passenger counts its own colour"
+        >
+          By route
+        </button>
+      </div>
+
       <div className="card map-title">
         {selected ? (
           <>
-            <span className="chip" style={{ background: COLOUR[selected.band] }}>
+            <span
+              className="chip"
+              style={{
+                background:
+                  colourBy === 'route' ? (ROUTE_COLOUR[selected.code] ?? COLOUR[selected.band]) : COLOUR[selected.band],
+              }}
+            >
               {selected.code}
             </span>
             <span>
               <b>{selected.name}</b>
               <br />
-              <small>Colour shows how full each stretch gets</small>
+              <small>
+                {colourBy === 'route' && ROUTE_COLOUR[selected.code]
+                  ? 'Colour identifies the route'
+                  : 'Colour shows how full each stretch gets'}
+              </small>
             </span>
             <button className="link-btn" onClick={() => onSelect(null)}>
               ← All routes
@@ -431,14 +550,34 @@ export function RouteMap({
         )}
       </div>
 
-      <div className="card legend" aria-label="Legend: how full the buses get">
-        <div className="legend-title">Seats filled at the busiest time</div>
-        {(['over', 'busy', 'room', 'unknown'] as Band[]).map((b) => (
-          <div className="legend-row" key={b}>
-            <span className={`swatch${b === 'unknown' ? ' dashed' : ''}`} style={{ borderColor: COLOUR[b] }} />
-            {BAND_LABEL[b]}
-          </div>
-        ))}
+      <div className="card legend" aria-label={colourBy === 'route' ? 'Legend: route colours' : 'Legend: how full the buses get'}>
+        {colourBy === 'route' ? (
+          <>
+            <div className="legend-title">Routes with passenger counts</div>
+            {data.routes
+              .filter((r) => ROUTE_COLOUR[r.code])
+              .map((r) => (
+                <div className="legend-row" key={r.code}>
+                  <span className="swatch" style={{ borderColor: ROUTE_COLOUR[r.code] }} />
+                  <b>{r.code}</b> {r.name}
+                </div>
+              ))}
+            <div className="legend-row legend-sep">
+              <span className="swatch dashed" style={{ borderColor: COLOUR.unknown }} />
+              <span>No passenger counts (10)</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="legend-title">Seats filled at the busiest time</div>
+            {(['over', 'busy', 'room', 'unknown'] as Band[]).map((b) => (
+              <div className="legend-row" key={b}>
+                <span className={`swatch${b === 'unknown' ? ' dashed' : ''}`} style={{ borderColor: COLOUR[b] }} />
+                {BAND_LABEL[b]}
+              </div>
+            ))}
+          </>
+        )}
         <div className="legend-row legend-sep">
           <span className="swatch-dot" aria-hidden />
           Bus stop ({data.stops.length})
