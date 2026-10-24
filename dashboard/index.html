@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wayfinders · Greater Malé Bus Supply Decision Tool</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="brand">
+        <h1>Wayfinders</h1>
+        <span class="subtitle">Greater Malé · MTCC Bus Supply Decision Tool</span>
+      </div>
+      <div class="topbar-meta">
+        <div class="service-pill" id="service-day-banner" title="Official RTL 2026 feed is time-filtered from the moment of the call">
+          <strong>Captured Window:</strong> Saturday 2026-10-24 · 11:00–24:00 (00:00–10:59 not captured)
+        </div>
+        <button class="btn-drawer" id="btn-toggle-drawer" type="button">
+          Coverage &amp; Methodology (F1–F6)
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace: C1 Map + C2 Route Panel -->
+    <main class="workspace">
+      <!-- C1: Map -->
+      <section class="map-pane">
+        <div class="map-overlay-top">
+          <!-- Colour mode toggle + Legend -->
+          <div class="map-control-card">
+            <div class="toggle-group" role="group" aria-label="Map colour mode">
+              <button type="button" class="toggle-btn active" id="mode-load-btn">Load Factor</button>
+              <button type="button" class="toggle-btn" id="mode-rtl-btn">Official RTL Colour</button>
+            </div>
+            <div id="load-legend" style="display:flex; gap:10px; align-items:center;">
+              <span class="legend-item"><i class="swatch-line" style="background:#e9222a"></i> ≥100% Over</span>
+              <span class="legend-item"><i class="swatch-line" style="background:#ff7f0e"></i> 60–99% Busy</span>
+              <span class="legend-item"><i class="swatch-line" style="background:#8a9992"></i> &lt;60%</span>
+              <span class="legend-item"><i class="swatch-dashed"></i> No demand data (10)</span>
+            </div>
+          </div>
+
+          <!-- Causeway + Stops toggles -->
+          <div class="map-control-card">
+            <label class="checkbox-label" title="Highlight segments ≥ 10 min (20-min causeway crossings &amp; VIA terminal approach)">
+              <input type="checkbox" id="toggle-causeway" checked />
+              <i class="swatch-causeway"></i> Causeway ≥10 min
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="toggle-stops" checked />
+              Stops (97)
+            </label>
+          </div>
+        </div>
+
+        <div id="map"></div>
+
+        <div class="map-footer-note">
+          Schematic stop-to-stop geometry · Basemap © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" style="color:inherit;">OpenStreetMap contributors</a>
+        </div>
+      </section>
+
+      <!-- C2: Route Panel -->
+      <aside class="route-panel" id="route-panel">
+        <!-- Route Quick Selector Strip -->
+        <div class="route-strip" id="route-strip"></div>
+
+        <!-- 1. Route Header -->
+        <div class="route-header">
+          <div class="route-title-row">
+            <div class="route-code-badge">
+              <span class="route-code-tag" id="rp-code">R1</span>
+              <span class="route-name-en" id="rp-name">West Park to HM Phase 1</span>
+            </div>
+            <span class="route-name-dv dv" id="rp-name-dv">އެޗްއެމް ފޭސް 1</span>
+          </div>
+          <div class="route-meta-grid">
+            <div class="meta-cell">
+              <span class="meta-label">Bus Type</span>
+              <span class="meta-val" id="rp-bustype">Double decker</span>
+            </div>
+            <div class="meta-cell" id="rp-seats-cell" title="">
+              <span class="meta-label">Seats (team) ⓘ</span>
+              <span class="meta-val" id="rp-seats">84</span>
+            </div>
+            <div class="meta-cell">
+              <span class="meta-label">Official Fare</span>
+              <span class="meta-val" id="rp-fare">10 MVR</span>
+            </div>
+            <div class="meta-cell" id="rp-trips-cell" title="">
+              <span class="meta-label">Trips / Day</span>
+              <span class="meta-val" id="rp-trips">61 (40 cap.)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Load Factor Band -->
+        <div class="panel-card">
+          <div class="card-header">
+            <span class="card-title">Saturday Load Factor Band</span>
+            <span class="badge-note" id="rp-demand-source">MTCC observed</span>
+          </div>
+          <div id="rp-band-container"></div>
+        </div>
+
+        <!-- 3. Demand vs Service by Hour -->
+        <div class="panel-card">
+          <div class="card-header">
+            <span class="card-title">Demand vs Seat Capacity by Hour</span>
+            <div class="toggle-group" id="daytype-switcher">
+              <button type="button" class="toggle-btn active" data-day="sat_holiday">Sat</button>
+              <button type="button" class="toggle-btn" data-day="weekday">Weekday</button>
+              <button type="button" class="toggle-btn" data-day="friday">Friday</button>
+            </div>
+          </div>
+          <div class="chart-legend">
+            <span><i class="dot-swatch" style="background:#e59849"></i>Demand (modelled 24h)</span>
+            <span><i class="dot-swatch" style="background:#4fa39b"></i>Seat Capacity (11–23h captured)</span>
+            <span><i class="dot-swatch" style="background:#262e2b; border:1px dashed #6e7772"></i>00–10h Not captured</span>
+          </div>
+          <div class="chart-well" id="rp-hourly-chart"></div>
+        </div>
+
+        <!-- 4. Timetable Ribbon -->
+        <div class="panel-card">
+          <div class="card-header">
+            <span class="card-title">Captured Timetable Ribbon (11:00–23:59)</span>
+            <span class="badge-note" id="rp-capture-note">Starts at Trip #22 (11:20)</span>
+          </div>
+          <div class="chart-well" id="rp-ribbon-chart"></div>
+        </div>
+
+        <!-- 5. Day-type Strip -->
+        <div class="panel-card">
+          <div class="card-header">
+            <span class="card-title">Boardings by Day-Type</span>
+            <span class="badge-note">Demand only · Service not captured by day</span>
+          </div>
+          <div id="rp-daytype-strip"></div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- C3: Scenario Bar (Always Visible at Bottom) -->
+    <footer class="scenario-bar">
+      <div class="scenario-controls">
+        <div class="scenario-buttons" id="scenario-buttons">
+          <button type="button" class="scen-btn active" data-scen="S0_baseline" title="Current captured schedule">
+            S0 Baseline
+          </button>
+          <button type="button" class="scen-btn" data-scen="S2_airport_retimed" title="+1 dep/h for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00">
+            S2 Airport
+          </button>
+          <button type="button" class="scen-btn" data-scen="S3_rebalanced_to_corridor" title="6 trips off airport lull (13–14h) onto R1/R2 peak (16–18h)">
+            S3 Rebalance
+          </button>
+          <button type="button" class="scen-btn" data-scen="S4_express_peak" title="+1 R1/R2 skip-stop departure per hour 15:00–18:00">
+            S4 Express
+          </button>
+          <button type="button" class="scen-btn rec" data-scen="S5_recommended_package" title="Recommended: S2 + S4 combined (re-timing only, 0 new buses)">
+            ★ S5 Package
+          </button>
+        </div>
+
+        <div class="slider-row">
+          <label for="rebalance-slider">Reassign airport → R1/R2 (0–12 trips):</label>
+          <input type="range" id="rebalance-slider" min="0" max="12" step="1" value="0" />
+          <strong id="slider-val-label">0 trips</strong>
+          <span class="interp-tag" id="interp-badge">Linear interpolation (S0↔S3)</span>
+        </div>
+      </div>
+
+      <!-- 5 KPI Tiles -->
+      <div class="kpi-grid" id="kpi-grid">
+        <div class="kpi-tile">
+          <span class="kpi-label">Over-Capacity Boardings</span>
+          <div class="kpi-main">
+            <span class="kpi-val" id="kpi-overcap">360</span>
+            <span class="kpi-delta neutral" id="kpi-overcap-delta">baseline</span>
+          </div>
+          <span class="kpi-sub" id="kpi-overcap-sub">R1: 317 · R2: 24 · R7: 13 · R3: 5</span>
+        </div>
+
+        <div class="kpi-tile">
+          <span class="kpi-label">Unmet Demand Share</span>
+          <div class="kpi-main">
+            <span class="kpi-val" id="kpi-unmet">3.68%</span>
+            <span class="kpi-delta neutral" id="kpi-unmet-delta">baseline</span>
+          </div>
+          <span class="kpi-sub">Of 9,805 captured-window pax</span>
+        </div>
+
+        <div class="kpi-tile">
+          <span class="kpi-label">Mean Wait (Captured)</span>
+          <div class="kpi-main">
+            <span class="kpi-val" id="kpi-wait">10.9 min</span>
+            <span class="kpi-delta neutral" id="kpi-wait-delta">baseline</span>
+          </div>
+          <span class="kpi-sub">Demand-weighted (headway ÷ 2)</span>
+        </div>
+
+        <div class="kpi-tile">
+          <span class="kpi-label">Trips (Captured Window)</span>
+          <div class="kpi-main">
+            <span class="kpi-val" id="kpi-trips">162</span>
+            <span class="kpi-delta neutral" id="kpi-trips-delta">baseline</span>
+          </div>
+          <span class="kpi-sub">Re-timings only · 0 new buses</span>
+        </div>
+
+        <div class="kpi-tile" title="On price alone (VOT=0), 74.7% of R1/R2 taxi riders would switch (3,833/day network-wide). On generalised cost (VOT 250 MVR/h), 0.05% switch on R1/R2 because the 70-min bus ride spends 40 min on two causeway crossings.">
+          <span class="kpi-label">Taxi Capture (Gen. Cost)</span>
+          <div class="kpi-main">
+            <span class="kpi-val" id="kpi-taxi">191/d</span>
+            <span class="kpi-delta neutral" id="kpi-taxi-delta">baseline</span>
+          </div>
+          <span class="kpi-sub" id="kpi-taxi-sub">Price-only: 75% · w/ time: 0.05% (R1)</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- C4: Methodology & Data Coverage Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2>Data Coverage, Methodology &amp; Report Figures (F1–F6)</h2>
+        <button class="btn-drawer" id="btn-close-drawer" type="button">Close ✕</button>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-title">Key Data Guardrails (Why Numbers Are Shown As Bands &amp; Gaps)</div>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+          <strong>1. Capture Window (11:00–24:00):</strong> The official RTL 2026 endpoint returns departures from the moment of the call to midnight on Saturday 2026-10-24. Hours 00:00–10:59 were not in the feed and are rendered as <em>Not captured</em>, never as zero.<br/>
+          <strong>2. Load-Factor Band (Avg ↔ Peak):</strong> MTCC ridership does not specify whether <code>total_pax</code> is one-direction or two-direction. We report both the upper bound (every passenger rides end-to-end) and the lower bound (uniform alighting).<br/>
+          <strong>3. 10 Routes With No Ridership:</strong> Only R1, R2, R3, R4, and R7 have MTCC ridership series. Routes R5, R6, R8–R15 are explicitly marked <code>NO DEMAND DATA</code> rather than zero-filled.<br/>
+          <strong>4. MACL Airport Coverage:</strong> MACL hourly data covers <strong>36.5%</strong> of international arrivals and <strong>0%</strong> of domestic arrivals (MBS Yearbook 11.13 provides total levels).
+        </p>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-title">Route Coverage Matrix (15 Official RTL Routes)</div>
+        <table class="coverage-table">
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Official Name</th>
+              <th>Dhivehi</th>
+              <th>Bus Type &amp; Seats</th>
+              <th>Demand Data</th>
+              <th>Service Capture</th>
+              <th>Load Band (Sat)</th>
+            </tr>
+          </thead>
+          <tbody id="coverage-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="panel-card">
+        <div class="card-title">Pre-Rendered Report Figures (docs/figures/F1–F6)</div>
+        <div class="figures-grid">
+          <div class="fig-card">
+            <span>F1 — Causeway Share of Journey Time (57% on R1)</span>
+            <img src="../docs/figures/F1_bridge_share.png" alt="F1 Bridge Share" loading="lazy" />
+          </div>
+          <div class="fig-card">
+            <span>F2 — Route Load Factor Band (Peak vs Avg)</span>
+            <img src="../docs/figures/F2_load_factors.png" alt="F2 Load Factors" loading="lazy" />
+          </div>
+          <div class="fig-card">
+            <span>F3 — Demand by Day-Type (Friday −37%)</span>
+            <img src="../docs/figures/F3_demand_daytype.png" alt="F3 Demand Daytype" loading="lazy" />
+          </div>
+          <div class="fig-card">
+            <span>F4 — Airport Tri-Peaked Arrivals vs Flat Bus Frequency</span>
+            <img src="../docs/figures/F4_airport_mismatch.png" alt="F4 Airport Mismatch" loading="lazy" />
+          </div>
+          <div class="fig-card">
+            <span>F5 — Scenario KPIs (S0 Baseline to S5 Package)</span>
+            <img src="../docs/figures/F5_scenario_kpis.png" alt="F5 Scenario KPIs" loading="lazy" />
+          </div>
+          <div class="fig-card">
+            <span>F6 — Generalised Cost: Bus Wins on Price, Loses on Time</span>
+            <img src="../docs/figures/F6_generalised_cost.png" alt="F6 Generalised Cost" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
