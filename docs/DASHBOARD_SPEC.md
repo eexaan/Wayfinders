@@ -731,6 +731,14 @@ re-render the whole page.
 - **Line weight:** 4 px for the selected route, 2 px otherwise.
 - **Stops:** circle markers, radius 3 (2 when zoomed out), white fill, grey
   stroke. Tooltip = stop name + which routes serve it.
+- **Stops are always drawn, not only for a selected route.** All 97 stop codes
+  from `route_stops.csv` (184 stop-route rows; 45 stops are served by more than
+  one route) appear in the all-routes view at radius 4, filled `#fff` with the
+  `INK` stroke, and every one carries a tooltip with its English name, its
+  Dhivehi name in Thaana, and the routes that call there. Selecting a route
+  promotes that route's stops and drops the rest to radius 2.5, fill `#dfe3e6`,
+  `interactive: false` - so the non-selected dots cannot steal a hover from the
+  lines. A `Bus stop (97)` row sits at the foot of the legend.
 - **Bridge segments:** render segments with `median_segment_minutes` ≥ 10
   in a heavier red stroke on top of the route line. These are the two
   20-minute crossings on R1/R2 and the 15-minute VIA terminal segments.

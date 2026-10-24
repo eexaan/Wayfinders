@@ -2,7 +2,7 @@ import { memo, useEffect, useMemo, useRef, useState } from 'react'
 import { CircleMarker, GeoJSON, MapContainer, Pane, Polyline, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 
-import { BAND_LABEL, fmtHour, type Band, type Data, type Route, type Segment } from '../data'
+import { BAND_LABEL, fmtHour, type Band, type Data, type Route, type Segment, type Stop } from '../data'
 import { HOME_BOUNDS, MAX_ZOOM, MIN_ZOOM, PAN_BOUNDS, TILE_ATTRIBUTION, TILE_URL } from '../mapArea'
 import { BAND_COLOUR as COLOUR } from '../colours'
 
@@ -125,6 +125,56 @@ const RouteLine = memo(function RouteLine({
         <i>Click to see this route</i>
       </Tooltip>
     </Polyline>
+  )
+})
+
+// All 97 stops at once. Unselected-route stops stay small and quiet so the
+// lines still read; the selected route's stops grow and offer a tooltip. Stops
+// are drawn whether or not a route is focused - an unlabelled dot on the map
+// is still the answer to "where does the bus stop".
+const Stops = memo(function Stops({
+  stops,
+  selectedCode,
+}: {
+  stops: Stop[]
+  selectedCode: string | null
+}) {
+  return (
+    <>
+      {stops.map((s) => {
+        const mine = selectedCode === null || s.routes.includes(selectedCode)
+        return (
+          <CircleMarker
+            key={s.code}
+            center={[s.lat, s.lon]}
+            radius={mine ? 4 : 2.5}
+            pathOptions={{
+              color: INK,
+              weight: mine ? 2 : 1.2,
+              fillColor: mine ? '#fff' : '#dfe3e6',
+              fillOpacity: 1,
+              opacity: mine ? 1 : 0.75,
+            }}
+            interactive={mine}
+          >
+            {mine && (
+              <Tooltip direction="top" offset={[0, -4]}>
+                <b>{s.name}</b>
+                {s.nameDv && (
+                  <>
+                    {' '}
+                    <span className="dv">{s.nameDv}</span>
+                  </>
+                )}
+                <br />
+                {s.routes.length > 1 ? `Routes ${s.routes.join(', ')}` : 'Served by this route only'}
+                {selectedCode === null && mine ? ' · click a route to filter' : ''}
+              </Tooltip>
+            )}
+          </CircleMarker>
+        )
+      })}
+    </>
   )
 })
 
@@ -269,6 +319,8 @@ export function RouteMap({
           />
         ))}
 
+        <Stops stops={data.stops} selectedCode={selected?.code ?? null} />
+
         {focus && selected && (
           <>
             <Polyline
@@ -292,20 +344,6 @@ export function RouteMap({
                     : 'no passenger counts'}
                 </Tooltip>
               </Polyline>
-            ))}
-            {focus.stops.map((s) => (
-              <CircleMarker
-                key={`${selected.code}-${s.code}`}
-                center={[s.lat, s.lon]}
-                radius={4}
-                pathOptions={{ color: INK, weight: 2, fillColor: '#fff', fillOpacity: 1 }}
-              >
-                <Tooltip direction="top" offset={[0, -4]}>
-                  <b>{s.name}</b>
-                  <br />
-                  Also served by {s.routes.filter((r) => r !== selected.code).join(', ') || 'no other route'}
-                </Tooltip>
-              </CircleMarker>
             ))}
             <Label at={focus.start.at} dir="left" className="end-label">
               <b>{focus.start.label}:</b> {focus.start.name}
@@ -401,6 +439,10 @@ export function RouteMap({
             {BAND_LABEL[b]}
           </div>
         ))}
+        <div className="legend-row legend-sep">
+          <span className="swatch-dot" aria-hidden />
+          Bus stop ({data.stops.length})
+        </div>
       </div>
     </>
   )

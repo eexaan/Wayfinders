@@ -328,6 +328,20 @@ main {
 .swatch.dashed {
   border-top-style: dotted;
 }
+.legend-sep {
+  margin-top: 4px;
+  padding-top: 5px;
+  border-top: 1px solid var(--line);
+}
+.swatch-dot {
+  width: 9px;
+  height: 9px;
+  margin: 0 8px 0 8px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: #fff;
+  flex: none;
+}
 .leaflet-tooltip {
   font: inherit;
   font-size: 13px;

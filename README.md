@@ -30,7 +30,7 @@ so zooming back over ground you have already covered costs no requests.
 
 | Panel | What it shows | What it is for |
 |---|---|---|
-| **Map** | All 15 routes as polylines on OpenStreetMap (Malé, airport island, Hulhumalé, Villimalé), coloured by how full each one runs | Find the corridors in trouble without reading a table |
+| **Map** | All 15 routes as polylines on OpenStreetMap (Malé, airport island, Hulhumalé, Villimalé), coloured by how full each one runs, with all 97 bus stops marked | Find the corridors in trouble without reading a table, and see where a passenger can actually board |
 | **Route panel** | Demand against seats hour by hour, the timetable ribbon, and where along the route the bus fills | See *when* and *where* the mismatch is, not just that it exists |
 | **Scenario bar** | Five fleet-neutral packages, every KPI shown with its delta against baseline | Move trips and read the consequence immediately |
 | **Method drawer** | Coverage matrix, capture window, source per table, the working-hours assumption | Audit any number without leaving the page |
