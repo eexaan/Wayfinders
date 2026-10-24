@@ -9,6 +9,45 @@ scraping, no data wrangling in the frontend — just read these tables.
 
 ---
 
+## 0. Quick start
+
+**You are building a static site. There is no backend, no database, no auth.**
+
+```bash
+# 1. serve it (fetch() is blocked over file://, so always serve)
+cd dashboard
+python -m http.server 8000
+# open http://localhost:8000
+```
+
+Layout to build into:
+
+```
+dashboard/
+  index.html          <- you create this
+  app.js              <- you create this
+  styles.css          <- you create this
+  data/               <- ALREADY THERE. read-only. do not regenerate.
+  build/              <- the scripts that produced data/. ignore them.
+```
+
+`dashboard/data/` currently holds **18 files, 280 KB total**. Copy nothing,
+compute nothing: load them with `fetch('./data/<name>.csv')` and parse with
+`d3-dsv` or `PapaParse` (both on CDN).
+
+Two CDN dependencies only:
+
+```html
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+```
+
+**If you need a field that is not in the tables below, do not derive it in JS.**
+Ask whoever owns `dashboard/build/build_data.py` to add it and re-export. The
+contract in §2 is frozen for that reason.
+
+---
+
 ## 1. The one-paragraph brief
 
 An interactive map of Greater Malé's 15 bus routes where an operator can
@@ -31,32 +70,51 @@ built by `dashboard/build/build_data.py`.
 
 ### 2.1 `route_lines.geojson` — the map geometry
 
-GeoJSON `FeatureCollection`, 15 features, one per route.
+GeoJSON `FeatureCollection`, **15 features**, one per route.
 
 ```jsonc
 {
   "type": "Feature",
-  "properties": { "route_code": "R1", "corridor": "male_hm1", "n_stops": 18 },
-  "geometry": { "type": "LineString", "coordinates": [[lon, lat], ...] }
+  "properties": {
+    "route_code": "R1",
+    "route_name": "West Park to HM Phase 1",
+    "colour": "#e9222a",       // official RTL colour - use it
+    "n_stops": 18
+  },
+  "geometry": { "type": "LineString", "coordinates": [[73.504676, 4.169366], ...] }
 }
 ```
 
-Coordinates are **[lon, lat]** (GeoJSON order), already in stop order, already
-clipped to Greater Malé. **Do not reverse them.** Draw straight
-`LineString` polylines — do not snap to roads. The map is schematic by
-design; snapping adds a dependency for no analytical gain.
+- Coordinates are **[lon, lat]** (GeoJSON order). **Do not reverse them.**
+- Already in stop order. Draw them as-is.
+- Draw straight `LineString` polylines. **Do not snap to roads** — the map is
+  schematic by design and snapping adds a dependency for no analytical gain.
+- The first and last coordinate of R1/R2 are the same place (West Park and its
+  opposite stop), so the line doubles back. That is correct, not a bug.
 
-### 2.2 `route_stops.csv` — 194 rows, 7 columns
+### 2.2 `route_stops.csv` — 184 rows (route-stop records), 7 columns
 
-| Column | Type | Example | Use |
+184 rows is **route × stop**, not unique stops: there are **97 unique
+`stop_code` values** across the 15 routes. A stop that several routes serve
+appears once per route, with its own `stop_order` on each.
+
+| Column | Type | Example | Notes |
 |---|---|---|---|
 | `route_code` | str | `R1` | join key |
-| `stop_seq` | int | `1` | order along the route |
-| `stop` | str | `Maafannu Bus Terminal` | label |
-| `stop_id` | int | `103` | join key (a stop appears on many routes) |
-| `lat` | float | `4.169366` | marker position |
-| `lon` | float | `73.504676` | marker position |
-| `corridors_served` | str | `male_airport,male_hm1,male_hm2` | which corridors reach this stop |
+| `stop_order` | int | `1` | position along that route, 1-based |
+| `stop_name` | str | `Maafannu Bus Terminal` | official English name |
+| `stop_name_dv` | str | `މާފަންނު ބަސްޓާރމިނަލް` | official Dhivehi name (UTF-8) |
+| `stop_code` | int | `103` | use this to de-duplicate stops across routes |
+| `lat` | float | `4.169366` | |
+| `lon` | float | `73.504676` | |
+
+Real first three rows:
+
+```csv
+route_code,stop_order,stop_name,stop_name_dv,stop_code,lat,lon
+R1,1,Maafannu Bus Terminal,މާފަންނު ބަސްޓާރމިނަލް,103,4.169366,73.504676
+R1,2,Tow Yard,ޓޯޔާރޑް,304,4.169349,73.510249
+```
 
 ### 2.3 `routes_master.csv` — 15 rows, one per route, OFFICIAL NAMING
 
@@ -166,6 +224,89 @@ R4 departures share from `route_service_by_hour.csv`.
 `Male City`, `Hulhumale Ph1`, `Hulhumale Ph2`, `Velana Airport`, `Villimale`,
 `Other`.
 
+### 2.14 `scenario_modal_shift.csv` — 36 rows (6 corridors × 6 scenarios)
+
+The per-corridor generalised-cost comparison. Drives the F6 figure and the
+"taxi capture" tile.
+
+| Column | Type | Example | Notes |
+|---|---|---|---|
+| `scenario` | str | `S0_baseline` | six values, same keys as §2.8 |
+| `corridor` | str | `male_hm1` | |
+| `mean_wait_min` | float | `9.9` | demand-weighted |
+| `bus_fare_mvr` | float | `10.0` | |
+| `bus_ride_min` | float | `70.0` | observed end-to-end |
+| `taxi_fare_mvr` | float | `85.0` | from the Avas fare matrix |
+| `taxi_per_passenger_mvr` | float | `42.5` | fare ÷ sharing factor (2) |
+| `taxi_ride_min` | float | `12.7` | observed median |
+| `gc_bus_mvr` | float | `342.9` | fare + (wait + ride) × 250 MVR/h |
+| `gc_taxi_mvr` | float | `116.2` | |
+| `gc_gap_mvr` | float | `226.7` | bus minus taxi |
+| `break_even_ride_min` | float | `15.6` | ride time at which the bus matches the taxi |
+| `ride_min_to_shed` | float | `54.4` | **the headline number per corridor** |
+| `p_taxi_to_bus_gc` | float | `0.0005` | logit probability on generalised cost |
+| `p_taxi_to_bus_price_only` | float | `0.7471` | same logit with time valued at zero |
+| `taxi_rides_per_day` | int | `1217` | observed |
+| `capturable_rides_per_day` | float | `0.6` | `p × rides` |
+| `capturable_rides_price_only` | float | `909.3` | |
+
+> **Render `p_taxi_to_bus_gc` and `p_taxi_to_bus_price_only` side by side.**
+> That pair is the whole argument: on price the bus wins (75%), on time it
+> loses (0.05%). Showing only one of them would misrepresent the finding.
+
+### 2.15 `scenario_modal_shift_summary.csv` — 6 rows
+
+`scenario`, `taxi_rides_capturable_per_day`, `taxi_rides_capturable_price_only`,
+`mean_gc_gap_mvr`, `min_ride_min_to_shed`, `taxi_rides_capturable_per_year`.
+Use this for the "taxi capture" KPI tile: read
+`taxi_rides_capturable_per_day` for the selected scenario.
+
+### 2.16 Five traps that will silently break the UI
+
+Read this before you write the chart layer. Each one produces a plausible but
+wrong chart, which is worse than an error.
+
+**1. `null` means "not captured", not "no bus".**
+`demand_supply_gap.trips_in_hour` is null for every hour before ~11:00, because
+the source feed is time-filtered (`capture_status` says so). If you plot those
+as 0 the chart will claim there are no buses in the morning. Render them as a
+gap — a shaded band, a dash, an explicit "not captured" label.
+
+**2. `demand_pax_est` exists for hours that have no capacity.**
+Demand is modelled for all 24 hours; service only for the captured ones. That
+means you can legitimately show **24 hours of demand against 13 hours of
+service** — and that juxtaposition is the clearest way to show the gap. Just
+label the capacity series as partial.
+
+**3. Load factor is a band, not a number.**
+`route_load` gives `load_factor_peak_pct` and `load_factor_avg_pct`. They differ
+by roughly 2×. Render both (range bar or a shaded band) and never present one
+as "the" load factor.
+
+**4. Ten routes have no ridership data at all.**
+`demand_source = 'NO DEMAND DATA'` for R5, R6, R8, R9, R10, R11, R12, R13,
+R14, R15. Do not render them as 0% — render them as unknown (grey, hatched,
+or omitted with a count). Only 5 routes have any demand figure: R1, R2, R3,
+R4, R7.
+
+**5. Dhivehi needs a Thaana font.**
+`route_name_dv` and `stop_name_dv` are Thaana script. Without a font that
+carries the glyphs they render as empty boxes. Add to your CSS:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thaana&display=swap');
+.dv { font-family: 'Noto Sans Thaana', sans-serif; direction: rtl; }
+```
+
+Also verify in a browser, never in a terminal — terminals reorder RTL text and
+make it look broken when it is fine.
+
+**Minor:** `trips_in_hour` is a float (`2.0`), not an int. `hour` is 0–23 with
+no zero-padding. `departure_time` is `"11:20:00"` (H:MM:SS), so slice it for
+display.
+
+---
+
 ## 3. Layout
 
 ```
@@ -176,9 +317,9 @@ R4 departures share from `route_service_by_hour.csv`.
 │                                            │  R1  West Park – HM Ph1     │
 │              MAP                           │  Double decker · 84 seats   │
 │   (Leaflet / MapLibre)                     │  ┌───────────────────────┐  │
-│                                            │  │ ▓▓▓▓▓▓▓▓▓▓░░░ 102%   │  │
+│                                            │  │ ▓▓▓▓▓▓▓▓▓░░░░  90%   │  │
 │   • 15 route polylines                    │  │ load factor band      │  │
-│     coloured by load factor               │  │ 51% ─────── 102%      │  │
+│     coloured by load factor               │  │ 45% ──────── 90%      │  │
 │   • 194 stop markers                       │  └───────────────────────┘  │
 │   • causeway segments highlighted          │  Trips/day 61  Boardings    │
 │     (≥10 min, thick red)                  │  5,212   Fare 10 MVR        │
@@ -193,9 +334,9 @@ R4 departures share from `route_service_by_hour.csv`.
 │                                            │  └────────────────────────┘ │
 ├────────────────────────────────────────────┴─────────────────────────────┤
 │  SCENARIO BAR                                                                  │
-│  [S0 Baseline] [S1 Friday] [S2 Airport] [S3 Rebalance] [S4 Express] [S5 All]│
+│  [S0 Baseline] [S2 Airport] [S3 Rebalance] [S4 Express] [S5 Package]        │
 │                                                                             │
-│  Over-capacity ▓ 1,715   Unmet ▓ 8.00%   Mean wait ▓ 11.6 min   Trips ▓ 371  │
+│  Over-capacity ▓ 360   Unmet ▓ 3.68%   Mean wait ▓ 10.9 min   Trips ▓ 162   │
 │  [───────────────●────────────────]  (trips slider)    Taxi capture ▓ 191/day │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
@@ -214,7 +355,11 @@ re-render the whole page.
   team prefers vector tiles). OSM raster tiles via
   `https://tile.openstreetmap.org/{z}/{x}/{y}.png` — **attribute
   © OpenStreetMap contributors** in the footer.
-- **Route lines:** from `route_lines.geojson`. Default colour scheme:
+- **Route metadata:** `routes_master.csv` is the lookup for every label on
+  the map and in the panel — official English name, Dhivehi name, colour,
+  fare, seats, trip counts.
+- **Route lines:** from `route_lines.geojson` (which already carries
+  `route_name` and the official `colour`). Default colour scheme:
   - `load_factor_peak_pct` ≥ 100 → red `#e9222a` (over capacity)
   - 60–100 → orange `#ff7f0e`
   - < 60 → grey `#9aa0a6`
@@ -228,6 +373,13 @@ re-render the whole page.
 - **Interactions:** hover a route → highlight + tooltip (route, bus type,
   load band, fare); click → select and populate the route panel; click a
   stop → show the stop's routes.
+- **Optional demand layer:** a taxi-OD heat layer built from
+  `taxi_od_by_hour.csv` (aggregate `rides` by pickup zone and hour) — this is
+  the revealed-demand story and it is worth one toggle. Zone names are:
+  `Male City`, `Hulhumale Ph1`, `Hulhumale Ph2`, `Velana Airport`, `Villimale`,
+  `Other`. This table has **no coordinates** — place zones at the reference
+  points you take from `route_stops.csv` (e.g. Maafannu Bus Terminal for
+  Malé, Hiya Flats for HM Ph1, VIA Domestic Terminal for the airport).
 - **Basemap note:** Malé is tiny (4 km). Default zoom 14, centre
   `4.195, 73.525`. Set `maxBounds` to the Greater Malé extent so the user
   cannot pan into the ocean.
@@ -253,8 +405,9 @@ Populated on route click. Contains:
 
 ### C3 — Scenario bar
 
-- Six buttons: **S0 Baseline · S1 Friday right-sized · S2 Airport re-timed ·
-  S3 Rebalanced to corridor · S4 Express added · S5 Recommended package**.
+- **Five** buttons: **S0 Baseline · S2 Airport re-timed · S3 Rebalanced to
+  corridor · S4 Express peak · S5 Recommended package**. There is no S1 — the
+  Friday scenario was withdrawn when the supply source changed (§2.8).
 - Clicking a button loads the row from `scenario_kpis.csv` into the KPI
   tiles and the corridor breakdown from `scenario_corridor_kpis.csv`.
 - Also expose **one live slider**: "trips reassigned from the airport routes
@@ -366,12 +519,18 @@ The dashboard is done when:
 5. The live "trips reassigned" slider moves the over-capacity tile and is
    labelled as an interpolation.
 6. Every modelled number carries a tooltip explaining it is modelled, and
-   the load factor is shown as a **band**.
-7. Routes without demand data are visibly marked as such.
-8. The OSM attribution is in the footer.
-9. It works at 1366×768 and on a projector (the pitch may be projected).
-10. Someone who did not build it can explain, in one sentence, what the
-    red lines mean.
+   the load factor is shown as a **band** (both `load_factor_peak_pct` and
+   `load_factor_avg_pct`), never as a single number.
+7. Routes without demand data are visibly marked as such — not drawn as 0%.
+8. Hours outside the capture window are visibly marked as "not captured", not
+   drawn as zero, and the captured window is stated on screen somewhere.
+9. A Dhivehi route name renders as Thaana script, not as empty boxes.
+10. The OSM attribution is in the footer.
+11. It works at 1366×768 and projected at 1920×1080 (the pitch will be
+    projected, and projector colour is worse than your monitor — check the
+    red/orange/grey legend is still distinguishable).
+12. Someone who did not build it can explain, in one sentence, what the red
+    lines mean.
 
 ---
 

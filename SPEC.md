@@ -228,29 +228,30 @@ analysis (§4 F5) as the primary claim**, not the point estimate.
 ## 6. Dashboard requirements
 
 The datathon's stated challenge is *"an interactive, GIS-powered statistical
-dashboard"*. Build to that spec.
+dashboard"*. **`docs/DASHBOARD_SPEC.md` is the authoritative build contract** —
+it holds the exact schema of every table, the component specs, the traps and
+the acceptance criteria. This section is the summary.
 
 **Must have**
-1. **Map** (Leaflet/MapLibre): OSM basemap, 15 route polylines coloured by
-   official RTL route colours, 613 stops sized by modelled boardings, the
-   causeway segments highlighted.
-2. **Route panel**: click a route → demand vs capacity by hour, by day-type;
-   load-factor band; schedule windows.
-3. **Scenario controls**: sliders/buttons for the 6 scenarios; KPI tiles
-   (over-capacity, unmet %, mean wait, trips/day, taxi capture) updating live.
+1. **Map** (Leaflet/MapLibre): OSM basemap, 15 route polylines in the official
+   RTL colours, 184 route-stop records (97 unique stops), the causeway
+   segments — every segment ≥ 10 min — highlighted.
+2. **Route panel**: click a route → demand vs capacity by hour, the load-factor
+   **band** (`load_factor_peak_pct` and `load_factor_avg_pct`), the official
+   English and Dhivehi names, fare, seats and trip counts.
+3. **Scenario controls**: 5 scenario buttons (S0, S2, S3, S4, S5 — there is no
+   S1), KPI tiles for over-capacity, unmet %, mean wait, trips and taxi
+   capture, each showing the delta against S0.
 4. **Charts**: the six figures in `docs/figures/` plus one interactive
    "demand vs service by hour" chart.
-5. **Coverage panel**: a route × what-we-have matrix, so gaps are visible
-   rather than hidden. *(This is a feature, not an embarrassment — it is the
-   "data gaps" contribution MBS asked for.)*
+5. **Coverage panel**: route × what-we-have, including the capture window and
+   the ten routes with no ridership data. *(This is a feature, not an
+   embarrassment — it is the "data gaps" contribution MBS asked for.)*
 
 **Nice to have**
-6. Before/after mode slide (baseline vs S5) with a corridor heatmap.
+6. A taxi-OD toggle on the map (the revealed-demand layer).
 7. A **synthesised GTFS feed** export for Greater Malé — no public GTFS
-   exists for Malé; ours would be the first, and it is loadable into Google
-   Maps / TransitApp.
-
----
+   exists for Malé; ours would be the first.
 
 ## 7. Fleet and capacity assumptions (team-provided — CONFIRM)
 
