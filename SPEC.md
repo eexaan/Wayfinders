@@ -279,17 +279,22 @@ than a result.
 
 | # | Scenario | What moves | Trips moved | Over-capacity | Unmet |
 |---|---|---|---|---|---|
-| S0 | Baseline | — | 0 | 381 | 3.79% |
-| S2 | Airport re-timed | 3 late-night airport trips → airport hours with unmet demand | 3 | 372 (−9) | 3.70% |
-| S3 | Rebalanced to the corridor | 8 trips off the airport afternoon lull → R1/R2 wherever it is over capacity | 8 | **95 (−286)** | 0.94% |
-| S4 | Express peak | 10 off-peak R1/R2 trips → R1/R2 peak hours | 10 | 132 (−249) | 1.31% |
-| **S5** | **Recommended package** | **S3 then S4** | **18** | **91 (−290)** | **0.91%** |
+| S0 | Baseline | — | 0 | 1009 | 10.04% |
+| S2 | Airport re-timed | 2 late-night airport trips → airport hours with unmet demand | 2 | 1007 (−2) | 10.01% |
+| S3 | Rebalanced to the corridor | 5 trips off the airport afternoon lull → R1 wherever it is over capacity | 5 | 661 (−348) | 6.57% |
+| S4 | Express peak | 1 off-peak R2 trip → the R1 peak | 1 | 937 (−72) | 9.32% |
+| **S5** | **Recommended package** | **S3 then S4** | **6** | **605 (−404)** | **6.01%** |
 
 Total trips stay at **162 in every scenario** (430 network-wide; the KPI is
-scoped to the five routes with ridership data). No donor is ever taken above
-79% load, and every move is logged in `scenario_moves.csv` with the unmet
-demand at the receiver before and after — so the effect of each individual trip
-is auditable, not just the aggregate.
+scoped to the five routes with ridership data). Every move is logged in
+`scenario_moves.csv` with the receiver's unmet demand before and after, so the
+effect of each individual trip is auditable, not just the aggregate.
+
+**A donor must still fit its own passengers after giving up the trip.** The
+ceiling is 100% of seats: a trip is only taken from an hour that stays within
+capacity once it loses that trip. The highest donor load is **66.3% before**
+and **99.5% after**, so no move creates a new over-capacity hour. The build
+asserts this, and `tests/test_reallocator.py` pins it.
 
 **Donors are chosen by lowest load, receivers by largest unmet demand, one trip
 at a time, with the load recomputed after every move.** Receivers are chosen by
@@ -297,11 +302,16 @@ the data, not by a hand-picked hour window: an earlier version restricted them
 to 15:00–20:00 and therefore refused to relieve R1 at 22:00, where the load is
 152%. The model was hiding its own best answer.
 
+**A move that is undone is not counted.** The greedy loop could previously take
+a trip from one hour and give it back on a later pass, logging the reversal as
+a second improvement. `net_moves()` cancels such pairs before the KPIs are
+computed, so `trips_moved` now equals the net change in the fleet.
+
 > **Two findings came out of enforcing fleet neutrality.**
 >
-> **1. Re-timing the airport buses alone barely helps (−9 boardings).** At
+> **1. Re-timing the airport buses alone barely helps (−2 boardings).** At
 > route-hour level the airport routes are *not* over capacity — their crowding
-> is concentrated on one segment (STELCO→VIA at 104%), and adding a trip to an
+> is concentrated on one segment (STELCO→VIA at 98%), and adding a trip to an
 > hour whose route average is 70% removes almost no unmet demand as measured
 > here. This is a limitation of a route-hour KPI, not evidence that the airport
 > bus is fine. It is why S3/S4 carry the capacity story and S2 is reported as a
@@ -314,6 +324,14 @@ to 15:00–20:00 and therefore refused to relieve R1 at 22:00, where the load is
 > **3. You cannot fine-tune with an 84-seat vehicle.** One trip into an hour
 > with 70 unmet passengers overshoots it to zero. The optimum is a small number
 > of large moves, not many small ones — which is also what a depot faces.
+>
+> **4. The corridor cannot bail itself out.** With the donor ceiling enforced,
+> S4 — the "express peak" scenario that re-times corridor trips into the
+> corridor peak — finds exactly **one** safe move. Every other R1 and R2
+> off-peak hour is already at 83–166% load, so taking a bus out of it would
+> strand passengers. The slack is on the airport routes, not the corridor. That
+> is the same finding as F1 arriving from the supply side: the corridor's
+> problem is journey time, not spare vehicles.
 
 **Caveat to state honestly:** the network-wide mean wait barely moves
 (10.8 → 10.8 min) because the changes are concentrated on a few corridors. The

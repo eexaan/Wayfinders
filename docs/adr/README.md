@@ -22,6 +22,7 @@ one, add a new ADR that supersedes it; do not silently edit.
 | [0011](0011-inferred-morning-service.md) | The morning is a bounded route-day **inference**, never hourly data | Accepted | report, pitch |
 | [0012](0012-working-hours-assumption.md) | Working hours assumed 08:00–16:00, published as a **band** | Accepted | report, dashboard |
 | [0013](0013-realtime-layer-deferred.md) | The **realtime layer is deferred**, with stated entry conditions | Accepted | report, pitch, roadmap |
+| [0014](0014-donor-ceiling.md) | **A trip move must not create a new over-capacity hour** | Accepted | model, dashboard |
 
 ## The six decisions most likely to be questioned
 

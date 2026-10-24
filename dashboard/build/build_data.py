@@ -546,6 +546,90 @@ def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFram
     return gap, load
 
 
+# A donor hour must still fit its own passengers after giving up the trip.
+# Raising this lets a scenario create a new over-capacity hour; that is a
+# transfer of the queue, not a relief.
+DONOR_CEILING_PCT = 100.0
+
+
+def net_moves(moves):
+    """Drop moves that exactly undo an earlier move.
+
+    The loop is greedy and recomputes after every step, so a receiver can
+    later become the cheapest donor and hand the trip straight back. The
+    fleet state is already correct once such a pair cancels, but counting
+    both rows inflates `trips_moved` and puts moves in the audit trail that
+    relieve nothing. Cancelling them makes the log equal the net change.
+    """
+    kept, pending = [], {}
+    for mv in moves:
+        key = (mv["from_route"], mv["from_hour"], mv["to_route"], mv["to_hour"])
+        reverse = (key[2], key[3], key[0], key[1])
+        if pending.get(reverse):
+            kept[pending[reverse].pop()] = None
+            continue
+        pending.setdefault(key, []).append(len(kept))
+        kept.append(mv)
+    return [mv for mv in kept if mv is not None]
+
+
+def reallocate(df, donor_rule, receiver_rule, n_moves, min_trips_after=1,
+               donor_ceiling_pct=DONOR_CEILING_PCT):
+    """Move up to n_moves trips, one at a time, donor -> receiver.
+
+    A donor is eligible only if its load stays within `donor_ceiling_pct`
+    *after* losing the trip. An earlier version tested the donor before the
+    move, so taking one bus from a 3-trip hour running at 83% left it at
+    125% with 35 passengers behind - the move manufactured the harm it was
+    meant to relieve, and the log still recorded an improvement.
+    """
+    d = df.copy()
+    d["_cap"] = d["trips_in_hour"] * d["seated_capacity"]
+    d["_load"] = d["demand_pax_est"] / d["_cap"]
+    d["_over"] = (d["demand_pax_est"] - d["_cap"]).clip(lower=0)
+    ceiling = donor_ceiling_pct / 100.0
+    moves = []
+    for _ in range(n_moves):
+        donors = d[donor_rule(d) & (d["trips_in_hour"] > min_trips_after)]
+        receivers = d[receiver_rule(d)]
+        if donors.empty or receivers.empty:
+            break
+        rec = receivers.loc[receivers["_over"].idxmax()]
+        donors = donors.drop(index=rec.name, errors="ignore")
+        if donors.empty or rec["_over"] <= 0:
+            break
+        # The load the donor would carry with one bus fewer. This is the
+        # guard the old code was missing.
+        cap_after = (donors["trips_in_hour"] - 1) * donors["seated_capacity"]
+        load_after = donors["demand_pax_est"] / cap_after
+        donors = donors[load_after <= ceiling]
+        if donors.empty:
+            break
+        don = donors.loc[donors["_load"].idxmin()]
+        don_unmet = float(don["_over"])
+        don_load_after = float(don["demand_pax_est"] / ((don["trips_in_hour"] - 1) * don["seated_capacity"]))
+        d.loc[don.name, "trips_in_hour"] -= 1
+        d.loc[rec.name, "trips_in_hour"] += 1
+        # recompute the two touched rows before the next iteration
+        for nm in (don.name, rec.name):
+            cap = d.loc[nm, "trips_in_hour"] * d.loc[nm, "seated_capacity"]
+            d.loc[nm, "_cap"] = cap
+            d.loc[nm, "_load"] = d.loc[nm, "demand_pax_est"] / cap
+            d.loc[nm, "_over"] = max(0.0, d.loc[nm, "demand_pax_est"] - cap)
+        rec_after = max(0.0, d.loc[rec.name, "demand_pax_est"] - d.loc[rec.name, "_cap"])
+        moves.append({
+            "from_route": don["route_code"], "from_hour": int(don["hour"]),
+            "to_route": rec["route_code"], "to_hour": int(rec["hour"]),
+            "trips": 1,
+            "donor_load_pct": round(float(don["_load"]) * 100, 1),
+            "donor_load_after_pct": round(don_load_after * 100, 1),
+            "donor_unmet_before": round(don_unmet, 1),
+            "receiver_unmet_before": round(float(rec["_over"]), 1),
+            "receiver_unmet_after": round(rec_after, 1),
+        })
+    return d.drop(columns=["_cap", "_load", "_over"]), net_moves(moves)
+
+
 def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Recompute the scenarios on the official captured service.
 
@@ -597,46 +681,6 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
             "demand_pax_captured": round(tot, 0),
             "trips_moved": trips_moved,
         }
-
-    def reallocate(df, donor_rule, receiver_rule, n_moves, min_trips_after=1):
-        """Move up to n_moves trips, one at a time, donor -> receiver."""
-        d = df.copy()
-        d["_cap"] = d["trips_in_hour"] * d["seated_capacity"]
-        d["_load"] = d["demand_pax_est"] / d["_cap"]
-        d["_over"] = (d["demand_pax_est"] - d["_cap"]).clip(lower=0)
-        moves = []
-        for _ in range(n_moves):
-            # Never take a trip from an hour that is already over capacity: that
-            # would move the queue rather than shorten it.
-            donors = d[donor_rule(d) & (d["trips_in_hour"] > min_trips_after) & (d["_over"] == 0)]
-            receivers = d[receiver_rule(d)]
-            if donors.empty or receivers.empty:
-                break
-            rec = receivers.loc[receivers["_over"].idxmax()]
-            donors = donors.drop(index=rec.name, errors="ignore")
-            if donors.empty or rec["_over"] <= 0:
-                break
-            don = donors.loc[donors["_load"].idxmin()]
-            don_unmet = float(don["_over"])
-            d.loc[don.name, "trips_in_hour"] -= 1
-            d.loc[rec.name, "trips_in_hour"] += 1
-            # recompute the two touched rows before the next iteration
-            for nm in (don.name, rec.name):
-                cap = d.loc[nm, "trips_in_hour"] * d.loc[nm, "seated_capacity"]
-                d.loc[nm, "_cap"] = cap
-                d.loc[nm, "_load"] = d.loc[nm, "demand_pax_est"] / cap
-                d.loc[nm, "_over"] = max(0.0, d.loc[nm, "demand_pax_est"] - cap)
-            rec_after = max(0.0, d.loc[rec.name, "demand_pax_est"] - d.loc[rec.name, "_cap"])
-            moves.append({
-                "from_route": don["route_code"], "from_hour": int(don["hour"]),
-                "to_route": rec["route_code"], "to_hour": int(rec["hour"]),
-                "trips": 1,
-                "donor_load_pct": round(float(don["_load"]) * 100, 1),
-                "donor_unmet_before": round(don_unmet, 1),
-                "receiver_unmet_before": round(float(rec["_over"]), 1),
-                "receiver_unmet_after": round(rec_after, 1),
-            })
-        return d.drop(columns=["_cap", "_load", "_over"]), moves
 
     airport_mask = lambda x: x["route_code"].isin(AIRPORT)
     corridor_mask = lambda x: x["route_code"].isin(CORRIDOR)
