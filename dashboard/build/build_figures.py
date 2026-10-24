@@ -93,10 +93,19 @@ def fig_load() -> None:
     ax.set_ylim(0, 118)
     ax.set_ylabel("% of seats")
     ax.legend(frameon=False, fontsize=7.5, loc="upper right")
-    ax.set_title("F2  Load factor is a segment, not a route: R1 is 89.5% only if nobody gets off",
-                 loc="left", fontweight="bold")
+    # Caption is derived from the table, never typed: a hard-coded version had
+    # drifted to "R1 77% / R3 104%" while the CSV said 90.1% / 98.4%.
+    r1 = d[d["route_code"] == "R1"].iloc[0]
+    r3 = d[d["route_code"] == "R3"].iloc[0]
+    ax.set_title(
+        f"F2  Load factor is a segment, not a route: R1 is {r1['load_factor_route_day_upper_pct']:.1f}% "
+        "only if nobody gets off",
+        loc="left", fontweight="bold",
+    )
     ax.text(0, -0.24,
-            "Peak segment: R1 77% (Hulhumalé Police Stn\u2192Amin Ave, 22:00); R3 104% (STELCO\u2192VIA, 13:00). "
+            f"Peak segment: R1 {r1['load_factor_peak_pct']:.1f}% ({r1['peak_segment']}, "
+            f"{int(r1['peak_segment_hour'])}:00); R3 {r3['load_factor_peak_pct']:.1f}% "
+            f"({r3['peak_segment']}, {int(r3['peak_segment_hour'])}:00). "
             "Hours before 11:00 are not captured by the RTL feed.",
             transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F2_load_factors.png")

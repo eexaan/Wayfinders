@@ -232,12 +232,18 @@ proof that the morning was not captured — show it, do not hide it.
 > ⚠️ **Changed 2026-10-24 — scenarios are now fleet-neutral.** Every scenario
 > *moves* trips instead of adding them, so **`trips_change` is 0 for all five**
 > and `total_trips_captured` is 162 everywhere. Do not show a "trips added"
-> figure: show **`trips_moved`**, which is 0 / 3 / 8 / 10 / 18. The build
+> figure: show **`trips_moved`**, which is 0 / 2 / 5 / 1 / 6. The build
 > asserts neutrality, so a non-zero `trips_change` means a bug, not a result.
 
+> ⚠️ **Changed again 2026-10-24 — donors are now guarded.** A trip may only be
+> taken from an hour that stays within 100% of seats *after* losing it, and a
+> move that is later undone is cancelled rather than counted. This is why the
+> move counts are small: the corridor has almost no spare buses. Do not
+> reintroduce an unguarded reallocator to make the numbers look better.
+
 > ⚠️ **The recommended package changed content.** S5 was `S2 + S4`; it is now
-> `S3 + S4`, because on measured data airport re-timing alone relieves only 9
-> boardings while cross-corridor reallocation relieves 286. If any copy says
+> `S3 + S4`, because on measured data airport re-timing alone relieves only 2
+> boardings while cross-corridor reallocation relieves 348. If any copy says
 > "S5 = airport re-timing + express peak", update it.
 
 > `total_trips_captured` counts only the **five routes with ridership data**

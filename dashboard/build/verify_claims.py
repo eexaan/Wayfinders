@@ -219,6 +219,19 @@ def check_holdout_mape() -> None:
 # ---------------------------------------------------------------------------
 # 5. Fleet neutrality
 # ---------------------------------------------------------------------------
+def _has_reverse_pair(moves) -> bool:
+    """True if any scenario both moves a trip A->B and B->A.
+
+    Such a pair leaves the fleet exactly where it started, so it cannot relieve
+    anyone; if it appears, `trips_moved` is counting work that did not happen.
+    """
+    for _, g in moves.groupby("scenario"):
+        seen = {(r.from_route, r.from_hour, r.to_route, r.to_hour) for r in g.itertuples()}
+        if any((b, d, a, c) in seen for a, c, b, d in seen):
+            return True
+    return False
+
+
 def check_fleet_neutral() -> None:
     k = pd.read_csv(DATA / "scenario_kpis.csv")
 
@@ -243,6 +256,24 @@ def check_fleet_neutral() -> None:
         "every logged move reduced receiver unmet demand",
         (moves["receiver_unmet_after"] < moves["receiver_unmet_before"]).all(),
         f"{len(moves)} moves logged",
+    )
+    # The move must not create a NEW over-capacity hour on the donor side. The
+    # check above tests the load before the move, which is precisely the state
+    # that was never the problem.
+    claim(
+        "no move pushes its donor over capacity",
+        (moves["donor_load_after_pct"] <= 100).all(),
+        f"max donor load after {moves['donor_load_after_pct'].max():.1f}%",
+    )
+    claim(
+        "no logged move cancels an earlier move",
+        not _has_reverse_pair(moves),
+        f"{len(moves)} moves logged, none reversed",
+    )
+    claim(
+        "trips_moved equals the number of logged moves",
+        (k["trips_moved"] == k["scenario"].map(moves.groupby("scenario")["trips"].sum()).fillna(0).astype(int)).all(),
+        f"kpis={k['trips_moved'].tolist()}",
     )
 
 
@@ -339,7 +370,7 @@ def check_deliverables() -> None:
         "validation_airport.csv": 10,
         "schedule_crosscheck.csv": 14,
         "schedule_crosscheck_hourly.csv": 100,
-        "scenario_moves.csv": 20,
+        "scenario_moves.csv": 10,
     }
     for name, min_rows in expected.items():
         path = DATA / name

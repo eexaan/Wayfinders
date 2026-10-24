@@ -5,7 +5,8 @@
 #   make figures  rebuild F1..F6 into docs/figures/
 #   make gtfs     rebuild the GTFS feed
 #   make check    verify the committed outputs against the raw sources
-#   make all      data + figures + gtfs + check
+#   make test     run the unit tests (the reallocator guards)
+#   make all      data + figures + gtfs + check + test
 #   make clean    remove build caches only, never data/
 #
 # The order in `data` is load-bearing: build_stop_demand.py reads what
@@ -16,9 +17,9 @@ PY      := .venv/bin/python
 BUILD   := dashboard/build
 DATAOUT := dashboard/data
 
-.PHONY: all setup data figures gtfs check clean validate-gtfs
+.PHONY: all setup data figures gtfs check test clean validate-gtfs
 
-all: data figures gtfs check
+all: data figures gtfs check test
 
 setup:
 	python3 -m venv .venv
@@ -43,6 +44,9 @@ gtfs:
 
 check:
 	$(PY) $(BUILD)/verify_claims.py
+
+test:
+	$(PY) -m pytest tests -q
 
 # Needs java and the validator jar (not committed: ~40 MB).
 #   curl -L -o gtfs-validator.jar \

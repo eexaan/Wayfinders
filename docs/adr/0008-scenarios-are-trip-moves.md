@@ -1,6 +1,6 @@
 # ADR-0008 — Scenarios are explicit trip moves, not percentage factors
 
-- **Status:** Accepted
+- **Status:** Accepted; **donor eligibility superseded by [ADR-0013](0013-donor-ceiling.md)**
 - **Date:** 2026-10-24
 - **Affects:** `scenario_kpis.csv`, `scenario_corridor_kpis.csv`, dashboard
 
@@ -41,8 +41,8 @@ tooltips, so a reader can reconstruct it by hand.
 - Scenario effects are **coarse**: a single trip is 15–60 minutes of headway on
   these routes, so "10% more service" is not expressible. Real optimisation
   needs a proper fleet-assignment model.
-- S5 currently *adds* 14 trips rather than reallocating them, so it is not yet
-  fleet-neutral. Making it so is Dev B's task.
+- S5 was additive when this was written; it is now fleet-neutral, like every
+  other scenario.
 - Hand-written per-hour moves do not generalise. A real tool would take a
   headway policy, not a list of hours.
 
@@ -64,7 +64,9 @@ k=pd.read_csv('dashboard/data/scenario_kpis.csv')
 print(k[['scenario','boardings_over_capacity','trips_change']].to_string(index=False))"
 ```
 
-No scenario may have `trips_change = 0` while claiming a capacity effect.
+No scenario may have `trips_change != 0`. A non-zero value means a bus was
+added or removed, which is a bug, not a result. The donor eligibility rule in
+this ADR was replaced by the ceiling in ADR-0013.
 
 ## Related
 
