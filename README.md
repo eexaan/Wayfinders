@@ -142,6 +142,7 @@ network can be loaded into standard journey-planning tools.
 
 ## For readers who want the detail
 
+- **[docs/METHODS.md](docs/METHODS.md)** — data sources, methods, assumptions, AI use and limits
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost
