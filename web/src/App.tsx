@@ -41,7 +41,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <h1>Raajje Rebalancer</h1>
+          <h1>Pathways</h1>
           <p>Greater Malé buses: where seats and passengers don't match</p>
         </div>
         <nav className="tabs" role="tablist">

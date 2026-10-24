@@ -1,6 +1,6 @@
 # Dashboard build spec
 
-**Raajje Rebalancer · Greater Malé bus supply decision tool**
+**Pathways · Greater Malé bus supply decision tool**
 For the dashboard developers. Read `SPEC.md` for the findings and the story;
 this document is the build contract.
 
@@ -30,7 +30,6 @@ web/
 dashboard/
   data/               <- THE CONTRACT. read-only. do not edit by hand.
   build/              <- the scripts that produced data/. ignore them.
-  index.html, app.js, styles.css   <- an earlier static prototype, NOT the app
 ```
 
 `make web` builds it; `make serve` builds and serves it on :8000.
@@ -675,7 +674,7 @@ a ridership *level*, a different reason).
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│  Raajje Rebalancer        Greater Malé · MTCC                          │
+│  Pathways                Greater Malé · MTCC                             │
 ├────────────────────────────────────────────┬─────────────────────────────┤
 │                                            │  ROUTE PANEL                │
 │                                            │  R1  West Park – HM Ph1     │

@@ -1,6 +1,6 @@
 # ADR-0007 — The dashboard is a static site with no backend
 
-- **Status:** Accepted — **conditionally superseded** by [ADR-0013](0013-realtime-layer-deferred.md) should a realtime phase begin
+- **Status:** Accepted — **conditionally superseded** by [ADR-0013](0013-realtime-layer-deferred.md) should a realtime phase begin; the static prototype described here was removed when the React app in `web/` became the only dashboard
 - **Date:** 2026-10-24
 - **Affects:** everything under `dashboard/`
 

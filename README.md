@@ -1,4 +1,4 @@
-# Raajje Rebalancer
+# Pathways
 
 **An interactive tool for matching bus supply to passenger demand in Greater Malé.**
 Maldives Datathon 2026 · Team Wayfinders
@@ -166,11 +166,35 @@ on is the one that most needs ground truth. The plan, the sensor comparison, the
 pilot design, the costs and the claims we refuse to make are in
 **[docs/ROADMAP.md](docs/ROADMAP.md)**.
 
+**Events that move a city at once.** A match at the national stadium, a concert
+on Hulhumalé, a Friday market, a cancelled ferry — each creates a surge at a
+known place and time, and the current model cannot see it. The extension is an
+event calendar keyed to venue, date and expected attendance, feeding a
+short-lived demand uplift into the scenario engine: the same fleet-neutral
+reallocation, run against tonight instead of a typical Saturday. The precondition
+is modest — a public events feed, or a curated calendar where none exists. The
+hard part is calibration: uplift per attendee has to be estimated from observed
+loads, not assumed. GTFS already carries the output, since extra trips on a known
+date are just `calendar_dates` exceptions.
+
+**Routes chosen from where people will be.** The network we have was not designed
+from the data we now hold. The first step is already in the repository: 321
+schools, government offices, hospitals, mosques, markets and shops scraped from
+OpenStreetMap, each classified by demand curve and matched to its nearest stop
+and walking distance. What is still missing is population density below atoll
+level — by island and by Malé ward — and the opening date of new commercial and
+office space, because OSM shows what exists, not what is about to employ people.
+Combined with the taxi catchments, that gives a first-pass demand surface for a
+route that does not yet exist. One limit is structural: the scenario engine is
+deliberately fleet-neutral, so it can show that a new corridor would fill but
+cannot buy the bus — that is a capital decision, outside the tool. And density
+is not demand; a new office is not a commute until it opens.
+
 ## For readers who want the detail
 
 - **[docs/METHODS.md](docs/METHODS.md)** — data sources, methods, assumptions, AI use and limits
 - **[docs/GTFS.md](docs/GTFS.md)** — the feed, its design decisions, and how to load it
-- **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, with costs and preconditions
+- **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, two extensions beyond it, and the costs and preconditions
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost

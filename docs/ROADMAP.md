@@ -1,6 +1,6 @@
 # Roadmap — from projection to realtime
 
-**Raajje Rebalancer · Maldives Datathon 2026 · Team Wayfinders**
+**Pathways · Maldives Datathon 2026 · Team Wayfinders**
 
 This document describes the phase **after** the submitted build. **Nothing in it
 is implemented.** The codebase is unchanged by it, no sensor is installed, and
@@ -270,6 +270,12 @@ decision support. Those are different claims and only the first is true today.
    not remove the need for the historical reconciliation.
 5. **That the roadmap is funded, approved or scheduled.** It is a plan with
    costs and preconditions attached.
+6. **That density is demand.** Population data locates people; it does not say
+   when or where they travel. A route proposed from density is a hypothesis to
+   be tested against counts, not a plan.
+7. **That the tool can fund a new route.** It can show that a corridor would
+   fill; it cannot buy the vehicle, because the scenario engine is fleet-neutral
+   by construction (ADR-0008, ADR-0014).
 
 The honest ladder is: **projection → decision support → closed-loop dispatch.**
 The submission is on the first rung. This document describes the next one.
@@ -293,6 +299,66 @@ Phase 2 begins only when all five hold:
 
 Until then the current tool stands on its own: it is reproducible, validated on
 held-out data, and honest about what it does not measure.
+
+---
+
+## 11. Two extensions beyond the loop
+
+Neither extension belongs to Phase 2, and neither is implemented. They are
+recorded because the same data and the same fleet-neutral constraint carry over,
+and because each changes what the model is asked rather than what it claims.
+
+### 11.1 Event-driven demand
+
+Demand today is a taxi-derived hourly shape averaged over 219 held-out days. A
+match at the national stadium, a concert on Hulhumalé, a Friday market or a
+cancelled ferry is smoothed away by that average, so the model cannot represent a
+surge that happens at a known place and time.
+
+The extension is an event calendar — venue, date, start time, expected
+attendance — applied as a short-lived uplift to the affected stops before the
+scenario engine runs.
+
+| Item | Position |
+|---|---|
+| Input | A public events feed, or a curated calendar where none exists |
+| Uplift | Attendees × mode share × arrival/departure window, then calibrated against observed loads |
+| Output | Extra trips on a known date, expressed as GTFS `calendar_dates` exceptions |
+| Guardrail | Fleet-neutral: event trips displace that day's lowest-load trips (ADR-0008, ADR-0014), or the operator supplies a spare vehicle |
+| Precondition | At least two events with usable attendance and load data to calibrate against |
+
+The calendar is the easy half. Calibration is the hard half: without two observed
+events we would be inventing the uplift, and an invented uplift is worse than
+none, because it reads as a forecast.
+
+### 11.2 Routes chosen from where people will be
+
+The submitted network was not designed from the data we now hold, and the first
+half of the evidence is already committed. `scripts/build_pois.py` scrapes 321
+named trip generators from OpenStreetMap — schools, government offices,
+hospitals, mosques, markets, shops — classifies each into one of seven
+demand-curve categories, and gives it a nearest stop, that stop's routes and a
+walking distance. `data/derived/poi_access_gaps.csv` then reports the access gap
+per category and island.
+
+That scrape also records what is missing. Only 3 of 321 POIs sit beyond 400 m of
+a stop, so within mapped Malé the network already reaches almost every mapped
+destination. But north of Hulhumalé Phase 1, OSM holds 6 named POIs against
+roughly 2,900 mapped buildings: the buildings exist, the amenities are not
+tagged. Absence of a POI means unmapped, not vacant.
+
+Two inputs would turn the POI layer from an access audit into a route question:
+
+| Input | Why it is needed | Where it would come from |
+|---|---|---|
+| Population density by island and by Malé ward | The yearbook gives atoll totals; a route needs people per hectare | Census tabulations |
+| Commercial and office pipeline, with opening dates | OSM maps what exists, not what is about to employ people | Planning approvals and developer announcements |
+
+The output is a candidate corridor and its unmet demand under the fleet
+constraint — not a timetable. Three limits bound it: density is not demand, an
+opening date can move, and a new route needs a vehicle the fleet-neutral engine
+cannot supply. The tool can show that a corridor would fill; buying the bus is a
+capital decision outside it.
 
 ---
 
