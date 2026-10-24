@@ -21,7 +21,11 @@ export function VintageLine({ data, onMore }: { data: Data; onMore: () => void }
       routes have no passenger counts ·{' '}
       <button className="link-btn" style={{ padding: '1px 8px', fontSize: 13 }} onClick={onMore}>
         How we know
-      </button>
+      </button>{' '}
+      · <b>Map</b> ©{' '}
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
+        OpenStreetMap contributors
+      </a>
     </footer>
   )
 }

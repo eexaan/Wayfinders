@@ -598,6 +598,9 @@ main {
   color: var(--ink-2);
   font-weight: 600;
 }
+.vintage a {
+  color: var(--ink-3);
+}
 
 /* ---------- scenarios ---------- */
 .scen {
