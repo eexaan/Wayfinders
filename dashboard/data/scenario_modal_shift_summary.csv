@@ -1,0 +1,7 @@
+scenario,taxi_rides_capturable_per_day,taxi_rides_capturable_price_only,mean_gc_gap_mvr,min_ride_min_to_shed,taxi_rides_capturable_per_year
+S0_baseline,190.6,3832.8,136.66666666666666,16.4,69569.0
+S1_friday_right_sized,190.6,3832.8,136.66666666666666,16.4,69569.0
+S2_airport_retimed,190.6,3832.8,136.66666666666666,16.4,69569.0
+S3_rebalanced_to_corridor,190.6,3832.8,136.66666666666666,16.4,69569.0
+S4_express_added,210.2,3832.8,119.3,16.4,76723.0
+S5_recommended_package,210.2,3832.8,119.3,16.4,76723.0

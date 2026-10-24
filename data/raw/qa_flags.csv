@@ -1,0 +1,33 @@
+kind,source_table,edition,detail
+total_mismatch,11.17,2024,"2014 GA. Koodoo : months sum to 2,902, printed total 826"
+revised,11.17,2024,2014-01 GA. Koodoo   aircraft_movements: 174 in 2024 edition -> 57
+revised,11.17,2024,2014-02 GA. Koodoo   aircraft_movements: 159 in 2024 edition -> 83
+revised,11.17,2024,2014-03 GA. Koodoo   aircraft_movements: 176 in 2024 edition -> 108
+revised,11.17,2024,2014-04 GA. Koodoo   aircraft_movements: 175 in 2024 edition -> 112
+revised,11.17,2024,2014-05 GA. Koodoo   aircraft_movements: 181 in 2024 edition -> 91
+revised,11.17,2024,2014-06 GA. Koodoo   aircraft_movements: 168 in 2024 edition -> 68
+revised,11.17,2024,2014-07 GA. Koodoo   aircraft_movements: 173 in 2024 edition -> 58
+revised,11.17,2024,2014-08 GA. Koodoo   aircraft_movements: 172 in 2024 edition -> 60
+revised,11.17,2024,2014-09 GA. Koodoo   aircraft_movements: 166 in 2024 edition -> 46
+revised,11.17,2024,2014-10 GA. Koodoo   aircraft_movements: 185 in 2024 edition -> 54
+revised,11.17,2024,2014-11 GA. Koodoo   aircraft_movements: 169 in 2024 edition -> 50
+revised,11.17,2024,2014-12 GA. Koodoo   aircraft_movements: 178 in 2024 edition -> 39
+revised,11.17,2025,2014-01 GA. Koodoo   aircraft_movements: 57 in 2024 edition -> 174
+revised,11.17,2025,2014-02 GA. Koodoo   aircraft_movements: 83 in 2024 edition -> 159
+revised,11.17,2025,2014-03 GA. Koodoo   aircraft_movements: 108 in 2024 edition -> 176
+revised,11.17,2025,2014-04 GA. Koodoo   aircraft_movements: 112 in 2024 edition -> 175
+revised,11.17,2025,2014-05 GA. Koodoo   aircraft_movements: 91 in 2024 edition -> 181
+revised,11.17,2025,2014-06 GA. Koodoo   aircraft_movements: 68 in 2024 edition -> 168
+revised,11.17,2025,2014-07 GA. Koodoo   aircraft_movements: 58 in 2024 edition -> 173
+revised,11.17,2025,2014-08 GA. Koodoo   aircraft_movements: 60 in 2024 edition -> 172
+revised,11.17,2025,2014-09 GA. Koodoo   aircraft_movements: 46 in 2024 edition -> 166
+revised,11.17,2025,2014-10 GA. Koodoo   aircraft_movements: 54 in 2024 edition -> 185
+revised,11.17,2025,2014-11 GA. Koodoo   aircraft_movements: 50 in 2024 edition -> 169
+revised,11.17,2025,2014-12 GA. Koodoo   aircraft_movements: 39 in 2024 edition -> 178
+arrival_departure_imbalance,,,"2023-01 Gan International Airport International Flights: 1,060 arrivals vs 450 departures"
+arrival_departure_imbalance,,,"2024-12 Gan International Airport International Flights: 766 arrivals vs 1,382 departures"
+arrival_departure_imbalance,,,"2025-08 Gan International Airport International Flights: 1,757 arrivals vs 1,003 departures"
+arrival_departure_imbalance,,,"2025-09 Maafaru International Airport Domestic Flights: 892 arrivals vs 2,231 departures"
+arrival_departure_imbalance,,,"2025-09 Maafaru International Airport International Flights: 892 arrivals vs 2,231 departures"
+arrival_departure_imbalance,,,"2025-11 Gan International Airport Domestic Flights: 991 arrivals vs 5,971 departures"
+arrival_departure_imbalance,,,"2025-11 Velana International Airport Domestic Flights: 124,305 arrivals vs 71,420 departures"

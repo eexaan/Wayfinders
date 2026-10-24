@@ -1,0 +1,613 @@
+area,route_number,route,order,stop,code,lat,lon
+Greater Malé,R1,West Park to HM Phase 1,1,Maafannu Bus Terminal,103,4.169366,73.504676
+Greater Malé,R1,West Park to HM Phase 1,2,Tow Yard,304,4.169349,73.510249
+Greater Malé,R1,West Park to HM Phase 1,3,STELCO,105,4.170010,73.514746
+Greater Malé,R1,West Park to HM Phase 1,4,Hulhumale' Cemetery,106,4.207528,73.539788
+Greater Malé,R1,West Park to HM Phase 1,5,Skate Park,107,4.207421,73.541765
+Greater Malé,R1,West Park to HM Phase 1,6,Flat No. 137,121,4.209958,73.542596
+Greater Malé,R1,West Park to HM Phase 1,7,Fehires Park,108,4.211553,73.543088
+Greater Malé,R1,West Park to HM Phase 1,8,Flat No. 147,109,4.213077,73.543635
+Greater Malé,R1,West Park to HM Phase 1,9,Ruhgandu 1,110,4.216186,73.544590
+Greater Malé,R1,West Park to HM Phase 1,10,Dhiraagu,111,4.219882,73.545734
+Greater Malé,R1,West Park to HM Phase 1,11,Hulhumale' Synthetic Track,112,4.219455,73.542702
+Greater Malé,R1,West Park to HM Phase 1,12,Hulhumale' Police Station,113,4.216780,73.542108
+Greater Malé,R1,West Park to HM Phase 1,13,Amin Avenue,114,4.214420,73.540352
+Greater Malé,R1,West Park to HM Phase 1,14,MNDF Flat,115,4.210681,73.539804
+Greater Malé,R1,West Park to HM Phase 1,15,Hulhumale' Cemetery OPP,11106,4.207528,73.539788
+Greater Malé,R1,West Park to HM Phase 1,16,Male' Swimming Track,117,4.169881,73.514446
+Greater Malé,R1,West Park to HM Phase 1,17,Dharumavantha School,118,4.169257,73.509328
+Greater Malé,R1,West Park to HM Phase 1,18,Maafannu Bus Terminal OPP,11103,4.169366,73.504676
+Greater Malé,R10,Orchid,1,Maafannu Madharusa,1102,4.175986,73.502422
+Greater Malé,R10,Orchid,2,Maafannu Sahara,1103,4.175881,73.503956
+Greater Malé,R10,Orchid,3,Maaveyo Maizaan,1004,4.175851,73.505883
+Greater Malé,R10,Orchid,4,Hilaaleege,1005,4.177532,73.507219
+Greater Malé,R10,Orchid,5,Justice Building,1006,4.178385,73.508454
+Greater Malé,R10,Orchid,6,Jumhooree Maidhaan,1007,4.178920,73.511040
+Greater Malé,R10,Orchid,7,Jetty NO5,1008,4.178784,73.513422
+Greater Malé,R10,Orchid,8,MTCC Tower,1009,4.178174,73.515595
+Greater Malé,R10,Orchid,9,Carnival,201,4.176984,73.517896
+Greater Malé,R10,Orchid,10,Artificial Beach,1011,4.175130,73.518064
+Greater Malé,R10,Orchid,11,Muni Ufaa,1012,4.174327,73.516835
+Greater Malé,R10,Orchid,12,Ibrahim Mosque,1013,4.174664,73.514333
+Greater Malé,R10,Orchid,13,Olympus,1014,4.174948,73.511412
+Greater Malé,R10,Orchid,14,City Square (North Side),1106,4.175205,73.509847
+Greater Malé,R10,Orchid,15,Maaveyo Magu,1016,4.175418,73.507406
+Greater Malé,R10,Orchid,16,Fini Park,1017,4.175659,73.504966
+Greater Malé,R10,Orchid,17,Social Centre,1018,4.174989258645558,73.50252476651059
+Greater Malé,R11,Ameenee,1,Raalhugandu (Mini Bus),202,4.173310,73.517863
+Greater Malé,R11,Ameenee,2,Dharubaaruge,1111,4.170695,73.516314
+Greater Malé,R11,Ameenee,3,Kudakudhinge Bageecha,1112,4.170928,73.514235
+Greater Malé,R11,Ameenee,4,Male' Hiya Flat,1113,4.171185,73.512209
+Greater Malé,R11,Ameenee,5,Rehendhi Flat,1114,4.171370,73.510187
+Greater Malé,R11,Ameenee,6,MIRA,1115,4.171568,73.508277
+Greater Malé,R11,Ameenee,7,Maafannu Stadium,1116,4.171871,73.505627
+Greater Malé,R11,Ameenee,8,Ministry of Environment,1117,4.171990,73.504227
+Greater Malé,R11,Ameenee,9,Maafannu Ferry Terminal,1101,4.172281,73.502060
+Greater Malé,R11,Ameenee,10,Dharumavantha Hospital (West Side),120,4.172781,73.500813
+Greater Malé,R11,Ameenee,11,Maafannu Madharusa,1102,4.175986,73.502422
+Greater Malé,R11,Ameenee,12,Maafannu Sahara,1103,4.175881,73.503956
+Greater Malé,R11,Ameenee,13,Odeon,1104,4.175564,73.506684
+Greater Malé,R11,Ameenee,14,Zikura Mosque,1105,4.175373,73.508185
+Greater Malé,R11,Ameenee,15,City Square,1015,4.175130,73.509529
+Greater Malé,R11,Ameenee,16,Billoori Jehige,1107,4.175024,73.511556
+Greater Malé,R11,Ameenee,17,Heenaamage,1119,4.174780,73.513774
+Greater Malé,R11,Ameenee,18,Dhamanaveshi,1108,4.174643,73.515062
+Greater Malé,R11,Ameenee,19,Henveiru Stadium,1109,4.174467,73.517145
+Greater Malé,R12,Sosun,1,MTCC Sawmill,1201,4.176728,73.517862
+Greater Malé,R12,Sosun,2,Ministry of Foreign Affairs,1202,4.178512,73.514082
+Greater Malé,R12,Sosun,3,Jumhooree Maidhaan,1007,4.178920,73.511040
+Greater Malé,R12,Sosun,4,Velaanaage,1204,4.178320,73.513278
+Greater Malé,R12,Sosun,5,ISRAHVEHINGE NAADHEE STOP,32006,4.178033,73.514222
+Greater Malé,R12,Sosun,6,Majeedhiyya School,1205,4.177506,73.515282
+Greater Malé,R12,Sosun,7,Islamic University of Maldives,1206,4.175993,73.514973
+Greater Malé,R12,Sosun,8,Dhamanaveshi,1108,4.174643,73.515062
+Greater Malé,R12,Sosun,9,Henveiru Stadium,1109,4.174467,73.517145
+Greater Malé,R13,Villimale Internal,1,Villimale Ferry Terminal,1301,4.175107,73.486942
+Greater Malé,R13,Villimale Internal,2,BML Villimale Branch,1302,4.174545,73.485970
+Greater Malé,R13,Villimale Internal,3,Muhyiddin School,1303,4.173209,73.485865
+Greater Malé,R13,Villimale Internal,4,MNDF Flats,1304,4.172340,73.485594
+Greater Malé,R13,Villimale Internal,5,Sinaai Sarahadhu,1305,4.171731,73.485121
+Greater Malé,R13,Villimale Internal,6,Salaam Miskiy,1306,4.172177,73.484309
+Greater Malé,R13,Villimale Internal,7,Boalha Dhandu,1307,4.173065,73.484268
+Greater Malé,R13,Villimale Internal,8,Vaaru Hingun,1308,4.173555,73.483706
+Greater Malé,R13,Villimale Internal,9,Viludhooni Park,1309,4.174031,73.483217
+Greater Malé,R13,Villimale Internal,10,Jumhooree Hingun,1310,4.174845,73.483660
+Greater Malé,R13,Villimale Internal,11,Villimale Beach,1311,4.175424,73.484172
+Greater Malé,R13,Villimale Internal,12,Villimale Harbor,1312,4.176026,73.484502
+Greater Malé,R13,Villimale Internal,13,Villimale Hospital,1313,4.176059,73.485470
+Greater Malé,R14,VILLIMALE INTERNAL 2,1,Villimale Ferry Terminal,1301,4.175107,73.486942
+Greater Malé,R14,VILLIMALE INTERNAL 2,2,Villimale Hospital,1313,4.176059,73.485470
+Greater Malé,R14,VILLIMALE INTERNAL 2,3,Villimale Harbor,1312,4.176026,73.484502
+Greater Malé,R14,VILLIMALE INTERNAL 2,4,Villimale Beach,1311,4.175424,73.484172
+Greater Malé,R14,VILLIMALE INTERNAL 2,5,Masjidh Al Ikhlaas Stop,32003,4.174233,73.484285
+Greater Malé,R14,VILLIMALE INTERNAL 2,6,Boalha Dhandu,1307,4.173065,73.484268
+Greater Malé,R14,VILLIMALE INTERNAL 2,7,Salaam Miskiy,1306,4.172177,73.484309
+Greater Malé,R14,VILLIMALE INTERNAL 2,8,Sinaai Sarahadhu,1305,4.171731,73.485121
+Greater Malé,R14,VILLIMALE INTERNAL 2,9,MNDF Flats,1304,4.172340,73.485594
+Greater Malé,R14,VILLIMALE INTERNAL 2,10,Edhuruvehi Bus Stop,33051,4.172797,73.486062
+Greater Malé,R14,VILLIMALE INTERNAL 2,11,Sinamale' Bus Stop,33052,4.174216,73.486783
+Greater Malé,R14,VILLIMALE INTERNAL 2,12,Villimale' Ferry Termial Op,32005,4.175078,73.486891
+Greater Malé,R15,West Park to Orange Hiya,1,Maafannu Madharusa,1102,4.175986,73.502422
+Greater Malé,R15,West Park to Orange Hiya,2,Maafannu Sahara,1103,4.175881,73.503956
+Greater Malé,R15,West Park to Orange Hiya,3,City Square,1015,4.175130,73.509529
+Greater Malé,R15,West Park to Orange Hiya,4,Heenaamage,1119,4.174780,73.513774
+Greater Malé,R15,West Park to Orange Hiya,5,Henveiru Stadium,1109,4.174467,73.517145
+Greater Malé,R15,West Park to Orange Hiya,6,Raalhugandu (Schedule Bus),20002,4.172973,73.517814
+Greater Malé,R15,West Park to Orange Hiya,7,Orange Hiya Bus Stop,1207,4.206560,73.536385
+Greater Malé,R15,West Park to Orange Hiya,8,Senahiya,204,4.172344,73.516718
+Greater Malé,R15,West Park to Orange Hiya,9,Muni Ufaa,1012,4.174327,73.516835
+Greater Malé,R15,West Park to Orange Hiya,10,Ibrahim Mosque,1013,4.174664,73.514333
+Greater Malé,R15,West Park to Orange Hiya,11,City Square (North Side),1106,4.175205,73.509847
+Greater Malé,R15,West Park to Orange Hiya,12,Fini Park,1017,4.175659,73.504966
+Greater Malé,R15,West Park to Orange Hiya,13,Social Centre,1018,4.174989258645558,73.50252476651059
+Greater Malé,R2,Carnival to HM Phase 1,1,Carnival,201,4.176984,73.517896
+Greater Malé,R2,Carnival to HM Phase 1,2,Raalhugandu (Schedule Bus),20002,4.172973,73.517814
+Greater Malé,R2,Carnival to HM Phase 1,3,Flat No. 120,203,4.210903,73.541829
+Greater Malé,R2,Carnival to HM Phase 1,4,Flat No. 147,109,4.213077,73.543635
+Greater Malé,R2,Carnival to HM Phase 1,5,Centro Mall,401,4.216350,73.542565
+Greater Malé,R2,Carnival to HM Phase 1,6,CHSE,11201,4.220615,73.541345
+Greater Malé,R2,Carnival to HM Phase 1,7,Amin Avenue,114,4.214420,73.540352
+Greater Malé,R2,Carnival to HM Phase 1,8,MNDF Flat,115,4.210681,73.539804
+Greater Malé,R2,Carnival to HM Phase 1,9,Hulhumale' Cemetery,106,4.207528,73.539788
+Greater Malé,R2,Carnival to HM Phase 1,10,Senahiya,204,4.172344,73.516718
+Greater Malé,R2,Carnival to HM Phase 1,11,Artificial Beach,1011,4.175130,73.518064
+Greater Malé,R3,West Park to VIA,1,Maafannu Bus Terminal,103,4.169366,73.504676
+Greater Malé,R3,West Park to VIA,2,Tow Yard,304,4.169349,73.510249
+Greater Malé,R3,West Park to VIA,3,STELCO,105,4.170010,73.514746
+Greater Malé,R3,West Park to VIA,4,VIA Domestic Terminal,306,4.190044,73.527056
+Greater Malé,R3,West Park to VIA,5,MACL Office,307,4.191667,73.526898
+Greater Malé,R3,West Park to VIA,6,VIA Domestic Terminal OPP,11306,4.190516,73.526887
+Greater Malé,R3,West Park to VIA,7,Male' Swimming Track,117,4.169881,73.514446
+Greater Malé,R3,West Park to VIA,8,Dharumavantha School,118,4.169257,73.509328
+Greater Malé,R3,West Park to VIA,9,Maafannu Bus Terminal OPP,11103,4.169366,73.504676
+Greater Malé,R4,HM Phase 1 to VIA,1,Amin Avenue,114,4.214420,73.540352
+Greater Malé,R4,HM Phase 1 to VIA,2,Hulhumale' Cemetery,106,4.207528,73.539788
+Greater Malé,R4,HM Phase 1 to VIA,3,VIA Domestic Terminal,306,4.190044,73.527056
+Greater Malé,R4,HM Phase 1 to VIA,4,MACL Office,307,4.191667,73.526898
+Greater Malé,R4,HM Phase 1 to VIA,5,VIA Domestic Terminal OPP,11306,4.190516,73.526887
+Greater Malé,R4,HM Phase 1 to VIA,6,Hulhumale' Cemetery OPP,11106,4.207528,73.539788
+Greater Malé,R4,HM Phase 1 to VIA,7,Fehires Park,108,4.211553,73.543088
+Greater Malé,R4,HM Phase 1 to VIA,8,Centro Mall,401,4.216350,73.542565
+Greater Malé,R4,HM Phase 1 to VIA,9,Amin Avenue Opp,11401,4.214420,73.540352
+Greater Malé,R5,HM Internal,1,Hiya Flats Stop 1,601,4.231390,73.548899
+Greater Malé,R5,HM Internal,2,H 16 Bus Stop,11309,4.234245,73.547805
+Greater Malé,R5,HM Internal,3,Hiya Flats Stop 2,602,4.231865,73.546356
+Greater Malé,R5,HM Internal,4,VINARES BUS STOP,32001,4.227847160312973,73.54408542858819
+Greater Malé,R5,HM Internal,5,MACL Flat Stop,11003,4.223710,73.544066
+Greater Malé,R5,HM Internal,6,CHSE,11201,4.220615,73.541345
+Greater Malé,R5,HM Internal,7,Hulhumalé Ferry Terminal,507,4.216739,73.537853
+Greater Malé,R5,HM Internal,8,Umar Zahir Building,509,4.213758,73.538511
+Greater Malé,R5,HM Internal,9,Court Complex Bus Stop,33035,4.211813,73.538368
+Greater Malé,R5,HM Internal,10,Orange Hiya Bus Stop,1207,4.206560,73.536385
+Greater Malé,R5,HM Internal,11,Hulhumale' Cemetery,106,4.207528,73.539788
+Greater Malé,R5,HM Internal,12,Flat No. 137,121,4.209958,73.542596
+Greater Malé,R5,HM Internal,13,Ruhgandu 1,110,4.216186,73.544590
+Greater Malé,R5,HM Internal,14,Dhiraagu,111,4.219882,73.545734
+Greater Malé,R5,HM Internal,15,Masjid Ameel Jaleel,604,4.224619,73.547014
+Greater Malé,R6,HM Phase 2 to HM Phase 1,1,Hiya Flats Stop 1,601,4.231390,73.548899
+Greater Malé,R6,HM Phase 2 to HM Phase 1,2,H 16 Bus Stop,11309,4.234245,73.547805
+Greater Malé,R6,HM Phase 2 to HM Phase 1,3,Hiya Flats Stop 2,602,4.231865,73.546356
+Greater Malé,R6,HM Phase 2 to HM Phase 1,4,VINARES BUS STOP,32001,4.227847160312973,73.54408542858819
+Greater Malé,R6,HM Phase 2 to HM Phase 1,5,MACL Flat Stop,11003,4.223710,73.544066
+Greater Malé,R6,HM Phase 2 to HM Phase 1,6,Hulhumale' Synthetic Track,112,4.219455,73.542702
+Greater Malé,R6,HM Phase 2 to HM Phase 1,7,Hulhumalé Police Station,503,4.217746,73.542216
+Greater Malé,R6,HM Phase 2 to HM Phase 1,8,Amin Avenue,114,4.214420,73.540352
+Greater Malé,R6,HM Phase 2 to HM Phase 1,9,Tree Top Hospital,606,4.211256,73.540480
+Greater Malé,R6,HM Phase 2 to HM Phase 1,10,Flat No. 120,203,4.210903,73.541829
+Greater Malé,R6,HM Phase 2 to HM Phase 1,11,Fehires Park,108,4.211553,73.543088
+Greater Malé,R6,HM Phase 2 to HM Phase 1,12,Flat No. 147,109,4.213077,73.543635
+Greater Malé,R6,HM Phase 2 to HM Phase 1,13,Ruhgandu 1,110,4.216186,73.544590
+Greater Malé,R6,HM Phase 2 to HM Phase 1,14,Flat No. 2,610,4.217841,73.545131
+Greater Malé,R6,HM Phase 2 to HM Phase 1,15,Dhiraagu,111,4.219882,73.545734
+Greater Malé,R6,HM Phase 2 to HM Phase 1,16,Masjid Ameel Jaleel,604,4.224619,73.547014
+Greater Malé,R7,HM Phase 2 to West Park,1,Hiya Flats Stop 2,602,4.231865,73.546356
+Greater Malé,R7,HM Phase 2 to West Park,2,VINARES BUS STOP,32001,4.227847160312973,73.54408542858819
+Greater Malé,R7,HM Phase 2 to West Park,3,MACL Flat Stop,11003,4.223710,73.544066
+Greater Malé,R7,HM Phase 2 to West Park,4,Male' Swimming Track,117,4.169881,73.514446
+Greater Malé,R7,HM Phase 2 to West Park,5,Dharumavantha School,118,4.169257,73.509328
+Greater Malé,R7,HM Phase 2 to West Park,6,Maafannu Bus Terminal,103,4.169366,73.504676
+Greater Malé,R7,HM Phase 2 to West Park,7,Tow Yard,304,4.169349,73.510249
+Greater Malé,R7,HM Phase 2 to West Park,8,STELCO,105,4.170010,73.514746
+Greater Malé,R7,HM Phase 2 to West Park,9,MWSC FLAT BUS STOP (DROP-OFF ONLY),32000,4.223651,73.543878
+Greater Malé,R7,HM Phase 2 to West Park,10,Masjid Ameel Jaleel,604,4.224619,73.547014
+Greater Malé,R7,HM Phase 2 to West Park,11,Hiya Flats Stop 1,601,4.231390,73.548899
+Greater Malé,R7,HM Phase 2 to West Park,12,H 16 Bus Stop,11309,4.234245,73.547805
+Greater Malé,R8,HM Phase 2 to Carnival,1,Hiya Flats Stop 2,602,4.231865,73.546356
+Greater Malé,R8,HM Phase 2 to Carnival,2,VINARES BUS STOP,32001,4.227847160312973,73.54408542858819
+Greater Malé,R8,HM Phase 2 to Carnival,3,MACL Flat Stop,11003,4.223710,73.544066
+Greater Malé,R8,HM Phase 2 to Carnival,4,Senahiya,204,4.172344,73.516718
+Greater Malé,R8,HM Phase 2 to Carnival,5,Artificial Beach West,208,4.174101,73.517817
+Greater Malé,R8,HM Phase 2 to Carnival,6,Carnival,201,4.176984,73.517896
+Greater Malé,R8,HM Phase 2 to Carnival,7,Raalhugandu (Schedule Bus),20002,4.172973,73.517814
+Greater Malé,R8,HM Phase 2 to Carnival,8,MWSC FLAT BUS STOP (DROP-OFF ONLY),32000,4.223651,73.543878
+Greater Malé,R8,HM Phase 2 to Carnival,9,Masjid Ameel Jaleel,604,4.224619,73.547014
+Greater Malé,R8,HM Phase 2 to Carnival,10,Hiya Flats Stop 1,601,4.231390,73.548899
+Greater Malé,R8,HM Phase 2 to Carnival,11,H 16 Bus Stop,11309,4.234245,73.547805
+Greater Malé,R9,HM Phase 2 to VIA,1,Hiya Flats Stop 1,601,4.231390,73.548899
+Greater Malé,R9,HM Phase 2 to VIA,2,H 16 Bus Stop,11309,4.234245,73.547805
+Greater Malé,R9,HM Phase 2 to VIA,3,Hiya Flats Stop 2,602,4.231865,73.546356
+Greater Malé,R9,HM Phase 2 to VIA,4,VINARES BUS STOP,32001,4.227847160312973,73.54408542858819
+Greater Malé,R9,HM Phase 2 to VIA,5,MACL Flat Stop,11003,4.223710,73.544066
+Greater Malé,R9,HM Phase 2 to VIA,6,VIA Domestic Terminal,306,4.190044,73.527056
+Greater Malé,R9,HM Phase 2 to VIA,7,MACL Office,307,4.191667,73.526898
+Greater Malé,R9,HM Phase 2 to VIA,8,VIA Domestic Terminal OPP,11306,4.190516,73.526887
+Greater Malé,R9,HM Phase 2 to VIA,9,MWSC FLAT BUS STOP (DROP-OFF ONLY),32000,4.223651,73.543878
+Greater Malé,R9,HM Phase 2 to VIA,10,Masjid Ameel Jaleel,604,4.224619,73.547014
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,1,Baani,33040,5.633534256,73.04102538
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,2,Kaalaa Stop,33041,5.632724198,73.04081344
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,3,Samandharu,33042,5.631854256,73.04055391
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,4,Galiyaano Stop,33043,5.628739874,73.03980965
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,5,Council Stop,33044,5.627383591,73.04061015
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,6,Primary School Stop,33045,5.625502209,73.04167097
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,7,Siraath Mosque,33046,5.625907944,73.04280571
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,8,R. Atoll School Stop,33047,5.627523711,73.04158879
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,9,Nishaan Stop,33048,5.628948601,73.04212512
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,10,Futsal Ground Stop,33049,5.629992549,73.04152266
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,11,Furuqan Miskiy Stop,33050,5.631346479,73.04177149
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,1,Flat 40,11219,6.890840,73.105290
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,2,Flat 94,11211,6.891702,73.106797
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,3,Flat 188,11212,6.892425620207305,73.108663338974
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,4,Fen Plant,11213,6.892603137815996,73.11160414210212
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,5,Fulhoi,11214,6.891580996822782,73.11324965341885
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,6,Cheynu Jamiyya,11228,6.890154,73.113516
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,7,Funamaage,11215,6.888735087768666,73.11379251521845
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,8,Hospital,11229,6.886053,73.114219
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,9,School Bus Stop,11216,6.884579999353747,73.114599606007
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,10,Himaaliya,11225,6.882114,73.114972
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,11,School Bus Stop OPP,11223,6.884555,73.114506
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,12,Hospital OPP,11226,6.886006,73.114271
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,13,Manaage,11217,6.88847926786093,73.11375299657453
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,14,Cheynu Jamiyya OPP,11230,6.890180,73.113449
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,15,Uthuruge,11218,6.891733654250999,73.11313538311796
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,16,Fen Plant OPP,21213,6.892603137815996,73.11160414210212
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,17,Flat 188 OPP,21212,6.892425620207305,73.108663338974
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,18,Flat 94 OPP,11227,6.891702,73.106797
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,19,Flat 40 OPP,11210,6.890840,73.105290
+Fuvahmulah,FM01,Fuvahmulah 1,1,Fuvahmulah Terminal,2088,-0.30954094311279334,73.44001627320813
+Fuvahmulah,FM01,Fuvahmulah 1,2,Fuvahmulah Airport,2089,-0.3087056675341932,73.4367428618744
+Fuvahmulah,FM01,Fuvahmulah 1,3,Vashoveyo,2090,-0.3083941965383862,73.43244430324775
+Fuvahmulah,FM01,Fuvahmulah 1,4,Funaad Futsal Pitch,2091,-0.3072762122220261,73.42912694511094
+Fuvahmulah,FM01,Fuvahmulah 1,5,Kandhovali Magi Kanmathi Stop 1,2092,-0.3035703811679535,73.42523398810768
+Fuvahmulah,FM01,Fuvahmulah 1,6,Milo Stadium,2093,-0.30123596269435404,73.42413803634354
+Fuvahmulah,FM01,Fuvahmulah 1,7,Maaneyre Athiri Stop 1,2094,-0.2985809517707751,73.4223276937802
+Fuvahmulah,FM01,Fuvahmulah 1,8,Valifannu,2095,-0.29644023820707166,73.42021128234738
+Fuvahmulah,FM01,Fuvahmulah 1,9,Cricket Stadium,2096,-0.2939036276338499,73.41717705171386
+Fuvahmulah,FM01,Fuvahmulah 1,10,Handhuvaree Goalhi Kanmathi,2097,-0.292482075466331,73.41469332616501
+Fuvahmulah,FM01,Fuvahmulah 1,11,Neregando Fanno,2098,-0.28842126319097416,73.41122791211681
+Fuvahmulah,FM01,Fuvahmulah 1,12,Dhadimagi Aaro,2099,-0.2860609489076505,73.41054126661457
+Fuvahmulah,FM01,Fuvahmulah 1,13,MTCC Site,2100,-0.2820591422620451,73.41190382879185
+Fuvahmulah,FM01,Fuvahmulah 1,14,Gemmiskiy Stop 1,2101,-0.280050535914306,73.41581009043058
+Fuvahmulah,FM01,Fuvahmulah 1,15,Pebbles Restaurant,33036,-0.2780780702208242,73.41751705386844
+Fuvahmulah,FM01,Fuvahmulah 1,16,Noor-E Masjid Stop,32010,-0.28378672115069015,73.42066769310527
+Fuvahmulah,FM01,Fuvahmulah 1,17,Hoadhandu/Dhiguvaandu Stop,32018,-0.2864137644164429,73.42243541607003
+Fuvahmulah,FM01,Fuvahmulah 1,18,Quranic Center Stop,32007,-0.28857862683848245,73.42416849068634
+Fuvahmulah,FM01,Fuvahmulah 1,19,Kedeyre Miskiy,2126,-0.29461100079989244,73.4288497052288
+Fuvahmulah,FM01,Fuvahmulah 1,20,Rasgefannu,2113,-0.294673070118902,73.42886895484283
+Fuvahmulah,FM01,Fuvahmulah 1,21,Euro Store,2114,-0.2965308614779684,73.43117227635892
+Fuvahmulah,FM01,Fuvahmulah 1,22,Funaadu Rd Stop,33039,-0.2995231132438184,73.43360283965008
+Fuvahmulah,FM01,Fuvahmulah 1,23,Waadheege Stop,2104,-0.30290073397449646,73.43587886282239
+Fuvahmulah,FM01,Fuvahmulah 1,24,FVM school stop,33037,-0.30659544344807604,73.43729186652257
+Fuvahmulah,FM01,Fuvahmulah 1,25,Fuvahmulah Airport OP,12089,-0.3087056675341932,73.4367428618744
+Addu City,HMD01,Hulhumeedhoo,1,Hulhumeedhoo Bus Terminal,2252,-0.589567,73.221458
+Addu City,HMD01,Hulhumeedhoo,2,BML Stop 1,2270,-0.58851,73.22783
+Addu City,HMD01,Hulhumeedhoo,3,Bondo Magu,2271,-0.58575,73.22786
+Addu City,HMD01,Hulhumeedhoo,4,Shabnamee Villa,2286,-0.58384,73.22688
+Addu City,HMD01,Hulhumeedhoo,5,Meedhoo Avashu Office,2287,-0.58356,73.22497
+Addu City,HMD01,Hulhumeedhoo,6,Bros Cafe',3005,-0.58482,73.22429
+Addu City,HMD01,Hulhumeedhoo,7,Super Value Mart,2272,-0.58503,73.22541
+Addu City,HMD01,Hulhumeedhoo,8,Mago'ari 1,2253,-0.5896,73.22778
+Addu City,HMD01,Hulhumeedhoo,9,Island Domino,2266,-0.59312,73.22765
+Addu City,HMD01,Hulhumeedhoo,10,Sensual Plus,2264,-0.59647,73.22754
+Addu City,HMD01,Hulhumeedhoo,11,Barakaath Miskiy,2263,-0.59878,73.22631
+Addu City,HMD01,Hulhumeedhoo,12,Hulhumeedhoo Bus Terminal OPP,112252,-0.589567,73.221458
+Addu City,LR01,Main Connector 1,1,Feydhoo Ferry Terminal,2129,-0.68127,73.13768
+Addu City,LR01,Main Connector 1,2,Maadhela Park Stop 1,2130,-0.68228,73.13919
+Addu City,LR01,Main Connector 1,3,Koamas Stop 1,2131,-0.6832241860677897,73.14087467103619
+Addu City,LR01,Main Connector 1,4,Sunrise Beach Stop 1,2132,-0.68457,73.14206
+Addu City,LR01,Main Connector 1,5,Gan Police Stop 1,2239,-0.68743,73.14455
+Addu City,LR01,Main Connector 1,6,Equator Village Stop 1,2240,-0.68785,73.14654
+Addu City,LR01,Main Connector 1,7,Maldivian Office Stop 1,2241,-0.68882,73.1495
+Addu City,LR01,Main Connector 1,8,Astra Stop 1,2242,-0.68967,73.15213
+Addu City,LR01,Main Connector 1,9,Astra Stop 2,2244,-0.68976,73.15212
+Addu City,LR01,Main Connector 1,10,Maldivian Office Stop 2,2245,-0.68875,73.14953
+Addu City,LR01,Main Connector 1,11,Equator Village Stop 2,2246,-0.68792,73.1465
+Addu City,LR01,Main Connector 1,12,Gan Police Stop 2,2247,-0.68747,73.14444
+Addu City,LR01,Main Connector 1,13,Maama Kaafa Park Stop 1,2133,-0.685,73.13944
+Addu City,LR01,Main Connector 1,14,See Me Stop 1,2134,-0.68346,73.13665
+Addu City,LR01,Main Connector 1,15,Feydhoo School Stop 1,2135,-0.6828,73.13551
+Addu City,LR01,Main Connector 1,16,Fais Mart Stop 1,2136,-0.68164,73.13353
+Addu City,LR01,Main Connector 1,17,Majanta Kanmathi Stop 1,2137,-0.68042,73.13141
+Addu City,LR01,Main Connector 1,18,Ethei Cafe Stop 1,2138,-0.6779,73.13052
+Addu City,LR01,Main Connector 1,19,Maradhoo Feydhoo Stop 1,2139,-0.67658,73.12944
+Addu City,LR01,Main Connector 1,20,M.Feydhoo Football GRD Stop 1,2154,-0.67608,73.12793
+Addu City,LR01,Main Connector 1,21,City Motion Stop 1,2155,-0.67393,73.12613
+Addu City,LR01,Main Connector 1,22,Maradhoo Feydhoo School Stop 1,2156,-0.67244,73.12485
+Addu City,LR01,Main Connector 1,23,Irushadhiyya School Stop 1,2157,-0.66971,73.12253
+Addu City,LR01,Main Connector 1,24,Samaa Green Stop 1,2158,-0.66859,73.12152
+Addu City,LR01,Main Connector 1,25,Zikuraage Stop 1,2159,-0.66599,73.11928
+Addu City,LR01,Main Connector 1,26,HK Rentals Stop 1,2160,-0.66448,73.11798
+Addu City,LR01,Main Connector 1,27,Van Bolhafishi Stop 1,2161,-0.66304,73.11674
+Addu City,LR01,Main Connector 1,28,Maradhoo Football GRD Stop 1,2162,-0.66026,73.11436
+Addu City,LR01,Main Connector 1,29,Kuni Koshi Stop 1,2248,-0.64261,73.10537
+Addu City,LR01,Main Connector 1,30,Police Training Academy Stop 1,2249,-0.63484,73.10121
+Addu City,LR01,Main Connector 1,31,Masjid Ibrahim Stop 1,2191,-0.61773,73.09877
+Addu City,LR01,Main Connector 1,32,AEH Stop 1,2190,-0.6200957951517552,73.0951035531063
+Addu City,LR01,Main Connector 1,33,Sheesha Stop 2,2216,-0.61496,73.09144
+Addu City,LR01,Main Connector 1,34,Daily Fresh Stop 2,2217,-0.61141,73.08939
+Addu City,LR01,Main Connector 1,35,Simpaaz Stop,21938,-0.6094956497425557,73.08831808679466
+Addu City,LR01,Main Connector 1,36,Ooredoo Shop Stop 2,2218,-0.60738,73.08709
+Addu City,LR01,Main Connector 1,37,Sunny Store Stop 2,2219,-0.60472,73.08557
+Addu City,LR01,Main Connector 1,38,Islamic Bank Stop 2,2220,-0.60251,73.08433
+Addu City,LR01,Main Connector 1,39,Sunrise Opticare Stop,21937,-0.6004864315996201,73.0831816442564
+Addu City,LR01,Main Connector 1,40,Euro Store Stop 2,2221,-0.59903,73.08239
+Addu City,LR01,Main Connector 1,41,Masjid Al Rahman Stop 2,2222,-0.59682,73.08105
+Addu City,LR01,Main Connector 1,42,Cubano Stop,21936,-0.5954488880529993,73.08027876909904
+Addu City,LR01,Main Connector 1,43,Hithadhoo School Stop 2,2223,-0.59335,73.07905
+Addu City,LR01,Main Connector 1,44,Maahera Cafe' Stop 2,2224,-0.59172,73.07813
+Addu City,LR01,Main Connector 1,45,Al Masjid Al Shura Stop 2,2225,-0.58939,73.0787
+Addu City,LR01,Main Connector 1,46,Kodagedhari Uthuru Stop,21935,-0.586847885658031,73.08075841605248
+Addu City,LR01,Main Connector 1,47,Kodagedhari Dhekunu Stop,21934,-0.5887633492029067,73.0818362211603
+Addu City,LR01,Main Connector 1,48,Alah Aabaadhuvi Sarahahdhu Stop 2,2226,-0.59072,73.08055
+Addu City,LR01,Main Connector 1,49,Matbross Stop 2,2227,-0.59238,73.08157
+Addu City,LR01,Main Connector 1,50,Metro Shopping Mall Stop 2,2228,-0.59319,73.08385
+Addu City,LR01,Main Connector 1,51,Two Star Stop 2,2229,-0.59592,73.08423
+Addu City,LR01,Main Connector 1,52,Royal Plus Stop 2,2230,-0.59859,73.08578
+Addu City,LR01,Main Connector 1,53,Fenaka Stop 2,2231,-0.60081,73.08709
+Addu City,LR01,Main Connector 1,54,Litus Hithadhoo Stop 2,2232,-0.60447,73.09023
+Addu City,LR01,Main Connector 1,55,Dhanaal Stop 2,2235,-0.6071744279342823,73.09318212740834
+Addu City,LR01,Main Connector 1,56,Sharafuddin School Stop 1,21932,-0.6087446937731329,73.09291668189874
+Addu City,LR01,Main Connector 1,57,AHS Stop 1,21931,-0.6115299325691694,73.09528213731389
+Addu City,LR01,Main Connector 1,58,Stadium Bus Stop,21933,-0.614502779296231,73.09749039343444
+Addu City,LR01,Main Connector 1,59,Masjid Ibrahim Stop 2,2238,-0.61776,73.09882
+Addu City,LR01,Main Connector 1,60,AEH Stop 1 OPP,112190,-0.62007,73.09509
+Addu City,LR01,Main Connector 1,61,Police Training Academy Stop 2,2251,-0.6348,73.10132
+Addu City,LR01,Main Connector 1,62,Kuni Koshi Stop 2,2250,-0.64265,73.10547
+Addu City,LR01,Main Connector 1,63,Maradhoo Football GRD Stop 2,2181,-0.66023,73.11439
+Addu City,LR01,Main Connector 1,64,Van Bolhafishi Stop 2,2182,-0.663,73.11679
+Addu City,LR01,Main Connector 1,65,HK Rentals Stop 2,2183,-0.6645,73.11807
+Addu City,LR01,Main Connector 1,66,Zikuraage Stop 2,2184,-0.66595,73.11932
+Addu City,LR01,Main Connector 1,67,Samaa Green Stop 2,2185,-0.66857,73.12156
+Addu City,LR01,Main Connector 1,68,Irushadhiyya School Stop 2,2186,-0.67061,73.12334
+Addu City,LR01,Main Connector 1,69,Maradhoo Feydhoo School Stop 2,2187,-0.67241,73.12489
+Addu City,LR01,Main Connector 1,70,City Motion Stop 2,2188,-0.67391,73.12616
+Addu City,LR01,Main Connector 1,71,Maradhoo Feydhoo Football GRD Stop 2,2189,-0.67606,73.12797
+Addu City,LR01,Main Connector 1,72,Maradhoo Feydhoo Stop 2,2144,-0.67658,73.12944
+Addu City,LR01,Main Connector 1,73,Ethei Coffee Stop 2,2145,-0.6779,73.13056
+Addu City,LR01,Main Connector 1,74,Majanta Kanmathi Stop 2,2146,-0.68037,73.13142
+Addu City,LR01,Main Connector 1,75,Fais Mart Stop 2,2147,-0.68167,73.13365
+Addu City,LR01,Main Connector 1,76,Feydhoo School Stop 2,2148,-0.68275,73.13554
+Addu City,LR01,Main Connector 1,77,See Me Stop 2,2149,-0.68343,73.13666
+Addu City,LR01,Main Connector 1,78,Maama Kaafa Park Stop 2,2150,-0.68498,73.13945
+Addu City,LR01,Main Connector 1,79,Gan Police Stop 1 OPP,112239,-0.68743,73.14455
+Addu City,LR01,Main Connector 1,80,Equator Village Stop 1 OPP,112240,-0.68785,73.14654
+Addu City,LR01,Main Connector 1,81,Maldivian Office Stop 1 OPP,112241,-0.68882,73.1495
+Addu City,LR01,Main Connector 1,82,Astra Stop 1 OPP,112242,-0.68967,73.15213
+Addu City,LR01,Main Connector 1,83,Astra Stop 2 OPP,112244,-0.68976,73.15212
+Addu City,LR01,Main Connector 1,84,Maldivian Office Stop 2 OPP,112245,-0.68875,73.14953
+Addu City,LR01,Main Connector 1,85,Equator Village Stop 2 OPP,112246,-0.68792,73.1465
+Addu City,LR01,Main Connector 1,86,Gan Police Stop 2 OPP,112247,-0.68747,73.14444
+Addu City,LR01,Main Connector 1,87,Sunrise Beach Stop 2,2151,-0.68455,73.14203
+Addu City,LR01,Main Connector 1,88,Koamas Stop 2,2152,-0.68322,73.14086
+Addu City,LR01,Main Connector 1,89,Maadhela Park Stop 2,2153,-0.68228,73.13919
+Addu City,LR01,Main Connector 1,90,Feydhoo Ferry Terminal OPP,21291,-0.68127,73.13768
+Addu City,LR02,Main Connector 2,1,Feydhoo Ferry Terminal,2129,-0.68127,73.13768
+Addu City,LR02,Main Connector 2,2,Maadhela Park Stop 1,2130,-0.68228,73.13919
+Addu City,LR02,Main Connector 2,3,Koamas Stop 1,2131,-0.6832241860677897,73.14087467103619
+Addu City,LR02,Main Connector 2,4,Sunrise Beach Stop 1,2132,-0.68457,73.14206
+Addu City,LR02,Main Connector 2,5,Gan Police Stop 1,2239,-0.68743,73.14455
+Addu City,LR02,Main Connector 2,6,Equator Village Stop 1,2240,-0.68785,73.14654
+Addu City,LR02,Main Connector 2,7,Maldivian Office Stop 1,2241,-0.68882,73.1495
+Addu City,LR02,Main Connector 2,8,Astra Stop 1,2242,-0.68967,73.15213
+Addu City,LR02,Main Connector 2,9,Astra Stop 2,2244,-0.68976,73.15212
+Addu City,LR02,Main Connector 2,10,Maldivian Office Stop 2,2245,-0.68875,73.14953
+Addu City,LR02,Main Connector 2,11,Equator Village Stop 2,2246,-0.68792,73.1465
+Addu City,LR02,Main Connector 2,12,Gan Police Stop 2,2247,-0.68747,73.14444
+Addu City,LR02,Main Connector 2,13,Maama Kaafa Park Stop 1,2133,-0.685,73.13944
+Addu City,LR02,Main Connector 2,14,See Me Stop 1,2134,-0.68346,73.13665
+Addu City,LR02,Main Connector 2,15,Feydhoo School Stop 1,2135,-0.6828,73.13551
+Addu City,LR02,Main Connector 2,16,Fais Mart Stop 1,2136,-0.68164,73.13353
+Addu City,LR02,Main Connector 2,17,Majanta Kanmathi Stop 1,2137,-0.68042,73.13141
+Addu City,LR02,Main Connector 2,18,Ethei Cafe Stop 1,2138,-0.6779,73.13052
+Addu City,LR02,Main Connector 2,19,Maradhoo Feydhoo Stop 1,2139,-0.67658,73.12944
+Addu City,LR02,Main Connector 2,20,M.Feydhoo Football GRD Stop 1,2154,-0.67608,73.12793
+Addu City,LR02,Main Connector 2,21,City Motion Stop 1,2155,-0.67393,73.12613
+Addu City,LR02,Main Connector 2,22,Maradhoo Feydhoo School Stop 1,2156,-0.67244,73.12485
+Addu City,LR02,Main Connector 2,23,Irushadhiyya School Stop 1,2157,-0.66971,73.12253
+Addu City,LR02,Main Connector 2,24,Samaa Green Stop 1,2158,-0.66859,73.12152
+Addu City,LR02,Main Connector 2,25,Zikuraage Stop 1,2159,-0.66599,73.11928
+Addu City,LR02,Main Connector 2,26,HK Rentals Stop 1,2160,-0.66448,73.11798
+Addu City,LR02,Main Connector 2,27,Van Bolhafishi Stop 1,2161,-0.66304,73.11674
+Addu City,LR02,Main Connector 2,28,Maradhoo Football GRD Stop 1,2162,-0.66026,73.11436
+Addu City,LR02,Main Connector 2,29,Kuni Koshi Stop 1,2248,-0.64261,73.10537
+Addu City,LR02,Main Connector 2,30,Police Training Academy Stop 1,2249,-0.63484,73.10121
+Addu City,LR02,Main Connector 2,31,AEH Stop 1,2190,-0.6200957951517552,73.0951035531063
+Addu City,LR02,Main Connector 2,32,Masjid Ibrahim Stop 1,2191,-0.61773,73.09877
+Addu City,LR02,Main Connector 2,33,Stadium Bus Stop,21933,-0.614502779296231,73.09749039343444
+Addu City,LR02,Main Connector 2,34,AHS Stop 1,21931,-0.6115299325691694,73.09528213731389
+Addu City,LR02,Main Connector 2,35,Sharafuddin School Stop 1,21932,-0.6087446937731329,73.09291668189874
+Addu City,LR02,Main Connector 2,36,Dhanaal Stop 1,2194,-0.6071744279342823,73.09318212740834
+Addu City,LR02,Main Connector 2,37,Litus Hithadhoo Stop 1,2197,-0.60442,73.09012
+Addu City,LR02,Main Connector 2,38,Fenaka Hithadhoo Stop 1,2198,-0.60084,73.08703
+Addu City,LR02,Main Connector 2,39,Royal Plus Stop 1,2199,-0.5986,73.08574
+Addu City,LR02,Main Connector 2,40,Two Star Stop 1,2200,-0.59593,73.08418
+Addu City,LR02,Main Connector 2,41,Metro Shopping Mall Stop 1,2201,-0.59319,73.08381
+Addu City,LR02,Main Connector 2,42,Matbross Stop 1,2202,-0.5924,73.08152
+Addu City,LR02,Main Connector 2,43,Alah Aabaadhuvi Sarahahdhu Stop 1,2203,-0.59073,73.08053
+Addu City,LR02,Main Connector 2,44,Kodagedhari Dhekunu Stop,21934,-0.5887633492029067,73.0818362211603
+Addu City,LR02,Main Connector 2,45,Kodagedhari Uthuru Stop,21935,-0.586847885658031,73.08075841605248
+Addu City,LR02,Main Connector 2,46,Al Masjid Al Shura Stop 1,2204,-0.58934,73.07865
+Addu City,LR02,Main Connector 2,47,Maahera Cafe' Stop 1,2205,-0.5917,73.07817
+Addu City,LR02,Main Connector 2,48,Hithadhoo School Stop 1,2206,-0.59333,73.07913
+Addu City,LR02,Main Connector 2,49,Cubano Stop,21936,-0.5954488880529993,73.08027876909904
+Addu City,LR02,Main Connector 2,50,Masjid Al Rahman Stop 1,2207,-0.5968,73.08112
+Addu City,LR02,Main Connector 2,51,Euro Store Stop 1,2208,-0.59905,73.08233
+Addu City,LR02,Main Connector 2,52,Sunrise Opticare Stop,21937,-0.6004864315996201,73.0831816442564
+Addu City,LR02,Main Connector 2,53,Islamic Bank Stop 1,2209,-0.60249,73.08436
+Addu City,LR02,Main Connector 2,54,Sunny Store Stop 1,2210,-0.6047,73.08562
+Addu City,LR02,Main Connector 2,55,Ooredoo Shop Stop 1,2211,-0.60736,73.08715
+Addu City,LR02,Main Connector 2,56,Simpaaz Stop,21938,-0.6094956497425557,73.08831808679466
+Addu City,LR02,Main Connector 2,57,Daily Fresh Stop 1,2212,-0.61139,73.08946
+Addu City,LR02,Main Connector 2,58,Sheesha Stop 1,2213,-0.61495,73.09149
+Addu City,LR02,Main Connector 2,59,AEH Stop 1 OPP,112190,-0.62007,73.09509
+Addu City,LR02,Main Connector 2,60,Masjid Ibrahim Stop 1 OPP,21911,-0.61773,73.09877
+Addu City,LR02,Main Connector 2,61,Police Training Academy Stop 2,2251,-0.6348,73.10132
+Addu City,LR02,Main Connector 2,62,Kuni Koshi Stop 2,2250,-0.64265,73.10547
+Addu City,LR02,Main Connector 2,63,Maradhoo Football GRD Stop 2,2181,-0.66023,73.11439
+Addu City,LR02,Main Connector 2,64,Van Bolhafishi Stop 2,2182,-0.663,73.11679
+Addu City,LR02,Main Connector 2,65,HK Rentals Stop 2,2183,-0.6645,73.11807
+Addu City,LR02,Main Connector 2,66,Zikuraage Stop 2,2184,-0.66595,73.11932
+Addu City,LR02,Main Connector 2,67,Samaa Green Stop 2,2185,-0.66857,73.12156
+Addu City,LR02,Main Connector 2,68,Irushadhiyya School Stop 2,2186,-0.67061,73.12334
+Addu City,LR02,Main Connector 2,69,Maradhoo Feydhoo School Stop 2,2187,-0.67241,73.12489
+Addu City,LR02,Main Connector 2,70,City Motion Stop 2,2188,-0.67391,73.12616
+Addu City,LR02,Main Connector 2,71,Maradhoo Feydhoo Football GRD Stop 2,2189,-0.67606,73.12797
+Addu City,LR02,Main Connector 2,72,Maradhoo Feydhoo Stop 2,2144,-0.67658,73.12944
+Addu City,LR02,Main Connector 2,73,Ethei Coffee Stop 2,2145,-0.6779,73.13056
+Addu City,LR02,Main Connector 2,74,Majanta Kanmathi Stop 2,2146,-0.68037,73.13142
+Addu City,LR02,Main Connector 2,75,Fais Mart Stop 2,2147,-0.68167,73.13365
+Addu City,LR02,Main Connector 2,76,Feydhoo School Stop 2,2148,-0.68275,73.13554
+Addu City,LR02,Main Connector 2,77,See Me Stop 2,2149,-0.68343,73.13666
+Addu City,LR02,Main Connector 2,78,Maama Kaafa Park Stop 2,2150,-0.68498,73.13945
+Addu City,LR02,Main Connector 2,79,Gan Police Stop 1 OPP,112239,-0.68743,73.14455
+Addu City,LR02,Main Connector 2,80,Equator Village Stop 1 OPP,112240,-0.68785,73.14654
+Addu City,LR02,Main Connector 2,81,Maldivian Office Stop 1 OPP,112241,-0.68882,73.1495
+Addu City,LR02,Main Connector 2,82,Astra Stop 1 OPP,112242,-0.68967,73.15213
+Addu City,LR02,Main Connector 2,83,Astra Stop 2 OPP,112244,-0.68976,73.15212
+Addu City,LR02,Main Connector 2,84,Maldivian Office Stop 2 OPP,112245,-0.68875,73.14953
+Addu City,LR02,Main Connector 2,85,Equator Village Stop 2 OPP,112246,-0.68792,73.1465
+Addu City,LR02,Main Connector 2,86,Gan Police Stop 2 OPP,112247,-0.68747,73.14444
+Addu City,LR02,Main Connector 2,87,Sunrise Beach Stop 2,2151,-0.68455,73.14203
+Addu City,LR02,Main Connector 2,88,Koamas Stop 2,2152,-0.68322,73.14086
+Addu City,LR02,Main Connector 2,89,Maadhela Park Stop 2,2153,-0.68228,73.13919
+Addu City,LR02,Main Connector 2,90,Feydhoo Ferry Terminal OPP,21291,-0.68127,73.13768
+Laamu,IK01,Isdhoo Kalaidhoo,1,Afannu,2028,2.12868819359886,73.58298650406518
+Laamu,IK01,Isdhoo Kalaidhoo,2,Mahafannu Stop 1,2029,2.12755167113404,73.58167187957275
+Laamu,IK01,Isdhoo Kalaidhoo,3,Isdhoo Harbour Stop 1,2030,2.127897992635048,73.5806647645007
+Laamu,IK01,Isdhoo Kalaidhoo,4,Masjid Inaara Stop 1,2031,2.1265101906858295,73.58044197060498
+Laamu,IK01,Isdhoo Kalaidhoo,5,Isdhoo School Stop 1,2032,2.127897992635048,73.5806647645007
+Laamu,IK01,Isdhoo Kalaidhoo,6,Aabaadhu Sarahaddhu 1,33002,2.12009967956686,73.5724319607048
+Laamu,IK01,Isdhoo Kalaidhoo,7,Aabaadhu Sarahaddhu 2,33003,2.1190224330390803,73.57129999374214
+Laamu,IK01,Isdhoo Kalaidhoo,8,Health Center Stop 1,2033,2.117541573635331,73.56973231483776
+Laamu,IK01,Isdhoo Kalaidhoo,9,Kalaidhoo School Stop 1,2034,2.1100456035385027,73.56083230725122
+Laamu,IK01,Isdhoo Kalaidhoo,10,Ijaara Goalhi Stop 1,2035,2.1085780172858786,73.5566595482044
+Laamu,IK01,Isdhoo Kalaidhoo,11,Hiyalee Manzil Stop 1,2036,2.109950150321437,73.55625171580532
+Laamu,IK01,Isdhoo Kalaidhoo,12,Kalaidhoo Harbour Stop 1,2037,2.1112584670694123,73.55453549804811
+Laamu,IK01,Isdhoo Kalaidhoo,13,Vaguthee Miskiy Stop 1,2038,2.1123523716064456,73.55575473317829
+Laamu,IK01,Isdhoo Kalaidhoo,14,Tharaf,2039,2.113060321985409,73.5554877207092
+Laamu,IK01,Isdhoo Kalaidhoo,15,Vaguthee Miskiy Stop 2,2040,2.1122667943548286,73.55590088273308
+Laamu,IK01,Isdhoo Kalaidhoo,16,Kalaidhoo Harbour Stop 2,2041,2.1112584670694123,73.55453549804811
+Laamu,IK01,Isdhoo Kalaidhoo,17,Hiyalee Manzil Stop 2,2042,2.1098177753747773,73.5562688793032
+Laamu,IK01,Isdhoo Kalaidhoo,18,Ijaara Goalhi Stop 2,2043,2.1085848057757888,73.55682016411598
+Laamu,IK01,Isdhoo Kalaidhoo,19,Kalaidhoo School Stop 2,2044,2.110052300880013,73.56067874338684
+Laamu,IK01,Isdhoo Kalaidhoo,20,Health Center Stop 2,2045,2.1176564506849562,73.56967617887935
+Laamu,IK01,Isdhoo Kalaidhoo,21,Aabaadhu Sarahaddhu 2 OP,33005,2.1190224330390803,73.57129999374214
+Laamu,IK01,Isdhoo Kalaidhoo,22,Aabaadhu Sarahaddhu 1 OP,33004,2.12009967956686,73.5724319607048
+Laamu,IK01,Isdhoo Kalaidhoo,23,Isdhoo School Stop 2,2046,2.127897992635048,73.5806647645007
+Laamu,IK01,Isdhoo Kalaidhoo,24,Masjid Inaara Stop 2,2047,2.126714191013915,73.58050098009056
+Laamu,IK01,Isdhoo Kalaidhoo,25,Isdhoo Harbour Stop 2,2048,2.127897992635048,73.5806647645007
+Laamu,IK01,Isdhoo Kalaidhoo,26,Mahafannu Stop 2,2049,2.1277063333388555,73.5816781842162
+Laamu,LF01,Fonadhoo To Gan,1,Kurigam,2014,1.825804954392605,73.49214545984351
+Laamu,LF01,Fonadhoo To Gan,2,Kurigum Football Ground 1,3002,1.8285889045989892,73.49570743954423
+Laamu,LF01,Fonadhoo To Gan,3,Fonadhoo Health Center Stop 1,2074,1.830715762774609,73.497832253626
+Laamu,LF01,Fonadhoo To Gan,4,LAEC Stop 1,2075,1.8341041493952863,73.50073903646832
+Laamu,LF01,Fonadhoo To Gan,5,Fonadhoo Harbour Stop 1,2013,1.834821477652043,73.50012977676101
+Laamu,LF01,Fonadhoo To Gan,6,BML Fonadhoo Branch Stop 1,2012,1.8348653644187582,73.50139979557169
+Laamu,LF01,Fonadhoo To Gan,7,Naira Workshop Stop 1,2011,1.837386197256762,73.50346179447907
+Laamu,LF01,Fonadhoo To Gan,8,Aamiskiy Magu Stop 1,2010,1.842444070985586,73.50681248984957
+Laamu,LF01,Fonadhoo To Gan,9,KDO Airport Stop 2,2019,1.85787256485246,73.51817086076377
+Laamu,LF01,Fonadhoo To Gan,10,Maandhoo Stop 2,2020,1.8754212466442255,73.52835227821124
+Laamu,LF01,Fonadhoo To Gan,11,Mukurimagu Ekuveni Stop 2,2021,1.8977097819564375,73.53543899617567
+Laamu,LF01,Fonadhoo To Gan,12,Mukurimagu Harbour Stop 2,2022,1.898371286709835,73.53501722871556
+Laamu,LF01,Fonadhoo To Gan,13,Amra Stop 2,2064,1.9140687112334367,73.54171379816839
+Laamu,LF01,Fonadhoo To Gan,14,Leziz Stop 2,2065,1.9188835490315277,73.54353573913754
+Laamu,LF01,Fonadhoo To Gan,15,Gan Regional Hospital Stop 2,2024,1.9207598714743683,73.54465567642909
+Laamu,LF01,Fonadhoo To Gan,16,Hamadh School Stop 2,2023,1.9206105423445228,73.54749809383104
+Laamu,LF01,Fonadhoo To Gan,17,Noofaru Stop 2,2025,1.9291779801322337,73.54425862833625
+Laamu,LF01,Fonadhoo To Gan,18,Villa College Stop 2,2026,1.9348844685992188,73.54333117356254
+Laamu,LF01,Fonadhoo To Gan,19,Youth Center Stop 2,2027,1.9324623938097891,73.54254125472043
+Laamu,LF01,Fonadhoo To Gan,20,Thundi Harbour Stop 1,2000,1.934114822285993,73.53960786791838
+Laamu,LF01,Fonadhoo To Gan,21,Youth Center Stop 1,2001,1.9324664148350523,73.54246950562869
+Laamu,LF01,Fonadhoo To Gan,22,Villa College Stop 1,2002,1.9349782923890368,73.54348607113442
+Laamu,LF01,Fonadhoo To Gan,23,Noofaru Stop 1,2003,1.9290915279196876,73.54439743265402
+Laamu,LF01,Fonadhoo To Gan,24,Gan Regional Hospital Stop 1,2004,1.9223096302011506,73.54438883494377
+Laamu,LF01,Fonadhoo To Gan,25,Hamadh School Stop 1,2005,1.9206105423445228,73.54749809383104
+Laamu,LF01,Fonadhoo To Gan,26,Leziz Stop 1,2058,1.9187376873639348,73.543630059256
+Laamu,LF01,Fonadhoo To Gan,27,Amra Stop 1,2059,1.913903611785872,73.54184486160767
+Laamu,LF01,Fonadhoo To Gan,28,Mukurimagu Harbour Stop 1,2006,1.8983158860589864,73.53508652908215
+Laamu,LF01,Fonadhoo To Gan,29,Mukurimagu Ekuveni Stop 1,2007,1.8977678769526471,73.53550258951098
+Laamu,LF01,Fonadhoo To Gan,30,Maandhoo Stop 1,2008,1.8756602175527513,73.52859228497306
+Laamu,LF01,Fonadhoo To Gan,31,KDO Airport Stop 1,2009,1.8581450127556067,73.5184745362379
+Laamu,LF01,Fonadhoo To Gan,32,Aamiskiy Magu Stop 2,2018,1.8424755706474267,73.50698348067579
+Laamu,LF01,Fonadhoo To Gan,33,Naira Workshop Stop 2,2017,1.837297729867568,73.50349196933077
+Laamu,LF01,Fonadhoo To Gan,34,BML Fonadhoo Branch Stop 2,2016,1.834772548099291,73.5014517687204
+Laamu,LF01,Fonadhoo To Gan,35,Fonadhoo Harbour Stop 2,2015,1.834821477652043,73.50012977676101
+Laamu,LF01,Fonadhoo To Gan,36,LAEC Stop 2,2082,1.8340439706757807,73.50074755754876
+Laamu,LF01,Fonadhoo To Gan,37,Fonadhoo Health Center Stop 2,2084,1.8308500865173623,73.49816810612472
+Laamu,LF01,Fonadhoo To Gan,38,Kurigum Football Ground 2,3003,1.8285922556528384,73.49590592301311
+Laamu,LG01,Gan To Fonadhoo,1,Thundi Harbour Stop 1,2000,1.934114822285993,73.53960786791838
+Laamu,LG01,Gan To Fonadhoo,2,Youth Center Stop 1,2001,1.9324664148350523,73.54246950562869
+Laamu,LG01,Gan To Fonadhoo,3,Villa College Stop 1,2002,1.9349782923890368,73.54348607113442
+Laamu,LG01,Gan To Fonadhoo,4,Noofaru Stop 1,2003,1.9290915279196876,73.54439743265402
+Laamu,LG01,Gan To Fonadhoo,5,Gan Regional Hospital Stop 1,2004,1.9223096302011506,73.54438883494377
+Laamu,LG01,Gan To Fonadhoo,6,Hamadh School Stop 1,2005,1.9206105423445228,73.54749809383104
+Laamu,LG01,Gan To Fonadhoo,7,Leziz Stop 1,2058,1.9187376873639348,73.543630059256
+Laamu,LG01,Gan To Fonadhoo,8,Amra Stop 1,2059,1.913903611785872,73.54184486160767
+Laamu,LG01,Gan To Fonadhoo,9,Mukurimagu Harbour Stop 1,2006,1.8983158860589864,73.53508652908215
+Laamu,LG01,Gan To Fonadhoo,10,Mukurimagu Ekuveni Stop 1,2007,1.8977678769526471,73.53550258951098
+Laamu,LG01,Gan To Fonadhoo,11,Maandhoo Stop 1,2008,1.8756602175527513,73.52859228497306
+Laamu,LG01,Gan To Fonadhoo,12,KDO Airport Stop 1,2009,1.8581450127556067,73.5184745362379
+Laamu,LG01,Gan To Fonadhoo,13,Aamiskiy Magu Stop 2,2018,1.8424755706474267,73.50698348067579
+Laamu,LG01,Gan To Fonadhoo,14,Naira Workshop Stop 2,2017,1.837297729867568,73.50349196933077
+Laamu,LG01,Gan To Fonadhoo,15,BML Fonadhoo Branch Stop 2,2016,1.834772548099291,73.5014517687204
+Laamu,LG01,Gan To Fonadhoo,16,Fonadhoo Harbour Stop 2,2015,1.834821477652043,73.50012977676101
+Laamu,LG01,Gan To Fonadhoo,17,LAEC Stop 2,2082,1.8340439706757807,73.50074755754876
+Laamu,LG01,Gan To Fonadhoo,18,Fonadhoo Health Center Stop 2,2084,1.8308500865173623,73.49816810612472
+Laamu,LG01,Gan To Fonadhoo,19,Kurigum Football Ground 2,3003,1.8285922556528384,73.49590592301311
+Laamu,LG01,Gan To Fonadhoo,20,Kurigam,2014,1.825804954392605,73.49214545984351
+Laamu,LG01,Gan To Fonadhoo,21,Kurigum Football Ground 1,3002,1.8285889045989892,73.49570743954423
+Laamu,LG01,Gan To Fonadhoo,22,Fonadhoo Health Center Stop 1,2074,1.830715762774609,73.497832253626
+Laamu,LG01,Gan To Fonadhoo,23,LAEC Stop 1,2075,1.8341041493952863,73.50073903646832
+Laamu,LG01,Gan To Fonadhoo,24,Fonadhoo Harbour Stop 1,2013,1.834821477652043,73.50012977676101
+Laamu,LG01,Gan To Fonadhoo,25,BML Fonadhoo Branch Stop 1,2012,1.8348653644187582,73.50139979557169
+Laamu,LG01,Gan To Fonadhoo,26,Naira Workshop Stop 1,2011,1.837386197256762,73.50346179447907
+Laamu,LG01,Gan To Fonadhoo,27,Aamiskiy Magu Stop 1,2010,1.842444070985586,73.50681248984957
+Laamu,LG01,Gan To Fonadhoo,28,KDO Airport Stop 2,2019,1.85787256485246,73.51817086076377
+Laamu,LG01,Gan To Fonadhoo,29,Maandhoo Stop 2,2020,1.8754212466442255,73.52835227821124
+Laamu,LG01,Gan To Fonadhoo,30,Mukurimagu Ekuveni Stop 2,2021,1.8977097819564375,73.53543899617567
+Laamu,LG01,Gan To Fonadhoo,31,Mukurimagu Harbour Stop 2,2022,1.898371286709835,73.53501722871556
+Laamu,LG01,Gan To Fonadhoo,32,Amra Stop 2,2064,1.9140687112334367,73.54171379816839
+Laamu,LG01,Gan To Fonadhoo,33,Leziz Stop 2,2065,1.9188835490315277,73.54353573913754
+Laamu,LG01,Gan To Fonadhoo,34,Gan Regional Hospital Stop 2,2024,1.9207598714743683,73.54465567642909
+Laamu,LG01,Gan To Fonadhoo,35,Hamadh School Stop 2,2023,1.9206105423445228,73.54749809383104
+Laamu,LG01,Gan To Fonadhoo,36,Noofaru Stop 2,2025,1.9291779801322337,73.54425862833625
+Laamu,LG01,Gan To Fonadhoo,37,Villa College Stop 2,2026,1.9348844685992188,73.54333117356254
+Laamu,LG01,Gan To Fonadhoo,38,Youth Center Stop 2,2027,1.9324623938097891,73.54254125472043
+Laamu,LG01,Gan To Fonadhoo,39,Thundi Harbour Stop 1 OP,3004,1.934114822285993,73.53960786791838
+Hdh. Kulhudhufushi,KC01,JS AEC Route,1,RW 30 Stop,3007,6.627810875418916,73.07203815270066
+Hdh. Kulhudhufushi,KC01,JS AEC Route,2,Orchid Bus Stop,3008,6.625801957324839,73.0728654270651
+Hdh. Kulhudhufushi,KC01,JS AEC Route,3,ZigZag  Bus Stop,3036,6.624358328430219,73.07280163973556
+Hdh. Kulhudhufushi,KC01,JS AEC Route,4,Saharaa Bus Stop,3037,6.622999123386009,73.07285164674249
+Hdh. Kulhudhufushi,KC01,JS AEC Route,5,DaisyMaage Stop,3023,6.622741262442204,73.07227508372262
+Hdh. Kulhudhufushi,KC01,JS AEC Route,6,Ranhadhaage Bus Stop,3010,6.622401836127409,73.07076880096292
+Hdh. Kulhudhufushi,KC01,JS AEC Route,7,Piyaanaage Bus Stop,3011,6.623768029505669,73.07005821558246
+Hdh. Kulhudhufushi,KC01,JS AEC Route,8,"JS, AEC Bus Stop",3012,6.626323447458816,73.0699045660804
+Hdh. Kulhudhufushi,KC01,JS AEC Route,9,Thilamashi Bus Stop,3038,6.6270074558291014,73.06844454537577
+Hdh. Kulhudhufushi,KC01,JS AEC Route,10,Coral Bus Stop,3013,6.627840987263696,73.06520714650199
+Hdh. Kulhudhufushi,KC01,JS AEC Route,11,Firdous Bus Stop,3014,6.6250001982644875,73.065517766596
+Hdh. Kulhudhufushi,KC01,JS AEC Route,12,Campus Bus Stop,3015,6.624094694499561,73.06746925878454
+Hdh. Kulhudhufushi,KC01,JS AEC Route,13,Dhaga'nduge Bus Stop,3009,6.622981166529982,73.0683358761647
+Hdh. Kulhudhufushi,KC01,JS AEC Route,14,Ocean Villa Bus Stop,3032,6.6221759423007995,73.06952615953446
+Hdh. Kulhudhufushi,KC01,JS AEC Route,15,Piyaanaage Bus Stop OPP,3016,6.623768029505669,73.07005821558246
+Hdh. Kulhudhufushi,KC01,JS AEC Route,16,"JS, AEC Bus Stop OPP",3017,6.626323447458816,73.0699045660804
+Hdh. Kulhudhufushi,KC01,JS AEC Route,17,RW 30 Stop OPP,3018,6.627810875418916,73.07203815270066
+Hdh. Kulhudhufushi,KC02,ASF Route,1,Raiybageechaage Bus Stop,3024,6.618366991737787,73.07195297881023
+Hdh. Kulhudhufushi,KC02,ASF Route,2,Hirafus Bus Stop,3020,6.6186069277505055,73.07317943994113
+Hdh. Kulhudhufushi,KC02,ASF Route,3,Alpha Bus Stop,3021,6.620395619577366,73.07382185223713
+Hdh. Kulhudhufushi,KC02,ASF Route,4,Giniraahige Stop,3022,6.6217233624042535,73.07287513078401
+Hdh. Kulhudhufushi,KC02,ASF Route,5,DaisyMaage Stop,3023,6.622741262442204,73.07227508372262
+Hdh. Kulhudhufushi,KC02,ASF Route,6,Ranhadhaage Bus Stop,3010,6.622401836127409,73.07076880096292
+Hdh. Kulhudhufushi,KC02,ASF Route,7,Kuda Miskiy Bus Stop,3026,6.621015461771691,73.07028466084569
+Hdh. Kulhudhufushi,KC02,ASF Route,8,Jeymuge Bus Stop,3025,6.619027689387821,73.0704459798929
+Hdh. Kulhudhufushi,KC02,ASF Route,9,State House Bus Stop,3019,6.616282611233785,73.07063650083649
+Hdh. Kulhudhufushi,KC02,ASF Route,10,Afeefudheen Bus Stop,3030,6.61512319279872,73.07070309798402
+Hdh. Kulhudhufushi,KC02,ASF Route,11,NOC Stop,3027,6.615963680738844,73.06943444330335
+Hdh. Kulhudhufushi,KC02,ASF Route,12,Hospital Bus Stop,3028,6.61804078204824,73.06903443181534
+Hdh. Kulhudhufushi,KC02,ASF Route,13,Bandaara Hiya Stop,3029,6.61929419170815,73.06860842252797
+Hdh. Kulhudhufushi,KC02,ASF Route,14,Satheyka Shop Bus Stop,3031,6.620956325503627,73.06889825445154
+Hdh. Kulhudhufushi,KC02,ASF Route,15,Ocean Villa Bus Stop,3032,6.6221759423007995,73.06952615953446
+Hdh. Kulhudhufushi,KC02,ASF Route,16,Kuda Miskiy Bus Stop OPP,3033,6.621015461771691,73.07028466084569
+Hdh. Kulhudhufushi,KC02,ASF Route,17,Jeymuge Bus Stop OPP,3034,6.619027689387821,73.0704459798929
+Hdh. Kulhudhufushi,KC02,ASF Route,18,State House Bus Stop OPP,3039,6.616282611233785,73.07063650083649
+Hdh. Kulhudhufushi,KC02,ASF Route,19,Afeefudheen Bus Stop OPP,3035,6.61512319279872,73.07070309798402
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,1,Stadium Stop,33006,5.95429983181162,73.4139282826882
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,2,Morning Light,33007,5.95491318764198,73.4134888537449
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,3,Kalhu Goyye Bakery,33008,5.95623044004634,73.4126627333887
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,4,Paris,33009,5.95694311355684,73.4122523960571
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,5,Kulhudhoo Stage Stop,33010,5.95781084161688,73.4117554847106
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,6,Radiumge Stop,33011,5.95875025000591,73.4112244344182
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,7,Fini Roalhi Stop,33012,5.95949347557952,73.4107654552411
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,8,Boduge stop,33013,5.9601250759289,73.41040336
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,9,Musthareege stop,33014,5.959596869,73.41152452
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,10,Vinares stop,33015,5.958881922,73.41195367
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,11,Haraheri stop,33016,5.957937549,73.41246061
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,12,Thundi stop,33017,5.956456962,73.41335915
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,13,Ulhandhu stop,33018,5.955259151,73.4140458
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,14,Kendhikolhudhoo school stop,33019,5.95101477,73.41659926
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,15,BML stop,33033,5.951798744435969,73.41607051072532
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,16,Hospital stop,33020,5.951138934,73.41463992
+N.Kendhikulhudhoo,KN01,Kendhikolhu,1,Nivaas stop,33034,5.948905605256726,73.41789572338247
+N.Kendhikulhudhoo,KN01,Kendhikolhu,2,Afi stop,33021,5.945785398,73.41969011
+N.Kendhikulhudhoo,KN01,Kendhikolhu,3,Minaa Stop,33022,5.944471519,73.42045781
+N.Kendhikulhudhoo,KN01,Kendhikolhu,4,Rose villa stop,33023,5.943470992,73.42102167
+N.Kendhikulhudhoo,KN01,Kendhikolhu,5,Fehi village stop,33024,5.942379608,73.42168591
+N.Kendhikulhudhoo,KN01,Kendhikolhu,6,Dhildhilaage stop,33025,5.941795478,73.42202022
+N.Kendhikulhudhoo,KN01,Kendhikolhu,7,Kalaavehi stop,33026,5.94233688,73.4223673
+N.Kendhikulhudhoo,KN01,Kendhikolhu,8,Baani Stop,33027,5.943170675,73.42188367
+N.Kendhikulhudhoo,KN01,Kendhikolhu,9,Sterling stop,33028,5.94403235,73.42138829
+N.Kendhikulhudhoo,KN01,Kendhikolhu,10,Meezaan Stop,33029,5.945216829,73.42069812
+N.Kendhikulhudhoo,KN01,Kendhikolhu,11,Muthee Stop,33030,5.946125377,73.42011396
+N.Kendhikulhudhoo,KN01,Kendhikolhu,12,Malakaa Stop,33031,5.947280688,73.41943732
+N.Kendhikulhudhoo,KN01,Kendhikolhu,13,Zone Stop,33032,5.948875686,73.41851258
+N.Kendhikulhudhoo,KN01,Kendhikolhu,14,Kendhikolhudhoo school stop,33019,5.95101477,73.41659926
+N.Kendhikulhudhoo,KN01,Kendhikolhu,15,BML stop,33033,5.951798744435969,73.41607051072532
+N.Kendhikulhudhoo,KN01,Kendhikolhu,16,Hospital stop,33020,5.951138934,73.41463992

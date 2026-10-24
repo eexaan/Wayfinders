@@ -1,0 +1,16 @@
+# Raw source data is committed under data/raw/ so the team can work offline.
+# Provenance, links and licences for every file are in DATA_SOURCES.md.
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+node_modules/

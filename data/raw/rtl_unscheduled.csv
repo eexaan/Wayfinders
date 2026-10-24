@@ -1,0 +1,62 @@
+zone,route,description,stops
+Zone 2,R2C1,Lh.Olhuvelifushi - Lh.Naifaru,Lh.Olhuvelifushi > Lh.Kurendhoo > Lh.Naifaru
+Zone 2,R2C2,Lh.Naifaru - Lh.Hinnavaru,Lh.Hinnavaru > Lh.Felivaru > Lh.Naifaru
+Zone 2,R2C3,Lh.Naifaru - Lh.Hinnavaru,Lh.Hinnavaru > Lh.Naifaru > Lh.Kurendhoo > Lh.Olhuvelifushi
+Zone 2,R2C4,Lh.Hinnavaru - Lh.Naifaru,Lh.Hinnavaru > Lh.Naifaru
+Zone 2,R2C5,Lh.Naifaru - Lh.Hinnavaru,Lh.Naifaru > Lh.Madivaru > Lh.Hinnavaru
+Zone 2,R2C7,Lh.Hinnavaru - Lh.Olhuvelifushi,Lh.Hinnavaru > Lh.Felivaru > Lh.Madivaru > Lh.Naifaru > Lh.Kurendhoo > Lh.Olhuvelifushi
+Zone 2,R2C6,Lh.Olhuvelifushi - Lh.Hinnavaru,Lh.Olhuvelifushi > Lh.Kurendhoo > Lh.Hinnavaru
+Zone 2,R2C6OLD,Lh.Hinnavaru - Lh.Olhuvelifushi,Lh.Hinnavaru > Lh.Kurendhoo > Lh.Olhuvelifushi
+Zone 2,R2C8,Lh.Olhuvelifushi - Lh.Naifaru,Lh.Olhuvelifushi > Lh.Kurendhoo > Lh.Hinnavaru > Lh.Naifaru
+Zone 2,R3C1,Lh.Olhuvelifushi - Lh.Naifaru,Lh.Olhuvelifushi > Lh.Kurendhoo > Lh.Maafilaafushi > Lh.Naifaru
+Zone 2,R3C3,Lh.Hinnavaru - Lh.Olhuvelifushi,Lh.Hinnavaru > Lh.Naifaru > Lh.Maafilaafushi > Lh.Kurendhoo > Lh.Olhuvelifushi
+Zone 2,Z2R8,LH.Hinnavaru - LH.Naifaru,Lh.Hinnavaru > Lh.Madivaru > Lh.Naifaru
+Zone 2,R3C4T,Lh.Naifaru - Lh.Madivaru,Lh.Naifaru > Lh.Madivaru
+Zone 2,Z2R9,LH.Naifaru - LH.Hinnavaru,Lh.Naifaru > Lh.Madivaru > Lh.Felivaru > Lh.Hinnavaru
+Zone 2,Z2R7,LH.Hinnavaru - LH.Olhuvelifushi,Lh.Hinnavaru > Lh.Felivaru > Lh.Madivaru > Lh.Naifaru > Lh.Kurendhoo > Lh.Olhuvelifushi
+Zone 2,Z2R6,LH.Olhuvelifushi - LH.Hinnavaru,Lh.Olhuvelifushi > Lh.Kurendhoo > Lh.Naifaru > Lh.Madivaru > Lh.Hinnavaru
+Zone 2,Z2R1,N.Manadhoo - N.Henbadhoo,N.Manadhoo > N.Maafaru > N.Landhoo > N.Maalhendhoo > N.Kendhikulhudhoo > N.Henbadhoo
+Zone 2,Z2R5,N.Manadhoo - N.Kudafari,N.Manadhoo > N.Kudafari
+Zone 2,Z2R16,B.Kendhoo - B.Eydhafushi,B.Kendhoo > B.Kudarikilu > B.Kamadhoo > B.Kihaadhoo > B.Dhonfanu > B.Dharavandhoo > B.Maalhos > B.Eydhafushi
+Zone 4,Z4R1,Th. Buruni - Th. Veymandoo,Th.Buruni > Th.Vilufushi > Th.Madifushi > Th.Dhiyamigili > Th.Guraidhoo > Th.Veymandoo
+Zone 4,Z4R4,Th. Veymandoo - Th. Thimarafushi,Th.Veymandoo > Th.Thimarafushi
+Zone 4,Z4R8A,Dh. Meedhoo - Dh. Kudahuvadhoo,Dh.Meedhoo > Dh.Bandidhoo > Dh.Rinbudhoo > Dh.Hulhudheli > Dh.Maaenboodhoo > Dh.Kudahuvadhoo
+Zone 1,S1C1L,Ha.Thuraakunu - Ha.Dhihdhoo,Ha.Thuraakunu > Ha.Uligamu > Ha.Molhadhoo > Ha.Dhihdhoo
+Zone 1,S1C31,Ha.Maarandhoo - Ha.Dhihdhoo,Ha.Maarandhoo > Ha.Thakandhoo > Ha.Utheemu > Ha.Dhihdhoo
+Zone 1,R1C55,Hdh.Kulhudhuffushi - Hdh.Naivaadhoo,Hdh.Kulhudhuffushi > Hdh.Kurin'bee > Hdh.Nellaidhoo > Hdh.Naivaadhoo
+Zone 1,S2C55,Sh.Noomaraa - Sh.Bileyfahi,Sh.Noomaraa > Sh.Feydhoo > Sh.Bileyfahi
+Zone 1,R1C6OD2,HDh.Kulhudhuffushi - HDh.Kumundhoo,Hdh.Vaikaradhoo > Hdh.Neykurendhoo > Hdh.Kumundhoo > Hdh.Kulhudhuffushi
+Zone 1,S1C4,Ha.Filladhoo - Ha.Dhihdhoo,Ha.Filladhoo > Ha.Baarah > Ha.Muraidhoo > Ha.Dhihdhoo
+Zone 1,R1V3,Hdh.Hirimaradhoo - Hdh.Hanimaadhoo,Hdh.Hirimaradhoo > Hdh.Finey > Hdh.Hanimaadhoo
+Zone 1,R1V4,Hdh.Kulhudhuffushi - Hdh.Makunudhoo,Hdh.Kulhudhuffushi > Hdh.Vaikaradhoo > Hdh.Makunudhoo
+Zone 1,R1V5,Hdh.Hanimaadhoo - Hdh.Kulhudhuffushi,Hdh.Hanimaadhoo > Hdh.Kulhudhuffushi
+Zone 1,R1C6A,Hdh.Makunudhoo - Hdh.Kulhudhuffushi,Hdh.Makunudhoo > Hdh.Vaikaradhoo > Hdh.Neykurendhoo > Hdh.Kumundhoo > Hdh.Kulhudhuffushi
+Zone 1,R1V1OLD,Hdh.Makunudhoo - Hdh.Kulhudhuffushi,Hdh.Makunudhoo > Hdh.Kulhudhuffushi
+Zone 1,R1C8,Hdh.Kulhudhuffushi - Hdh.Hanimaadhoo,Hdh.Kulhudhuffushi > Hdh.Hanimaadhoo
+Zone 1,H1OLD,Hdh.Kulhudhuffushi - Ha.Ihavandhoo,Hdh.Kulhudhuffushi > Ha.Hoarafushi > Ha.Ihavandhoo
+Zone 1,S1C2,Ha.Molhadhoo - Ha.Dhihdhoo,Ha.Molhadhoo > Ha.Hoarafushi > Ha.Ihavandhoo > Ha.Dhihdhoo
+Zone 1,S1V2,Ha.Dhidhdhoo - Ha.Filladhoo,Ha.Dhihdhoo > Ha.Filladhoo
+Zone 1,S1V3,Ha.Kelaa - Ha.Dhidhdhoo,Ha.Kelaa > Ha.Dhihdhoo
+Zone 1,S1V4,Ha.Filladhoo - Ha.Kelaa,Ha.Filladhoo > Ha.Kelaa
+Zone 1,S2C4,Sh.Maroshi - Sh.Funudhoo,Sh.Maroshi > Sh.Komandoo > Sh.Maaun'goodhoo > Sh.Lhaimagu > Sh.Funadhoo
+Zone 1,R1V11,Hdh.Makunudhoo - Hdh.Kulhudhuffushi,Hdh.Makunudhoo > Hdh.Vaikaradhoo > Hdh.Neykurendhoo > Hdh.Kumundhoo > Hdh.Kulhudhuffushi
+Zone 1,S1C5AR,Ha.Kelaa - Ha.Dhihdhoo,Ha.Kelaa > Ha.Vashafaru > Ha.Dhihdhoo
+Zone 1,S2V1,Sh.Bileyfahi - Hdh.Kulhudhuffushi,Sh.Bileyfahi > Hdh.Kulhudhuffushi
+Zone 1,S2C2V2,Sh.Funadhoo - Sh.Feevah,Sh.Funadhoo > Sh.Narudhoo > Sh.Milandhoo > Sh.Foakaidhoo > Sh.Feevah
+Zone 1,S2V2OLD,Sh.Bileyfahi - Sh.Funadhoo,Sh.Bileyfahi > Sh.Funadhoo
+Zone 1,S2V2,Sh.Bileyfahi - Sh.Funadhoo,Sh.Bileyfahi > Sh.Maroshi > Sh.Funadhoo
+Zone 1,ERROR,Sh.Noomaraa - Hdh.Kulhudhuffushi,Sh.Noomaraa > Sh.Noomaraa > Sh.Feydhoo > Sh.Feydhoo > Sh.Bileyfahi > Sh.Bileyfahi > Sh.Goidhoo > Sh.Goidhoo > Sh.Kan'ditheemu > Sh.Kan'ditheemu > Hdh.Kulhudhuffushi > Hdh.Kulhudhuffushi
+Zone 1,S2C11,Sh.Kan'ditheemu - Sh.Bileyfahi,Sh.Kan'ditheemu > Sh.Goidhoo > Sh.Bileyfahi
+Zone 1,S2C1,Sh.Kan'ditheemu - Sh.Funadhoo,Sh.Kan'ditheemu > Sh.Goidhoo > Sh.Bileyfahi > Sh.Maroshi > Sh.Funadhoo
+Zone 1,S1C55,Ha.Kelaa - Ha.Dhihdhoo,Ha.Kelaa > Ha.Filladhoo > Ha.Baarah > Ha.Muraidhoo > Ha.Vashafaru > Ha.Dhihdhoo
+Zone 1,R1C5OD2,Hdh.Naivaadhoo - Hdh.Kulhudhuffushi,Hdh.Naivaadhoo > Hdh.Nellaidhoo > Hdh.Kurin'bee > Hdh.Kumundhoo > Hdh.Kulhudhuffushi
+Zone 1,S1C1OLD,Ha.Thuraakunu - Ha.Dhidhdhoo,Ha.Thuraakunu > Ha.Uligamu > Ha.Molhadhoo > Ha.Vashafaru > Ha.Dhihdhoo
+Zone 1,H2V2,Hdh.Kulhudhuffushi - Sh.Funadhoo,Hdh.Kulhudhuffushi > Sh.Funadhoo
+Zone 1,R1C5,Hdh.Naivaadhoo - Hdh.Kulhudhuffushi,Hdh.Naivaadhoo > Hdh.Nellaidhoo > Hdh.Kurin'bee > Hdh.Kulhudhuffushi
+Zone 1,S1C51,Ha.Kelaa - Ha.Dhidhdhoo,Ha.Kelaa > Ha.Filladhoo > Ha.Baarah > Ha.Muraidhoo > Ha.Dhihdhoo
+Zone 1,S1C5,Ha.Kelaa - Ha.Dhidhdhoo,Ha.Kelaa > Ha.Filladhoo > Ha.Baarah > Ha.Vashafaru > Ha.Dhihdhoo
+Zone 5,Z5R2,Ga.Dhevvadhoo - Ga.Villingili,Ga.Dhevvadhoo > Ga.Dhaandhoo > Ga.Nilandhoo > Ga.Maamendhoo > Ga.Kooddoo > Ga.Villingili
+Zone 5,Z5R9A,Ga.Villingili - Ga.Kolamaafushi,Ga.Villingili > Ga.Kolamaafushi
+Zone 5,Z5R3A,Ga.Villingili - Ga.Kanduhulhudhoo,Ga.Villingili > Ga.Kondey > Ga.Gemanafushi > Ga.Kanduhulhudhoo
+Zone 6,Z6R12,Gdh.Vaadhoo - Gn.Fuvahmulah,Gdh.Vaadhoo > Gdh.Faresmaathoda > Gn.Fuvahmulah
+Zone 6,Z6R1,Gn.Fuvahmulah - Gdh.Vaadhoo,Gn.Fuvahmulah > Gdh.Vaadhoo

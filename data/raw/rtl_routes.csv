@@ -1,0 +1,50 @@
+route_id,route,zone,description,stops,trips_per_day,color,fetched_at
+229,Z2R3,Zone 2,N.Manadhoo - N.Kudafari,"N.Manadhoo, N.Miladhoo, N.Lhohi, N.Kudafari",2,#0258fd,2026-10-10T14:46:48+00:00
+253,Z2R15,Zone 2,R.Innamaadhoo - R.Ungoofaaru,"R.Innamaadhoo, R.Ungoofaaru",1,#0f8f2b,2026-10-10T14:46:48+00:00
+227,Z2R2,Zone 2,N.Manadhoo - N.Holhudhoo,"N.Manadhoo, N.Magoodhoo, N.Velidhoo, N.Fodhdhoo, N.Holhudhoo",2,#07de9a,2026-10-10T14:46:48+00:00
+257,Z2R17,Zone 2,B.Eydhafushi - B.Goidhoo,"B.Eydhafushi, B.Hithaadhoo, B.Thulhaadhoo, B.Fulhadhoo, B.Fehendhoo, B.Goidhoo",2,#18e8bc,2026-10-10T14:46:48+00:00
+250,Z2R13,Zone 2,R.Ungoofaaru - R.Ifuru,"R.Ungoofaaru, R.Ifuru",4,#9420ce,2026-10-10T14:46:48+00:00
+252,Z2R14,Zone 2,R.Ungoofaaru - R.Innamaadhoo,"R.Ungoofaaru, R.Ifuru, R.Innamaadhoo",1,#c82273,2026-10-10T14:46:48+00:00
+273,Z2UBC,Zone 2,R.Ungoofaaru - R.Dhuvaafaru,"R.Ungoofaaru, R.Dhuvaafaru",6,#5e5fff,2026-10-10T14:46:48+00:00
+249,Z2R12,Zone 2,R.Ungoofaaru - R.Innmaadhoo,"R.Ungoofaaru, R.Dhuvaafaru, R.Maakurathu, R.Rasmaadhoo, R.Innamaadhoo",2,#2728bd,2026-10-10T14:46:48+00:00
+247,Z2R11,Zone 2,R.Ungoofaaru - R.Maduvvari,"R.Ungoofaaru, R.Inguraidhoo, R.Fainu, R.Kinolhas, R.Meedhoo, R.Maduvvari",1,#d21919,2026-10-10T14:46:48+00:00
+259,Z2R18,Zone 2,B.Dharavandhoo - B.Eydhafushi,"B.Dharavandhoo, B.Maalhos, B.Eydhafushi",1,#1347ea,2026-10-10T14:46:48+00:00
+231,Z2R4,Zone 2,N.Maafaru - N.Manadhoo,"N.Maafaru, N.Manadhoo",2,#f50397,2026-10-10T14:46:48+00:00
+271,Z2H1,Zone 2,R.Ungoofaaru - N.Manadhoo,"R.Ungoofaaru, N.Manadhoo",2,#ff6c00,2026-10-10T14:46:48+00:00
+245,Z2R10,Zone 2,R.Ungoofaaru - R.Alifushi,"R.Ungoofaaru, R.Ifuru, R.Hulhudhuffaaru, R.Angolhitheem, R.Rasgetheem, R.Vaadhoo, R.Alifushi",2,#3bb6b9,2026-10-10T14:46:48+00:00
+290,Z4R16,Zone 4,L. Isdhoo - L. Fonadhoo,"L.Isdhoo, L.Kalaidhoo, L.Dhanbidhoo, L.Maabaidhoo, L.Mundoo, L.Gan, L.Fonadhoo",2,#479aa9,2026-10-10T14:46:48+00:00
+285,Z4R8,Zone 4,Dh. Kudahuvadhoo - Dh. Meedhoo,"Dh.Kudahuvadhoo, Dh.Maaenboodhoo, Dh.Bandidhoo, Dh.Meedhoo",2,#21da63,2026-10-10T14:46:48+00:00
+279,Z4R7,Zone 4,F. Nilandhoo - F. Feeali,"F.Nilandhoo, F.Dharanboodhoo, F.Magoodhoo, F.Bilehdhoo, F.Feeali",2,#7a659b,2026-10-10T14:46:48+00:00
+265,Z4R3,Zone 4,Th. Veymandoo - Th. Gaadhiffushi,"Th.Veymandoo, Th.Thimarafushi, Th.Gaadhiffushi",2,#aa24c8,2026-10-10T14:46:48+00:00
+292,Z4R17,Zone 4,L. Maavah - L. Gan,"L.Maavah, L.Kunahandhoo, L.Hithadhoo, L.Maamendhoo, L.Fonadhoo, L.Gan",2,#aa48da,2026-10-10T14:46:48+00:00
+283,Z4R6,Zone 4,Dh. Kudahuvadhoo - Dh. Meedhoo,"Dh.Kudahuvadhoo, Dh.Hulhudheli, Dh.Rinbudhoo, Dh.Meedhoo",2,#9b9f3f,2026-10-10T14:46:48+00:00
+287,Z4R10,Zone 4,Dh. Meedhoo - Dh. Kudahuvadhoo,"Dh.Meedhoo, Dh.Kudahuvadhoo",1,#c82194,2026-10-10T14:46:48+00:00
+286,Z4R9,Zone 4,Dh. Kudahuvadhoo - Dh. Meedhoo,"Dh.Kudahuvadhoo, Dh.Maaenboodhoo, Dh.Bandidhoo, Dh.Meedhoo",1,#130c9d,2026-10-10T14:46:48+00:00
+269,Z4R5,Zone 4,Th. Gaadhiffushi - Th. Veymandoo,"Th.Gaadhiffushi, Th.Veymandoo",2,#e50b4b,2026-10-10T14:46:48+00:00
+263,Z4R2,Zone 4,Th. Veymandoo - Th. Kandoodhoo,"Th.Veymandoo, Th.Kinbidhoo, Th.Omadhoo, Th.Hirilandhoo, Th.Vandhoo, Th.Kandoodhoo",2,#1cb689,2026-10-10T14:46:48+00:00
+280,Z4H1,Zone 4,F. Nilandhoo - Dh. Meedhoo,"F.Nilandhoo, Dh.Meedhoo",2,#762929,2026-10-10T14:46:48+00:00
+130,R1V2,Zone 1,Hdh.Vaikaradhoo - Hdh.Makunudhoo,"Hdh.Vaikaradhoo, Hdh.Makunudhoo",2,#f0f25e,2026-10-10T14:46:48+00:00
+149,S2C3,Zone 1,Sh.Komandoo - Sh.Funadhoo,"Sh.Komandoo, Sh.Maaun'goodhoo, Sh.Lhaimagu, Sh.Funadhoo",2,#0ddc7c,2026-10-10T14:46:48+00:00
+182,R1C6,Zone 1,Hdh.Kumundhoo - Hdh.Kulhudhuffushi,"Hdh.Kumundhoo, Hdh.Kulhudhuffushi",4,#0af1e4,2026-10-10T14:46:48+00:00
+99,R1C7,Zone 1,Hdh.Hanimaadhoo - Hdh.Kulhudhuffushi,"Hdh.Hanimaadhoo, Hdh.Nolhivaranfaru, Hdh.Nolhivaram, Hdh.Kulhudhuffushi",4,#c56503,2026-10-10T14:46:48+00:00
+276,S2C2,Zone 1,Sh.Feevah - Sh.Funadhoo,"Sh.Feevah, Sh.Foakaidhoo, Sh.Narudhoo, Sh.Milandhoo, Sh.Funadhoo",2,#12aaf3,2026-10-10T14:46:48+00:00
+240,S1C1,Zone 1,Ha.Thuraakunu - Ha.Dhihdhoo,"Ha.Thuraakunu, Ha.Uligamu, Ha.Molhadhoo, Ha.Hoarafushi, Ha.Ihavandhoo, Ha.Dhihdhoo",2,#ab5f5f,2026-10-10T14:46:48+00:00
+163,R1C9,Zone 1,Hdh.Kulhudhuffushi - Hdh.Hanimaadhoo,"Hdh.Kulhudhuffushi, Hdh.Hanimaadhoo",2,#20cb11,2026-10-10T14:46:48+00:00
+128,S1V1,Zone 1,Ha.Dhihdhoo - Hdh.Kulhudhuffushi,"Ha.Dhihdhoo, Hdh.Kulhudhuffushi",2,#d39f7a,2026-10-10T14:46:48+00:00
+177,S2C5,Zone 1,Sh.Noomaraa - Hdh.Kulhudhuffushi,"Sh.Noomaraa, Sh.Feydhoo, Sh.Bileyfahi, Sh.Goidhoo, Sh.Kan'ditheemu, Hdh.Kulhudhuffushi",2,#67cc3e,2026-10-10T14:46:48+00:00
+124,S1C6,Zone 1,Ha.Dhihdhoo - Hdh.Hanimaadhoo,"Ha.Dhihdhoo, Hdh.Hanimaadhoo",2,#ab5757,2026-10-10T14:46:48+00:00
+93,R1C4,Zone 1,Hdh.Hirimaradhoo - Hdh.Kulhudhuffushi,"Hdh.Hirimaradhoo, Hdh.Finey, Hdh.Hanimaadhoo, Hdh.Kulhudhuffushi",2,#00c4ff,2026-10-10T14:46:48+00:00
+215,S1C3,Zone 1,Ha.Maarandhoo - Ha.Dhihdhoo,"Ha.Maarandhoo, Ha.Thakandhoo, Ha.Utheemu, Ha.Muraidhoo, Ha.Dhihdhoo",2,#f8ff00,2026-10-10T14:46:48+00:00
+274,H2,Zone 1,Sh.Funadhoo- Hdh.Kulhudhuffushi,"Sh.Funadhoo, Sh.Feevah, Hdh.Kulhudhuffushi",2,#17d55a,2026-10-10T14:46:48+00:00
+169,R1V1,Zone 1,Hdh.Vaikaradhoo - Hdh.Kulhudhuffushi,"Hdh.Makunudhoo, Hdh.Vaikaradhoo, Hdh.Neykurendhoo, Hdh.Kulhudhuffushi",2,#2711c2,2026-10-10T14:46:48+00:00
+242,H1,Zone 1,Ha.Ihavandhoo - HDh.Kulhudhuffushi,"Ha.Ihavandhoo, Ha.Hoarafushi, Ha.Maarandhoo, Ha.Thakandhoo, Hdh.Kulhudhuffushi",2,#fd2525,2026-10-10T14:46:48+00:00
+189,Z5R4,Zone 5,Ga.Kondey - Gdh.Faresmaathoda,"Ga.Kondey, Ga.Gemanafushi, Ga.Kanduhulhudhoo, Gdh.Maavarulu, Gdh.Gahdhoo, Gdh.Vaadhoo, Gdh.Faresmaathoda",2,#0e1f20,2026-10-10T14:46:48+00:00
+191,Z5R5,Zone 5,Gdh.Nadella - Gdh.Thinadhoo,"Gdh.Nadella, Gdh.Rathafandhoo, Gdh.Fiyori, Gdh.Faresmaathoda, Gdh.Vaadhoo, Gdh.Thinadhoo",2,#419361,2026-10-10T14:46:48+00:00
+193,Z5R6,Zone 5,Gdh.Vaadhoo - Gdh.Thinadhoo,"Gdh.Vaadhoo, Gdh.Faresmaathoda, Gdh.Fiyori, Gdh.Rathafandhoo, Gdh.Nadella, Gdh.Hon'dehdhoo, Gdh.Madaveli, Gdh.Kaadehdhoo, Gdh.Thinadhoo",2,#4f887b,2026-10-10T14:46:48+00:00
+234,Z5R9,Zone 5,Ga.Kolamaafushi - Ga.Villingili,"Ga.Kolamaafushi, Ga.Kooddoo, Ga.Villingili",2,#e22020,2026-10-10T14:46:48+00:00
+195,Z5R7,Zone 5,Gdh.Thinadhoo - Gdh.Kaadehdhoo,"Gdh.Thinadhoo, Gdh.Kaadehdhoo",2,#529b81,2026-10-10T14:46:48+00:00
+236,Z5R3,Zone 5,Ga.Kanduhulhudhoo - Ga.Villingili,"Ga.Kanduhulhudhoo, Ga.Gemanafushi, Ga.Kondey, Ga.Kooddoo, Ga.Villingili",2,#0d62de,2026-10-10T14:46:48+00:00
+238,Z5R10,Zone 5,Gn.Fuvahmulah - Gdh.Vaadhoo,"Gn.Fuvahmulah, Gdh.Faresmaathoda, Gdh.Vaadhoo",2,#4f00ff,2026-10-10T14:46:48+00:00
+183,Z5R1,Zone 5,Ga.Villingili - Gdh.Thinadhoo,"Ga.Villingili, Ga.Dhevvadhoo, Gdh.Thinadhoo",2,#39ad9c,2026-10-10T14:46:48+00:00
+197,Z5R8,Zone 5,Ga.Villingili - Ga.Kooddoo,"Ga.Villingili, Ga.Kooddoo",2,#3d6c59,2026-10-10T14:46:48+00:00
+205,Z6R2,Zone 6,Gn.Fuvahmulah - S.Feydhoo,"Gn.Fuvahmulah, S.Hulhumeedhoo, S.Feydhoo",2,#2c4fc7,2026-10-10T14:46:48+00:00
