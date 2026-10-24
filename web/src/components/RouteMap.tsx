@@ -186,13 +186,16 @@ const RouteLine = memo(function RouteLine({
         ? {
             ...LINE,
             color: identity ?? COLOUR[route.band],
-            weight: groundWidth(hot ? W.routeHot : W.route, zoom),
+            // Hover needs its own floor: below z15 both weights clamp to the
+            // 1 px minimum, so the hover state would be invisible at the
+            // default overview. Keep the resting line thin, lift it on hover.
+            weight: groundWidth(hot ? W.routeHot : W.route, zoom, hot ? 2 : 1),
             opacity: hidden ? 0 : dimmed ? 0.15 : 1,
           }
         : {
             ...LINE,
             color: COLOUR.unknown,
-            weight: groundWidth(hot ? W.unknownHot : W.unknown, zoom),
+            weight: groundWidth(hot ? W.unknownHot : W.unknown, zoom, hot ? 1.5 : 1),
             opacity: hidden ? 0 : dimmed ? 0.2 : 0.95,
             dashArray: '7 5',
           },
