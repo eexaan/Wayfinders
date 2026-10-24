@@ -83,8 +83,8 @@ Yearbook (S4/S5) and found a material coverage gap:
 
 | Measure (2025) | MACL (D3) | MBS Yearbook (S4) | MACL coverage |
 |---|---|---|---|
-| International arriving passengers | 984,629 (adults) | 2,699,225 (all) | **≈ 40%** |
-| International aircraft movements | 6,396 (17.5/day) | 34,808 (95/day) | **≈ 18%** |
+| International arriving passengers | **1,084,115** (of whom 984,439 adults) | 2,699,225 (all) | **40.16%** (adult-only 36.47%) |
+| International aircraft movements (arrivals) | 6,395 (17.5/day) | 34,808 (95/day) | **≈ 18%** |
 | Domestic arriving passengers | — | 1,455,156 (3,987/day) | **0%** |
 
 **MACL contains no domestic flights.** We tested four hypotheses to establish
