@@ -5,7 +5,8 @@
 #   make figures  rebuild F1..F7 into docs/figures/
 #   make gtfs     rebuild the GTFS feed
 #   make check    verify the committed outputs against the raw sources
-#   make serve    serve the dashboard on http://localhost:8000
+#   make web      build the dashboard (React app in web/) into web/dist
+#   make serve    build the dashboard and serve it on http://localhost:8000
 #   make test     run the unit tests (the reallocator guards)
 #   make all      data + figures + gtfs + check + test
 #   make clean    remove build caches only, never data/
@@ -46,12 +47,15 @@ gtfs:
 check:
 	$(PY) $(BUILD)/verify_claims.py
 
-# The dashboard is a static site; fetch() is blocked over file://, so it has to
-# be served. No build step, no dependencies.
-serve:
-	@test -f dashboard/index.html || \
-	  { echo "dashboard/index.html is not in this checkout — see docs/DASHBOARD_SPEC.md §0"; exit 1; }
-	cd dashboard && python3 -m http.server 8000
+# The dashboard is the React app in web/. Vite bundles it to web/dist, and
+# scripts/sync-data.mjs copies the frozen data contract from dashboard/data/
+# into the bundle first, so the built site makes no network calls at runtime.
+# Needs Node 20+ and a first `npm ci` (network) — everything else is offline.
+web:
+	cd web && npm ci --silent && npm run build
+
+serve: web
+	cd web/dist && python3 -m http.server 8000
 
 test:
 	$(PY) -m pytest tests -q

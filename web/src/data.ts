@@ -42,7 +42,7 @@ export interface Stop {
 export interface Segment {
   route: string
   coords: [number, number][]
-  causeway: boolean
+  bridge: boolean
   minutes: number | null
   from: string
   to: string
@@ -94,7 +94,8 @@ export interface Data {
     headway: { route: Route; minutes: number } | null
     unmetPct: number | null
   }
-  causewayMinutes: number | null
+  // the Sinamalé Bridge is the story: how much of one route's run it takes
+  bridge: { route: string; minutes: number; crossings: number; endToEnd: number; sharePct: number } | null
   basemap: GeoJSON.FeatureCollection
 }
 
@@ -129,7 +130,7 @@ const median = (xs: number[]) => {
 }
 
 export async function loadData(): Promise<Data> {
-  const [master, load, stopRows, gap, deps, kpis, corridor, shift, periods, segLoad, segRes, basemap] = await Promise.all([
+  const [master, load, stopRows, gap, deps, kpis, corridor, shift, periods, segLoad, bridges, segRes, basemap] = await Promise.all([
     csv('routes_master.csv'),
     csv('route_load.csv'),
     csv('route_stops.csv'),
@@ -140,6 +141,7 @@ export async function loadData(): Promise<Data> {
     csv('scenario_modal_shift_summary.csv'),
     csv('usage_by_period.csv', true),
     csv('load_by_segment.csv', true),
+    csv('bridge_segment_analysis.csv', true),
     fetch(`${import.meta.env.BASE_URL}data/route_segments.geojson`).then((r) => r.json()),
     fetch(`${import.meta.env.BASE_URL}data/basemap.geojson`).then((r) => r.json()),
   ])
@@ -162,7 +164,9 @@ export async function loadData(): Promise<Data> {
     return {
       route: p.route_code,
       coords: f.geometry.coordinates.map(([lon, lat]: number[]) => [lat, lon]),
-      causeway: p.causeway,
+      // property renamed from `causeway`; accept either so a stale geojson
+      // still loads rather than silently drawing every leg as non-bridge
+      bridge: p.bridge ?? p.causeway,
       minutes: p.median_segment_minutes,
       from: p.from_stop,
       to: p.to_stop,
@@ -263,8 +267,12 @@ export async function loadData(): Promise<Data> {
     }
   }
 
-  const taxiBy: Record<string, number> = {}
-  for (const s of shift!) taxiBy[s.scenario.split('_')[0]] = Number(s.taxi_rides_capturable_per_day)
+  // scenario_modal_shift_summary.csv predates the fleet-neutral rebuild: its S4
+  // and S5 rows assume ADDED trips, so they are not comparable to these
+  // scenarios (docs/DASHBOARD_SPEC.md §2.14). Only the baseline row is used,
+  // for every scenario: re-timing buses does not change who switches mode.
+  const taxiBase = shift!.find((s) => s.scenario.startsWith('S0'))
+  const taxiPerDay = taxiBase ? Number(taxiBase.taxi_rides_capturable_per_day) : null
   const scenarios: Scenario[] = kpis!.map((k) => {
     const key = k.scenario.split('_')[0]
     return {
@@ -275,7 +283,7 @@ export async function loadData(): Promise<Data> {
       waitMin: Number(k.mean_wait_min_captured),
       trips: Number(k.total_trips_captured),
       tripsMoved: Number(k.trips_moved ?? 0),
-      taxiPerDay: taxiBy[key] ?? null,
+      taxiPerDay,
       byRoute: Object.fromEntries(
         corridor!.filter((c) => c.scenario === k.scenario).map((c) => [c.route_code, Number(c.boardings_over_capacity)]),
       ),
@@ -295,7 +303,31 @@ export async function loadData(): Promise<Data> {
   const base = scenarios.find((s) => s.key === 'S0')
 
   const capturedHours = gap!.filter((g) => g.capture_status === 'captured').map((g) => Number(g.hour))
-  const causeway = segments.filter((s) => s.causeway && s.minutes).map((s) => s.minutes!)
+
+  // What the bridge costs, from the scheduled stop-to-stop timings.
+  const endToEnd: Record<string, number> = {}
+  for (const b of bridges ?? []) {
+    const m = num(b.median_end_to_end_minutes)
+    if (m !== null) endToEnd[b.route_code] = Math.max(endToEnd[b.route_code] ?? 0, m)
+  }
+  const bridgeByRoute: Record<string, { minutes: number; crossings: number }> = {}
+  for (const s of segments) {
+    if (!s.bridge || !s.minutes) continue
+    const b = (bridgeByRoute[s.route] ??= { minutes: 0, crossings: 0 })
+    b.minutes += s.minutes
+    b.crossings += 1
+  }
+  const bridgeEntry = Object.entries(bridgeByRoute).sort((a, b) => b[1].minutes - a[1].minutes)[0]
+  const bridge =
+    bridgeEntry && endToEnd[bridgeEntry[0]]
+      ? {
+          route: bridgeEntry[0],
+          minutes: bridgeEntry[1].minutes,
+          crossings: bridgeEntry[1].crossings,
+          endToEnd: endToEnd[bridgeEntry[0]],
+          sharePct: Math.round((bridgeEntry[1].minutes / endToEnd[bridgeEntry[0]]) * 100),
+        }
+      : null
 
   return {
     routes,
@@ -320,7 +352,7 @@ export async function loadData(): Promise<Data> {
       headway,
       unmetPct: base?.unmetPct ?? null,
     },
-    causewayMinutes: causeway.length ? Math.max(...causeway) : null,
+    bridge,
     basemap,
   }
 }

@@ -20,16 +20,24 @@ python -m http.server 8000
 # open http://localhost:8000
 ```
 
-Layout to build into:
+The interface is implemented in **`web/`** — React + TypeScript + Vite:
 
 ```
+web/
+  src/                <- App.tsx, components/, data.ts (the only data reader)
+  scripts/sync-data.mjs  <- copies dashboard/data/ into the bundle before build
+  dist/               <- build output (gitignored)
 dashboard/
-  index.html          <- you create this
-  app.js              <- you create this
-  styles.css          <- you create this
-  data/               <- ALREADY THERE. read-only. do not regenerate.
+  data/               <- THE CONTRACT. read-only. do not edit by hand.
   build/              <- the scripts that produced data/. ignore them.
+  index.html, app.js, styles.css   <- an earlier static prototype, NOT the app
 ```
+
+`make web` builds it; `make serve` builds and serves it on :8000.
+
+`src/data.ts` is the single reader of the contract. It joins on route code and
+never hard-codes a figure; if a number on screen is wrong, the bug is there or
+in the CSV, not in a component.
 
 `dashboard/data/` currently holds **31 files, 756 KB total**. Copy nothing,
 compute nothing: load them with `fetch('./data/<name>.csv')` and parse with
@@ -548,6 +556,35 @@ Bus usage split by day period. Periods are non-overlapping and sum to the day.
 Use this to caption F7. The headline is 08:00–16:00 = **39%**, and the point
 of the table is that 07:00–15:00 and 09:00–17:00 give 37% and 42% — the claim
 survives an hour of slop either way.
+
+### 2.32 `route_segments.geojson` — road-snapped legs (NEW)
+
+`dashboard/build/snap_routes.py` routes every stop-to-stop leg over
+OpenStreetMap roads with OSRM, so the Malé → Hulhumalé legs follow the
+Sinamalé Bridge instead of cutting across the sea. Committed output; the script
+needs network access, so it is **not** part of `make`.
+
+One feature per leg. `route_code`, `seq` (1-based, joins `route_stops.stop_order`),
+`from_stop`, `to_stop`, `from_code`, `to_code`, `road_m`, `straight_m`,
+`loop_removed_m`, `snap_from_m`, `snap_to_m`, `median_segment_minutes`,
+`bridge` (bool: the scheduled leg is ≥ 10 min, i.e. a crossing or the VIA
+approach). Geometry is `[lon, lat]`.
+
+Covers Malé, the airport island and Hulhumalé. R13/R14 (Villimalé) are absent,
+which is why `routes_master` shows them as not on the map.
+
+### 2.33 `basemap.geojson` — the offline basemap (NEW)
+
+`dashboard/build/build_basemap.py`: one Overpass query, output committed. No
+tile server, so the dashboard works with no network and no API key.
+`FeatureCollection` where each feature has `properties.kind` = `land` or `road`
+(with `properties.class` = `major` / `minor` for roads).
+Attribution: **© OpenStreetMap contributors**, ODbL — it must stay visible.
+
+### 2.34 `stop_snap_qa.csv` — stop placement check (NEW)
+
+Distance from each stop to the nearest road, for auditing the snap. QA only;
+the app does not read it.
 
 ### 2.30 Design precedent to follow
 

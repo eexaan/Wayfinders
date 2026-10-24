@@ -18,7 +18,7 @@ Output:
         properties: route_code, seq, from_stop, to_stop, from_code, to_code,
                     road_m, loop_removed_m, straight_m, snap_from_m, snap_to_m,
                     median_segment_minutes (from bridge_segment_analysis.csv),
-                    causeway (bool: scheduled leg >= 10 min)
+                    bridge (bool: scheduled leg >= 10 min)
     dashboard/data/stop_snap_qa.csv         distance from each stop to the
                                             nearest road, for checking placement
 
@@ -47,7 +47,7 @@ LOOP_CLOSE_M, LOOP_MIN_M = 40, 1000
 
 # Malé + airport island + Hulhumalé. Villimalé (lon ~73.484) is outside.
 BBOX = {"south": 4.160, "west": 73.494, "north": 4.248, "east": 73.560}
-CAUSEWAY_MIN = 10.0
+BRIDGE_MIN = 10.0
 
 
 def inside(lat: float, lon: float) -> bool:
@@ -145,7 +145,7 @@ def main() -> None:
                     "snap_from_m": round(wps[0]["distance"], 1),
                     "snap_to_m": round(wps[1]["distance"], 1),
                     "median_segment_minutes": mins,
-                    "causeway": bool(mins is not None and mins >= CAUSEWAY_MIN),
+                    "bridge": bool(mins is not None and mins >= BRIDGE_MIN),
                 },
                 "geometry": geom,
             })

@@ -7,7 +7,10 @@ const NAMES: Record<string, { name: string; what: string }> = {
   // descriptions follow dashboard/data/scenario_moves.csv
   S2: { name: 'Re-time the airport buses', what: 'Move late-night R4 trips to midday, one of them onto R3.' },
   S3: { name: 'Move buses to the busy corridor', what: 'Move quiet R4 airport trips onto R1 in the afternoon and evening rush.' },
-  S4: { name: 'Shift R2 trips to R1’s rush', what: 'Move midday R2 trips onto R1 between 15:00 and 22:00.' },
+  S4: {
+    name: 'Shift one R2 trip to R1’s rush',
+    what: 'Move one midday R2 trip onto R1 at 16:00 — the only safe move, since the corridor has no spare buses.',
+  },
   S5: { name: 'Recommended package', what: 'The corridor move plus R1/R2 re-timing, together.' },
 }
 
@@ -31,10 +34,15 @@ function Tile({ label, value, base, unit, better, digits = 0 }: {
       <div className="label">{label}</div>
       <div className="value num">
         {value === null ? '—' : fmt(value)}
-        <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--ink-3)' }}> {unit}</span>
+        <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--ink-3)' }}>
+          {unit === '%' ? '' : ' '}
+          {unit}
+        </span>
       </div>
       <div className={`delta ${cls} num`}>
-        {same ? 'same as today' : `${d! > 0 ? '+' : '−'}${fmt(Math.abs(d!))} ${unit} vs today${good ? ' ✓' : ''}`}
+        {same
+          ? 'same as today'
+          : `${d! > 0 ? '+' : '−'}${fmt(Math.abs(d!))}${unit === '%' ? '' : ' '}${unit} vs today${good ? ' ✓' : ''}`}
       </div>
     </div>
   )
@@ -124,6 +132,10 @@ export function Scenarios({ data, active, onPick }: { data: Data; active: string
               {Math.abs(cur.trips - base.trips)} vs today), all made by re-timing existing buses.
             </>
           )}
+          <p className="note" style={{ margin: '10px 0 0' }}>
+            Re-timing buses does not win taxi riders: the modal-shift model needs a shorter journey, not a different
+            hour. That is why the taxi figure does not move with the scenario.
+          </p>
         </div>
         <ByRoute data={data} base={base} active={cur} />
       </div>

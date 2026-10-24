@@ -1,32 +1,34 @@
-# React + TypeScript + Vite
+# Dashboard (React + TypeScript + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The interactive tool. **This is the deliverable**; `dashboard/index.html` at the
+repo root is an earlier static prototype and is not used.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm ci
+npm run dev        # http://localhost:5173
+npm run build      # -> dist/, which `make serve` serves on :8000
+npm run lint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Where the numbers come from
+
+`scripts/sync-data.mjs` runs before `dev` and `build` and copies the frozen
+contract from `../dashboard/data/` into `public/data/`. **Nothing here computes
+a figure.** `src/data.ts` is the only file that reads those files; components
+render what it returns. If a number on screen is wrong, fix the build script in
+`../dashboard/build/` and re-run `make data` — do not patch a component.
+
+The contract, column by column, is `../docs/DASHBOARD_SPEC.md` §2. The two
+traps that matter most:
+
+- **Uncaptured is not zero.** `demand_supply_gap.trips_in_hour` is null before
+  ~11:00. Draw a gap, never a zero bar.
+- **Unknown is not zero.** Ten routes have `NO DEMAND DATA`. Show them as
+  unknown, not as 0%.
+
+## Layout
+
+`App.tsx` holds the two tabs (`#overview`, `#overview/R1`, `#scenarios/S5` — all
+bookmarkable). `components/` has one file per panel: `RouteMap`, `RouteRanking`,
+`RoutePanel`, `HourlyChart`, `Scenarios`, `MethodDrawer`, `VintageLine`,
+`KpiStrip`.

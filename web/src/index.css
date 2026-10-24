@@ -197,6 +197,10 @@ main {
   display: flex;
   gap: 8px;
   align-items: flex-start;
+  /* max-content, not auto: the tooltip sits in a zero-width pane, so an
+     automatic width shrink-to-fits to the longest word and the text collapses
+     into a narrow column. max-width still caps it. */
+  width: max-content;
   background: #fff;
   color: var(--ink);
   border: 1.5px solid var(--ink);
@@ -230,6 +234,22 @@ main {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+.map-note {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 500;
+  margin: 0;
+  max-width: min(52%, 520px);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink-2);
 }
 .map-title {
   position: absolute;

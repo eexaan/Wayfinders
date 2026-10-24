@@ -7,7 +7,8 @@ const SOURCES = [
   ['MTCC bus ridership (2025): passenger counts', 'https://github.com/mbs-datathon/maldives-datathon-2026-datasets/releases/tag/v1.0'],
   ['Avas Ride taxi trips (Aug–Sep 2026): hour-by-hour shape of demand', 'https://github.com/mbs-datathon/maldives-datathon-2026-datasets/releases/tag/v1.0'],
   ['MACL airport traffic: when flights land', 'https://github.com/mbs-datathon/maldives-datathon-2026-datasets/releases/tag/v1.0'],
-  ['Seat counts per bus (PSM News)', 'https://www.psmnews.mv/en/106008'],
+  ['Seat counts per bus (team capacity table, ADR-0010)', 'https://github.com/eexaan/Wayfinders/blob/main/data/raw/mtcc_bus_capacity.csv'],
+  ['Airport passenger totals including domestic (MBS Yearbook 11.13)', 'https://statisticsmaldives.gov.mv/yearbook/2026/wp-content/uploads/sites/13/2026/07/11.13.xlsx'],
   ['Road layout for the route lines: OpenStreetMap via OSRM', 'https://router.project-osrm.org/'],
 ] as const
 

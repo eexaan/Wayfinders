@@ -9,12 +9,13 @@ Maldives Datathon 2026 · Team Wayfinders
 > waiting.
 
 ```bash
-make serve          # or: cd dashboard && python3 -m http.server 8000
+make serve          # builds the dashboard and serves it on :8000
 # open http://localhost:8000
 ```
 
-Everything runs in the browser from committed CSV files. No server, no account,
-no build step, nothing to install.
+Needs Node 20+ for the first build (`make web`); after that the app is a static
+bundle that reads the committed CSV files. No backend, no account, no network
+calls at runtime — the basemap and route geometry are bundled too.
 
 ---
 
@@ -99,7 +100,8 @@ make data       # rebuild every derived table from data/raw and data/official
 make figures    # F1..F7 into docs/figures/
 make gtfs       # rebuild the GTFS feed
 make check      # re-derive 92 claims; exit code 0 = everything holds
-make all        # all of the above
+make web        # build the dashboard (React app in web/) into web/dist
+make all        # data + figures + gtfs + check + tests
 ```
 
 A clean rebuild produces no diff — including the GTFS zip, whose members are

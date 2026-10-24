@@ -99,17 +99,8 @@ export function RouteMap({
         text: `${r.isAirport ? 'The airport bus' : r.name}, at ${fmtHour(seg.peakHour!)}${hw}`,
       })
     })
-    const bridge = data.segments
-      .filter((s) => s.causeway && s.minutes)
-      .sort((a, b) => b.minutes! - a.minutes! || b.coords.length - a.coords.length)[0]
-    if (bridge)
-      out.push({
-        n: out.length + 1,
-        at: at(bridge, 0.25),
-        dir: 'bottom',
-        title: `${bridge.minutes} min on the bridge`,
-        text: 'Every Malé–Hulhumalé bus crosses it',
-      })
+    // The bridge is a LINE, not a point: pinning a third bubble to it either
+    // ran off the card or covered R3's label. It gets a caption strip instead.
     return out
   }, [data])
 
@@ -265,6 +256,16 @@ export function RouteMap({
             </Label>
           ))}
       </MapContainer>
+
+      {!selected && data.bridge && (
+        <p className="map-note">
+          <b>
+            {data.bridge.minutes} of {data.bridge.route}'s {data.bridge.endToEnd} minutes
+          </b>{' '}
+          are spent on the Sinamalé Bridge — {data.bridge.crossings} crossings,{' '}
+          {data.bridge.sharePct}% of the journey.
+        </p>
+      )}
 
       <div className="card map-title">
         {selected ? (

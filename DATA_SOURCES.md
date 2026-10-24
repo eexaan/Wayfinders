@@ -62,7 +62,39 @@ seats per route before any absolute load-factor claim is published.**
 
 ---
 
+### 2b. Derived inputs that are committed but not rebuilt by `make`
 
+Three tables in `dashboard/data/` were produced by one-off analysis and have
+**no build script**. They are committed so the pipeline runs, but they are
+inputs, not outputs: deleting them breaks `make data`, and `make` cannot
+regenerate them.
+
+| File | Produced by | Used for | Risk |
+|---|---|---|---|
+| `taxi_od_by_hour.csv` | zone-mapped aggregation of D2 (ad hoc) | the hourly demand *shape* for every modelled route | if D2 or the zone mapping changes, this file does not follow |
+| `scenario_modal_shift.csv` | generalised-cost logit over D2 + `car_fare_matrix.csv` (ad hoc) | F6 and the taxi-capture numbers | still carries the withdrawn `S1` label and the pre-fleet-neutral `S4_express_added` key — the dashboard reads only its `S0_baseline` row |
+| `scenario_modal_shift_summary.csv` | aggregate of the above | the "taxi capture" figure | same |
+
+`make check` verifies what these files feed, but it cannot verify that they are
+what the current sources would produce. Writing `build_taxi_od.py` and
+`build_modal_shift.py` is the remaining gap; until then, treat the mode-shift
+and hourly-shape numbers as **frozen analysis**, not as reproducible output.
+
+### 2c. Dashboard geometry (network-built, committed)
+
+Three more files are generated from OpenStreetMap and OSRM by scripts that need
+network access, so they are **not** part of `make`. The dashboard ships them,
+which is what lets the app run with no tiles and no key.
+
+| File | Built by | Source | Notes |
+|---|---|---|---|
+| `basemap.geojson` | `dashboard/build/build_basemap.py` | OSM via Overpass API | island outlines + roads for Malé, the airport island and Hulhumalé. **© OpenStreetMap contributors, ODbL** |
+| `route_segments.geojson` | `dashboard/build/snap_routes.py` | OSRM on OSM roads | one LineString per stop-to-stop leg, so routes follow the Sinamalé Bridge instead of crossing open water |
+| `stop_snap_qa.csv` | `dashboard/build/snap_routes.py` | same | distance from each stop to the nearest road; QA only |
+
+Rebuilding them requires those two services to be reachable and may return
+slightly different geometry, so treat them as **frozen artefacts**, not as
+outputs of `make`.
 
 ## 3. Open data and tooling
 
@@ -141,6 +173,7 @@ yearbook tables the team uploaded).
 | `taxi_od_by_hour.csv` | D2 |
 | `data/derived/rtl_greater_male_gtfs.zip` | S1 per-stop timings, converted to GTFS — see [docs/GTFS.md](docs/GTFS.md) |
 | `data/derived/gtfs_validation.csv` | the GTFS feed itself, 18 structural checks |
+| `basemap.geojson`, `route_segments.geojson`, `stop_snap_qa.csv` | OSM + OSRM, see §2c |
 | `data/derived/gtfs_validator_report.json` | the GTFS feed itself, MobilityData `gtfs-validator` 6.0.0 |
 
 ### Attribution for the GTFS feed and basemap
