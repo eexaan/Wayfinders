@@ -68,22 +68,36 @@ def fig_bridge() -> None:
 
 
 def fig_load() -> None:
+    """F2 — route-day upper bound vs measured peak-segment load factor.
+
+    The two bars exist to make the reconciliation visible: the old figure
+    assumed every passenger rode the whole route, which is why it disagreed
+    with what a segment actually carries.
+    """
     d = pd.read_csv(DATA / "route_load.csv").dropna(subset=["load_factor_peak_pct"])
     d = d.sort_values("load_factor_peak_pct", ascending=False).reset_index(drop=True)
     x = np.arange(len(d))
-    fig, ax = plt.subplots(figsize=(7.4, 3.4))
-    ax.bar(x, d["load_factor_peak_pct"],
-           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_peak_pct"]])
-    for i, v in enumerate(d["load_factor_peak_pct"]):
-        ax.text(i, v + 1.5, f"{v:.0f}%", ha="center", fontsize=8)
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(7.6, 3.6))
+    ax.bar(x - w / 2, d["load_factor_route_day_upper_pct"], w,
+           color="#c9ced6", label="Route-day upper bound (every pax rides end-to-end)")
+    ax.bar(x + w / 2, d["load_factor_peak_pct"], w,
+           color=[RED if v >= 85 else ORANGE if v >= 60 else GREY for v in d["load_factor_peak_pct"]],
+           label="Peak stop-to-stop segment, captured hours")
+    for i, (u, p) in enumerate(zip(d["load_factor_route_day_upper_pct"], d["load_factor_peak_pct"])):
+        ax.text(i - w / 2, u + 1.5, f"{u:.0f}", ha="center", fontsize=7.5, color="#666666")
+        ax.text(i + w / 2, p + 1.5, f"{p:.0f}", ha="center", fontsize=8, fontweight="bold")
     ax.axhline(100, color="black", ls="--", lw=1)
-    ax.text(len(d) - 0.4, 101.5, "capacity", ha="right", fontsize=8)
+    ax.text(len(d) - 0.45, 101.5, "capacity", ha="right", fontsize=8)
     ax.set_xticks(x, d["route_code"])
-    ax.set_ylim(0, 112)
-    ax.set_ylabel("% of seats (upper bound)")
-    ax.set_title("F2  Load factor, captured Saturday: R1 at 89.5%, the airport bus R4 at 51%",
+    ax.set_ylim(0, 118)
+    ax.set_ylabel("% of seats")
+    ax.legend(frameon=False, fontsize=7.5, loc="upper right")
+    ax.set_title("F2  Load factor is a segment, not a route: R1 is 89.5% only if nobody gets off",
                  loc="left", fontweight="bold")
-    ax.text(0, -0.2, "Weekday demand on R1 is 13.7% higher; at the same 61 trips that is ~102%.",
+    ax.text(0, -0.24,
+            "Peak segment: R1 77% (Hulhumalé Police Stn\u2192Amin Ave, 22:00); R3 104% (STELCO\u2192VIA, 13:00). "
+            "Hours before 11:00 are not captured by the RTL feed.",
             transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F2_load_factors.png")
     plt.close(fig)

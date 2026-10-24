@@ -1,100 +1,100 @@
 route_code,hour,trips_in_hour,capture_status,seats,seat_capacity_hour,demand_pax_est,load_factor_pct,unmet_pax_est,demand_source
-R1,0,,before_capture_window,84,,126.5,,,MTCC observed (level) x Avas shape (modelled)
-R1,1,,before_capture_window,84,,61.6,,,MTCC observed (level) x Avas shape (modelled)
-R1,2,,before_capture_window,84,,32.8,,,MTCC observed (level) x Avas shape (modelled)
-R1,3,,before_capture_window,84,,19.8,,,MTCC observed (level) x Avas shape (modelled)
-R1,4,,before_capture_window,84,,15.8,,,MTCC observed (level) x Avas shape (modelled)
-R1,5,,before_capture_window,84,,33.5,,,MTCC observed (level) x Avas shape (modelled)
-R1,6,,before_capture_window,84,,88.5,,,MTCC observed (level) x Avas shape (modelled)
-R1,7,,before_capture_window,84,,183.4,,,MTCC observed (level) x Avas shape (modelled)
-R1,8,,before_capture_window,84,,169.7,,,MTCC observed (level) x Avas shape (modelled)
-R1,9,,before_capture_window,84,,166.8,,,MTCC observed (level) x Avas shape (modelled)
-R1,10,,before_capture_window,84,,161.7,,,MTCC observed (level) x Avas shape (modelled)
-R1,11,2.0,captured,84,168.0,165.2,98.3,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,12,3.0,captured,84,252.0,192.7,76.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,13,3.0,captured,84,252.0,225.9,89.6,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,14,3.0,captured,84,252.0,270.8,107.5,18.8,MTCC observed (level) x Avas shape (modelled)
-R1,15,3.0,captured,84,252.0,321.9,127.7,69.9,MTCC observed (level) x Avas shape (modelled)
-R1,16,4.0,captured,84,336.0,378.6,112.7,42.6,MTCC observed (level) x Avas shape (modelled)
-R1,17,4.0,captured,84,336.0,315.1,93.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,18,4.0,captured,84,336.0,325.5,96.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,19,4.0,captured,84,336.0,303.2,90.2,0.0,MTCC observed (level) x Avas shape (modelled)
-R1,20,3.0,captured,84,252.0,303.5,120.4,51.5,MTCC observed (level) x Avas shape (modelled)
-R1,21,3.0,captured,84,252.0,257.0,102.0,5.0,MTCC observed (level) x Avas shape (modelled)
-R1,22,2.0,captured,84,168.0,255.4,152.0,87.4,MTCC observed (level) x Avas shape (modelled)
-R1,23,2.0,captured,84,168.0,210.1,125.1,42.1,MTCC observed (level) x Avas shape (modelled)
-R2,0,,before_capture_window,84,,95.1,,,MTCC observed (level) x Avas shape (modelled)
-R2,1,,before_capture_window,84,,46.3,,,MTCC observed (level) x Avas shape (modelled)
-R2,2,,before_capture_window,84,,24.7,,,MTCC observed (level) x Avas shape (modelled)
-R2,3,,before_capture_window,84,,14.9,,,MTCC observed (level) x Avas shape (modelled)
-R2,4,,before_capture_window,84,,11.8,,,MTCC observed (level) x Avas shape (modelled)
-R2,5,,before_capture_window,84,,25.2,,,MTCC observed (level) x Avas shape (modelled)
-R2,6,,before_capture_window,84,,66.6,,,MTCC observed (level) x Avas shape (modelled)
-R2,7,,before_capture_window,84,,137.9,,,MTCC observed (level) x Avas shape (modelled)
-R2,8,,before_capture_window,84,,127.6,,,MTCC observed (level) x Avas shape (modelled)
-R2,9,,before_capture_window,84,,125.4,,,MTCC observed (level) x Avas shape (modelled)
-R2,10,,before_capture_window,84,,121.5,,,MTCC observed (level) x Avas shape (modelled)
-R2,11,2.0,captured,84,168.0,124.2,73.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,12,3.0,captured,84,252.0,144.9,57.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,13,3.0,captured,84,252.0,169.8,67.4,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,14,3.0,captured,84,252.0,203.6,80.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,15,3.0,captured,84,252.0,242.0,96.0,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,16,4.0,captured,84,336.0,284.7,84.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,17,4.0,captured,84,336.0,236.9,70.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,18,4.0,captured,84,336.0,244.7,72.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,19,4.0,captured,84,336.0,228.0,67.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,20,3.0,captured,84,252.0,228.2,90.6,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,21,3.0,captured,84,252.0,193.3,76.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R2,22,2.0,captured,84,168.0,192.0,114.3,24.0,MTCC observed (level) x Avas shape (modelled)
-R2,23,2.0,captured,84,168.0,158.0,94.0,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,0,,before_capture_window,52,,5.9,,,MTCC observed (level) x Avas shape (modelled)
-R3,1,,before_capture_window,52,,2.1,,,MTCC observed (level) x Avas shape (modelled)
-R3,2,,before_capture_window,52,,2.9,,,MTCC observed (level) x Avas shape (modelled)
-R3,3,,before_capture_window,52,,8.2,,,MTCC observed (level) x Avas shape (modelled)
-R3,4,,before_capture_window,52,,13.8,,,MTCC observed (level) x Avas shape (modelled)
-R3,5,,before_capture_window,52,,44.5,,,MTCC observed (level) x Avas shape (modelled)
-R3,6,,before_capture_window,52,,54.6,,,MTCC observed (level) x Avas shape (modelled)
-R3,7,,before_capture_window,52,,50.2,,,MTCC observed (level) x Avas shape (modelled)
-R3,8,,before_capture_window,52,,52.0,,,MTCC observed (level) x Avas shape (modelled)
-R3,9,,before_capture_window,52,,53.7,,,MTCC observed (level) x Avas shape (modelled)
-R3,10,,before_capture_window,52,,51.1,,,MTCC observed (level) x Avas shape (modelled)
-R3,11,1.0,captured,52,52.0,39.9,76.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,12,1.0,captured,52,52.0,42.0,80.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,13,1.0,captured,52,52.0,53.4,102.7,1.4,MTCC observed (level) x Avas shape (modelled)
-R3,14,1.0,captured,52,52.0,56.1,107.9,4.1,MTCC observed (level) x Avas shape (modelled)
-R3,15,1.0,captured,52,52.0,43.1,82.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,16,1.0,captured,52,52.0,29.3,56.3,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,17,1.0,captured,52,52.0,27.3,52.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,18,1.0,captured,52,52.0,27.5,52.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,19,1.0,captured,52,52.0,23.7,45.6,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,20,1.0,captured,52,52.0,24.4,46.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,21,1.0,captured,52,52.0,26.7,51.3,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,22,1.0,captured,52,52.0,12.5,24.0,0.0,MTCC observed (level) x Avas shape (modelled)
-R3,23,1.0,captured,52,52.0,6.8,13.1,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,0,,before_capture_window,52,,11.2,,,MTCC observed (level) x Avas shape (modelled)
-R4,1,,before_capture_window,52,,3.6,,,MTCC observed (level) x Avas shape (modelled)
-R4,2,,before_capture_window,52,,3.8,,,MTCC observed (level) x Avas shape (modelled)
-R4,3,,before_capture_window,52,,17.9,,,MTCC observed (level) x Avas shape (modelled)
-R4,4,,before_capture_window,52,,24.2,,,MTCC observed (level) x Avas shape (modelled)
-R4,5,,before_capture_window,52,,67.9,,,MTCC observed (level) x Avas shape (modelled)
-R4,6,,before_capture_window,52,,63.1,,,MTCC observed (level) x Avas shape (modelled)
-R4,7,,before_capture_window,52,,91.5,,,MTCC observed (level) x Avas shape (modelled)
-R4,8,,before_capture_window,52,,76.1,,,MTCC observed (level) x Avas shape (modelled)
-R4,9,,before_capture_window,52,,62.3,,,MTCC observed (level) x Avas shape (modelled)
-R4,10,,before_capture_window,52,,57.4,,,MTCC observed (level) x Avas shape (modelled)
-R4,11,1.0,captured,52,52.0,36.3,69.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,12,2.0,captured,52,104.0,45.1,43.4,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,13,2.0,captured,52,104.0,69.7,67.0,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,14,2.0,captured,52,104.0,71.4,68.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,15,2.0,captured,52,104.0,66.6,64.0,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,16,2.0,captured,52,104.0,53.8,51.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,17,2.0,captured,52,104.0,34.4,33.1,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,18,2.0,captured,52,104.0,33.1,31.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,19,2.0,captured,52,104.0,25.8,24.8,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,20,2.0,captured,52,104.0,29.6,28.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,21,2.0,captured,52,104.0,36.9,35.5,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,22,2.0,captured,52,104.0,19.3,18.6,0.0,MTCC observed (level) x Avas shape (modelled)
-R4,23,2.0,captured,52,104.0,12.8,12.3,0.0,MTCC observed (level) x Avas shape (modelled)
+R1,0,,before_capture_window,84,,162.5,,,"MTCC level x Avas OD, stop-allocated"
+R1,1,,before_capture_window,84,,65.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,2,,before_capture_window,84,,28.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,3,,before_capture_window,84,,20.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,4,,before_capture_window,84,,16.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,5,,before_capture_window,84,,27.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,6,,before_capture_window,84,,43.7,,,"MTCC level x Avas OD, stop-allocated"
+R1,7,,before_capture_window,84,,127.5,,,"MTCC level x Avas OD, stop-allocated"
+R1,8,,before_capture_window,84,,162.2,,,"MTCC level x Avas OD, stop-allocated"
+R1,9,,before_capture_window,84,,167.2,,,"MTCC level x Avas OD, stop-allocated"
+R1,10,,before_capture_window,84,,178.2,,,"MTCC level x Avas OD, stop-allocated"
+R1,11,2.0,captured,84,168.0,176.8,105.2,8.8,"MTCC level x Avas OD, stop-allocated"
+R1,12,3.0,captured,84,252.0,179.5,71.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R1,13,3.0,captured,84,252.0,220.6,87.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R1,14,3.0,captured,84,252.0,247.9,98.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R1,15,3.0,captured,84,252.0,313.7,124.5,61.7,"MTCC level x Avas OD, stop-allocated"
+R1,16,4.0,captured,84,336.0,416.1,123.8,80.1,"MTCC level x Avas OD, stop-allocated"
+R1,17,4.0,captured,84,336.0,337.0,100.3,1.0,"MTCC level x Avas OD, stop-allocated"
+R1,18,4.0,captured,84,336.0,339.0,100.9,3.0,"MTCC level x Avas OD, stop-allocated"
+R1,19,4.0,captured,84,336.0,348.4,103.7,12.4,"MTCC level x Avas OD, stop-allocated"
+R1,20,3.0,captured,84,252.0,320.3,127.1,68.3,"MTCC level x Avas OD, stop-allocated"
+R1,21,3.0,captured,84,252.0,263.3,104.5,11.3,"MTCC level x Avas OD, stop-allocated"
+R1,22,2.0,captured,84,168.0,239.6,142.6,71.6,"MTCC level x Avas OD, stop-allocated"
+R1,23,2.0,captured,84,168.0,182.2,108.5,14.2,"MTCC level x Avas OD, stop-allocated"
+R2,0,,before_capture_window,84,,113.1,,,"MTCC level x Avas OD, stop-allocated"
+R2,1,,before_capture_window,84,,46.8,,,"MTCC level x Avas OD, stop-allocated"
+R2,2,,before_capture_window,84,,24.0,,,"MTCC level x Avas OD, stop-allocated"
+R2,3,,before_capture_window,84,,17.6,,,"MTCC level x Avas OD, stop-allocated"
+R2,4,,before_capture_window,84,,10.3,,,"MTCC level x Avas OD, stop-allocated"
+R2,5,,before_capture_window,84,,17.3,,,"MTCC level x Avas OD, stop-allocated"
+R2,6,,before_capture_window,84,,35.9,,,"MTCC level x Avas OD, stop-allocated"
+R2,7,,before_capture_window,84,,65.1,,,"MTCC level x Avas OD, stop-allocated"
+R2,8,,before_capture_window,84,,119.5,,,"MTCC level x Avas OD, stop-allocated"
+R2,9,,before_capture_window,84,,118.9,,,"MTCC level x Avas OD, stop-allocated"
+R2,10,,before_capture_window,84,,144.5,,,"MTCC level x Avas OD, stop-allocated"
+R2,11,2.0,captured,84,168.0,133.3,79.3,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,12,3.0,captured,84,252.0,143.3,56.9,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,13,3.0,captured,84,252.0,165.7,65.8,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,14,3.0,captured,84,252.0,189.1,75.0,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,15,3.0,captured,84,252.0,248.4,98.6,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,16,4.0,captured,84,336.0,300.0,89.3,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,17,4.0,captured,84,336.0,265.7,79.1,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,18,4.0,captured,84,336.0,253.5,75.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,19,4.0,captured,84,336.0,270.2,80.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,20,3.0,captured,84,252.0,246.1,97.7,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,21,3.0,captured,84,252.0,204.1,81.0,0.0,"MTCC level x Avas OD, stop-allocated"
+R2,22,2.0,captured,84,168.0,177.5,105.7,9.5,"MTCC level x Avas OD, stop-allocated"
+R2,23,2.0,captured,84,168.0,137.5,81.8,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,0,,before_capture_window,52,,5.4,,,"MTCC level x Avas OD, stop-allocated"
+R3,1,,before_capture_window,52,,2.7,,,"MTCC level x Avas OD, stop-allocated"
+R3,2,,before_capture_window,52,,3.6,,,"MTCC level x Avas OD, stop-allocated"
+R3,3,,before_capture_window,52,,11.0,,,"MTCC level x Avas OD, stop-allocated"
+R3,4,,before_capture_window,52,,7.4,,,"MTCC level x Avas OD, stop-allocated"
+R3,5,,before_capture_window,52,,37.2,,,"MTCC level x Avas OD, stop-allocated"
+R3,6,,before_capture_window,52,,65.7,,,"MTCC level x Avas OD, stop-allocated"
+R3,7,,before_capture_window,52,,56.2,,,"MTCC level x Avas OD, stop-allocated"
+R3,8,,before_capture_window,52,,55.3,,,"MTCC level x Avas OD, stop-allocated"
+R3,9,,before_capture_window,52,,41.3,,,"MTCC level x Avas OD, stop-allocated"
+R3,10,,before_capture_window,52,,53.5,,,"MTCC level x Avas OD, stop-allocated"
+R3,11,1.0,captured,52,52.0,41.6,80.0,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,12,1.0,captured,52,52.0,41.6,80.0,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,13,1.0,captured,52,52.0,56.8,109.2,4.8,"MTCC level x Avas OD, stop-allocated"
+R3,14,1.0,captured,52,52.0,53.0,101.9,1.0,"MTCC level x Avas OD, stop-allocated"
+R3,15,1.0,captured,52,52.0,46.4,89.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,16,1.0,captured,52,52.0,28.0,53.8,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,17,1.0,captured,52,52.0,24.7,47.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,18,1.0,captured,52,52.0,22.0,42.3,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,19,1.0,captured,52,52.0,23.2,44.6,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,20,1.0,captured,52,52.0,25.0,48.1,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,21,1.0,captured,52,52.0,26.2,50.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,22,1.0,captured,52,52.0,14.3,27.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R3,23,1.0,captured,52,52.0,9.5,18.3,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,0,,before_capture_window,52,,5.7,,,"MTCC level x Avas OD, stop-allocated"
+R4,1,,before_capture_window,52,,3.4,,,"MTCC level x Avas OD, stop-allocated"
+R4,2,,before_capture_window,52,,1.9,,,"MTCC level x Avas OD, stop-allocated"
+R4,3,,before_capture_window,52,,13.7,,,"MTCC level x Avas OD, stop-allocated"
+R4,4,,before_capture_window,52,,17.5,,,"MTCC level x Avas OD, stop-allocated"
+R4,5,,before_capture_window,52,,51.7,,,"MTCC level x Avas OD, stop-allocated"
+R4,6,,before_capture_window,52,,79.1,,,"MTCC level x Avas OD, stop-allocated"
+R4,7,,before_capture_window,52,,71.5,,,"MTCC level x Avas OD, stop-allocated"
+R4,8,,before_capture_window,52,,65.4,,,"MTCC level x Avas OD, stop-allocated"
+R4,9,,before_capture_window,52,,81.7,,,"MTCC level x Avas OD, stop-allocated"
+R4,10,,before_capture_window,52,,70.0,,,"MTCC level x Avas OD, stop-allocated"
+R4,11,1.0,captured,52,52.0,55.5,106.7,3.5,"MTCC level x Avas OD, stop-allocated"
+R4,12,2.0,captured,52,104.0,53.2,51.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,13,2.0,captured,52,104.0,58.9,56.6,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,14,2.0,captured,52,104.0,76.8,73.8,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,15,2.0,captured,52,104.0,63.1,60.7,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,16,2.0,captured,52,104.0,39.2,37.7,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,17,2.0,captured,52,104.0,36.1,34.7,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,18,2.0,captured,52,104.0,44.9,43.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,19,2.0,captured,52,104.0,28.5,27.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,20,2.0,captured,52,104.0,31.6,30.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,21,2.0,captured,52,104.0,37.3,35.9,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,22,2.0,captured,52,104.0,16.7,16.1,0.0,"MTCC level x Avas OD, stop-allocated"
+R4,23,2.0,captured,52,104.0,10.3,9.9,0.0,"MTCC level x Avas OD, stop-allocated"
 R5,0,,before_capture_window,54,,,,,NO DEMAND DATA
 R5,1,,before_capture_window,54,,,,,NO DEMAND DATA
 R5,2,,before_capture_window,54,,,,,NO DEMAND DATA
@@ -143,30 +143,30 @@ R6,20,4.0,captured,84,336.0,,,,NO DEMAND DATA
 R6,21,4.0,captured,84,336.0,,,,NO DEMAND DATA
 R6,22,4.0,captured,84,336.0,,,,NO DEMAND DATA
 R6,23,4.0,captured,84,336.0,,,,NO DEMAND DATA
-R7,0,,before_capture_window,84,,85.8,,,MTCC observed (level) x Avas shape (modelled)
-R7,1,,before_capture_window,84,,39.0,,,MTCC observed (level) x Avas shape (modelled)
-R7,2,,before_capture_window,84,,21.4,,,MTCC observed (level) x Avas shape (modelled)
-R7,3,,before_capture_window,84,,13.4,,,MTCC observed (level) x Avas shape (modelled)
-R7,4,,before_capture_window,84,,9.8,,,MTCC observed (level) x Avas shape (modelled)
-R7,5,,before_capture_window,84,,23.2,,,MTCC observed (level) x Avas shape (modelled)
-R7,6,,before_capture_window,84,,58.0,,,MTCC observed (level) x Avas shape (modelled)
-R7,7,,before_capture_window,84,,159.1,,,MTCC observed (level) x Avas shape (modelled)
-R7,8,,before_capture_window,84,,166.6,,,MTCC observed (level) x Avas shape (modelled)
-R7,9,,before_capture_window,84,,146.6,,,MTCC observed (level) x Avas shape (modelled)
-R7,10,,before_capture_window,84,,146.7,,,MTCC observed (level) x Avas shape (modelled)
-R7,11,3.0,captured,84,252.0,150.9,59.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,12,4.0,captured,84,336.0,150.9,44.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,13,4.0,captured,84,336.0,179.5,53.4,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,14,4.0,captured,84,336.0,205.3,61.1,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,15,4.0,captured,84,336.0,244.2,72.7,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,16,4.0,captured,84,336.0,280.2,83.4,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,17,4.0,captured,84,336.0,241.5,71.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,18,4.0,captured,84,336.0,240.5,71.6,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,19,3.0,captured,84,252.0,232.2,92.1,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,20,3.0,captured,84,252.0,234.6,93.1,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,21,3.0,captured,84,252.0,193.8,76.9,0.0,MTCC observed (level) x Avas shape (modelled)
-R7,22,2.0,captured,84,168.0,181.9,108.3,13.9,MTCC observed (level) x Avas shape (modelled)
-R7,23,2.0,captured,84,168.0,146.9,87.4,0.0,MTCC observed (level) x Avas shape (modelled)
+R7,0,,before_capture_window,84,,114.2,,,"MTCC level x Avas OD, stop-allocated"
+R7,1,,before_capture_window,84,,50.6,,,"MTCC level x Avas OD, stop-allocated"
+R7,2,,before_capture_window,84,,23.7,,,"MTCC level x Avas OD, stop-allocated"
+R7,3,,before_capture_window,84,,15.6,,,"MTCC level x Avas OD, stop-allocated"
+R7,4,,before_capture_window,84,,17.2,,,"MTCC level x Avas OD, stop-allocated"
+R7,5,,before_capture_window,84,,29.2,,,"MTCC level x Avas OD, stop-allocated"
+R7,6,,before_capture_window,84,,33.4,,,"MTCC level x Avas OD, stop-allocated"
+R7,7,,before_capture_window,84,,111.6,,,"MTCC level x Avas OD, stop-allocated"
+R7,8,,before_capture_window,84,,120.1,,,"MTCC level x Avas OD, stop-allocated"
+R7,9,,before_capture_window,84,,125.9,,,"MTCC level x Avas OD, stop-allocated"
+R7,10,,before_capture_window,84,,138.6,,,"MTCC level x Avas OD, stop-allocated"
+R7,11,3.0,captured,84,252.0,136.0,54.0,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,12,4.0,captured,84,336.0,139.5,41.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,13,4.0,captured,84,336.0,166.2,49.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,14,4.0,captured,84,336.0,185.6,55.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,15,4.0,captured,84,336.0,253.8,75.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,16,4.0,captured,84,336.0,320.9,95.5,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,17,4.0,captured,84,336.0,252.8,75.2,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,18,4.0,captured,84,336.0,274.2,81.6,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,19,3.0,captured,84,252.0,266.4,105.7,14.4,"MTCC level x Avas OD, stop-allocated"
+R7,20,3.0,captured,84,252.0,251.2,99.7,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,21,3.0,captured,84,252.0,200.2,79.4,0.0,"MTCC level x Avas OD, stop-allocated"
+R7,22,2.0,captured,84,168.0,183.4,109.2,15.4,"MTCC level x Avas OD, stop-allocated"
+R7,23,2.0,captured,84,168.0,141.8,84.4,0.0,"MTCC level x Avas OD, stop-allocated"
 R8,0,,before_capture_window,84,,,,,NO DEMAND DATA
 R8,1,,before_capture_window,84,,,,,NO DEMAND DATA
 R8,2,,before_capture_window,84,,,,,NO DEMAND DATA

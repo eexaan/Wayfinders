@@ -1,16 +1,16 @@
-route_code,route_name,bus_type,seats,fare_mvr,trips_per_day,seat_capacity_day,boardings_per_day,pax_per_trip,load_factor_peak_pct,load_factor_avg_pct,demand_source,service_capture
-R1,West Park to HM Phase 1,Double decker,84,10.0,61.0,5124.0,4585.0,75.2,89.5,44.7,MTCC observed,40 of 61.0 trips captured
-R2,Carnival to HM Phase 1,Double decker,84,10.0,61.0,5124.0,3447.0,56.5,67.3,33.6,MTCC observed,40 of 61.0 trips captured
-R3,West Park to VIA,Airport bus,52,10.0,20.0,1040.0,752.0,37.6,72.3,36.1,MTCC observed,13 of 20.0 trips captured
-R4,HM Phase 1 to VIA,Airport bus,52,10.0,38.0,1976.0,1014.0,26.7,51.3,25.6,MTCC observed,25 of 38.0 trips captured
-R5,HM Internal,Regular bus,54,5.0,17.0,918.0,,,,,NO DEMAND DATA,12 of 17.0 trips captured
-R6,HM Phase 2 to HM Phase 1,Double decker,84,5.0,75.0,6300.0,,,,,NO DEMAND DATA,51 of 75.0 trips captured
-R7,HM Phase 2 to West Park,Double decker,84,15.0,66.0,5544.0,3552.0,53.8,64.1,32.0,MTCC observed,44 of 66.0 trips captured
-R8,HM Phase 2 to Carnival,Double decker,84,15.0,61.0,5124.0,,,,,NO DEMAND DATA,40 of 61.0 trips captured
-R9,HM Phase 2 to VIA,Airport bus,52,15.0,38.0,1976.0,,,,,NO DEMAND DATA,25 of 38.0 trips captured
-R10,Orchid,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R11,Ameenee,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R12,Sosun,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R13,Villimale Internal,E-minibus,11,5.0,92.0,1012.0,,,,,NO DEMAND DATA,63 of 92.0 trips captured
-R14,VILLIMALE INTERNAL 2,E-minibus,11,5.0,105.0,1155.0,,,,,NO DEMAND DATA,77 of 105.0 trips captured
-R15,West Park to Orange Hiya,Minibus,21,10.0,,,,,,,NO DEMAND DATA,no timings returned
+route_code,route_name,bus_type,seats,fare_mvr,trips_per_day,seat_capacity_day,boardings_per_day,pax_per_trip,load_factor_peak_pct,load_factor_avg_pct,demand_source,service_capture,load_factor_route_day_upper_pct,peak_segment_id,peak_segment,peak_segment_hour
+R1,West Park to HM Phase 1,Double decker,84,10.0,61.0,5124.0,4585.0,75.2,77.3,54.2,MTCC observed,40 of 61.0 trips captured,89.5,R1-S12,Hulhumale' Police Station → Amin Avenue,22.0
+R2,Carnival to HM Phase 1,Double decker,84,10.0,61.0,5124.0,3447.0,56.5,58.0,41.2,MTCC observed,40 of 61.0 trips captured,67.3,R2-S05,Centro Mall → CHSE,22.0
+R3,West Park to VIA,Airport bus,52,10.0,20.0,1040.0,752.0,37.6,104.1,21.9,MTCC observed,13 of 20.0 trips captured,72.3,R3-S03,STELCO → VIA Domestic Terminal,13.0
+R4,HM Phase 1 to VIA,Airport bus,52,10.0,38.0,1976.0,1014.0,26.7,89.2,18.8,MTCC observed,25 of 38.0 trips captured,51.3,R4-S02,Hulhumale' Cemetery → VIA Domestic Terminal,11.0
+R5,HM Internal,Regular bus,54,5.0,17.0,918.0,,,,,NO DEMAND DATA,12 of 17.0 trips captured,,,,
+R6,HM Phase 2 to HM Phase 1,Double decker,84,5.0,75.0,6300.0,,,,,NO DEMAND DATA,51 of 75.0 trips captured,,,,
+R7,HM Phase 2 to West Park,Double decker,84,15.0,66.0,5544.0,3552.0,53.8,63.7,38.8,MTCC observed,44 of 66.0 trips captured,64.1,R7-S08,STELCO → MWSC FLAT BUS STOP (DROP-OFF ONLY),22.0
+R8,HM Phase 2 to Carnival,Double decker,84,15.0,61.0,5124.0,,,,,NO DEMAND DATA,40 of 61.0 trips captured,,,,
+R9,HM Phase 2 to VIA,Airport bus,52,15.0,38.0,1976.0,,,,,NO DEMAND DATA,25 of 38.0 trips captured,,,,
+R10,Orchid,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned,,,,
+R11,Ameenee,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned,,,,
+R12,Sosun,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned,,,,
+R13,Villimale Internal,E-minibus,11,5.0,92.0,1012.0,,,,,NO DEMAND DATA,63 of 92.0 trips captured,,,,
+R14,VILLIMALE INTERNAL 2,E-minibus,11,5.0,105.0,1155.0,,,,,NO DEMAND DATA,77 of 105.0 trips captured,,,,
+R15,West Park to Orange Hiya,Minibus,21,10.0,,,,,,,NO DEMAND DATA,no timings returned,,,,

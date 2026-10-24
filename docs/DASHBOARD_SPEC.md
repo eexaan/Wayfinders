@@ -66,7 +66,10 @@ scenario bar.
 ## 2. Data contract
 
 All files are in `dashboard/data/`, committed, CSVs, UTF-8, comma-separated,
-built by `dashboard/build/build_data.py`.
+built by `dashboard/build/build_data.py`, then
+`dashboard/build/build_stop_demand.py` (which refines demand and load factors).
+Run them in that order; `build_stop_demand.py` writes §2.16–2.19 and updates
+`route_load.csv` and `demand_supply_gap.csv`.
 
 ### 2.1 `route_lines.geojson` — the map geometry
 
@@ -151,7 +154,7 @@ This is the reference table. Use it for every route label in the UI.
 | `capture_status` | str | `captured` \| `before_capture_window` |
 | `seats` | int | |
 | `seat_capacity_hour` | int \| null | `trips_in_hour × seats` |
-| `demand_pax_est` | float \| null | modelled: MTCC level × Avas shape |
+| `demand_pax_est` | float \| null | modelled: MTCC level × Avas OD, **stop-allocated** (see §2.17) |
 | `load_factor_pct` | float \| null | null where capacity is null |
 | `unmet_pax_est` | float \| null | |
 | `demand_source` | str | `NO DEMAND DATA` for the 10 routes without ridership |
@@ -164,12 +167,32 @@ This is the reference table. Use it for every route label in the UI.
 
 `route_code`, `route_name`, `bus_type`, `seats`, `fare_mvr`, `trips_per_day`,
 `seat_capacity_day`, `boardings_per_day`, `pax_per_trip`,
-`load_factor_peak_pct`, `load_factor_avg_pct`, `demand_source`,
+`load_factor_peak_pct`, `load_factor_avg_pct`,
+`load_factor_route_day_upper_pct`, `peak_segment_id`, `peak_segment`,
+`peak_segment_hour`, `demand_source`,
 `service_capture` (e.g. `40 of 61.0 trips captured`).
 
-> ⚠️ `load_factor_peak_pct` and `load_factor_avg_pct` are a **band**, not a
-> point estimate. Render both (range bar). Never show one as "the" load factor.
-> Routes with `demand_source = NO DEMAND DATA` must be shown as such, not as zero.
+**These three load-factor columns mean different things — read them carefully:**
+
+| Column | Meaning |
+|---|---|
+| `load_factor_route_day_upper_pct` | The **old, superseded** figure: `daily_boardings ÷ (trips_per_day × seats)`. Assumes every passenger rides the whole route. It is an upper bound, not a peak. Kept for reconciliation only. |
+| `load_factor_peak_pct` | **The headline.** The fullest stop-to-stop segment in any captured hour, as a % of seats. |
+| `load_factor_avg_pct` | Mean across all captured segment-hours. |
+
+> ⚠️ **Changed on 2026-10-24 (Dev B task 1).** `load_factor_peak_pct` and
+> `load_factor_avg_pct` are **no longer the route-day band** — they are
+> segment-based. R1 moves from 89.5% / 44.7% to **77.3% / 54.2%**. The old
+> number is preserved in `load_factor_route_day_upper_pct`, so the two cannot be
+> confused. Use `peak_segment` + `peak_segment_hour` for the caption
+> (`Hulhumale' Police Station → Amin Avenue, 22:00`).
+>
+> Note the peak hour is often **late**, because service thins out while demand
+> persists — not because 22:00 is the busiest hour. R1's demand peaks at 16:00.
+> If your chart implies "22:00 is the peak hour", use
+> `route_segment_summary.csv` → `load_factor_at_demand_peak_pct` instead.
+
+Routes with `demand_source = NO DEMAND DATA` must be shown as such, not as zero.
 
 ### 2.6 `service_departures.csv` — one row per captured trip
 
@@ -261,7 +284,66 @@ The per-corridor generalised-cost comparison. Drives the F6 figure and the
 Use this for the "taxi capture" KPI tile: read
 `taxi_rides_capturable_per_day` for the selected scenario.
 
-### 2.16 Five traps that will silently break the UI
+### 2.16 `demand_by_stop.csv` — 184 rows, stop-level boardings (NEW)
+
+Built by `dashboard/build/build_stop_demand.py`, which runs **after**
+`build_data.py`. One row per route × stop.
+
+| Column | Type | Notes |
+|---|---|---|
+| `route_code` | str | |
+| `stop_order` | int | 1-based, joins `route_stops.csv` |
+| `stop_code` | int | official RTL code |
+| `stop_name` / `lat` / `lon` | | |
+| `daily_boardings` | float \| **null** | null for the 10 routes with no ridership level |
+| `daily_alightings` | float \| **null** | measured from taxi **destinations**, not assumed symmetric |
+| `avas_rides_per_day` | float | Saturday rides whose origin snapped to this stop |
+| `boarding_share_pct` | float | share of the route's boardings |
+| `stop_role` | str | `interchange` where share ≥ 10%, else empty |
+| `method` / `demand_source` / `catchment_m` | | provenance, for a tooltip |
+
+Sum of `daily_boardings` per route **equals** `demand_by_daytype` exactly
+(verified to ±0.2 pax). Safe to use as the source of truth for stop sizing.
+
+### 2.17 `load_by_segment.csv` — 4,344 rows, the real load factor (NEW)
+
+route × segment × hour. This is what "load factor" should have meant.
+
+| Column | Type | Notes |
+|---|---|---|
+| `route_code` | str | |
+| `segment_id` | str | e.g. `R1-S12` |
+| `from_stop_order` / `from_stop` / `to_stop_order` / `to_stop` | | the segment |
+| `segment_km` | float | great-circle length |
+| `hour` | int | 0–23 |
+| `passengers` | float \| null | null where no ridership level exists |
+| `seat_capacity_hour` | float \| **null** | **null = not captured** |
+| `load_factor_pct` | float \| null | null where either side is null |
+| `capacity_basis` | str | `observed` \| `not_captured` |
+| `demand_source` | str | |
+
+> Only 5 routes (R1, R2, R3, R4, R7) have load factors. 4,344 rows = 181
+> segments × 24 hours.
+
+### 2.18 `route_segment_summary.csv` — 15 rows, the reconciliation (NEW)
+
+`route_code`, `peak_segment_id`, `peak_segment_from`, `peak_segment_to`,
+`peak_segment_hour`, `peak_segment_passengers`, `peak_segment_capacity`,
+`load_factor_segment_peak_pct`, `demand_peak_hour`,
+`load_factor_at_demand_peak_pct`, `load_factor_segment_mean_pct`,
+`load_factor_route_day_upper_pct`, `scale_factor`, `rides_considered`,
+`rides_in_catchment`, `rides_dropped_backtrack`, `catchment_share_pct`.
+
+`scale_factor` ≈ 2.7–3.4 means bus boardings are that many times the observed
+taxi rides on the same corridor. It is a sanity check, not a result.
+
+### 2.19 `segment_load_sensitivity.csv` — 45 rows (NEW)
+
+`route_code`, `catchment_m` (400/600/800), `topology`, `rides_in_catchment`,
+`peak_segment_load_pct`. Use this if a judge asks whether the 600 m catchment
+drove the answer. It did not: R1 is 76.4 / 77.3 / 77.6%.
+
+### 2.20 Five traps that will silently break the UI
 
 Read this before you write the chart layer. Each one produces a plausible but
 wrong chart, which is worse than an error.
@@ -278,10 +360,14 @@ means you can legitimately show **24 hours of demand against 13 hours of
 service** — and that juxtaposition is the clearest way to show the gap. Just
 label the capacity series as partial.
 
-**3. Load factor is a band, not a number.**
-`route_load` gives `load_factor_peak_pct` and `load_factor_avg_pct`. They differ
-by roughly 2×. Render both (range bar or a shaded band) and never present one
-as "the" load factor.
+**3. Load factor is a segment, not a route.**
+`route_load.load_factor_peak_pct` is now the fullest **stop-to-stop segment**,
+not a route-day average. It is generally *lower* than
+`load_factor_route_day_upper_pct` (R1: 77.3% vs 89.5%), because passengers get
+off along the way. Do not add the two, average them, or treat the old bound as
+a range — the upper bound is a superseded figure kept only for reconciliation.
+For the "where is the bus full?" story use `load_by_segment.csv` and name the
+segment and hour.
 
 **4. Ten routes have no ridership data at all.**
 `demand_source = 'NO DEMAND DATA'` for R5, R6, R8, R9, R10, R11, R12, R13,
@@ -304,6 +390,13 @@ make it look broken when it is fine.
 **Minor:** `trips_in_hour` is a float (`2.0`), not an int. `hour` is 0–23 with
 no zero-padding. `departure_time` is `"11:20:00"` (H:MM:SS), so slice it for
 display.
+
+**6. Villimalé has no taxi data, so R13/R14 have no segment demand.**
+Avas has zero pickups west of 73.495; the Villimalé stops sit at 73.483–73.486.
+R13/R14 therefore have `daily_boardings = null` and no rows with a load factor.
+This is a **coverage gap in the source**, not a modelling failure. Say so on the
+chart rather than greying them out with the same treatment as R5/R6 (which lack
+a ridership *level*, a different reason).
 
 ---
 
@@ -519,8 +612,9 @@ The dashboard is done when:
 5. The live "trips reassigned" slider moves the over-capacity tile and is
    labelled as an interpolation.
 6. Every modelled number carries a tooltip explaining it is modelled, and
-   the load factor is shown as a **band** (both `load_factor_peak_pct` and
-   `load_factor_avg_pct`), never as a single number.
+   the load factor is shown as a **peak segment**, named and timed
+   (`load_factor_peak_pct` + `peak_segment` + `peak_segment_hour`), never as a
+   single unattributed route percentage.
 7. Routes without demand data are visibly marked as such — not drawn as 0%.
 8. Hours outside the capture window are visibly marked as "not captured", not
    drawn as zero, and the captured window is stated on screen somewhere.

@@ -87,25 +87,43 @@ also 8.5× cheaper.
 
 ### F2 — One corridor carries nearly all the load; the airport buses do not
 
-Upper-bound load factor — every boarding rides the full route — on the
-**captured service day (Saturday)**:
+**Load factor at the segment, not the route** (captured Saturday, 11:00–24:00):
 
-| Route | Official RTL name | Bus type | Seats | Trips/day | Boardings/day | Load (peak) | Load (avg) |
-|---|---|---|---|---|---|---|---|
-| **R1** | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | **89.5%** | 44.7% |
-| R3 | West Park to VIA | Airport bus | 52 | 20 | 752 | 72.3% | 36.1% |
-| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 67.3% | 33.6% |
-| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 64.1% | 32.0% |
-| **R4** | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | **51.3%** | 25.6% |
+| Route | Official RTL name | Bus type | Seats | Trips/day | Boardings/day | Route-day upper bound | **Peak segment** | Where |
+|---|---|---|---|---|---|---|---|---|
+| **R1** | West Park to HM Phase 1 | Double decker | 84 | 61 | 4,585 | 89.5% | **77.3%** | Hulhumalé Police Stn → Amin Ave, 22:00 |
+| **R3** | West Park to VIA | Airport bus | 52 | 20 | 752 | 72.3% | **104.1%** | STELCO → VIA, 13:00 |
+| R4 | HM Phase 1 to VIA | Airport bus | 52 | 38 | 1,014 | 51.3% | 89.2% | HM Cemetery → VIA, 11:00 |
+| R7 | HM Phase 2 to West Park | Double decker | 84 | 66 | 3,552 | 64.1% | 63.7% | STELCO → MWSC Flat, 22:00 |
+| R2 | Carnival to HM Phase 1 | Double decker | 84 | 61 | 3,447 | 67.3% | 58.0% | Centro Mall → CHSE, 22:00 |
 
 Ten routes have **no ridership data at all** (R5, R6, R8–R15) and are marked
 `NO DEMAND DATA` rather than zero-filled.
 
+> **The 89.5% figure was an upper bound, and it was labelled "peak". It is now
+> reconciled.** `daily_boardings ÷ (trips_per_day × seats)` assumes every
+> passenger rides the whole route. Distributing each route's measured boardings
+> across its own stops using the Avas catchment, then accumulating on-minus-off
+> along the stop order, gives a peak **segment** load factor instead.
+>
+> For R1 that is **77.3%** — lower than the bound, as it must be, because
+> passengers alight along the way. The route-day number overstated crowding on
+> R1 by about 12 points. It *understated* crowding on R3, whose airport segment
+> genuinely exceeds 100% while its route-day average is 72%.
+>
+> Both figures are kept side by side (`load_factor_route_day_upper_pct` vs
+> `load_factor_peak_pct`) so the correction is auditable rather than silent.
+
+> **The peak hour is late, and that is a service finding, not a demand one.**
+> R1's demand peaks at 16:00, but its fullest segment occurs at 22:00 when the
+> timetable thins to 2 trips/hour. `route_segment_summary.csv` reports
+> `load_factor_at_demand_peak_pct` (R1: 69.9%) separately so the two cannot be
+> conflated.
+
 > **Read the load numbers with the service day in mind.** The captured feed is
 > one service day (Saturday), so boardings and trips are paired correctly.
-> Weekday boardings on R1 are 13.7% higher than Saturday (5,212 vs 4,585); at
-> the same 61 trips that is **~102% of seats**. A weekday capture is needed to
-> confirm — see §12.
+> Weekday boardings on R1 are 13.7% higher than Saturday (5,212 vs 4,585).
+> A weekday capture is needed to confirm — see §12.
 
 ### F3 — Demand varies sharply; the service day cannot be compared from one capture
 

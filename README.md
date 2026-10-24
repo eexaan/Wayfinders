@@ -36,11 +36,19 @@ segment. A taxi does the same trip in 12.7 minutes. The bus is **4.4×
 slower than a taxi** and 8.5× cheaper — which is why people take taxis.
 
 **2. One corridor carries nearly all the load; the airport buses do not.**
-On the captured Saturday, **R1 runs at 89.5%** of an 84-seat double-decker
-(weekday demand is 13.7% higher, which puts a weekday at ~102%), against
-**51% on R4**, the airport bus. **R3 is an hourly bus with a 30-minute
-expected wait**, and the airport buses run the same frequency at 03:00 as at
-08:00 while 35.5% of international arrivals land in a three-hour window.
+On the captured Saturday, **R1's fullest segment runs at 77%** of an 84-seat
+double-decker, against **58% on R2** and **64% on R7**. The airport buses look
+light on a route average (R4 51%) but their **airport segment is the busiest
+thing in the network at 104%** — STELCO to VIA at 13:00 — because every
+airport passenger funnels through it on a single trip. **R3 is an hourly bus
+with a 30-minute expected wait**, and the airport buses run the same frequency
+at 03:00 as at 08:00 while 35.5% of international arrivals land in a
+three-hour window.
+
+> Load factor is measured **per stop-to-stop segment**, not per route. The
+> older route-level figure (R1 at 89.5%) assumed every passenger rode the whole
+> route and overstated crowding on R1 by ~12 points; it is retained as
+> `load_factor_route_day_upper_pct` for reconciliation.
 
 **3. The bus already wins on price and loses on time.** On fare alone,
 62–76% of taxi riders on every corridor would take the bus. On generalised
@@ -79,6 +87,7 @@ docs/
   figures/F1..F6.png        the six report figures
 dashboard/
   build/build_data.py       rebuilds every table from the official inputs
+  build/build_stop_demand.py  stop-level demand + segment load (runs AFTER build_data.py)
   build/build_figures.py    rebuilds F1..F6
   data/                     the tables the dashboard reads (see DASHBOARD_SPEC §2)
 data/
