@@ -161,6 +161,7 @@ export interface Simulation {
   stopIndex: Map<string, number>
   readonly clock: number
   readonly events: SimEvent[]
+  readonly departures: { route: string; dir: number; at: number; extra: boolean }[]
   readonly totalDemand: number
   readonly remaining: number
 }
