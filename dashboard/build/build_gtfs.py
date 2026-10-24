@@ -254,9 +254,16 @@ def build() -> dict:
         }])
 
     # Zip with every file at the archive root, which is what validators expect.
+    # Member timestamps are pinned to the service date: zipfile would otherwise
+    # stamp "now", so an unchanged feed would produce a new blob on every run
+    # and dirty the working tree for no reason.
+    stamp = (2026, 10, 24, 0, 0, 0)
     with zipfile.ZipFile(ZIPPATH, "w", zipfile.ZIP_DEFLATED) as zf:
-        for name in counts:
-            zf.write(OUTDIR / name, arcname=name)
+        for name in sorted(counts):
+            info = zipfile.ZipInfo(name, date_time=stamp)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            zf.writestr(info, (OUTDIR / name).read_bytes())
 
     return {
         "counts": counts,
