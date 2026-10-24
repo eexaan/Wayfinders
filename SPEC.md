@@ -361,25 +361,30 @@ the acceptance criteria. This section is the summary.
 7. A **synthesised GTFS feed** export for Greater Malé — no public GTFS
    exists for Malé; ours would be the first.
 
-## 7. Fleet and capacity assumptions (team-provided — CONFIRM)
+## 7. Fleet and capacity
 
-| Bus type | Seats | Routes | Source |
-|---|---|---|---|
-| Double decker | 84 | R1, R2, R6, R7, R8 | stated by team |
-| Airport bus | 52 (50–54) | R4, R9 | stated by team |
-| Airport bus | 52 | R3 | **ASSUMED — confirm** |
-| Regular bus | 54 | R5 | **ASSUMED — confirm** |
-| Minibus | 21 (20–22) | R10, R11, R12, R15 | team + Team Kandu `minibus=yes` |
-| E-minibus | 11 | R13, R14 | **ASSUMED — confirm** |
+Capacity is **not** an assumption any more. It comes from the team capacity
+table, `data/raw/mtcc_bus_capacity.csv`, which carries the model, seated
+capacity, wheelchair bays and maximum passengers per route, with a source and
+a confidence flag on every row. See **ADR-0010**.
 
-> ⚠️ **Source:** reported bus capacity at <https://www.psmnews.mv/en/106008>
-> (linked in `data/official/notes.txt`) plus the `minibus` flag in Team Kandu's route
-> table. The article is behind a Cloudflare challenge and could not be
-> machine-read, so these figures are **team-provided, not automatically
-> verified**. They drive every absolute load-factor number. **Confirm the
-> seats per route with MTCC** (or use MBS Yearbook 11.3 for registered vehicle
-> types) before publishing an absolute load factor. The *relative* findings
-> (F3, F4, F5) do not depend on them.
+| Route | Model | Seated | Max (seats + standing) | Load on seats | Load on max |
+|---|---|---|---|---|---|
+| **R1** | Yutong ZK6116HGS double decker | 72 | 84 | **104.4%** | 89.5% |
+| R2 | Yutong ZK6116HGS double decker | 72 | 84 | 78.5% | 67.3% |
+| R7 | Yutong ZK6116HGS double decker | 72 | 84 | 74.8% | 64.1% |
+| R3 | Yutong ZK6122H9 coach | 55 | 55 | 68.3% | 68.3% |
+| R4 | Yutong ZK6122H9 coach | 55 | 55 | 48.5% | 48.5% |
+| R5, R6 | Yutong ZK6126HGA single decker | 33 | *not stated* | **not comparable** | — |
+| R10–R12, R15 | Yutong ZK6729D2 diesel minibus | 24 | 24 | — | — |
+| R13, R14 | Yutong E6S electric minibus | 11 | 15 | — | — |
+
+**The headline is the seats figure** — ADR-0003. "R1 is at 104% of its seats"
+means people stand or wait; "89.5% of total capacity" sounds like there is room.
+
+Where the operator gave seats but not standing capacity (R5, R6), no load
+factor is formed at all. Capacity remains a **fleet-class** assumption: it is
+per route, not per departure.
 
 **The other load-bearing assumption (A1):** MTCC `total_pax` is boardings in
 **one direction**. Under this reading R1 sits at 89.5% of an 84-seat bus on the
@@ -471,7 +476,7 @@ each difference is given a mechanism and a size.
 |---|---|---|
 | MACL 2025 arrivals as % of Yearbook international arrivals | **40.2%** | FLAG — sample, usable for shape not level |
 | MACL turboprop arrivals as % of Yearbook **domestic** arrivals | **0.32%** | FAIL — MACL has no domestic traffic at all |
-| MACL adult arrivals as % of Yearbook international arrivals | 36.5% | INFO — this is the previously quoted coverage |
+| MACL adult arrivals as % of Yearbook international arrivals | 40% | INFO — this is the previously quoted coverage |
 | Correlation of MACL monthly volume with Yearbook monthly arrivals | **0.21** | FAIL — MACL carries no seasonal signal |
 | Avas airport dropoffs as % of Yearbook international departures/day | **15.3%** | PLAUSIBLE — credible taxi mode share |
 | Avas airport pickups as % of Yearbook international arrivals/day | **2.2%** | FLAG — pickups and dropoffs are not symmetric |
@@ -571,7 +576,7 @@ hardware, and beats a webcam for validating the supply model.
 | **Fleet capacities wrong** (team knowledge) | High | Confirm with MTCC; report a band; F3/F4/F5 do not depend on them |
 | **The RTL feed returns one service day, time-filtered from the moment of the call** | High | Our capture covers ~11:00–24:00 on a Saturday; the morning peak is missing. Re-run `dashboard/build/build_data.py` shortly after 00:00 to capture a full day, and once on a Friday and a weekday to restore the day-type comparison. Hours not captured are emitted as null, never 0 |
 | **MTCC counts are "sample value"** per its own README | Medium | State it; use MTCC as the anchor and cross-check against Avas |
-| **MACL covers ≤36.5% of international arrivals, 0% of domestic** | Medium | Use Yearbook for levels, MACL for shape; publish the coverage table as a finding |
+| **MACL covers ≈40% of international arrivals, 0% of domestic** | Medium | Use Yearbook for levels, MACL for shape; publish the coverage table as a finding |
 | No ridership data for R5, R6, R8, R9, R10–R15 | Medium | Publish a coverage matrix; mark as `NO DEMAND DATA` rather than zero-filling |
 | Camera model inaccurate in dense crowds | Low | Validation only, not a product claim |
 | Scope creep into FollowMe / marine transport | Medium | Excluded by decision — do not reopen |

@@ -259,7 +259,7 @@ def main() -> None:
         if stops.empty:
             continue
         closed = topo.get(code) == "closed_circuit"
-        seats = int(r.seats)
+        seats = int(getattr(r, "seated_capacity", getattr(r, "seats", 0)))
         has_level = code in ROUTES_WITH_LEVEL and code in level
         daily_target = float(level[code]) if has_level else np.nan
 
@@ -342,7 +342,7 @@ def main() -> None:
                         "segment_km": round(seg_len / 1000, 3),
                         "hour": hour,
                         "passengers": round(float(pax), 1) if has_level else None,
-                        "seat_capacity_hour": cap if not np.isnan(cap) else None,
+                        "seated_capacity_hour": cap if not np.isnan(cap) else None,
                         "load_factor_pct": lf,
                         "capacity_basis": basis_hour[hour],
                         "demand_source": "stop-allocated MTCC level x Avas OD" if has_level else "NO DEMAND DATA",
@@ -471,11 +471,11 @@ def main() -> None:
     gap.loc[replaces, "demand_source"] = "MTCC level x Avas OD, stop-allocated"
     gap["load_factor_pct"] = [
         round(d / c * 100, 1) if (d is not None and not pd.isna(d) and c and not pd.isna(c)) else None
-        for d, c in zip(gap["demand_pax_est"], gap["seat_capacity_hour"])
+        for d, c in zip(gap["demand_pax_est"], gap["seated_capacity_hour"])
     ]
     gap["unmet_pax_est"] = [
         round(max(0.0, d - c), 1) if (d is not None and not pd.isna(d) and c and not pd.isna(c)) else None
-        for d, c in zip(gap["demand_pax_est"], gap["seat_capacity_hour"])
+        for d, c in zip(gap["demand_pax_est"], gap["seated_capacity_hour"])
     ]
     gap.drop(columns=["demand_pax_est_stop_allocated"]).to_csv(OUT / "demand_supply_gap.csv", index=False)
 

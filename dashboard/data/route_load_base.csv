@@ -1,16 +1,16 @@
-route_code,route_name,bus_type,seats,fare_mvr,trips_per_day,seat_capacity_day,boardings_per_day,pax_per_trip,load_factor_peak_pct,load_factor_avg_pct,demand_source,service_capture
-R1,West Park to HM Phase 1,Double decker,84,10.0,61.0,5124.0,4585.0,75.2,89.5,44.7,MTCC observed,40 of 61.0 trips captured
-R2,Carnival to HM Phase 1,Double decker,84,10.0,61.0,5124.0,3447.0,56.5,67.3,33.6,MTCC observed,40 of 61.0 trips captured
-R3,West Park to VIA,Airport bus,52,10.0,20.0,1040.0,752.0,37.6,72.3,36.1,MTCC observed,13 of 20.0 trips captured
-R4,HM Phase 1 to VIA,Airport bus,52,10.0,38.0,1976.0,1014.0,26.7,51.3,25.6,MTCC observed,25 of 38.0 trips captured
-R5,HM Internal,Regular bus,54,5.0,17.0,918.0,,,,,NO DEMAND DATA,12 of 17.0 trips captured
-R6,HM Phase 2 to HM Phase 1,Double decker,84,5.0,75.0,6300.0,,,,,NO DEMAND DATA,51 of 75.0 trips captured
-R7,HM Phase 2 to West Park,Double decker,84,15.0,66.0,5544.0,3552.0,53.8,64.1,32.0,MTCC observed,44 of 66.0 trips captured
-R8,HM Phase 2 to Carnival,Double decker,84,15.0,61.0,5124.0,,,,,NO DEMAND DATA,40 of 61.0 trips captured
-R9,HM Phase 2 to VIA,Airport bus,52,15.0,38.0,1976.0,,,,,NO DEMAND DATA,25 of 38.0 trips captured
-R10,Orchid,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R11,Ameenee,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R12,Sosun,Minibus,21,7.0,,,,,,,NO DEMAND DATA,no timings returned
-R13,Villimale Internal,E-minibus,11,5.0,92.0,1012.0,,,,,NO DEMAND DATA,63 of 92.0 trips captured
-R14,VILLIMALE INTERNAL 2,E-minibus,11,5.0,105.0,1155.0,,,,,NO DEMAND DATA,77 of 105.0 trips captured
-R15,West Park to Orange Hiya,Minibus,21,10.0,,,,,,,NO DEMAND DATA,no timings returned
+route_code,route_name,bus_type,bus_model,seated_capacity,max_passengers,load_factor_comparable,fare_mvr,trips_per_day,seated_capacity_day,capacity_day_max,boardings_per_day,pax_per_trip,load_factor_seats_upper_pct,load_factor_seats_avg_pct,load_factor_capacity_upper_pct,load_factor_capacity_avg_pct,demand_source,service_capture
+R1,West Park to HM Phase 1,double decker bus,Yutong ZK6116HGS,72,84,True,10.0,61.0,4392.0,5124.0,4585.0,75.2,104.4,52.2,89.5,44.7,MTCC observed,40 of 61.0 trips captured
+R2,Carnival to HM Phase 1,double decker bus,Yutong ZK6116HGS,72,84,True,10.0,61.0,4392.0,5124.0,3447.0,56.5,78.5,39.2,67.3,33.6,MTCC observed,40 of 61.0 trips captured
+R3,West Park to VIA,coach bus,Yutong ZK6122H9,55,55,True,10.0,20.0,1100.0,1100.0,752.0,37.6,68.3,34.2,68.3,34.2,MTCC observed,13 of 20.0 trips captured
+R4,HM Phase 1 to VIA,coach bus,Yutong ZK6122H9,55,55,True,10.0,38.0,2090.0,2090.0,1014.0,26.7,48.5,24.2,48.5,24.2,MTCC observed,25 of 38.0 trips captured
+R5,HM Internal,single decker city bus,Yutong ZK6126HGA,33,33,False,5.0,17.0,561.0,561.0,,,,,,,CAPACITY NOT COMPARABLE (standing capacity not stated),12 of 17.0 trips captured
+R6,HM Phase 2 to HM Phase 1,single decker city bus,Yutong ZK6126HGA,33,33,False,5.0,75.0,2475.0,2475.0,,,,,,,CAPACITY NOT COMPARABLE (standing capacity not stated),51 of 75.0 trips captured
+R7,HM Phase 2 to West Park,double decker bus,Yutong ZK6116HGS,72,84,True,15.0,66.0,4752.0,5544.0,3552.0,53.8,74.8,37.4,64.1,32.0,MTCC observed,44 of 66.0 trips captured
+R8,HM Phase 2 to Carnival,double decker bus,Yutong ZK6116HGS,72,84,True,15.0,61.0,4392.0,5124.0,,,,,,,NO DEMAND DATA,40 of 61.0 trips captured
+R9,HM Phase 2 to VIA,coach bus,Yutong ZK6122H9,55,55,True,15.0,38.0,2090.0,2090.0,,,,,,,NO DEMAND DATA,25 of 38.0 trips captured
+R10,Orchid,diesel minibus,Yutong ZK6729D2,24,24,True,7.0,,,,,,,,,,NO DEMAND DATA,no timings returned
+R11,Ameenee,diesel minibus,Yutong ZK6729D2,24,24,True,7.0,,,,,,,,,,NO DEMAND DATA,no timings returned
+R12,Sosun,diesel minibus,Yutong ZK6729D2,24,24,True,7.0,,,,,,,,,,NO DEMAND DATA,no timings returned
+R13,Villimale Internal,electric minibus,Yutong E6S,11,15,True,5.0,92.0,1012.0,1380.0,,,,,,,NO DEMAND DATA,63 of 92.0 trips captured
+R14,VILLIMALE INTERNAL 2,electric minibus,Yutong E6S,11,15,True,5.0,105.0,1155.0,1575.0,,,,,,,NO DEMAND DATA,77 of 105.0 trips captured
+R15,West Park to Orange Hiya,diesel minibus,Yutong ZK6729D2,24,24,True,10.0,,,,,,,,,,NO DEMAND DATA,no timings returned

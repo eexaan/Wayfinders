@@ -55,28 +55,41 @@ OUT = ROOT / "dashboard" / "data"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
-# Fleet: bus type and seat capacity per route.
-# Source: reported capacity at https://www.psmnews.mv/en/106008 (team-provided,
-# see data/official/notes.txt) plus the official isMiniBusRoute flag.
-# Routes marked ASSUMED still need confirmation from MTCC.
+# Fleet: bus type and capacity per route, loaded from the team's capacity table.
+#
+# Source: data/raw/mtcc_bus_capacity.csv (team fleet guidance, 2026-10-24).
+# It carries TWO capacity numbers per route, and the difference matters:
+#   seated_capacity  - seats only
+#   max_passengers   - seats + permitted standing
+# For R1 they are 72 and 84, so the same ridership is 104% of seats but 89.5%
+# of total capacity. See docs/adr/0003-load-factor-on-seats.md for why the
+# headline is the seats figure.
+#
+# `load_factor_comparable` is False where the operator gave seats but not
+# standing capacity (R5, R6): a load factor cannot be formed there.
 # ---------------------------------------------------------------------------
-FLEET = {
-    "R1": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R2": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R6": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R7": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R8": ("Double decker", 84, "psmnews.mv/en/106008 (team-provided)"),
-    "R4": ("Airport bus", 52, "psmnews.mv/en/106008 (team-provided, 50-54)"),
-    "R9": ("Airport bus", 52, "psmnews.mv/en/106008 (team-provided, 50-54)"),
-    "R3": ("Airport bus", 52, "ASSUMED - confirm with MTCC"),
-    "R5": ("Regular bus", 54, "ASSUMED - confirm with MTCC"),
-    "R10": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R11": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R12": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R15": ("Minibus", 21, "official minibus flag + psmnews (20-22)"),
-    "R13": ("E-minibus", 11, "ASSUMED eco e-minibus - confirm"),
-    "R14": ("E-minibus", 11, "ASSUMED eco e-minibus - confirm"),
-}
+CAPACITY_CSV = RAW / "mtcc_bus_capacity.csv"
+
+
+def load_capacity() -> pd.DataFrame:
+    cap = pd.read_csv(CAPACITY_CSV)
+    cap = cap[cap["area"] == "Greater Malé"].copy()
+    cap = cap.rename(columns={"route_number": "route_code"})
+    keep = [
+        "route_code", "bus_type", "bus_model", "seated_capacity", "wheelchair_bays",
+        "max_passengers", "capacity_basis", "load_factor_comparable", "confidence",
+        "seated_capacity_source", "notes",
+    ]
+    cap = cap[[c for c in keep if c in cap.columns]]
+    # max_passengers is blank where standing capacity was not stated: fall back
+    # to seats so the column is always usable, but keep the flag honest.
+    cap["max_passengers"] = cap["max_passengers"].fillna(cap["seated_capacity"])
+    cap["load_factor_comparable"] = (
+        cap["load_factor_comparable"].astype(str).str.upper().eq("TRUE")
+    )
+    cap["capacity_source"] = "data/raw/mtcc_bus_capacity.csv (team, 2026-10-24)"
+    return cap
+
 
 # Which corridor each route serves -> used to attach the Avas demand shape.
 ROUTE_CORRIDOR = {
@@ -95,6 +108,80 @@ AIRPORT_CORRIDORS = {"male_airport", "hm1_airport", "hm2_airport"}
 
 AIRCRAFT_DAY_NOTE = "Saturday 2026-10-24 service day (feed is time-filtered)"
 
+# The feed returns departures from the moment of the call onwards, so the
+# morning is not observed (ADR-0001, ADR-0005). We cannot change the server's
+# clock, but two facts ARE official and let us bound the morning WITHOUT
+# inventing hourly data:
+#   * trips_per_day (max trip order) - the complete daily trip count
+#   * capture_first_departure - the first remaining departure at the call time
+# Their difference is the exact number of morning trips. Combined with an
+# assumed service start we get a bounded AVERAGE morning headway. That is a
+# route-day statistic, not an hourly series, and it is emitted separately so it
+# can never be mistaken for observed data (ADR-0011).
+# ---------------------------------------------------------------------------
+# Day periods for "bus usage by working hours".
+#
+# There is no published workforce or working-hours dataset for the Maldives, so
+# 08:00-16:00 is an ASSUMPTION supplied by the team. It is a parameter, not a
+# constant: build_period_usage() also emits a sensitivity table over 07-15,
+# 08-16 and 09-17 so a reader can see how much the answer moves.
+# See docs/adr/0012-working-hours-assumption.md.
+# ---------------------------------------------------------------------------
+WORKING_HOURS_START = 8
+WORKING_HOURS_END = 16
+
+PERIODS = [
+    ("night", 0, 6),
+    ("am_commute", 6, 8),
+    ("working_hours", WORKING_HOURS_START, WORKING_HOURS_END),
+    ("pm_commute", 16, 19),
+    ("evening", 19, 22),
+    ("late", 22, 24),
+]
+
+
+def _period_of(hour: int) -> str:
+    for name, a, b in PERIODS:
+        if a <= hour < b:
+            return name
+    return "late"
+
+
+SERVICE_START_ASSUMED_MIN = 6 * 60      # 06:00, the assumption
+SERVICE_START_LOW_MIN = 5 * 60 + 30     # 05:30 -> upper bound on headway
+SERVICE_START_HIGH_MIN = 6 * 60 + 30    # 06:30 -> lower bound on headway
+
+
+def morning_inference(first_departure_time: str | None, trips_total, trips_captured):
+    """Exact morning trip count + bounded average headway. Nothing hourly."""
+    if not isinstance(first_departure_time, str) or not trips_total:
+        return None
+    if pd.isna(trips_total) or pd.isna(trips_captured):
+        return None
+    try:
+        hh, mm, _ = (int(x) for x in first_departure_time.split(":"))
+    except (ValueError, AttributeError):
+        return None
+    first = hh * 60 + mm
+    n = int(trips_total) - int(trips_captured or 0)
+    if n <= 0:
+        return None
+    spans = {
+        "assumed": first - SERVICE_START_ASSUMED_MIN,
+        "low": first - SERVICE_START_LOW_MIN,
+        "high": first - SERVICE_START_HIGH_MIN,
+    }
+    if spans["assumed"] <= 0:
+        return None
+    return {
+        "trips_before_capture": n,
+        "assumed_service_start": "06:00",
+        "morning_span_min": spans["assumed"],
+        "morning_avg_headway_min": round(spans["assumed"] / n, 1),
+        "morning_avg_headway_min_low": round(spans["high"] / n, 1),
+        "morning_avg_headway_min_high": round(spans["low"] / n, 1),
+    }
+
 
 def load_routes() -> list[dict]:
     payload = json.loads((OFFICIAL / "rtl" / "bus_routedetails_2026.json").read_text())
@@ -107,9 +194,12 @@ def route_sort_key(code: str) -> tuple[int, str]:
 
 
 # ---------------------------------------------------------------------------
-def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def build_master(
+    routes: list[dict], capacity: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """routes_master.csv, route_stops.csv, service_departures.csv"""
     master_rows, stop_rows, dep_rows = [], [], []
+    cap = capacity.set_index("route_code")
 
     for r in routes:
         code = r["routeNumber"]
@@ -122,7 +212,19 @@ def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.Dat
         trips_captured = len(dep_times)
         trips_total = max((t["order"] for t in dep_times), default=None)
 
-        bus_type, seats, cap_source = FLEET.get(code, ("?", 0, "unknown"))
+        if code in cap.index:
+            c = cap.loc[code]
+            bus_type = c["bus_type"]
+            bus_model = c.get("bus_model")
+            seated = int(c["seated_capacity"])
+            maxpax = int(c["max_passengers"])
+            comparable = bool(c["load_factor_comparable"])
+            cap_source = c["capacity_source"]
+        else:
+            bus_type, bus_model, seated, maxpax, comparable = "?", None, 0, 0, False
+            cap_source = "NOT IN CAPACITY TABLE"
+
+        seats = seated  # kept for the hourly gap table, which is seats-based
 
         master_rows.append(
             {
@@ -140,10 +242,15 @@ def build_master(routes: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame, pd.Dat
                 "n_stops": len(stops),
                 "trips_per_day": trips_total,
                 "trips_captured": trips_captured,
-                "capture_first_departure": dep_times[0]["timing"] if dep_times else None,
-                "capture_last_departure": dep_times[-1]["timing"] if dep_times else None,
+                "capture_first_departure": dep_times[0]["timing"] if dep_times else "",
+                "capture_last_departure": dep_times[-1]["timing"] if dep_times else "",
                 "bus_type": bus_type,
-                "seats": seats,
+                "bus_model": bus_model,
+                "seated_capacity": seated,
+                "wheelchair_bays": None,
+                "max_passengers": maxpax,
+                "load_factor_comparable": comparable,
+                "seats": seated,
                 "capacity_source": cap_source,
                 "corridor": ROUTE_CORRIDOR.get(code),
                 "service_day": AIRCRAFT_DAY_NOTE,
@@ -383,8 +490,8 @@ def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFram
                     "hour": hour,
                     "trips_in_hour": trips,
                     "capture_status": "captured" if trips is not None else "before_capture_window",
-                    "seats": seats,
-                    "seat_capacity_hour": cap,
+                    "seated_capacity": seats,
+                    "seated_capacity_hour": cap,
                     "demand_pax_est": demand_h,
                     "load_factor_pct": round(demand_h / cap * 100, 1) if (demand_h is not None and cap) else None,
                     "unmet_pax_est": round(max(0.0, demand_h - cap), 1) if (demand_h is not None and cap) else None,
@@ -392,21 +499,43 @@ def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFram
                 }
             )
 
+        # Two denominators per ADR-0003: seats (primary) and seats+standing.
+        maxpax = int(getattr(r, "max_passengers", seats) or seats)
+        comparable = bool(getattr(r, "load_factor_comparable", False))
         cap_day = (r.trips_per_day or 0) * seats if r.trips_per_day else None
+        cap_day_max = (r.trips_per_day or 0) * maxpax if r.trips_per_day else None
+        usable = has_demand and comparable and cap_day
         load_rows.append(
             {
                 "route_code": code,
                 "route_name": r.route_name,
                 "bus_type": r.bus_type,
-                "seats": seats,
+                "bus_model": getattr(r, "bus_model", None),
+                "seated_capacity": seats,
+                "max_passengers": maxpax,
+                "load_factor_comparable": comparable,
                 "fare_mvr": r.fare_mvr,
                 "trips_per_day": r.trips_per_day,
-                "seat_capacity_day": cap_day,
+                "seated_capacity_day": cap_day,
+                "capacity_day_max": cap_day_max,
                 "boardings_per_day": round(daily_pax, 0) if has_demand else None,
                 "pax_per_trip": round(daily_pax / r.trips_per_day, 1) if (has_demand and r.trips_per_day) else None,
-                "load_factor_peak_pct": round(daily_pax / cap_day * 100, 1) if (has_demand and cap_day) else None,
-                "load_factor_avg_pct": round(daily_pax * 0.5 / cap_day * 100, 1) if (has_demand and cap_day) else None,
-                "demand_source": "MTCC observed" if has_demand else "NO DEMAND DATA",
+                # Primary: load on SEATS. Upper bound assumes every boarding rides
+                # the full route; avg assumes uniform alighting (halved).
+                "load_factor_seats_upper_pct": round(daily_pax / cap_day * 100, 1) if usable else None,
+                "load_factor_seats_avg_pct": round(daily_pax * 0.5 / cap_day * 100, 1) if usable else None,
+                # Secondary: load on seats + permitted standing.
+                "load_factor_capacity_upper_pct": round(daily_pax / cap_day_max * 100, 1)
+                if (has_demand and comparable and cap_day_max) else None,
+                "load_factor_capacity_avg_pct": round(daily_pax * 0.5 / cap_day_max * 100, 1)
+                if (has_demand and comparable and cap_day_max) else None,
+                "demand_source": (
+                    "MTCC observed" if has_demand
+                    else "NO DEMAND DATA"
+                ) if comparable else (
+                    "CAPACITY NOT COMPARABLE (standing capacity not stated)"
+                    if not comparable else "MTCC observed"
+                ),
                 "service_capture": f"{r.trips_captured} of {r.trips_per_day} trips captured"
                 if r.trips_captured
                 else "no timings returned",
@@ -453,7 +582,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
     def kpis(df, label, trips_moved):
         d = df.dropna(subset=["trips_in_hour", "demand_pax_est"]).copy()
         d = d[d["trips_in_hour"] > 0]
-        d["capacity"] = d["trips_in_hour"] * d["seats"]
+        d["capacity"] = d["trips_in_hour"] * d["seated_capacity"]
         d["over"] = (d["demand_pax_est"] - d["capacity"]).clip(lower=0)
         w = d["demand_pax_est"].clip(lower=0)
         tot = float(w.sum())
@@ -472,7 +601,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
     def reallocate(df, donor_rule, receiver_rule, n_moves, min_trips_after=1):
         """Move up to n_moves trips, one at a time, donor -> receiver."""
         d = df.copy()
-        d["_cap"] = d["trips_in_hour"] * d["seats"]
+        d["_cap"] = d["trips_in_hour"] * d["seated_capacity"]
         d["_load"] = d["demand_pax_est"] / d["_cap"]
         d["_over"] = (d["demand_pax_est"] - d["_cap"]).clip(lower=0)
         moves = []
@@ -493,7 +622,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
             d.loc[rec.name, "trips_in_hour"] += 1
             # recompute the two touched rows before the next iteration
             for nm in (don.name, rec.name):
-                cap = d.loc[nm, "trips_in_hour"] * d.loc[nm, "seats"]
+                cap = d.loc[nm, "trips_in_hour"] * d.loc[nm, "seated_capacity"]
                 d.loc[nm, "_cap"] = cap
                 d.loc[nm, "_load"] = d.loc[nm, "demand_pax_est"] / cap
                 d.loc[nm, "_over"] = max(0.0, d.loc[nm, "demand_pax_est"] - cap)
@@ -589,7 +718,7 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
         d = df.dropna(subset=["trips_in_hour", "demand_pax_est"])
         d = d[d["trips_in_hour"] > 0]
         for route, g in d.groupby("route_code"):
-            cap = g["trips_in_hour"] * g["seats"]
+            cap = g["trips_in_hour"] * g["seated_capacity"]
             over = (g["demand_pax_est"] - cap).clip(lower=0)
             corr.append({
                 "scenario": label,
@@ -606,6 +735,92 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
 
 
 # ---------------------------------------------------------------------------
+def build_period_usage(gap: pd.DataFrame, master: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Bus usage and service by day period, per route plus a network total.
+
+    Demand per period is the sum of the hourly demand estimate, which is the
+    MTCC daily level distributed by the Avas shape. Service per period is the
+    sum of captured departures only, so `hours_captured` exposes partial
+    coverage - 3 of the 8 working hours fall before the capture window.
+    """
+    g = gap.copy()
+    g["period"] = g["hour"].map(_period_of)
+
+    rows = []
+    for (route, period), grp in g.groupby(["route_code", "period"]):
+        seats = int(grp["seated_capacity"].iloc[0]) if grp["seated_capacity"].notna().any() else 0
+        demand = grp["demand_pax_est"].sum(min_count=1)
+        cap_hours = grp["trips_in_hour"].notna()
+        trips = grp.loc[cap_hours, "trips_in_hour"].sum()
+        cap = trips * seats if seats else None
+        total_hours = len(grp)
+        captured_hours = int(cap_hours.sum())
+        rows.append(
+            {
+                "route_code": route,
+                "period": period,
+                "hours_in_period": total_hours,
+                "hours_captured": captured_hours,
+                "hours_not_captured": total_hours - captured_hours,
+                "boardings_est": round(demand, 1) if pd.notna(demand) else None,
+                "trips_captured": float(trips) if captured_hours else None,
+                "seated_capacity": cap,
+                "load_factor_seats_pct": round(demand / cap * 100, 1)
+                if (pd.notna(demand) and cap) else None,
+            }
+        )
+    per_route = pd.DataFrame(rows)
+    # share of that route's own daily demand
+    route_daily = per_route.groupby("route_code")["boardings_est"].transform("sum")
+    per_route["share_of_route_demand_pct"] = (
+        per_route["boardings_est"] / route_daily * 100
+    ).round(1)
+
+    # network total per period
+    net = (
+        g.groupby("period")
+        .agg(boardings_est=("demand_pax_est", "sum"),
+             trips_captured=("trips_in_hour", "sum"),
+             hours_captured=("trips_in_hour", "count"),
+             hours_in_period=("hour", "size"))
+        .reset_index()
+    )
+    daily = net["boardings_est"].sum()
+    net["share_of_route_demand_pct"] = (net["boardings_est"] / daily * 100).round(1)
+    net["route_code"] = "ALL"
+    net["hours_not_captured"] = net["hours_in_period"] - net["hours_captured"]
+    net["seated_capacity"] = None
+    net["load_factor_seats_pct"] = None
+    cols = list(per_route.columns)
+    for c in cols:
+        if c not in net.columns:
+            net[c] = None
+    net = net[cols]
+    out = pd.concat([per_route, net], ignore_index=True)
+    out["period_order"] = out["period"].map({n: i for i, (n, _, _) in enumerate(PERIODS)})
+    out = out.sort_values(["route_code", "period_order"]).drop(columns="period_order")
+    out.to_csv(OUT / "usage_by_period.csv", index=False)
+
+    # sensitivity on the working-hours definition
+    sens = []
+    for start, end in [(7, 15), (8, 16), (9, 17), (7, 17), (8, 18)]:
+        in_win = g["hour"].between(start, end - 1)
+        dem = g.loc[in_win, "demand_pax_est"].sum()
+        cap_hours = in_win & g["trips_in_hour"].notna()
+        sens.append(
+            {
+                "working_window": f"{start:02d}:00-{end:02d}:00",
+                "share_of_daily_demand_pct": round(dem / daily * 100, 1),
+                "hours_captured_in_window": int(cap_hours.sum()),
+                "hours_in_window": int(in_win.sum()),
+                "trips_captured_in_window": float(g.loc[cap_hours, "trips_in_hour"].sum()),
+            }
+        )
+    pd.DataFrame(sens).to_csv(OUT / "working_hours_sensitivity.csv", index=False)
+    return out, pd.DataFrame(sens)
+
+
+# ---------------------------------------------------------------------------
 def main() -> None:
     """Build everything first, validate, and only then write.
 
@@ -615,7 +830,8 @@ def main() -> None:
     outputs. Nothing touches the disk until every computation has succeeded.
     """
     routes = load_routes()
-    master, stops_df, deps = build_master(routes)
+    capacity = load_capacity()
+    master, stops_df, deps = build_master(routes, capacity)
     hourly = build_hourly_service(deps, master)
     bridge = build_bridge(stops_df, routes)
     demand = load_demand()
@@ -631,16 +847,44 @@ def main() -> None:
     hourly.to_csv(OUT / "route_service_by_hour.csv", index=False)
     bridge.to_csv(OUT / "bridge_segment_analysis.csv", index=False)
     demand.to_csv(OUT / "demand_by_daytype.csv", index=False)
-    # Both of these are BASE tables. build_stop_demand.py refines them into the
-    # files the dashboard reads, so writing them under the final names here
-    # meant running this script alone silently reverted the refined demand and
-    # load factors. The base names have exactly one reader each.
+    # BASE tables. build_stop_demand.py refines these into demand_supply_gap.csv
+    # and route_load.csv by adding per-stop demand and segment columns. Writing
+    # the final names here would clobber the refined versions whenever this
+    # script runs alone, so the base files have exactly one reader each.
     gap.to_csv(OUT / "demand_supply_gap_base.csv", index=False)
-    # route_load.csv is only a *base* table here: build_stop_demand.py adds the
-    # segment columns. Writing it to its own name kept clobbering the refined
-    # version whenever this script ran alone, so the base goes elsewhere and
-    # the refined file has exactly one writer.
     load.to_csv(OUT / "route_load_base.csv", index=False)
+
+    # Inferred morning: a route-day statistic, kept out of the hourly table.
+    morning_rows = []
+    for r in master.itertuples():
+        m = morning_inference(
+            getattr(r, "capture_first_departure", None),
+            getattr(r, "trips_per_day", None),
+            getattr(r, "trips_captured", None),
+        )
+        if not m:
+            continue
+        morning_rows.append(
+            {
+                "route_code": r.route_code,
+                "route_name": r.route_name,
+                "trips_per_day": r.trips_per_day,
+                "trips_captured": r.trips_captured,
+                **m,
+                "method": (
+                    "trips_before_capture = official trips_per_day - captured trips; "
+                    "average headway = (first captured departure - assumed 06:00 start) / trips"
+                ),
+                "status": "INFERRED - not observed. Replace with a real capture if available.",
+            }
+        )
+    pd.DataFrame(morning_rows).to_csv(OUT / "morning_service_inferred.csv", index=False)
+
+    # Bus usage by day period, with the working-hours band.
+    usage, wh_sens = build_period_usage(gap, master)
+
+    kpis.to_csv(OUT / "scenario_kpis.csv", index=False)
+    corr.to_csv(OUT / "scenario_corridor_kpis.csv", index=False)
 
     pd.set_option("display.width", 200)
     print("=" * 100)
@@ -657,6 +901,14 @@ def main() -> None:
     print("ROUTE LOAD (daily)")
     print("=" * 100)
     print(load.to_string(index=False))
+    print()
+    print("=" * 100)
+    print("USAGE BY PERIOD (network)")
+    print("=" * 100)
+    print(usage[usage.route_code == "ALL"].to_string(index=False))
+    print()
+    print("working-hours sensitivity")
+    print(wh_sens.to_string(index=False))
     print()
     print("=" * 100)
     print("SCENARIOS")

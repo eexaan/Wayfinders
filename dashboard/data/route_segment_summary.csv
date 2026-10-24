@@ -1,11 +1,11 @@
 route_code,peak_segment_id,peak_segment_from,peak_segment_to,peak_segment_hour,peak_segment_passengers,peak_segment_capacity,load_factor_segment_peak_pct,demand_peak_hour,load_factor_at_demand_peak_pct,load_factor_segment_mean_pct,load_factor_route_day_upper_pct,scale_factor,rides_considered,rides_in_catchment,rides_dropped_backtrack,catchment_share_pct
-R1,R1-S12,Hulhumale' Police Station,Amin Avenue,22.0,129.8,168.0,77.3,16.0,69.9,54.2,89.5,3.0031,53355,13741,0,25.8
-R2,R2-S05,Centro Mall,CHSE,22.0,97.4,168.0,58.0,16.0,50.1,41.2,67.3,2.8843,53355,10757,0,20.2
-R3,R3-S03,STELCO,VIA Domestic Terminal,13.0,54.1,52.0,104.1,6.0,,21.9,72.3,2.6773,53355,2527,0,4.7
-R4,R4-S02,Hulhumale' Cemetery,VIA Domestic Terminal,11.0,46.4,52.0,89.2,9.0,,18.8,51.3,3.4218,53355,2666,0,5.0
+R1,R1-S12,Hulhumale' Police Station,Amin Avenue,22.0,129.8,144.0,90.1,16.0,81.6,63.2,104.4,3.0031,53355,13741,0,25.8
+R2,R2-S05,Centro Mall,CHSE,22.0,97.4,144.0,67.7,16.0,58.4,48.0,78.5,2.8843,53355,10757,0,20.2
+R3,R3-S03,STELCO,VIA Domestic Terminal,13.0,54.1,55.0,98.4,6.0,,20.7,68.3,2.6773,53355,2527,0,4.7
+R4,R4-S02,Hulhumale' Cemetery,VIA Domestic Terminal,11.0,46.4,55.0,84.3,9.0,,17.8,48.5,3.4218,53355,2666,0,5.0
 R5,,,,,,,,,,,,,53355,2519,1187,4.7
 R6,,,,,,,,,,,,,53355,2175,1014,4.1
-R7,R7-S08,STELCO,MWSC FLAT BUS STOP (DROP-OFF ONLY),22.0,107.1,168.0,63.7,16.0,53.9,38.8,64.1,2.9207,53355,10946,0,20.5
+R7,R7-S08,STELCO,MWSC FLAT BUS STOP (DROP-OFF ONLY),22.0,107.1,144.0,74.4,16.0,62.9,45.2,74.8,2.9207,53355,10946,0,20.5
 R8,,,,,,,,,,,,,53355,7591,0,14.2
 R9,,,,,,,,,,,,,53355,2411,914,4.5
 R10,,,,,,,,,,,,,53355,55,0,0.1

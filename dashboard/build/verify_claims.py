@@ -105,12 +105,18 @@ def check_peak_segments() -> None:
 
     # These are the numbers quoted in SPEC F2, the README and the 5-minute
     # pitch. If they move, the prose is wrong.
+    #
+    # Recomputed after the fleet capacity table replaced the assumed 84/52-seat
+    # figures: deckers are 72 seats (not 84) and coaches 55 (not 52), so every
+    # segment load factor moved. Old -> new:
+    #   R1 77.3 -> 90.1   R3 104.1 -> 98.4   R4 89.2 -> 84.3
+    #   R7 63.7 -> 74.4   R2  58.0 -> 67.7
     expected = {
-        "R1": (77.3, "Hulhumale' Police Station"),
-        "R3": (104.1, "STELCO"),
-        "R4": (89.2, "Hulhumale' Cemetery"),
-        "R7": (63.7, "STELCO"),
-        "R2": (58.0, "Centro Mall"),
+        "R1": (90.1, "Hulhumale' Police Station"),
+        "R3": (98.4, "STELCO"),
+        "R4": (84.3, "Hulhumale' Cemetery"),
+        "R7": (74.4, "STELCO"),
+        "R2": (67.7, "Centro Mall"),
     }
     for route, (lf, from_stop) in expected.items():
         d = seg[(seg["route_code"] == route)].dropna(subset=["load_factor_pct"])
