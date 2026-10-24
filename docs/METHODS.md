@@ -66,7 +66,7 @@ Each step is a script; the order is load-bearing.
 | 4 | `dashboard/build/build_schedule_crosscheck.py` | Feed vs published timetable comparison |
 | 5 | `dashboard/build/build_figures.py` | Figures F1–F7 |
 | 6 | `dashboard/build/build_gtfs.py` | GTFS feed for the network |
-| 7 | `dashboard/build/verify_claims.py` | **57 assertions re-derived from raw sources** |
+| 7 | `dashboard/build/verify_claims.py` | **92 assertions re-derived from raw sources** |
 
 `make data && make figures && make check && make test` reproduces everything. The rebuild is
 deterministic: a second run produces no diff.
@@ -194,24 +194,28 @@ The assumptions that change results, with what happens if they are wrong.
 
 Stated plainly, because a reader is entitled to know.
 
-**What AI was used for.** An AI coding assistant (via OpenCode) was used
-throughout:
+**What AI was used for.** AI coding tools were used throughout:
 
 - discovering that the official bus timetable was available as a public JSON
   endpoint, and mapping its structure
 - writing the processing scripts in `dashboard/build/`, and the documentation
   and decision records
+- building the dashboard interface in `web/` — the React components, the map
+  wiring and the styling
 - drafting this note and the public README
 - reviewing and resolving the merge conflicts when two analysts' branches
   diverged
 
+The analysis and pipeline work ran through an assistant in OpenCode; the
+interface and other code were written with Cursor and Claude Code.
+
 **What AI was not used for.** Collecting primary data, making scope decisions,
-building the dashboard interface, and supplying the fleet capacity figures and
-the MBS documents, which came from the team.
+and supplying the fleet capacity figures and the MBS documents, which came from
+the team.
 
 **How the output was controlled.** Three mechanisms, in order of importance:
 
-1. **Machine verification.** `verify_claims.py` re-derives **57 claims** from the
+1. **Machine verification.** `verify_claims.py` re-derives **92 claims** from the
    raw sources and fails the build if the committed numbers disagree. No figure
    in the report is taken on trust from the assistant.
 2. **Human review.** Every merge was reviewed and approved by a team member.
@@ -231,9 +235,9 @@ weakness. Any claim that survived is one that either an independent check or a
 second analyst could not overturn.
 
 **Per-member confirmation.** Each team member is responsible for disclosing their
-own tool use. This section records the assistant's contribution; colleagues'
-individual use of AI tooling for modelling and interface work should be added by
-them rather than folded into this account.
+own tool use. The account above is team-level: OpenCode, Cursor and Claude Code
+were used across the analysis, the interface and other code. Where an
+individual's use differs, that member should add it here.
 
 **Recommendation to readers.** Treat this as an analyst's draft: the arithmetic
 is reproducible and machine-checked, but the framing and the policy

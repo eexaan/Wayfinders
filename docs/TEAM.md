@@ -1,7 +1,8 @@
 # Team: ownership and cross-check
 
-Four people. This page says who owns what, what each person owes the report,
-and how to check any number for yourself in under a minute.
+Four people: Raaish, Eexaan, Falulaan and Lysha. This page says who owns what,
+what each person owes the report, and how to check any number for yourself in
+under a minute.
 
 ---
 
@@ -10,9 +11,9 @@ and how to check any number for yourself in under a minute.
 | Member | Role | Owns | Does **not** touch |
 |---|---|---|---|
 | **Raaish** | Data owner + validation | `data/`, `dashboard/build/build_data.py`, `dashboard/data/`, validation results | UI code, the report text |
-| **Dev B** | Modelling | `build_data.py` demand/scenario functions, `docs/adr/` proposals for model changes | UI code, `data/` sources |
-| **Dev C** | UI | `web/src/`, `web/index.html`, `web/src/index.css` | anything in `dashboard/data/` |
-| **Member 4** | Report | `docs/report/`, the deck, the dataset register prose | source data, model code |
+| **Falulaan** | Modelling | `build_data.py` demand/scenario functions, `docs/adr/` proposals for model changes | UI code, `data/` sources |
+| **Eexaan** | UI | `web/src/`, `web/index.html`, `web/src/index.css` | anything in `dashboard/data/` |
+| **Lysha** | Team lead + report | `docs/report/`, the deck, the dataset register prose | source data, model code |
 
 **Rule:** one owner per file. If you need a change in someone else's area,
 request it; do not edit it. That is how four people on one day avoid writing
@@ -22,19 +23,19 @@ over each other.
 
 ## 2. What each person owes the report
 
-Member 4 cannot reconstruct the reasoning from the repo in the time available.
+Lysha cannot reconstruct the reasoning from the repo in the time available.
 These are the hand-offs, and they are a hard dependency, not a courtesy.
 
 | From | Deliverable | By |
 |---|---|---|
 | **Raaish** | The headline-numbers sheet (§3 below), the limitations list, `DATA_SOURCES.md` verified against the repo | 18:00 |
 | **Raaish** | Confirmation that `dashboard/data/` is frozen | 12:30 |
-| **Dev B** | Validation table: holdout MAPE + the three-way airport reconciliation | 18:00 |
-| **Dev B** | Segment load factor, or an explicit "not available" | 16:00 |
-| **Dev C** | 3–4 screenshots of the finished dashboard (map, route panel, a scenario, the method drawer) | 20:00 |
+| **Falulaan** | Validation table: holdout MAPE + the three-way airport reconciliation | 18:00 |
+| **Falulaan** | Segment load factor, or an explicit "not available" | 16:00 |
+| **Eexaan** | 3–4 screenshots of the finished dashboard (map, route panel, a scenario, the method drawer) | 20:00 |
 | **All** | One paragraph each on what you did and what you would do next | 19:00 |
 
-**Rule:** member 4 writes from these numbers, not from a re-derivation. If they
+**Rule:** Lysha writes from these numbers, not from a re-derivation. If they
 recompute something and disagree, that is a bug to chase — not a competing
 figure in the deck.
 
@@ -179,7 +180,7 @@ Before approving anyone's change, check:
 3. **Does it break a canonical number?** Run §4 and compare with §3.
 4. **Does it touch the frontend contract?** If it renames a column in
    `dashboard/data/`, `docs/DASHBOARD_SPEC.md` must change in the same commit,
-   and Dev C must be told before it lands.
+   and Eexaan must be told before it lands.
 5. **Does it reintroduce a withdrawn claim?** See the table in §3.
 
 ---

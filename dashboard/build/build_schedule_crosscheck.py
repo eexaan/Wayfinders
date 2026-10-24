@@ -2,7 +2,7 @@
 ================================================================================
 Schedule cross-check: MTCC published timetable vs the official RTL feed
 ================================================================================
-Maldives Datathon 2026 | Team Wayfinders  |  Dev B task 2c (SPEC §10 "must")
+Maldives Datathon 2026 | Team Wayfinders  |  Falulaan task 2c (SPEC §10 "must")
 
 WHAT THIS PROVES
     That the supply side is right. Every capacity number in this project comes
