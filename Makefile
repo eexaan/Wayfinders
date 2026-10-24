@@ -4,6 +4,7 @@
 #   make data     rebuild every derived table from the raw inputs
 #   make figures  rebuild F1..F7 into docs/figures/
 #   make gtfs     rebuild the GTFS feed
+#   make reroute  rebuild the reroute network and its proof run
 #   make check    verify the committed outputs against the raw sources
 #   make web      build the dashboard (React app in web/) into web/dist
 #   make serve    build the dashboard and serve it on http://localhost:8000
@@ -19,9 +20,9 @@ PY      := .venv/bin/python
 BUILD   := dashboard/build
 DATAOUT := dashboard/data
 
-.PHONY: all setup data figures gtfs check test clean validate-gtfs
+.PHONY: all setup data figures gtfs reroute check test clean validate-gtfs
 
-all: data figures gtfs check test
+all: data figures gtfs reroute check test
 
 setup:
 	python3 -m venv .venv
@@ -43,6 +44,15 @@ figures:
 
 gtfs:
 	$(PY) $(BUILD)/build_gtfs.py
+
+# The reroute chain, in order: the population surface feeds the stop choice, the
+# stop choice feeds the network, and the network feeds the proof run. The headless
+# simulation is the SAME engine the browser animates (web/src/sim/engine.mjs), so
+# this target needs node as well as python.
+reroute:
+	$(PY) $(BUILD)/build_population.py
+	$(PY) $(BUILD)/build_reroute_network.py
+	cd web && node scripts/run-sim.mjs
 
 check:
 	$(PY) $(BUILD)/verify_claims.py

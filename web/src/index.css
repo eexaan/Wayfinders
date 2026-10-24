@@ -903,3 +903,585 @@ main {
     flex: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   #reroute — the replacement network and its simulation
+   --------------------------------------------------------------------------- */
+.reroute {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px 24px;
+}
+.reroute-head {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 4px 2px 0;
+}
+.reroute-head h2 {
+  font-size: 19px;
+  margin: 0 0 4px;
+}
+.reroute-head p {
+  margin: 0;
+  max-width: 78ch;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.reroute-scope {
+  flex: none;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+.reroute-scope b {
+  color: var(--ink);
+}
+.reroute-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  gap: 16px;
+  min-height: 560px;
+}
+.reroute-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  max-height: clamp(560px, calc(100vh - 236px), 1100px);
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+/* ---- simulation controls ---- */
+.sim-controls {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sim-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sim-play {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
+.sim-play:hover {
+  background: #0b141c;
+}
+.sim-clock {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  min-width: 88px;
+}
+.sim-speed {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.sim-speed button {
+  border: 0;
+  background: transparent;
+  padding: 6px 11px;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.sim-speed button[aria-pressed='true'] {
+  background: var(--ink);
+  color: #fff;
+}
+.sim-speed button + button {
+  border-left: 1px solid var(--line);
+}
+.sim-track {
+  position: relative;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+.sim-track input[type='range'] {
+  width: 100%;
+  margin: 0;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  outline: none;
+  position: relative;
+  z-index: 2;
+}
+.sim-track input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(22, 32, 43, 0.35);
+  cursor: grab;
+}
+.sim-track input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid #fff;
+  cursor: grab;
+}
+.sim-track-fill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ink-3);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
+}
+.sim-meta {
+  font-size: 12px;
+  color: var(--ink-2);
+  justify-content: space-between;
+}
+.sim-meta b {
+  color: var(--ink);
+}
+.sim-density {
+  font-variant-numeric: tabular-nums;
+}
+.sim-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.sim-field input {
+  width: 92px;
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--page);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the proof panel ---- */
+.scoreboard {
+  padding: 14px 16px;
+}
+.proof-grid {
+  margin-top: 10px;
+  font-size: 12.5px;
+}
+.proof-row {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 74px);
+  gap: 8px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+.proof-row > span:first-child {
+  color: var(--ink-2);
+}
+.proof-row > span:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.proof-row .best {
+  font-weight: 700;
+  color: var(--good);
+}
+.proof-row small {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.proof-head {
+  border-top: 0;
+  padding-bottom: 2px;
+}
+.proof-head > span {
+  font-size: 11px;
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+.proof-head b {
+  color: var(--ink);
+  font-size: 12px;
+}
+.proof-verdict {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--page);
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.proof-verdict b {
+  color: var(--ink);
+}
+.proof-net {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.proof-net b {
+  color: var(--ink);
+  font-size: 14px;
+}
+.proof-assume {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.proof-assume summary {
+  cursor: pointer;
+  color: var(--link, #2a6fd6);
+}
+.proof-assume ul {
+  margin: 8px 0;
+  padding-left: 18px;
+  line-height: 1.55;
+}
+
+/* ---- the stop board ---- */
+.stop-board {
+  padding: 14px 16px 4px;
+}
+.board-head .card-sub {
+  margin-bottom: 6px;
+}
+.board-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 6px 0 8px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.board-filters > button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 4px 11px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.board-filters > button.on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.board-sort {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.board-sort button {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-3);
+  padding: 3px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.board-sort button[aria-pressed='true'] {
+  background: var(--page);
+  color: var(--ink);
+  font-weight: 600;
+}
+.board-scroll {
+  max-height: 340px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+table.board {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+table.board th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid var(--line);
+  z-index: 1;
+}
+table.board th.num,
+table.board td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+table.board td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.board tbody tr {
+  cursor: pointer;
+}
+table.board tbody tr:hover {
+  background: #f8f9f6;
+}
+table.board tbody tr.sel {
+  background: #eef3fb;
+}
+table.board td small {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+table.board td.hot {
+  color: var(--bad);
+  font-weight: 700;
+}
+.board-routes {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.badge-extra {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-ok {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+/* ---- the method strip ---- */
+.method-strip {
+  padding: 12px 16px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.method-strip summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+.method-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+.method-cols h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  margin: 0 0 5px;
+}
+.method-cols p {
+  margin: 0 0 8px;
+  line-height: 1.55;
+}
+.method-strip .note {
+  margin-top: 6px;
+}
+
+@media (max-width: 1180px) {
+  .reroute-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .reroute-side {
+    max-height: none;
+    overflow: visible;
+  }
+  .method-cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+.proof-caveat {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-left: 2px solid var(--line);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* the route legend lists every route, so it needs to be scrollable */
+.legend-routes {
+  max-height: 232px;
+  overflow-y: auto;
+  max-width: 300px;
+}
+.legend-routes .legend-row {
+  gap: 6px;
+  line-height: 1.3;
+}
+.legend-route-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.legend-route-meta {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 10.5px;
+}
+
+/* ---------------------------------------------------------------------------
+   The ablation panel: four rows, each one change apart
+   --------------------------------------------------------------------------- */
+.abl {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.abl-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--surface);
+}
+.abl-row.abl-base {
+  background: var(--page);
+  border-style: dashed;
+}
+.abl-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.abl-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.abl-title b {
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.abl-title small {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.abl-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 7px;
+}
+.abl-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.abl-kpi small {
+  font-size: 10px;
+  color: var(--ink-3);
+  line-height: 1.2;
+}
+.abl-kpi b {
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.abl-kpi b em {
+  font-size: 10px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--ink-3);
+}
+.abl-delta {
+  font-size: 10px;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+}
+.abl-delta.good {
+  color: var(--good);
+  font-weight: 600;
+}
+.abl-delta.bad {
+  color: var(--bad);
+  font-weight: 600;
+}
+.abl-delta.same,
+.abl-delta.none {
+  color: var(--ink-3);
+}
+.proof-verdict ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  line-height: 1.55;
+}
+.proof-verdict li {
+  margin-bottom: 3px;
+}
+
+/* ---- the route times board ---- */
+.route-times {
+  margin-top: 16px;
+}
+.route-times .board-scroll {
+  max-height: 520px;
+}
+.route-times-all {
+  margin: 4px 0 8px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+}

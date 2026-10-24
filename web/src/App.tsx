@@ -7,14 +7,16 @@ import { HourlyChart } from './components/HourlyChart'
 import { RoutePanel } from './components/RoutePanel'
 import { Scenarios } from './components/Scenarios'
 import { MethodDrawer } from './components/MethodDrawer'
+import { ReroutePage } from './components/ReroutePage'
 import { VintageLine } from './components/VintageLine'
 
-type Tab = 'overview' | 'scenarios'
+type Tab = 'overview' | 'scenarios' | 'reroute'
 
-// #overview, #overview/R1, #scenarios/S5 - so the demo path can be bookmarked
+// #overview, #overview/R1, #scenarios/S5, #reroute - so the demo path can be bookmarked
 function readHash(): { tab: Tab; arg: string | null } {
   const [tab, arg] = window.location.hash.replace(/^#/, '').split('/')
-  return { tab: tab === 'scenarios' ? 'scenarios' : 'overview', arg: arg || null }
+  const known: Tab[] = ['overview', 'scenarios', 'reroute']
+  return { tab: (known.find((t) => t === tab) ?? 'overview') as Tab, arg: arg || null }
 }
 
 export default function App() {
@@ -22,6 +24,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
   const [{ tab, arg }, setNav] = useState(readHash)
   const [drawer, setDrawer] = useState(false)
+  const [seed, setSeed] = useState(20261024)
 
   useEffect(() => {
     loadData().then(setData, (e) => setError(String(e)))
@@ -50,6 +53,9 @@ export default function App() {
           </button>
           <button role="tab" aria-selected={tab === 'scenarios'} onClick={() => go('scenarios')}>
             What if we change it?
+          </button>
+          <button role="tab" aria-selected={tab === 'reroute'} onClick={() => go('reroute')}>
+            Reroute it
           </button>
         </nav>
         <button className="link-btn" onClick={() => setDrawer(true)}>
@@ -91,6 +97,8 @@ export default function App() {
           <Scenarios data={data} active={arg ?? 'S5'} onPick={(s) => go('scenarios', s)} />
         </main>
       )}
+
+      {tab === 'reroute' && <ReroutePage seed={seed} onSeed={setSeed} />}
 
       {data && <VintageLine data={data} onMore={() => setDrawer(true)} />}
       {data && drawer && <MethodDrawer data={data} onClose={() => setDrawer(false)} />}

@@ -942,3 +942,44 @@ The dashboard is done when:
 Pre-rendered PNGs of all six are in `docs/figures/` — you can drop them in
 while the interactive versions are being built, and they are already sized
 for slides.
+
+---
+
+## 4. The reroute contract (`#reroute`)
+
+The reroute tab reads a second, independent contract, built by `make reroute`.
+[REROUTE.md](REROUTE.md) explains the design; ADR-0015 records why it exists and
+what it deliberately does not cover.
+
+| File | Grain | Key columns |
+|---|---|---|
+| `reroute_stops.csv` | one row per stop | `stop_id, lat, lon, island, name, population_400m, hotspots_400m, carried_over, routes, is_interchange, today_code` |
+| `reroute_routes.csv` | one row per route | `route_id, name, service_class, kind, replaces_routes, n_stops, island_list, length_km, run_time_min, cycle_time_min, seats, buses_required, headway_min, stop_ids` |
+| `reroute_segments.geojson` | one LineString per stop-to-stop leg | `route_id, seq, from_id, to_id, length_m, minutes` |
+| `reroute_fleet_alloc.csv` | one row per route | `route_id, buses, peak_demand, cycle_min, headway_min` — totals 55 |
+| `reroute_demand_stop_hour.csv` | stop × hour | `stop_id, hour, boardings` |
+| `reroute_od.csv` | stop pair | `origin_stop_id, dest_stop_id, rides_per_day` |
+| `reroute_hotspots.geojson` | one Point per attractor | `kind, name, weight` |
+| `pop_grid.csv` | 150 m cell | `lat, lon, island, population, night_taxi_rides_per_day, combined_score` |
+| `reroute_params.json` | one object | every assumption the network build used |
+| `reroute_stop_advisory.csv` | one row per stop | `first_bus_time, first_bus_route, peak_queue, peak_load_pct, extra_bus_required, extra_bus_windows, reason` |
+| `reroute_proof.json` | one object | the four-row ablation: `rows[].label, note, change, kpis, delta` |
+
+Rules that matter:
+
+- **`kind` says what a route is.** `kept` is today's geometry copied verbatim,
+  `through` is a kept route extended along a circuit, `loop` is a Hulhumalé
+  circuit. Only `loop` and the tail of `through` are generated.
+- **`carried_over` marks today's stops.** Malé and airport stops are all
+  `true`; if any is not, the regeneration bug has returned.
+- **`buses_required` is the fixed allocation, and the rows total 55.** Rows 1–3 of
+  the ablation all run 55 buses; only row 4 adds any.
+- **`headway_min` is `cycle_time / buses`**, not an aspiration. The fleet
+  constrains the service physically.
+- **Every ablation row differs from the one above by one `change`** (`dispatch`,
+  `topology`, `fleet`), and the baseline's `change` is empty. A row may make
+  things worse; the topology row does.
+- **`extra_bus_required` is a boolean with a reason.** It is `yes` when a spare was
+  dispatched or the peak queue reached 25 — never a raw queue peak.
+- **Journey time and wait time are different columns.** Wait is time standing at a
+  stop; journey is arrival to final alighting.

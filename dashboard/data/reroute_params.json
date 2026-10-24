@@ -1,0 +1,102 @@
+{
+  "population_surface": {
+    "cell_m": 150.0,
+    "blend": {
+      "population": 0.5,
+      "night_taxi": 0.5
+    },
+    "calibration_total": 227613.0,
+    "calibration_target": "Census 2022 (MBS yearbook 3.3) scaled to the 2022 mid-year projection for Male' City (table 3.16)",
+    "census_growth_factor": 1.0741,
+    "island_targets": {
+      "Malé": 147409.0,
+      "Hulhumalé": 70584.2,
+      "Hulhulé": 861.4
+    },
+    "bbox": "4.165,73.500,4.245,73.560",
+    "osm_queried_at": "2026-10-24T10:56:03Z",
+    "osm_attribution": "© OpenStreetMap contributors (ODbL 1.0)",
+    "in_scope_islands": [
+      "Hulhulé",
+      "Hulhumalé",
+      "Malé"
+    ],
+    "limitations": [
+      "island totals are published census counts; the within-island split is a building-footprint x storeys proxy",
+      "building:levels is present on a minority of footprints; storeys are inferred by type for the rest",
+      "Villimale' is out of scope and is not fetched or scored"
+    ],
+    "island_totals": {
+      "Hulhulé": {
+        "cells": 146.0,
+        "population": 861.4,
+        "night_rides": 22.7,
+        "attractor": 38.0
+      },
+      "Hulhumalé": {
+        "cells": 155.0,
+        "population": 70584.2,
+        "night_rides": 385.4,
+        "attractor": 270.0
+      },
+      "Malé": {
+        "cells": 93.0,
+        "population": 147409.1,
+        "night_rides": 369.6,
+        "attractor": 1029.5
+      }
+    }
+  },
+  "network": {
+    "scope": "R1-R9 in scope. R5/R6 replaced by loops. R10-R12 excluded from both networks (no captured departures). Villimalé out of scope.",
+    "kept_routes": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R7",
+      "R8",
+      "R9"
+    ],
+    "replaced_by_loops": [
+      "R5",
+      "R6"
+    ],
+    "excluded_routes": [
+      "R10",
+      "R11",
+      "R12"
+    ],
+    "stops_kept": 44,
+    "stops_new": 26,
+    "stops_total": 70,
+    "loop_edge_penalty": 20.0,
+    "max_km_loop": 12.0,
+    "walk_radius_m": 400.0,
+    "catchment_m": 450.0,
+    "fleet": {
+      "total_buses": 55,
+      "allocation": "one bus per route, the rest by largest remainder on peak demand",
+      "headway_rule": "cycle_time / buses, so the fleet constrains the service"
+    },
+    "demand_level": {
+      "source": "MTCC bus_daily 2025, Saturday service day",
+      "routes": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R7"
+      ],
+      "daily_boardings": 13350.0,
+      "total_including_airport": 14032.9,
+      "shape": "Avas taxi OD, Saturday, scaled to the MTCC level"
+    },
+    "airport_stream": {
+      "bus_share_of_arrivals": 0.06,
+      "via_stop_id": "K307",
+      "daily_passengers": 682.9,
+      "note": "a judgement, not a measurement; both networks receive the same stream"
+    }
+  }
+}
