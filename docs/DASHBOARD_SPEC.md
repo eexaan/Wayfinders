@@ -65,11 +65,25 @@ scenario bar.
 
 ## 2. Data contract
 
-All files are in `dashboard/data/`, committed, CSVs, UTF-8, comma-separated,
-built by `dashboard/build/build_data.py`, then
-`dashboard/build/build_stop_demand.py` (which refines demand and load factors).
-Run them in that order; `build_stop_demand.py` writes §2.16–2.19 and updates
-`route_load.csv` and `demand_supply_gap.csv`.
+All files are in `dashboard/data/`, committed, CSVs, UTF-8, comma-separated.
+Rebuild with **`make data`** (or the scripts in this order):
+
+```
+build_data.py            -> *_base.csv  (raw route-level tables)
+build_stop_demand.py     -> demand_supply_gap.csv, route_load.csv, §2.16-2.19
+build_validation.py      -> validation_*.csv, airport_demand_profile.csv
+build_schedule_crosscheck.py -> schedule_crosscheck*.csv
+build_gtfs.py            -> data/derived/rtl_greater_male_gtfs.zip
+build_figures.py         -> docs/figures/F1..F6.png
+```
+
+**`demand_supply_gap.csv` and `route_load.csv` each have exactly one writer**
+(`build_stop_demand.py`). `build_data.py` writes `*_base.csv` instead, so running
+it alone can no longer revert the refined demand and segment load factors. An
+earlier version did exactly that, silently.
+
+Verify the committed numbers reproduce from the raw sources with **`make check`**
+(`build/verify_claims.py`, 54 independent checks, exit code 0 = all hold).
 
 ### 2.1 `route_lines.geojson` — the map geometry
 

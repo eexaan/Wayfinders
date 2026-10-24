@@ -437,10 +437,12 @@ def main() -> None:
     segments.to_csv(OUT / "load_by_segment.csv", index=False)
     sens.to_csv(OUT / "segment_load_sensitivity.csv", index=False)
 
-    # ---- update route_load.csv with the segment truth, keep the old bound ----
-    # Everything is recomputed from the summary, never read back from this file,
-    # so re-running the script is idempotent.
-    load = pd.read_csv(OUT / "route_load.csv")
+    # ---- write route_load.csv: the base table plus the segment truth ----
+    # This is the ONLY writer of route_load.csv. It reads route_load_base.csv
+    # (written by build_data.py) rather than its own previous output, so
+    # re-running is idempotent and build_data.py running alone can no longer
+    # clobber the refined file.
+    load = pd.read_csv(OUT / "route_load_base.csv")
     summary = pd.DataFrame.from_dict(route_summary, orient="index").rename_axis("route_code").reset_index()
     summary.to_csv(OUT / "route_segment_summary.csv", index=False)
 
@@ -459,7 +461,7 @@ def main() -> None:
     load.to_csv(OUT / "route_load.csv", index=False)
 
     # ---- update demand_supply_gap.csv so both files agree by construction ----
-    gap = pd.read_csv(OUT / "demand_supply_gap.csv")
+    gap = pd.read_csv(OUT / "demand_supply_gap_base.csv")
     gap["demand_pax_est_stop_allocated"] = [
         round(gap_demand.get((c, hh), np.nan), 1) if (c, hh) in gap_demand else None
         for c, hh in zip(gap["route_code"], gap["hour"])
@@ -486,7 +488,8 @@ def main() -> None:
     build_data = importlib.util.module_from_spec(spec)
     sys.modules["build_data"] = build_data
     spec.loader.exec_module(build_data)
-    kpis_s, corr_s, moves_s = build_data.build_scenarios(pd.read_csv(OUT / "demand_supply_gap.csv"))
+    kpis_s, corr_s, moves_s = build_data.build_scenarios(
+        pd.read_csv(OUT / "demand_supply_gap.csv"))
     kpis_s.to_csv(OUT / "scenario_kpis.csv", index=False)
     corr_s.to_csv(OUT / "scenario_corridor_kpis.csv", index=False)
     moves_s.to_csv(OUT / "scenario_moves.csv", index=False)

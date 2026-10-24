@@ -33,8 +33,9 @@ Outputs (dashboard/data/):
     route_lines.geojson        route polylines from the official coordinates
     service_departures.csv     every captured trip departure
     route_service_by_hour.csv  departures and headway per route per hour
-    demand_supply_gap.csv      demand vs capacity per route per hour
-    route_load.csv             route-level daily demand vs capacity
+    demand_supply_gap_base.csv demand vs capacity per route per hour (pre-stop-allocation)
+    route_load_base.csv        route-level daily demand vs capacity (pre-segment)
+    (build_stop_demand.py refines both into demand_supply_gap.csv and route_load.csv)
     bridge_segment_analysis.csv scheduled stop-to-stop segment times
     scenario_kpis.csv          scenarios recomputed on the official service
 """
@@ -353,7 +354,7 @@ def taxi_shapes() -> dict[str, pd.Series]:
 
 
 def build_gap(master, hourly, demand, shapes) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """demand_supply_gap.csv (route x hour) and route_load.csv (route level)."""
+    """demand_supply_gap_base.csv (route x hour) and route_load_base.csv (route level)."""
     rows, load_rows = [], []
     for r in master.itertuples():
         code = r.route_code
@@ -606,30 +607,40 @@ def build_scenarios(gap: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
 
 # ---------------------------------------------------------------------------
 def main() -> None:
+    """Build everything first, validate, and only then write.
+
+    The write order used to interleave with the build, so a failed assertion in
+    build_scenarios() left demand_supply_gap.csv and route_load.csv already
+    rewritten with the bad state -- a failed build silently corrupted two
+    outputs. Nothing touches the disk until every computation has succeeded.
+    """
     routes = load_routes()
     master, stops_df, deps = build_master(routes)
+    hourly = build_hourly_service(deps, master)
+    bridge = build_bridge(stops_df, routes)
+    demand = load_demand()
+    shapes = taxi_shapes()
+    gap, load = build_gap(master, hourly, demand, shapes)
+    kpis, corr, moves = build_scenarios(gap)
+
+    # ---- validation complete; from here on the build cannot fail ----
     master.to_csv(OUT / "routes_master.csv", index=False)
     stops_df.to_csv(OUT / "route_stops.csv", index=False)
     deps.to_csv(OUT / "service_departures.csv", index=False)
     build_geojson(stops_df, master)
-
-    hourly = build_hourly_service(deps, master)
     hourly.to_csv(OUT / "route_service_by_hour.csv", index=False)
-
-    bridge = build_bridge(stops_df, routes)
     bridge.to_csv(OUT / "bridge_segment_analysis.csv", index=False)
-
-    demand = load_demand()
     demand.to_csv(OUT / "demand_by_daytype.csv", index=False)
-    shapes = taxi_shapes()
-    gap, load = build_gap(master, hourly, demand, shapes)
-    gap.to_csv(OUT / "demand_supply_gap.csv", index=False)
-    load.to_csv(OUT / "route_load.csv", index=False)
-
-    kpis, corr, moves = build_scenarios(gap)
-    kpis.to_csv(OUT / "scenario_kpis.csv", index=False)
-    corr.to_csv(OUT / "scenario_corridor_kpis.csv", index=False)
-    moves.to_csv(OUT / "scenario_moves.csv", index=False)
+    # Both of these are BASE tables. build_stop_demand.py refines them into the
+    # files the dashboard reads, so writing them under the final names here
+    # meant running this script alone silently reverted the refined demand and
+    # load factors. The base names have exactly one reader each.
+    gap.to_csv(OUT / "demand_supply_gap_base.csv", index=False)
+    # route_load.csv is only a *base* table here: build_stop_demand.py adds the
+    # segment columns. Writing it to its own name kept clobbering the refined
+    # version whenever this script ran alone, so the base goes elsewhere and
+    # the refined file has exactly one writer.
+    load.to_csv(OUT / "route_load_base.csv", index=False)
 
     pd.set_option("display.width", 200)
     print("=" * 100)

@@ -113,6 +113,23 @@ needs no key. It gives the official English and Dhivehi route names, colours,
 fares, and every stop's scheduled departure times. Demand is MTCC ridership,
 shape is Avas taxi OD, and airport arrivals are MACL plus MBS Yearbook 11.13.
 
+## Rebuild and verify
+
+```bash
+make setup     # once: creates .venv, installs requirements.txt
+make data      # rebuild every derived table from the raw inputs
+make figures   # rebuild F1..F6
+make gtfs      # rebuild the GTFS feed
+make check     # 54 independent checks against the raw sources; exit 0 = all hold
+make all       # everything above, in order
+```
+
+`make check` recomputes the headline numbers from the raw Excel/CSV/PDF inputs
+without importing the pipeline, so it fails if a documented figure stops being
+true. It also asserts the invariants that are easy to break silently: stop
+boardings conserving the MTCC total, fleet-neutral scenarios, nulls never
+becoming zeros, and `route_load.csv` agreeing with `load_by_segment.csv`.
+
 > **Known gap:** the RTL feed is time-filtered from the moment of the call, so
 > our capture covers roughly 11:00–24:00 of one service day. The morning peak
 > and the Friday/weekday comparison are not captured. Hours outside the window

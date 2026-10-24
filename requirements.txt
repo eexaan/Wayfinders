@@ -1,0 +1,13 @@
+# Runtime dependencies for the Wayfinders build pipeline.
+#
+# Create the environment once:
+#     python3 -m venv .venv
+#     .venv/bin/python -m pip install -r requirements.txt
+#
+# Then every script runs with .venv/bin/python, or via `make`.
+# Versions are the ones the committed outputs were generated with, so a
+# rebuild reproduces them rather than drifting.
+pandas==3.0.1
+numpy==2.4.2
+openpyxl==3.1.5
+matplotlib==3.11.2
