@@ -20,6 +20,12 @@ Airport, and Villimalé.
 
 Out of scope: marine transport, ferries, inter-atoll travel, and fares policy.
 
+Also out of scope by explicit decision: the **realtime layer** — sensor-based
+people counting at stops, live vehicle positions, and closed-loop reallocation.
+Nothing of that kind is implemented here. It is planned as a later phase with
+stated entry conditions, documented in [ROADMAP.md](ROADMAP.md) and recorded as
+[ADR-0013](adr/0013-realtime-layer-deferred.md).
+
 ---
 
 ## 2. Data sources
@@ -38,7 +44,7 @@ disclosure was used.
 | 7 | Fleet capacity by route | Team field knowledge | `data/raw/mtcc_bus_capacity.csv` | 24 Oct 2026 | **Capacity** |
 | 8 | Basemap and road network | OpenStreetMap contributors | `openstreetmap.org` | — | Map rendering (ODbL) |
 
-Full links, licences and per-file provenance: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
+Full links, licences and per-file provenance: **[DATA_SOURCES.md](../DATA_SOURCES.md)**.
 
 **One source we deliberately did not use.** MTCC publishes route timetables as
 PDFs, but the only edition available online is "Ramadan 1446" (February 2025) —
@@ -127,6 +133,28 @@ and **no domestic flights**, and carries no seasonal signal.
 No published working-hours data exists. We assume **08:00–16:00** and publish the
 band rather than the point: 07:00–15:00 gives 37%, 08:00–16:00 **39%**,
 09:00–17:00 42% (ADR-0012).
+
+### 4.7 GTFS construction
+
+The RTL payload carries per-stop timings for each trip, so the feed's
+`stop_times` are **the observed schedule, rounded — not interpolated from an
+assumed speed**, which is how most synthesised feeds are produced.
+
+Three decisions follow from the source's limits rather than from preference:
+
+- **One service day.** `calendar.txt` contains Saturday 2026-10-24 only, because
+  the endpoint returns only the remainder of the day from the moment it is
+  called. We did not extrapolate a weekday we never observed.
+- **11 of 15 routes.** R10, R11, R12 and R15 return no timings; they are absent
+  rather than invented.
+- **32 partially-timed trips** ship with the stop-times they actually have, not
+  with interpolated times that would look precise and be wrong.
+
+112 stops that cannot be boarded are encoded `pickup_type=1` rather than
+dropped, so the route geometry stays correct. The feed is validated twice: 19
+structural checks re-asserted by `verify_claims.py`, and MobilityData
+`gtfs-validator` 6.0.0 reporting **0 errors** and 2 warnings, both inherent to a
+one-day feed. See [GTFS.md](GTFS.md).
 
 ---
 

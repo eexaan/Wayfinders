@@ -551,21 +551,37 @@ rather than quietly kept:
    weighting, because a planner reading "33% of passengers" and a planner
    reading "25% of flights" would draw different conclusions.
 
-### On the camera crowd detector (important)
+### On the camera crowd detector — deferred to Phase 2, with conditions
 
-**Do not build it as a product feature.** It is not reproducible, it produces
-numbers no planner can act on, and it will eat 3 hours you do not have.
+This was raised during the build and is **not** in the submitted codebase. The
+decision is recorded in [ADR-0013](docs/adr/0013-realtime-layer-deferred.md) and the
+plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-**Build it as a validation appendix instead:** one stop, one 30-minute window,
-observed people vs modelled boardings, one slide reporting MAPE. That
-converts "our model is plausible" into "our model is **validated**", which is
-worth far more to a judging panel than a live webcam demo. If time remains
-afterwards, productise it.
+**Why it was not built today:** it is not reproducible within the build window,
+and a live webcam demo would have cost the validation work that actually
+supports our numbers. One stop, one 30-minute window, observed people vs
+modelled boardings, would have converted "our model is plausible" into "our
+model is validated" — but the held-out test (MAPE 9.91% vs a 16.27% baseline)
+already does that more cheaply, on 219 days instead of 30 minutes.
 
-**Prefer the RTL live GPS API** if a token can be obtained
-(`https://bo.rtl.mv:4455/maldives/api/v2/bus/routedetails`, needs a JWT) —
-it gives observed running times and headways across all 14 routes with zero
-hardware, and beats a webcam for validating the supply model.
+**Why it is the right next step rather than a nice-to-have:** the stop-level
+load factor is an *allocation, not a measurement* (ADR-0002) — boardings are
+distributed across stops using taxi catchments and scaled 2.7–3.4×. The
+project's most actionable finding, R3 at 98.4% of seats on the airport approach,
+is therefore the least directly observed number we publish. Sensors settle it.
+
+**Sensor choice matters more than the plan does.** IR break-beam counts
+*crossings* and ultrasonic measures *proximity*; neither reports how many people
+are standing on the kerb. ROADMAP §2.1 compares seven options and recommends a
+**thermal or edge-blurred camera at three stops**, calibrated against manual
+counts, with accuracy reported **by queue band** — because crowd counters are
+accurate when a stop is quiet and degrade exactly when it is busy.
+
+**A prerequisite, not an afterthought:** demand without vehicle position is not
+a control loop. The RTL live endpoint
+(`https://bo.rtl.mv:4455/maldives/api/v2/bus/routedetails`, needs a JWT) gives
+observed running times and headways across all routes with zero hardware, and is
+the supply half of any realtime phase. It is also the cheaper half.
 
 ---
 
@@ -578,7 +594,7 @@ hardware, and beats a webcam for validating the supply model.
 | **MTCC counts are "sample value"** per its own README | Medium | State it; use MTCC as the anchor and cross-check against Avas |
 | **MACL covers ≈40% of international arrivals, 0% of domestic** | Medium | Use Yearbook for levels, MACL for shape; publish the coverage table as a finding |
 | No ridership data for R5, R6, R8, R9, R10–R15 | Medium | Publish a coverage matrix; mark as `NO DEMAND DATA` rather than zero-filling |
-| Camera model inaccurate in dense crowds | Low | Validation only, not a product claim |
+| Camera model inaccurate in dense crowds (Phase 2) | Medium | Edge-blurred camera or thermal; accuracy reported by queue band; calibrated against manual counts (ROADMAP §2.2) |
 | Scope creep into FollowMe / marine transport | Medium | Excluded by decision — do not reopen |
 
 ---

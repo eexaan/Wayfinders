@@ -585,7 +585,7 @@ the number.**
 | **FollowMe (17.46M vessel GPS rows)** | Out of scope per the team decision; it is marine, and the problem statement is about Greater Malé buses. |
 | **A spatial "missing route" analysis** | 97.1% coverage kills it, and the network is already dense. |
 | **An LP/MILP fleet optimiser** | Overkill for the time budget and hard to explain in 5 minutes. A transparent reallocation model with a Pareto view is more defensible. |
-| **Building the camera crowd detector as a product** | Not reproducible, not actionable by a planner, and it would consume 3 hours. Reframed as a 90-minute validation appendix. |
+| **Building the camera crowd detector as a product** | Not reproducible inside the build window, and it would have consumed 3 hours. Reframed as a validation appendix at the time; **since revised** — it is now a planned Phase 2 feature with stated entry conditions (ADR-0013, `docs/ROADMAP.md`), because it closes ADR-0002's allocation-not-measurement gap. |
 
 ---
 

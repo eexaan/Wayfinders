@@ -763,8 +763,9 @@ Cut these without discussion. Time is the binding constraint.
 - ❌ User-uploaded data, editable tables, or a data-entry form.
 - ❌ A live-data refresh from the RTL API (needs a JWT; see the research
   notes for the endpoint if someone has time).
-- ❌ A camera/crowd-detection feature. It is a *validation appendix*, not a
-  dashboard panel.
+- ❌ A camera/crowd-detection feature. It is not a dashboard panel; sensor-based
+  counting is a separate later phase with its own entry conditions
+  (`docs/ROADMAP.md` §2, ADR-0013).
 - ❌ A second basemap layer, terrain, 3D buildings, or satellite tiles.
 - ❌ Animated vehicles on the map. There is no live vehicle data.
 - ❌ More than 4 panels. If you have time, add the per-corridor before/after
