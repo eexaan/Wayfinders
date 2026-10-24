@@ -61,6 +61,25 @@ instant and obviously reversible.
 **Not** an analytics dashboard with 12 charts. Four panels, one map, one
 scenario bar.
 
+### 1.1 Panel → finding map
+
+Every finding in `SPEC.md` must be *visible in the interface*, not only in the
+README. If a panel does not carry its row, the story is not in the product.
+
+| Finding | Where it must appear | The thing on screen |
+|---|---|---|
+| **F1** The Sinamalé Bridge is the journey (57% of R1's run) | Route panel, and the map | The two ≥ 10 min segments drawn heavier; a caption naming them and their 20 min each |
+| **F2** Load is a segment, not a route | Route panel | The load band showing `load_factor_avg_pct` → `load_factor_peak_pct`, with the peak segment named and timed |
+| **F2** The airport bus is full and hourly | Map + route panel for R3 | R3 in the ≥ 100% colour, with the headway ribbon showing one tick per hour |
+| **F3** Demand by day type | Route panel | The day-type strip, labelled "demand only" (no service-side comparison exists) |
+| **F4** Airport arrivals are tri-peaked, the bus is flat | Method drawer, or a toggle | Arrival share by hour against R4 departures by hour |
+| **F5** Working hours carry 39% | Method drawer | The period bar with the working-hours window highlighted and the 37–42% band |
+| **S5** Six trips remove 404 boardings | Scenario bar | The KPI tiles with deltas, and `trips_moved` — never a "trips added" figure |
+| **Null results** (S2 −2, S4 one safe move) | Scenario bar | The failing scenarios must be selectable and must show their near-zero effect |
+
+Two of these are negative results and one is a data gap. Show them anyway: a
+tool that only displays the wins is a brochure, not a decision tool.
+
 ---
 
 ## 2. Data contract
@@ -279,7 +298,7 @@ say so in the caption; the matching service-side comparison is not available.
 
 `route_code`, `from_stop`, `to_stop`, `median_segment_minutes`,
 `median_end_to_end_minutes`, `n_trips`. The F1 chart. Highlight segments
-≥ 10 min — they are the causeway crossings and the VIA terminal approach.
+≥ 10 min — they are the crossings of the Sinamalé Bridge and the VIA terminal approach.
 
 ### 2.12 `airport_demand_profile.csv` — 24 rows
 
@@ -629,7 +648,7 @@ a ridership *level*, a different reason).
 │   • 15 route polylines                    │  │ load factor band      │  │
 │     coloured by load factor               │  │ 45% ──────── 90%      │  │
 │   • 184 route-stop records                 │  └───────────────────────┘  │
-│   • causeway segments highlighted          │  Trips/day 61  Boardings    │
+│   • bridge segments highlighted            │  Trips/day 61  Boardings    │
 │     (≥10 min, thick red)                  │  5,212   Fare 10 MVR        │
 │                                            │                             │
 │                                            │  ┌── demand vs service ──┐ │
@@ -675,7 +694,7 @@ re-render the whole page.
 - **Line weight:** 4 px for the selected route, 2 px otherwise.
 - **Stops:** circle markers, radius 3 (2 when zoomed out), white fill, grey
   stroke. Tooltip = stop name + which routes serve it.
-- **Causeway segments:** render segments with `median_segment_minutes` ≥ 10
+- **Bridge segments:** render segments with `median_segment_minutes` ≥ 10
   in a heavier red stroke on top of the route line. These are the two
   20-minute crossings on R1/R2 and the 15-minute VIA terminal segments.
 - **Interactions:** hover a route → highlight + tooltip (route, bus type,

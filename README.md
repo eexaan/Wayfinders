@@ -1,143 +1,118 @@
 # Raajje Rebalancer
 
-**Matching bus supply to passenger demand in Greater Malé.**
+**An interactive tool for matching bus supply to passenger demand in Greater Malé.**
 Maldives Datathon 2026 · Team Wayfinders
 
-*Raajje* is the Maldivian name for the Hulhumalé causeway — the bottleneck
-under most of what follows.
+> **Move a bus. See who is left behind.**
+> Fifteen routes, one Saturday of real service, and a scenario bar that re-times
+> existing trips — no new vehicles — and shows what happens to the people
+> waiting.
+
+```bash
+make serve          # or: cd dashboard && python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+Everything runs in the browser from committed CSV files. No server, no account,
+no build step, nothing to install.
 
 ---
 
-## The problem
-
-Greater Malé is small — Malé is about four kilometres long — but it is densely
-populated, and the buses linking Malé, Hulhumalé and the airport carry tens of
-thousands of people a day.
-
-The complaint is familiar: **some buses arrive full and leave people waiting,
-while others run half empty.** A taxi from Malé to Hulhumalé costs **85
-rufiyaa**; the bus costs **10**. Yet people take the taxi.
-
-There has been no straightforward way to check whether the service matches the
-demand, because no single dataset holds both. The passenger counts cover a
-handful of routes and no times of day. The timetable is published as a PDF. The
-taxi records describe a different mode entirely.
-
-## What we did
-
-We brought five public datasets together for the first time — bus passenger
-counts, the official bus timetable, taxi trip records, airport arrivals, and the
-national statistical yearbook — into one picture of **who travels where, when,
-and on how many buses**.
-
-We then built a tool that lets a planner move buses between routes and hours and
-see what happens to passengers.
-
-We also tested the result against measured ridership rather than asserting it.
-
-## What we found
-
-**1. The causeway is the journey.** The bus from Malé to Hulhumalé Phase 1 is
-scheduled at 70 minutes. **Forty of those minutes — 57% — are two crossings of
-the causeway.** A taxi covers the same trip in a median of 12.7 minutes. The bus
-is **5.5 times slower and 8.5 times cheaper**. People are not buying speed; they
-are paying to avoid an hour in a queue.
-
-**2. The airport bus is full, and it runs once an hour.** Route R3 from Malé to
-the airport looks lightly used over a whole day — 68% of its seats. But on the
-final segment into the airport it reaches **98% of capacity**, and that bus runs
-**once an hour, a 30-minute expected wait.**
-
-The average hid the crush. **The airport service does not need fewer buses; it
-needs more.**
-
-**3. The busiest corridor is near capacity, not over it.** Route R1 between Malé
-and Hulhumalé Phase 1 carries 4,585 passengers a day against 4,392 seats. That
-ratio — 104% — assumes every passenger rides the whole route, which nobody does.
-At its busiest single segment R1 is **90% full**, and at its busiest demand hour
-**82%**. It is close to capacity, and it degrades in the late evening when
-service thins.
-
-**4. Most bus use happens outside the working day.** Assuming an 08:00–16:00
-working day, **39% of bus travel falls inside it**. The single three-hour
-evening commute carries **21%** — more than half the working day's share.
-
-**5. A cheaper bus will not win riders.** On fare alone, **62–76% of taxi
-passengers would switch to the bus**. Once travel time is counted, only
-**0.05–9.3%** would. The bus would need to save **54 minutes** on the
-Malé–Hulhumalé corridor to compete. No discount closes that gap. **Only the
-causeway can.**
-
-## What it means
-
-1. **Add trips to the airport buses, not fewer.** R3 is 98% full on its airport
-   approach and runs hourly. Re-timing it to the arrival peaks costs no new
-   buses. Note the limit of our own measure: at *route-hour* level the airport
-   routes never breach capacity, because the crush is on one segment, so the
-   re-timing scenario measures near-null (−2 boardings). That is a property of
-   the KPI, not evidence the bus is fine.
-2. **Move trips off the airport lull onto the corridor.** With a fixed fleet the
-   measurable win is the five trips the airport routes can spare in their
-   afternoon lull, moved to R1 where the demand actually is: −348 boardings
-   over capacity on its own.
-3. **Give buses priority at the causeway.** Journey time is the binding
-   constraint on modal shift; nothing else changes it.
-4. **Run a skip-stop service on R1 and R2.** The two crossings dominate the
-   journey, so trimming the twelve intermediate Hulhumalé stops yields a real
-   time saving. Do not expect it to free many vehicles: with the donor ceiling
-   enforced, the corridor has almost no spare capacity to re-time.
-
-Under our recommended package, **404 fewer boardings are over capacity** in the
-period we measured — 1,009 down to 605, unmet demand 10.0% down to 6.0% — by
-moving 6 existing trips. No new vehicles.
-
-## How much to trust this
-
-We validated rather than assumed. The demand model predicts held-out ridership
-with **9.9% mean absolute percentage error**, against **16.3%** for a naive
-baseline — on 219 held-out days it had never seen.
-
-`make check` re-derives 92 claims from the raw sources and fails if the
-committed numbers disagree. It passes 92/92.
-
-## What we could not measure
-
-We would rather say this than overstate the result:
-
-- The bus timetable feed returns only **the rest of the day from the moment it
-  is requested**. Our capture covers about **11:00 to midnight**, so the morning
-  peak is not observed. We bound it rather than invent it.
-- Only **5 of the 15 routes** have passenger counts.
-- The airport dataset provided covers about **40% of international arrivals and
-  no domestic flights**, and carries no seasonal signal. Airport totals therefore
-  come from the national yearbook.
-- The **08:00–16:00 working day is an assumption**; no published working-hours
-  data exists. Moving it by an hour shifts the answer by about three points.
-- Our results describe **one Saturday in October 2026**, not a weekday.
-- Load factors are modelled from taxi trip patterns, not counted on the bus.
-
 ## The tool
 
-An interactive map of the 15 routes coloured by how full each one runs. Select a
-route to see passenger demand against the buses provided, hour by hour, and
-where on the route it fills up. Choose a scenario to see what changes for
-passengers.
+| Panel | What it shows | What it is for |
+|---|---|---|
+| **Map** | All 15 routes as polylines, coloured by how full each one runs | Find the corridors in trouble without reading a table |
+| **Route panel** | Demand against seats hour by hour, the timetable ribbon, and where along the route the bus fills | See *when* and *where* the mismatch is, not just that it exists |
+| **Scenario bar** | Five fleet-neutral packages, every KPI shown with its delta against baseline | Move trips and read the consequence immediately |
+| **Method drawer** | Coverage matrix, capture window, source per table, the working-hours assumption | Audit any number without leaving the page |
+
+The interface enforces two rules, because the data does:
+
+- **Uncaptured is not empty.** Service was captured from about 11:00 onwards, so
+  earlier hours are drawn as a gap — never as zero. A chart showing no morning
+  buses would be a lie about Malé.
+- **Unknown is not zero.** Ten of the 15 routes have no ridership data at all.
+  They are marked unknown rather than drawn at 0%.
+
+## What the tool shows you
+
+| # | On screen | The finding |
+|---|---|---|
+| **1** | Two segments on R1 and R2 drawn thicker and red | **The Sinamalé Bridge is the journey.** R1 is scheduled at 70 minutes; **forty of those minutes — 57% — are two crossings of the bridge.** A taxi does the same trip in a median of 12.7 minutes. The bus is **5.5 times slower and 8.5 times cheaper**. People are not buying speed; they are paying to avoid an hour in a queue. |
+| **2** | R3's line red at the airport end, its timetable ribbon one tick per hour | **The airport bus is full, and it runs once an hour.** R3 looks lightly used over a whole day — 68% of its seats — but on the final segment into the airport it reaches **98% of capacity**, and the bus comes once an hour: a 30-minute expected wait. The average hid the crush. |
+| **3** | The load-factor band on R1's panel | **The busiest corridor is near capacity, not over it.** R1 carries 4,585 passengers a day against 4,392 seats. That ratio — 104% — assumes every passenger rides end to end, which nobody does. At its busiest segment R1 is **90% full**, and **82%** at its busiest demand hour. It degrades late in the evening, when service thins. |
+| **4** | The period bar in the drawer, working hours highlighted | **Most bus use happens outside the working day.** On an assumed 08:00–16:00 day, **39% of bus travel falls inside it**. The three-hour evening commute alone carries 21% — more than half the working day's share. |
+| **5** | The taxi-capture tile, two probabilities side by side | **A cheaper bus will not win riders.** On fare alone, 62–76% of taxi passengers would switch. Once travel time is counted, 0.05–9.3% would. The bus would need to save 54 minutes on the Malé–Hulhumalé corridor. No discount closes that gap. |
+
+## The scenario bar, in practice
+
+Pick **S5 — recommended package**. Six trips move out of the airport routes'
+afternoon lull and into R1 where the queues are. Nothing else changes: no new
+buses, no extra drivers, the same 162 trips on the evaluated routes.
+
+| | Baseline | S5 |
+|---|---|---|
+| Boardings over capacity | 1,009 | **605** |
+| Unmet demand | 10.0% | **6.0%** |
+| Mean wait | 10.8 min | 10.7 min |
+| Trips moved | — | **6** |
+| New vehicles | — | **0** |
+
+**404 fewer boardings are over capacity — 1,009 down to 605 — by moving 6
+existing trips.**
+
+The other four scenarios are there to be tried, including the ones that fail:
+re-timing airport buses on their own relieves only 2 boardings, and the
+"express peak" scenario finds exactly one safe move, because the corridor has
+almost no spare capacity to donate. A donor may only give up a trip if it stays
+within 100% of seats afterwards ([ADR-0014](docs/adr/0014-donor-ceiling.md)).
+The tool shows the null results rather than hiding them.
+
+## What the tool cannot show
+
+| Limit | Why | How the tool handles it |
+|---|---|---|
+| The morning peak | The timetable feed returns only the rest of the day from the moment it is called; our capture is ~11:00–24:00 | Drawn as an explicit gap, with a bounded route-day estimate in `morning_service_inferred.csv` |
+| 10 of 15 routes | MTCC counts ridership on R1, R2, R3, R4, R7 only | Marked `NO DEMAND DATA`, never zero-filled |
+| Airport totals | The airport extract covers ~40% of international arrivals, no domestic flights, no seasonal signal | Levels come from the national yearbook; the extract supplies only the hourly shape |
+| Working hours | 08:00–16:00 is an assumption — no published data exists | Published as a band: 07:00–15:00 gives 37%, 09:00–17:00 gives 42% |
+| The day itself | One Saturday in October 2026, not a weekday | Stated on screen |
+| Where the bus is full | Load factors are allocated from taxi catchments, not counted on the bus | Labelled as modelled in every cell that carries one |
+
+## Trust: verified, not asserted
+
+- The demand model predicts held-out ridership with **9.9% mean absolute
+  percentage error**, against **16.3%** for a naive baseline, on 219 held-out
+  days it never saw.
+- `make check` re-derives 92 claims from the raw sources and fails if the
+  committed numbers disagree. It passes **92/92** — including checks that the
+  prose in this README still matches the data.
+- Every figure on screen traces to a committed CSV, and every CSV row carries
+  its source.
+
+## Build it yourself
 
 ```bash
-cd dashboard
-python -m http.server 8000     # then open http://localhost:8000
+make setup      # create .venv and install the pinned dependencies
+make data       # rebuild every derived table from data/raw and data/official
+make figures    # F1..F7 into docs/figures/
+make gtfs       # rebuild the GTFS feed
+make check      # re-derive 92 claims; exit code 0 = everything holds
+make all        # all of the above
 ```
 
-It runs entirely in the browser from committed data files — no server, no
-account, nothing to install.
+A clean rebuild produces no diff — including the GTFS zip, whose members are
+stored rather than deflated so the archive is bit-identical on any machine.
 
 ## The GTFS feed
 
 We publish **the first GTFS feed for the Greater Malé bus network** — the
-standard format every journey planner in the world already reads.
+standard format every journey planner already reads.
 
 **No public GTFS existed for Malé.** We built one from the official RTL
-timetable, so it describes the real 2026 schedule.
+timetable, so it describes the real 2026 schedule — and its stop times are the
+observed schedule, not interpolated from an assumed bus speed.
 
 | | |
 |---|---|
@@ -147,20 +122,12 @@ timetable, so it describes the real 2026 schedule.
 | Stop times | 5,538 |
 | Validator errors | **0** (MobilityData `gtfs-validator` 6.0.0) |
 
-The timetable payload carries per-stop timings for each trip, so **our stop
-times are the observed schedule, not interpolated from an assumed bus speed.**
-The feed rebuilds byte-for-byte identically, and 18 structural checks are
-re-asserted on every `make check`.
-
-Why it matters beyond the file: it makes the network portable. OpenTripPlanner,
-MOTIS, Transitland, Google Transit and most trip-planning apps can route on it
-with no bespoke code — and GTFS is the format **GTFS-Realtime extends**, so it
-is the foundation for the live phase described in the roadmap.
-
-It is an honest snapshot, not a production feed: one Saturday, 11 of 15 routes,
-no minibus timings. Those limits are visible in the feed rather than hidden.
-
-Details, design decisions and how to load it: **[docs/GTFS.md](docs/GTFS.md)**.
+It makes the network portable: OpenTripPlanner, MOTIS, Transitland, Google
+Transit and most trip-planning apps can route on it with no bespoke code — and
+GTFS is the format GTFS-Realtime extends, so it is the foundation for the live
+phase in the roadmap. It is an honest snapshot, not a production feed: one
+Saturday, 11 of 15 routes, no minibus timings.
+**[docs/GTFS.md](docs/GTFS.md)**
 
 ## Data
 
@@ -185,11 +152,9 @@ demand on the day we measured, not whether they match now.
 The step after is realtime — automated people-counting at stops, live vehicle
 positions over GTFS-Realtime, and a loop that reallocates trips as queues build.
 That closes the model's own weakest point: our stop-level load factors are
-**allocated from taxi catchments, not measured**, so the finding we most want
-acted on is the one that most needs ground truth.
-
-It is deliberately not in this build. The plan, the sensor comparison, the pilot
-design, the costs and the claims we refuse to make are in
+allocated from taxi catchments, not measured, so the finding we most want acted
+on is the one that most needs ground truth. The plan, the sensor comparison, the
+pilot design, the costs and the claims we refuse to make are in
 **[docs/ROADMAP.md](docs/ROADMAP.md)**.
 
 ## For readers who want the detail

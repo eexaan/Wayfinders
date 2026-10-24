@@ -244,7 +244,8 @@ R1, trip 52, Malé → Hulhumale Phase 1:
 | Dharumavantha School | 21:08 | 2 |
 | Maafannu Bus Terminal OPP | 21:10 | 2 |
 
-**Total 70 minutes, of which 40 (57%) is the two causeway crossings.** The
+**Total 70 minutes, of which 40 (57%) is the two crossings of the Sinamalé
+Bridge.** The
 crossings are the *only* slow segments; every stop-to-stop segment is a
 uniform 2 minutes.
 
@@ -252,17 +253,17 @@ Across all routes (median segment times):
 
 | Route | End-to-end | Slowest segment |
 |---|---|---|
-| R1 | 70 min | 20 + 20 min (causeway) |
-| R2 | 67 min | 20 + 20 min (causeway) |
+| R1 | 70 min | 20 + 20 min (bridge) |
+| R2 | 67 min | 20 + 20 min (bridge) |
 | R4 | 46 min | 15 min (VIA terminal) |
-| R7 | 40 min | 20 min (causeway) |
+| R7 | 40 min | 20 min (bridge) |
 | R6 | 40 min | 5 min (all internal) |
 | R5 | 31 min | 3 min (all internal) |
 | R3 | 44 min | 15 min (VIA terminal) |
 
-**Internal Hulhumalé routes (R5, R6) run 3–5 min per segment. Cross-causeway
+**Internal Hulhumalé routes (R5, R6) run 3–5 min per segment. Cross-bridge
 routes run 20 min for the same distance.** That contrast is the evidence that
-the causeway, not the stop spacing, is the bottleneck.
+the bridge crossing, not the stop spacing, is the bottleneck.
 
 ### 3.2 Why the bus loses to the taxi
 
@@ -519,8 +520,8 @@ loses untouched.
 The **break-even** column is the assumption-free version of the question: at
 VOT 250 and 2-up sharing, the bus needs its ride time down to 14.6–19.6 min
 on three corridors. Two of those are reachable by express service. The
-Malé↔HM Ph1 corridor needs 54 minutes — which is more than the entire
-causeway cost, so **it requires solving the bridge**, not the stops.
+Malé↔HM Ph1 corridor needs 54 minutes — more than the entire bridge crossing
+costs, so **it requires solving the bridge**, not the stops.
 
 ### 6.3 Sensitivity
 
@@ -638,7 +639,7 @@ the number.**
 
 | File | Shows |
 |---|---|
-| `docs/figures/F1_bridge_share.png` | 40 of R1's 70 minutes are the two causeway crossings |
+| `docs/figures/F1_bridge_share.png` | 40 of R1's 70 minutes are the two crossings of the Sinamalé Bridge |
 | `docs/figures/F2_load_factors.png` | R1 at 104.4% of seats and 90.1% at its fullest segment; R3 at 98.4% on the airport approach |
 | `docs/figures/F3_demand_daytype.png` | Friday demand is 37% below a weekday (demand only) |
 | `docs/figures/F4_airport_mismatch.png` | Flat 30-min airport service vs tri-peaked arrivals |

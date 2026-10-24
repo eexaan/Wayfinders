@@ -5,6 +5,7 @@
 #   make figures  rebuild F1..F7 into docs/figures/
 #   make gtfs     rebuild the GTFS feed
 #   make check    verify the committed outputs against the raw sources
+#   make serve    serve the dashboard on http://localhost:8000
 #   make test     run the unit tests (the reallocator guards)
 #   make all      data + figures + gtfs + check + test
 #   make clean    remove build caches only, never data/
@@ -44,6 +45,13 @@ gtfs:
 
 check:
 	$(PY) $(BUILD)/verify_claims.py
+
+# The dashboard is a static site; fetch() is blocked over file://, so it has to
+# be served. No build step, no dependencies.
+serve:
+	@test -f dashboard/index.html || \
+	  { echo "dashboard/index.html is not in this checkout — see docs/DASHBOARD_SPEC.md §0"; exit 1; }
+	cd dashboard && python3 -m http.server 8000
 
 test:
 	$(PY) -m pytest tests -q

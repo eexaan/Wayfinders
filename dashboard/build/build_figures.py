@@ -6,7 +6,7 @@ Maldives Datathon 2026 | Team Wayfinders
 
 Draws every figure directly from dashboard/data/. No number is typed by hand.
 
-    F1_bridge_share.png        the causeway is 57% of R1's journey
+    F1_bridge_share.png        the Sinamalé Bridge is 57% of R1's journey
     F2_load_factors.png        route-day upper bound vs the fullest segment
     F3_demand_daytype.png      Friday demand vs a weekday (demand only)
     F4_airport_mismatch.png    hourly airport bus vs tri-peaked arrivals
@@ -57,7 +57,7 @@ def fig_bridge() -> None:
     rest = total - crossing
 
     fig, ax = plt.subplots(figsize=(7.4, 3.0))
-    ax.barh(["the rest of the route", "the two causeway crossings"],
+    ax.barh(["the rest of the route", "the two Sinamalé Bridge crossings"],
             [rest, crossing], color=[GREY, RED])
     for i, v in enumerate([rest, crossing]):
         ax.text(v + 1, i, f"{v:.0f} min  ({v / total * 100:.0f}%)", va="center")

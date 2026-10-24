@@ -56,7 +56,7 @@ else is derived.
 | 4 | R3 airport bus headway | **60 min** (hourly, all captured hours) | §4 command B |
 | 5 | Expected wait on R3 | 30 min | 60 ÷ 2 |
 | 6 | R1 end-to-end scheduled run | **70 min** | §4 command C |
-| 7 | Share of that run on the two causeway crossings | **40 min = 57%** | §4 command C |
+| 7 | Share of that run on the two crossings of the Sinamalé Bridge | **40 min = 57%** | §4 command C |
 | 8 | Same corridor by taxi (median) | 12.7 min | `taxi_od_by_hour.csv` |
 | 9 | Bus fare vs taxi fare, Malé↔HM Ph1 | 10 vs 85 MVR (8.5×) | `routes_master.csv`, `scenario_modal_shift.csv` |
 | 10 | Taxi riders who would switch on price alone | 62–76% | `scenario_modal_shift.csv` |
@@ -123,7 +123,7 @@ d=pd.read_csv('dashboard/data/route_service_by_hour.csv')
 print(d[d.route_code.isin(['R3','R4'])].pivot(
       index='hour',columns='route_code',values='departures').to_string())"
 
-# C - the causeway
+# C - the bridge
 python -c "
 import pandas as pd
 d=pd.read_csv('dashboard/data/bridge_segment_analysis.csv')
