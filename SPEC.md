@@ -156,20 +156,48 @@ Official RTL 2026 departures, captured window:
 | R1 (Malé ↔ HM Ph1) | 2–4 per hour, building to 4 at 16:00–19:00 | 15–30 min | 7.5–15 min |
 
 R3 is literally an **hourly bus with a 30-minute expected wait**. Meanwhile
-MACL international arrivals (2019–25, 4.89M arrivals) peak hard:
+airport arrivals peak hard in the morning. MACL 2025, international flights,
+**passenger-weighted** (people, not aircraft — the weighting matters, see below):
 
-| Hour | % of arrivals |
+| Hour | % of arriving passengers |
 |---|---|
-| 07:00 | 12.27% |
-| 08:00 | 11.68% |
-| 09:00 | 11.52% |
-| 11:00 | 10.31% |
-| 14:00 | 9.94% |
-| **07:00–09:59 combined** | **35.5%** |
+| 07:00 | 10.29% |
+| 08:00 | 10.08% |
+| 09:00 | 12.70% |
+| 11:00 | 12.70% |
+| 14:00 | 9.40% |
+| **07:00–09:59 combined** | **33.1%** |
 
-**35.5% of arrivals land in a three-hour window**, and the airport buses run
-the same frequency at 03:00 as at 08:00. Nothing runs at all between 00:00 and
-06:00, when 1.9% of arrivals land.
+**A third of arriving passengers land in a three-hour window**, and the airport
+buses run the same frequency at 03:00 as at 08:00. Nothing runs at all between
+00:00 and 06:00, when 4.3% of passengers arrive.
+
+> **This figure depends on how you weight it, so the weighting is now stated.**
+> Passenger-weighted, 07:00–09:59 carries **33.1%** of arrivals. Flight-weighted
+> it is only **25.3%**, and the largest three-hour window moves to midday
+> (27.9% ending 13:00) — because the morning is a widebody bank (37.7% of
+> widebody flights, 43.7% of widebody passengers) while midday is many small
+> narrowbodies. For a *bus demand* question the passenger weighting is the
+> correct one: an empty 300-seat widebody and a full 50-seat turboprop are not
+> one busload each.
+>
+> The previously quoted **35.5%** came from a wider 2019–25 window and could
+> not be reproduced exactly from the current extract. The reproducible 2025
+> figure is 33.1%, a drift of 2.8 points that does not change the finding.
+> `airport_demand_profile.csv` now has a builder (`build_validation.py`) and a
+> stated definition, where before it was a committed file with no provenance.
+
+**MACL is a sample, not a census — and this is now measured.** It holds
+1,084,115 passenger arrivals in 2025 against the Yearbook's 2,699,225
+international arrivals (**40.2% coverage**), spread over a near-constant 533
+flights every month (coefficient of variation 0.013). Its monthly volume is
+therefore flat by construction and correlates only **0.21** with the Yearbook's
+seasonal profile. Consequences, both enforced in the pipeline:
+
+- MACL is used for **hour-of-day shape only**, never for level.
+- MACL is never used for **seasonality**, and it contains **no domestic
+  traffic** (0.32% of the Yearbook domestic total), so domestic demand cannot
+  be derived from it at all.
 
 ### F5 — The bus already wins on price. It loses on time.
 
@@ -336,12 +364,81 @@ you still have a strong submission.
 
 ## 10. Validation plan
 
+**Status: items 1 and 2 are done and reproducible**
+(`dashboard/build/build_validation.py` → `validation_*.csv`). Results below.
+
 | Method | Proves | Cost | Priority |
 |---|---|---|---|
-| **Holdout** — fit the hourly shape on 80% of days, predict route-day totals for the held-out 20%, report MAPE | the model predicts *measured* ridership | 1–2 h | **must** |
-| **Cross-source coherence** — Yearbook airport levels vs MACL vs Avas airport OD; MTCC boardings vs Avas corridor flows | the triangulation holds | 1 h | **must** |
-| **Schedule cross-check** — parsed PDF service vs the live per-stop timetable | the parser is right | 30 min | **must** |
+| **Holdout** — fit the hourly shape on 80% of days, predict route-day totals for the held-out 20%, report MAPE | the model predicts *measured* ridership | 1–2 h | **must** — ✅ done |
+| **Cross-source coherence** — Yearbook airport levels vs MACL vs Avas airport OD; MTCC boardings vs Avas corridor flows | the triangulation holds | 1 h | **must** — ✅ done |
+| **Schedule cross-check** — parsed PDF service vs the live per-stop timetable | the parser is right | 30 min | **must** — deferred |
 | **Camera spot-check** — 1 stop, 30 min video, pretrained detector, observed vs modelled | live ground truth at one point in space-time | 2–3 h | stretch |
+
+### 10.1 Holdout accuracy
+
+Chronological 80/20 split of MTCC 2025 daily boardings — **not random**, because
+a random split trains on the future. Train 876 route-days to 2025-10-19, test
+219 route-days from 2025-10-20 to 2025-12-31.
+
+| Model | R1 MAPE | R2 MAPE | R4 MAPE | All MAPE | All MdAPE |
+|---|---|---|---|---|---|
+| M0 — route mean (naive) | 14.87% | 18.63% | 15.32% | **16.27%** | 7.87% |
+| **M1 — route × day-type mean (used by the pipeline)** | **7.89%** | **11.93%** | **9.92%** | **9.91%** | **6.03%** |
+| M2 — M1 plus a linear trend | 9.55% | 13.95% | 10.86% | 11.45% | 7.18% |
+
+**The model the pipeline uses cuts holdout error by 39% against the naive
+route mean** (16.27% → 9.91%). Adding a trend makes it *worse*, so the level is
+left as a day-type mean — a measured choice, not a default.
+
+On Saturdays specifically — the service day the supply side is measured on —
+MAPE is **7.10%** with a bias of only **+0.72%**. That is the pair of numbers
+that matters, because it is the day every load factor is computed for.
+
+> **Bias is +6.2% overall, and it is a seasonality finding, not a model
+> failure.** The holdout is 20 October – 31 December, which includes the
+> year-end peak, while the training mean is pulled down by the low season. The
+> model under-predicts this window by 6% for that reason. M2's trend term is an
+> attempt to absorb it, and it fails.
+
+### 10.2 Cross-source airport coherence
+
+Three sources, three different populations. They are not meant to be equal, so
+each difference is given a mechanism and a size.
+
+| Test | Value | Verdict |
+|---|---|---|
+| MACL 2025 arrivals as % of Yearbook international arrivals | **40.2%** | FLAG — sample, usable for shape not level |
+| MACL turboprop arrivals as % of Yearbook **domestic** arrivals | **0.32%** | FAIL — MACL has no domestic traffic at all |
+| MACL adult arrivals as % of Yearbook international arrivals | 36.5% | INFO — this is the previously quoted coverage |
+| Correlation of MACL monthly volume with Yearbook monthly arrivals | **0.21** | FAIL — MACL carries no seasonal signal |
+| Avas airport dropoffs as % of Yearbook international departures/day | **15.3%** | PLAUSIBLE — credible taxi mode share |
+| Avas airport pickups as % of Yearbook international arrivals/day | **2.2%** | FLAG — pickups and dropoffs are not symmetric |
+
+The reconciliation holds, with one structural caveat: **Avas is Aug–Sep 2026
+and the Yearbook is 2025**, so the mode share compares different years and
+should be read to a percentage point or two. Avas airport dropoffs are stable
+across a 1.0–1.5 km airport radius (1,099 → 1,121 per day); at 2.5 km the
+circle absorbs Hulhumalé and the count triples, which is why 1.5 km is used.
+
+The pickups asymmetry is real, not a bug: arriving passengers mostly take
+pre-booked transfers, resort boats and the RTL bus, while departing residents
+call a taxi. **Never assume Avas pickups and dropoffs are symmetric** — the
+stop-level allocation in §3 therefore uses each direction separately.
+
+### 10.3 What validation changed
+
+Two published claims did not survive contact with the data and were corrected
+rather than quietly kept:
+
+1. `airport_demand_profile.csv` had **no builder** and no filter reproduced its
+   numbers. It now has a stated definition (2025, international, passenger-
+   weighted) and is regenerated by `build_validation.py`. The 07:00–09:59 share
+   moves from 35.5% to **33.1%**, a 2.8-point drift that does not change the F4
+   finding but is now auditable.
+2. The **35.5% was weighting-dependent** and never said so. Flight-weighted it
+   is 25.3% and the peak window moves to midday. The chart now states the
+   weighting, because a planner reading "33% of passengers" and a planner
+   reading "25% of flights" would draw different conclusions.
 
 ### On the camera crowd detector (important)
 
@@ -404,11 +501,13 @@ hardware, and beats a webcam for validating the supply model.
 2. **0:40–1:40 — F1, the causeway.** 57% of the bus's journey is two bridge
    crossings. The bus is 4.4× slower than the taxi *and* 8.5× cheaper. That
    is why young Maldivians take taxis.
-3. **1:40–2:40 — F2, F3, F4, the misallocation.** R1 carries about 90% of
-   its seats on a Saturday and would pass 100% on a weekday; the airport bus
-   R4 runs at 51%. R3 is an hourly bus with a 30-minute expected wait, the
-   airport buses run the same frequency at 03:00 as at 08:00, and 35.5% of
-   arrivals land in a three-hour window.
+3. **1:40–2:40 — F2, F3, F4, the misallocation.** Load factor is measured per
+   stop-to-stop segment, not per route: R1's fullest segment is 77% of an
+   84-seat double-decker, but the airport segment STELCO→VIA hits **104%** on a
+   52-seat bus, because every airport passenger funnels through it. R3 is an
+   hourly bus with a 30-minute expected wait, the airport buses run the same
+   frequency at 03:00 as at 08:00, and a third of arriving passengers (33.1%)
+   land in a three-hour window.
 4. **2:40–4:10 — the tool.** Live demo: move 6 trips, watch over-capacity
    fall by 200 passengers, unmet demand fall, and the taxi capture change.
    Six scenarios, one recommended package — all re-timings, zero new buses.

@@ -343,7 +343,48 @@ taxi rides on the same corridor. It is a sanity check, not a result.
 `peak_segment_load_pct`. Use this if a judge asks whether the 600 m catchment
 drove the answer. It did not: R1 is 76.4 / 77.3 / 77.6%.
 
-### 2.20 Five traps that will silently break the UI
+### 2.20 `validation_holdout.csv` — 13 rows, does the model predict reality (NEW)
+
+Built by `dashboard/build/build_validation.py`. One row per model × route.
+
+| Column | Type | Notes |
+|---|---|---|
+| `test` | str | `chronological_80_20` |
+| `model` | str | `M0_route_mean`, `M1_route_x_daytype`, `M2_daytype_plus_trend` |
+| `route_code` | str | `R1`, `R2`, `R4`, `ALL`, `ALL_SATURDAY_ONLY` |
+| `mape_pct` / `mdape_pct` / `p90_ape_pct` | float | mean / median / 90th-percentile absolute % error |
+| `bias_pct` | float | positive = model under-predicts |
+| `n` | int | held-out route-days |
+
+Use `model = M1_route_x_daytype` and `route_code = ALL` for the headline:
+**9.91% MAPE against a 16.27% naive baseline**. Always show the baseline next
+to it — a MAPE with no baseline proves nothing.
+
+### 2.21 `validation_airport.csv` — 11 rows, the three-way reconciliation (NEW)
+
+`test`, `quantity`, `sources`, `value`, `expected`, `mechanism`, `verdict`.
+
+Read `verdict`: `PASS` / `PLAUSIBLE` / `INFO` / `FLAG` / `FAIL`. The `mechanism`
+column exists so a judge can see *why* a number is not 100%, not just that it
+is not.
+
+### 2.22 `validation_summary.csv` — 15 rows, one line per check (NEW)
+
+`check`, `scope`, `metric`, `value`, `baseline`, `verdict`. This is the tile:
+"N checks, N pass, N flag". Do not hide the flags — the flags are the finding.
+
+### 2.23 `airport_demand_profile.csv` — 24 rows, now reproducible
+
+Rebuilt by `build_validation.py` from a stated definition: 2025 international
+flights, hour = scheduled arrival, **passenger-weighted**.
+
+> ⚠️ **This file changed on 2026-10-24.** `macl_share_pct` is now
+> passenger-weighted 2025, not an unspecified 2019–25 basket. The
+> 07:00–09:59 share moves 35.5% → **33.1%**. `macl_international_arrival_share`
+> is retained as the flight-weighted share for the audit. If your chart says
+> "35.5%", change it to 33.1% and state the weighting.
+
+### 2.24 Five traps that will silently break the UI
 
 Read this before you write the chart layer. Each one produces a plausible but
 wrong chart, which is worse than an error.

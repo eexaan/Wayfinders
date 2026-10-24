@@ -42,8 +42,8 @@ light on a route average (R4 51%) but their **airport segment is the busiest
 thing in the network at 104%** — STELCO to VIA at 13:00 — because every
 airport passenger funnels through it on a single trip. **R3 is an hourly bus
 with a 30-minute expected wait**, and the airport buses run the same frequency
-at 03:00 as at 08:00 while 35.5% of international arrivals land in a
-three-hour window.
+at 03:00 as at 08:00 while a third of arriving passengers (33.1%,
+passenger-weighted) land in a three-hour window.
 
 > Load factor is measured **per stop-to-stop segment**, not per route. The
 > older route-level figure (R1 at 89.5%) assumed every passenger rode the whole
@@ -88,6 +88,7 @@ docs/
 dashboard/
   build/build_data.py       rebuilds every table from the official inputs
   build/build_stop_demand.py  stop-level demand + segment load (runs AFTER build_data.py)
+  build/build_validation.py holdout MAPE + airport reconciliation; rebuilds the airport profile
   build/build_figures.py    rebuilds F1..F6
   data/                     the tables the dashboard reads (see DASHBOARD_SPEC §2)
 data/

@@ -141,7 +141,7 @@ def fig_airport() -> None:
     fig, ax = plt.subplots(figsize=(8.4, 3.4))
     arr = ap.set_index("hour")["macl_share_pct"]
     ax.bar(arr.index, arr.values, color=BLUE, alpha=0.85,
-           label="international arrivals, % of day (MACL 2019–25)")
+           label="arriving passengers, % of day (MACL 2025, pax-weighted)")
     ax2 = ax.twinx()
     ax2.plot(share.index, share.values, color=RED, lw=2, marker="o", ms=3,
              label="R4 scheduled departures, % of captured day")
@@ -152,8 +152,11 @@ def fig_airport() -> None:
     h1, l1 = ax.get_legend_handles_labels()
     h2, l2 = ax2.get_legend_handles_labels()
     ax.legend(h1 + h2, l1 + l2, frameon=False, fontsize=8, loc="upper left")
-    ax.set_title("F4  Airport buses run a flat headway; 35.5% of arrivals land between 07:00 and 09:59",
+    ax.set_title("F4  Airport buses run a flat headway; a third of passengers land between 07:00 and 09:59",
                  loc="left", fontweight="bold")
+    ax.text(0, -0.22,
+            "Passenger-weighted. Flight-weighted the morning share is 25.3%, so the weighting is stated on the chart.",
+            transform=ax.transAxes, fontsize=7, color="#555555")
     fig.savefig(FIGS / "F4_airport_mismatch.png")
     plt.close(fig)
 
