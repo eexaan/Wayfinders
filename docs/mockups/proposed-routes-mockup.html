@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wayfinder — proposed new routes</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --page:#f3f4f1; --surface:#fff; --line:#e3e5e0; --ink:#16202b;
+    --ink2:#4a5561; --ink3:#6c7681;
+    --over:#d1392e; --busy:#e8872a; --room:#8e979f;
+    --good:#16794a; --focus:#2a6fd6;
+    --radius:10px; --shadow:0 1px 2px rgba(22,32,43,.06),0 2px 8px rgba(22,32,43,.04);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;
+       font-size:14px;color:var(--ink);background:var(--page);display:flex;flex-direction:column;overflow:hidden}
+  header{display:flex;align-items:center;gap:14px;padding:9px 18px;background:var(--surface);
+         border-bottom:1px solid var(--line);flex:none}
+  header h1{margin:0;font-size:16px;letter-spacing:-.01em}
+  header p{margin:0;color:var(--ink3);font-size:12px}
+  .spacer{flex:1}
+  .rule{display:flex;align-items:center;gap:8px;background:#eef7f0;border:1px solid #cfe8d7;
+        color:#145c39;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600}
+  .rule svg{flex:none}
+
+  main{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:10px;
+       padding:10px 18px 12px;min-height:0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow)}
+  #mapwrap{position:relative;overflow:hidden;min-height:0}
+  #map{position:absolute;inset:0;background:#dde7ec}
+  .overlay{position:absolute;z-index:500;background:var(--surface);border:1px solid var(--line);
+           border-radius:8px;box-shadow:var(--shadow);font-size:12px}
+  #legend{left:10px;bottom:10px;padding:8px 11px;color:var(--ink2);display:grid;gap:4px;font-size:11.5px}
+  #legend .row{display:flex;align-items:center;gap:7px}
+  .ln{width:24px;height:0;border-top-width:4px;border-top-style:solid;border-radius:2px}
+  #hint{right:10px;bottom:10px;padding:5px 10px;color:var(--ink3);font-size:11px}
+
+  .side{display:flex;flex-direction:column;gap:9px;min-height:0;overflow-y:auto}
+  .side .card{padding:10px 12px;flex:none}
+  h2{margin:0 0 2px;font-size:13px;font-weight:650}
+  .sub{margin:0;color:var(--ink3);font-size:11.5px;line-height:1.35}
+
+  .prop{cursor:pointer;border-left:4px solid;transition:background .12s}
+  .prop:hover{background:#fafbfa}
+  .prop.on{background:#f6f9fe}
+  .prop .head{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+  .prop .id{font-weight:800;font-size:11px;letter-spacing:.02em}
+  .kind{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+        padding:1px 5px;border-radius:4px;border:1px solid}
+  .kind.new{color:#5b21b6;background:#f3ecfe;border-color:#ddd0fb}
+  .kind.ext{color:#0b6b52;background:#e8f7f1;border-color:#c3e8db}
+  .prop h3{margin:0;font-size:12.5px;font-weight:650;line-height:1.25}
+  .meta{display:flex;gap:10px;color:var(--ink3);font-size:11px;margin-top:3px;
+        font-variant-numeric:tabular-nums}
+  .detail{display:none;margin-top:9px;padding-top:9px;border-top:1px solid var(--line);
+          font-size:11.5px;line-height:1.4;color:var(--ink2)}
+  .prop.on .detail{display:block}
+  .detail b{color:var(--ink)}
+  .anchor{display:grid;grid-template-columns:62px minmax(0,1fr);gap:6px;margin:6px 0;font-size:11px}
+  .anchor .role{font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.03em;
+                color:var(--ink3);padding-top:1px}
+  .anchor .ev{color:var(--ink3);font-size:10.5px;margin-top:1px;line-height:1.3}
+  .win{display:inline-block;background:#f1f2ef;border-radius:4px;padding:0 5px;font-size:10.5px;
+       font-variant-numeric:tabular-nums;margin:0 4px 3px 0;color:var(--ink2)}
+  .conf{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .conf.high{color:var(--good)} .conf.medium{color:#a8620c} .conf.low{color:var(--over)}
+  .adds{color:var(--good);font-weight:600}
+  .removes{color:var(--ink3)}
+  .leaflet-tooltip{font:inherit;font-size:11.5px;border-radius:6px;border-color:var(--line);color:var(--ink)}
+  .sep{border:0;border-top:1px solid var(--line);margin:0}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Wayfinder — proposed service changes</h1>
+    <p>Mockup. Lines are routed on real OSM roads; anchor points are real POIs.</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="rule">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M8 1.5 14.5 13.5h-13L8 1.5Z"/><path d="M8 6v3.2M8 11.4v.1"/>
+    </svg>
+    These add service. None takes a trip off an existing route.
+  </div>
+</header>
+
+<main>
+  <section class="card" id="mapwrap" aria-label="Proposed routes map">
+    <div id="map"></div>
+    <div class="overlay" id="legend">
+      <div class="row"><span class="ln" style="border-color:#b9c0c6;border-top-width:3px"></span> Existing route (15 today)</div>
+      <div class="row"><span class="ln" style="border-color:#7b3ff2"></span> P1 · school special</div>
+      <div class="row"><span class="ln" style="border-color:#0f8f6f"></span> P2 · extend R6 north</div>
+      <div class="row"><span class="ln" style="border-color:#c2601a"></span> P3 · west feeder loop</div>
+    </div>
+    <div class="overlay" id="hint">Click a proposal to expand</div>
+  </section>
+
+  <aside class="side">
+    <section class="card">
+      <h2>Three ways to reach Phase 2</h2>
+      <p class="sub">Cheapest first. Each one adds service; none reallocates an existing trip.</p>
+    </section>
+    <div id="cards"></div>
+    <section class="card">
+      <h2>Why not move a bus instead?</h2>
+      <p class="sub">
+        Because the riders already on that route would be stranded. Moving an R1 trip onto
+        R2 helps R2 and leaves R1's passengers at a stop with no bus — which is what the
+        <b>donor load after</b> column in <code>scenario_moves.csv</code> already watches
+        for. Proposals here are additive: a new trip, a new stop, or an extended line.
+      </p>
+    </section>
+  </aside>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="dynamic-data.js"></script>
+<script src="proposals.js"></script>
+<script>
+const WF = window.WF;
+const DATA = window.PROPOSALS;
+const INK = '#16202b';
+
+const map = L.map('map', { scrollWheelZoom:true })
+  .fitBounds([[4.196,73.525],[4.246,73.555]], { padding:[26,26] });
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+/* existing network, deliberately quiet so the proposals read as the subject */
+const existing = L.layerGroup().addTo(map);
+for (const segs of Object.values(WF.lines)) {
+  L.polyline(segs, { color:'#b9c0c6', weight:3, opacity:.75,
+                     lineCap:'round', lineJoin:'round', interactive:false }).addTo(existing);
+}
+for (const s of WF.stops) {
+  L.circleMarker(s.p, { radius:2.2, color:'#8a939b', weight:1, fillColor:'#fff',
+                        fillOpacity:1, opacity:.75, interactive:false }).addTo(existing);
+}
+
+/* proposals */
+const layers = {};
+for (const p of DATA.proposals) {
+  const g = L.layerGroup().addTo(map);
+  const casing = L.polyline(p.coords, { color:'#fff', weight:11, opacity:.9,
+                                        lineCap:'round', lineJoin:'round', interactive:false }).addTo(g);
+  const line = L.polyline(p.coords, { color:p.colour, weight:6, opacity:.95,
+                                      lineCap:'round', lineJoin:'round' }).addTo(g);
+  line.bindTooltip(`<b>${p.id} · ${p.name}</b><br>${p.km} km · ${p.min} min`,
+                   { sticky:true });
+
+  for (const a of p.anchors) {
+    const isNew = a.role === 'new stop';
+    L.circleMarker(a.at, { radius:isNew?6:5, color:p.colour, weight:3,
+                           fillColor:isNew?p.colour:'#fff', fillOpacity:1 })
+      .bindTooltip(`<b>${a.name}</b><br>${a.evidence}`, { direction:'top' })
+      .addTo(g);
+  }
+  layers[p.id] = { group:g, line, p };
+}
+document.getElementById('hint').textContent = 'Click a proposal to expand';
+
+/* cards */
+let active = null;
+const cards = document.getElementById('cards');
+cards.innerHTML = DATA.proposals.map(p => `
+  <section class="card prop" id="card-${p.id}" style="border-left-color:${p.colour}">
+    <div class="head">
+      <span class="id" style="color:${p.colour}">${p.id}</span>
+      <span class="kind ${p.kind === 'extension' ? 'ext' : 'new'}">
+        ${p.kind === 'extension' ? 'route extension' : 'new route'}</span>
+    </div>
+    <h3>${p.name}</h3>
+    <div class="meta"><span>${p.km} km</span><span>${p.min} min</span>
+      <span class="conf ${p.confidence}">${p.confidence} confidence</span></div>
+    <div class="detail">
+      <div>${p.why}</div>
+      ${p.anchors.map(a => `
+        <div class="anchor">
+          <span class="role">${a.role}</span>
+          <span><b>${a.name}</b><div class="ev">${a.evidence}</div></span>
+        </div>`).join('')}
+      <div style="margin-top:7px">${p.windows.map(w=>`<span class="win">${w}</span>`).join('')}</div>
+      <div style="margin-top:7px">
+        <span class="adds">+ ${p.adds}</span><br>
+        <span class="removes">Removes: ${p.removes}</span>
+      </div>
+    </div>
+  </section>`).join('');
+
+function select(id) {
+  active = active === id ? null : id;
+  for (const [pid, l] of Object.entries(layers)) {
+    const on = active === null || active === pid;
+    l.line.setStyle({ weight: active === pid ? 8 : 6, opacity: on ? .95 : .25 });
+    document.getElementById(`card-${pid}`).classList.toggle('on', active === pid);
+  }
+}
+for (const p of DATA.proposals) {
+  document.getElementById(`card-${p.id}`)
+    .addEventListener('click', () => select(p.id));
+  layers[p.id].line.on('click', () => select(p.id));
+}
+</script>
+</body>
+</html>
