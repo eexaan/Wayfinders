@@ -747,6 +747,16 @@ re-render the whole page.
 - **Basemap note:** Malé is tiny (4 km). Default zoom 14, centre
   `4.195, 73.525`. Set `maxBounds` to the Greater Malé extent so the user
   cannot pan into the ocean.
+- **Rendered basemap (React app, `web/src/mapArea.js`):** OSM raster tiles as
+  the base, `HOME_BOUNDS` fit to the **whole network including Villimalé**
+  (`R13`/`R14`, lon ~73.483 — a box that stops at 73.497 silently loses two
+  routes). Pan limit `PAN_BOUNDS` is deliberately wider than the fit so the
+  coast and the Sinamalé Bridge read as context; `MIN_ZOOM` 12. A committed
+  OSM-derived vector outline (`dashboard/build/build_basemap.py`) is the
+  offline fallback and a manual toggle: if no tile loads and three tile
+  requests fail, the map switches itself rather than showing an empty box.
+  Every route must be drawn, including the ten with no passenger counts —
+  "dashed" means *no counts*, never *not there*.
 
 ### C2 — Route panel
 
@@ -849,7 +859,9 @@ Cut these without discussion. Time is the binding constraint.
 - ❌ A camera/crowd-detection feature. It is not a dashboard panel; sensor-based
   counting is a separate later phase with its own entry conditions
   (`docs/ROADMAP.md` §2, ADR-0013).
-- ❌ A second basemap layer, terrain, 3D buildings, or satellite tiles.
+- ❌ A second basemap layer, terrain, 3D buildings, or satellite tiles. (The
+  committed vector outline is a fallback for the same canvas, not a second
+  selectable commercial basemap.)
 - ❌ Animated vehicles on the map. There is no live vehicle data.
 - ❌ More than 4 panels. If you have time, add the per-corridor before/after
   view, not a fifth panel.

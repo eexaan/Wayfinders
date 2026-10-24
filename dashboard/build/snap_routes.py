@@ -22,8 +22,7 @@ Output:
     dashboard/data/stop_snap_qa.csv         distance from each stop to the
                                             nearest road, for checking placement
 
-Scope: Malé, the airport island and Hulhumalé only. Villimalé routes (R13, R14)
-are left out of the map (see BBOX).
+Scope: Greater Malé - Malé, the airport island, Hulhumalé and Villimalé.
 """
 
 from __future__ import annotations
@@ -46,7 +45,9 @@ DETOUR_RATIO, DETOUR_EXTRA_M = 2.0, 1000
 LOOP_CLOSE_M, LOOP_MIN_M = 40, 1000
 
 # Malé + airport island + Hulhumalé. Villimalé (lon ~73.484) is outside.
-BBOX = {"south": 4.160, "west": 73.494, "north": 4.248, "east": 73.560}
+# Villimalé (R13/R14, lon ~73.483) must be inside: a route with one stop outside
+# the box is skipped whole, so a narrower box drops two routes off the map.
+BBOX = {"south": 4.150, "west": 73.470, "north": 4.250, "east": 73.570}
 BRIDGE_MIN = 10.0
 
 

@@ -6,5 +6,5 @@ export const BAND_COLOUR: Record<Band, string> = {
   over: '#d1392e',
   busy: '#e8872a',
   room: '#8e979f',
-  unknown: '#a3aab1',
+  unknown: '#77828c',
 }

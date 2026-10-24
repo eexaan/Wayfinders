@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { loadData, type Data } from './data'
-import { KpiStrip } from './components/KpiStrip'
 import { RouteMap } from './components/RouteMap'
 import { RouteRanking } from './components/RouteRanking'
 import { HourlyChart } from './components/HourlyChart'
@@ -63,7 +62,6 @@ export default function App() {
 
       {data && tab === 'overview' && (
         <main>
-          <KpiStrip data={data} onRoute={selectRoute} />
           <div className="overview">
             <section className="card map-card" aria-label="Route map">
               <RouteMap data={data} selected={selected} onSelect={selectRoute} />
@@ -77,7 +75,7 @@ export default function App() {
                   <RoutePanel data={data} route={selected} onClose={() => selectRoute(null)} />
                 </section>
               ) : (
-                <section className="card">
+                <section className="card chart-card">
                   <h2 className="card-h">When it breaks: passengers vs seats, hour by hour</h2>
                   <p className="card-sub">All 5 routes with passenger counts, combined. Click a route to see its own.</p>
                   <HourlyChart points={data.networkHourly} />

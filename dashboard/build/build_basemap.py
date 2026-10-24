@@ -28,8 +28,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "dashboard" / "data" / "basemap.geojson"
 OVERPASS = "https://overpass-api.de/api/interpreter"
 
-# a little wider than the map's view (web/src/mapArea.js) so edges are not cut
-BBOX = "4.150,73.490,4.255,73.565"
+# a little wider than the map's pan limit (web/src/mapArea.js) so edges are not
+# cut; must include Villimalé (lon ~73.483) or R13/R14 fall off the fallback map
+BBOX = "4.145,73.465,4.258,73.572"
 MAJOR = {"motorway", "trunk", "primary", "secondary"}
 QUERY = f"""[out:json][timeout:90];
 (

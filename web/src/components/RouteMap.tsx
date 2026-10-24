@@ -1,17 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { CircleMarker, GeoJSON, MapContainer, Pane, Polyline, Tooltip, useMap } from 'react-leaflet'
+import { CircleMarker, GeoJSON, MapContainer, Pane, Polyline, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 
 import { BAND_LABEL, fmtHour, type Band, type Data, type Route, type Segment } from '../data'
-import { BOUNDS, MAX_ZOOM, MIN_ZOOM } from '../mapArea'
+import { HOME_BOUNDS, MAX_ZOOM, MIN_ZOOM, PAN_BOUNDS, TILE_ATTRIBUTION, TILE_URL } from '../mapArea'
 import { BAND_COLOUR as COLOUR } from '../colours'
+
+type Basemap = 'osm' | 'outline'
 
 // worst on top: where routes share a road, the fullest one is what you see
 const ORDER: Record<Band, number> = { unknown: 0, room: 1, busy: 2, over: 3 }
 const INK = '#16202b'
 const LINE = { lineCap: 'round' as const, lineJoin: 'round' as const }
 
-// our own basemap (dashboard/build/build_basemap.py): sea = container background
+// offline fallback (dashboard/build/build_basemap.py): sea = container background.
+// Used when OSM tiles cannot be fetched, so the demo still works without a network.
 const baseStyle = (f?: GeoJSON.Feature): L.PathOptions =>
   f?.properties?.kind === 'land'
     ? { stroke: true, color: '#cfd5cc', weight: 1, fillColor: '#f8f8f5', fillOpacity: 1, interactive: false }
@@ -71,6 +74,22 @@ export function RouteMap({
   onSelect: (code: string | null) => void
 }) {
   const [hover, setHover] = useState<string | null>(null)
+  const [basemap, setBasemap] = useState<Basemap>('osm')
+  const mapRef = useRef<L.Map | null>(null)
+  const tiles = useRef({ loaded: 0, errors: 0 })
+
+  // Offline venue, or a blocked tile host: fall back to the committed vector
+  // outline after a few misses if not one tile has arrived, rather than leaving
+  // an empty grey box where the island should be.
+  const tileHandlers = {
+    tileload: () => {
+      tiles.current.loaded += 1
+    },
+    tileerror: () => {
+      tiles.current.errors += 1
+      if (tiles.current.loaded === 0 && tiles.current.errors === 3) setBasemap('outline')
+    },
+  }
 
   const lines = useMemo(() => {
     const by: Record<string, Segment[]> = {}
@@ -105,9 +124,9 @@ export function RouteMap({
   }, [data])
 
   const bounds = useMemo<L.LatLngBoundsExpression>(() => {
-    if (!selected) return BOUNDS as L.LatLngBoundsExpression
+    if (!selected) return HOME_BOUNDS as L.LatLngBoundsExpression
     const pts = data.segments.filter((s) => s.route === selected.code).flatMap((s) => s.coords)
-    return pts.length ? L.latLngBounds(pts) : (BOUNDS as L.LatLngBoundsExpression)
+    return pts.length ? L.latLngBounds(pts) : (HOME_BOUNDS as L.LatLngBoundsExpression)
   }, [data, selected])
 
   // focused route: where it starts, where it ends, where it is fullest
@@ -132,26 +151,35 @@ export function RouteMap({
   return (
     <>
       <MapContainer
-        bounds={BOUNDS as L.LatLngBoundsExpression}
-        maxBounds={L.latLngBounds(BOUNDS as L.LatLngBoundsLiteral).pad(0.1)}
-        maxBoundsViscosity={1}
+        bounds={HOME_BOUNDS as L.LatLngBoundsExpression}
+        maxBounds={PAN_BOUNDS as L.LatLngBoundsLiteral}
+        maxBoundsViscosity={0.5}
         minZoom={MIN_ZOOM}
         maxZoom={MAX_ZOOM}
         zoomSnap={0.25}
         scrollWheelZoom
+        ref={mapRef}
       >
-        <Pane name="base" style={{ zIndex: 200 }}>
-          <GeoJSON
-            data={data.basemap}
-            style={baseStyle}
-            attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        {basemap === 'osm' ? (
+          <TileLayer
+            url={TILE_URL}
+            attribution={TILE_ATTRIBUTION}
+            maxZoom={MAX_ZOOM}
+            detectRetina
+            eventHandlers={tileHandlers}
           />
-        </Pane>
-        {PLACES.map((p) => (
-          <Label key={p.name} at={p.at} dir="center" className="place-label">
-            {p.name}
-          </Label>
-        ))}
+        ) : (
+          <>
+            <Pane name="base" style={{ zIndex: 200 }}>
+              <GeoJSON data={data.basemap} style={baseStyle} attribution={TILE_ATTRIBUTION} />
+            </Pane>
+            {PLACES.map((p) => (
+              <Label key={p.name} at={p.at} dir="center" className="place-label">
+                {p.name}
+              </Label>
+            ))}
+          </>
+        )}
         <FitTo bounds={bounds} />
 
         {/* routes; keys change with focus so the focused route is re-added on top */}
@@ -167,7 +195,7 @@ export function RouteMap({
               pathOptions={
                 counted
                   ? { ...LINE, color: COLOUR[route.band], weight: hot ? 8 : 5, opacity: faded ? 0.15 : 1 }
-                  : { ...LINE, color: COLOUR.unknown, weight: hot ? 4 : 2, opacity: faded ? 0.15 : 0.7, dashArray: '1 6' }
+                  : { ...LINE, color: COLOUR.unknown, weight: hot ? 6 : 3.5, opacity: faded ? 0.2 : 0.95, dashArray: '7 5' }
               }
               eventHandlers={{
                 click: () => onSelect(route.code),
@@ -266,6 +294,27 @@ export function RouteMap({
           {data.bridge.sharePct}% of the journey.
         </p>
       )}
+
+      <div className="card map-tools">
+        <span className="map-tools-label">Base map</span>
+        <button
+          className={basemap === 'osm' ? 'on' : ''}
+          onClick={() => setBasemap('osm')}
+          title="OpenStreetMap raster tiles (needs a network)"
+        >
+          OpenStreetMap
+        </button>
+        <button
+          className={basemap === 'outline' ? 'on' : ''}
+          onClick={() => setBasemap('outline')}
+          title="Committed OSM-derived outline; works offline"
+        >
+          Outline
+        </button>
+        <button onClick={() => mapRef.current?.flyToBounds(HOME_BOUNDS as L.LatLngBoundsLiteral, { padding: [30, 30], duration: 0.6 })}>
+          All 15 routes
+        </button>
+      </div>
 
       <div className="card map-title">
         {selected ? (

@@ -11,11 +11,16 @@ Maldives Datathon 2026 · Team Wayfinders
 ```bash
 make serve          # builds the dashboard and serves it on :8000
 # open http://localhost:8000
+
+# or, for live reload while editing:
+cd web && npm install && npm run dev      # http://localhost:5173
 ```
 
 Needs Node 20+ for the first build (`make web`); after that the app is a static
-bundle that reads the committed CSV files. No backend, no account, no network
-calls at runtime — the basemap and route geometry are bundled too.
+bundle that reads the committed CSV files. No backend, no account. The base map
+is OpenStreetMap raster tiles, so it is the one thing that wants a network — if
+the tile host is unreachable the map falls back on its own to the outline
+committed in `dashboard/data/basemap.geojson`, and every route still draws.
 
 ---
 
@@ -23,7 +28,7 @@ calls at runtime — the basemap and route geometry are bundled too.
 
 | Panel | What it shows | What it is for |
 |---|---|---|
-| **Map** | All 15 routes as polylines, coloured by how full each one runs | Find the corridors in trouble without reading a table |
+| **Map** | All 15 routes as polylines on OpenStreetMap (Malé, airport island, Hulhumalé, Villimalé), coloured by how full each one runs | Find the corridors in trouble without reading a table |
 | **Route panel** | Demand against seats hour by hour, the timetable ribbon, and where along the route the bus fills | See *when* and *where* the mismatch is, not just that it exists |
 | **Scenario bar** | Five fleet-neutral packages, every KPI shown with its delta against baseline | Move trips and read the consequence immediately |
 | **Method drawer** | Coverage matrix, capture window, source per table, the working-hours assumption | Audit any number without leaving the page |

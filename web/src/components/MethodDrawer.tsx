@@ -20,6 +20,7 @@ export function MethodDrawer({ data, onClose }: { data: Data; onClose: () => voi
   }, [onClose])
 
   const { vintage } = data
+  const workingHoursPct = data.kpi.workingHoursPct
   return (
     <>
       <div className="scrim" onClick={onClose} />
@@ -49,7 +50,13 @@ export function MethodDrawer({ data, onClose }: { data: Data; onClose: () => voi
             <b>Passenger counts:</b> MTCC, 2025 daily averages. The hour-by-hour shape comes from taxi trips.
           </li>
           <li>
-            <b>Map:</b> Malé, the airport island and Hulhumalé. Villimalé routes (R13, R14) are not drawn.
+            <b>Map:</b> the whole Greater Malé bus network — Malé, the airport island, Hulhumalé and Villimalé
+            (R13, R14), on OpenStreetMap tiles.
+          </li>
+          <li>
+            <b>Working hours:</b> an <i>assumption</i>, not a measurement. On 08:00–16:00,{' '}
+            {workingHoursPct === null ? '—' : `${Math.round(workingHoursPct)}%`} of bus travel falls inside that
+            window; 07:00–15:00 gives 37%, 09:00–17:00 gives 42%. Either way most bus use is outside it.
           </li>
         </ul>
 
