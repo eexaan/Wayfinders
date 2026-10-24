@@ -757,6 +757,14 @@ re-render the whole page.
   requests fail, the map switches itself rather than showing an empty box.
   Every route must be drawn, including the ten with no passenger counts —
   "dashed" means *no counts*, never *not there*.
+- **Caching (`web/public/sw.js`):** a service worker answers only two kinds of
+  request — OSM tiles (cache-first, LRU-trimmed to 900 entries; opaque `no-cors`
+  responses are cacheable, so `res.ok` alone is not a valid test) and local
+  `/data/*.csv|geojson|json` (stale-while-revalidate). Everything else, including
+  every module and the dev client, passes straight through so a stale bundle can
+  never be served. Tile zoom repeats and reloads then cost no network. The map
+  also sets `updateWhenZooming={false}` and `keepBuffer={6}`, and `zoomSnap={1}`
+  so one wheel notch is one tile level instead of four fractional ones.
 
 ### C2 — Route panel
 

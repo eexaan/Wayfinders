@@ -21,6 +21,8 @@ bundle that reads the committed CSV files. No backend, no account. The base map
 is OpenStreetMap raster tiles, so it is the one thing that wants a network — if
 the tile host is unreachable the map falls back on its own to the outline
 committed in `dashboard/data/basemap.geojson`, and every route still draws.
+Tiles and the data tables are cached by a small service worker (`web/public/sw.js`),
+so zooming back over ground you have already covered costs no requests.
 
 ---
 

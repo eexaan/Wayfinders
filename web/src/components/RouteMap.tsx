@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 import { CircleMarker, GeoJSON, MapContainer, Pane, Polyline, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 
@@ -34,15 +34,25 @@ const loadText = (r: Route) =>
 
 const at = (s: Segment, f: number) => s.coords[Math.floor((s.coords.length - 1) * f)]
 
-// fit on mount (after the container has its size) and whenever the focus changes
+// Fit on mount, then re-fit whenever the focus changes. invalidateSize() is a
+// forced reflow, so it runs on mount and on a real container resize only -
+// calling it on every route click is what made selecting a route feel slow.
 function FitTo({ bounds }: { bounds: L.LatLngBoundsExpression }) {
   const map = useMap()
   const first = useRef(true)
   useEffect(() => {
-    map.invalidateSize()
-    if (first.current) map.fitBounds(bounds, { padding: [30, 30] })
-    else map.flyToBounds(bounds, { padding: [50, 50], duration: 0.6 })
-    first.current = false
+    const ro = new ResizeObserver(() => map.invalidateSize({ animate: false }))
+    ro.observe(map.getContainer())
+    return () => ro.disconnect()
+  }, [map])
+  useEffect(() => {
+    if (first.current) {
+      map.invalidateSize({ animate: false })
+      map.fitBounds(bounds, { padding: [30, 30], animate: false })
+      first.current = false
+    } else {
+      map.flyToBounds(bounds, { padding: [50, 50], duration: 0.45 })
+    }
   }, [map, bounds])
   return null
 }
@@ -63,6 +73,60 @@ function Label({ at, dir, className, children }: {
     </CircleMarker>
   )
 }
+
+// One route's whole line as a single multi-polyline. Memoised on primitive
+// props: hovering a route re-renders two lines, not the whole map.
+const RouteLine = memo(function RouteLine({
+  route,
+  all,
+  hot,
+  dimmed,
+  hidden,
+  onSelect,
+  onHover,
+}: {
+  route: Route
+  all: [number, number][][]
+  hot: boolean
+  dimmed: boolean
+  hidden: boolean
+  onSelect: (code: string) => void
+  onHover: (code: string | null) => void
+}) {
+  const counted = route.peakPct !== null
+  const pathOptions = useMemo<L.PathOptions>(
+    () =>
+      counted
+        ? { ...LINE, color: COLOUR[route.band], weight: hot ? 8 : 5, opacity: hidden ? 0 : dimmed ? 0.15 : 1 }
+        : {
+            ...LINE,
+            color: COLOUR.unknown,
+            weight: hot ? 6 : 3.5,
+            opacity: hidden ? 0 : dimmed ? 0.2 : 0.95,
+            dashArray: '7 5',
+          },
+    [counted, hot, dimmed, hidden, route.band],
+  )
+  const eventHandlers = useMemo(
+    () => ({
+      click: () => onSelect(route.code),
+      mouseover: () => onHover(route.code),
+      mouseout: () => onHover(null),
+    }),
+    [onSelect, onHover, route.code],
+  )
+  return (
+    <Polyline positions={all} pathOptions={pathOptions} eventHandlers={eventHandlers}>
+      <Tooltip sticky>
+        <b>{route.code}</b> · {route.name}
+        <br />
+        {loadText(route)}
+        <br />
+        <i>Click to see this route</i>
+      </Tooltip>
+    </Polyline>
+  )
+})
 
 export function RouteMap({
   data,
@@ -156,7 +220,8 @@ export function RouteMap({
         maxBoundsViscosity={0.5}
         minZoom={MIN_ZOOM}
         maxZoom={MAX_ZOOM}
-        zoomSnap={0.25}
+        zoomSnap={1}
+        zoomDelta={1}
         scrollWheelZoom
         ref={mapRef}
       >
@@ -165,7 +230,13 @@ export function RouteMap({
             url={TILE_URL}
             attribution={TILE_ATTRIBUTION}
             maxZoom={MAX_ZOOM}
+            maxNativeZoom={19}
             detectRetina
+            // keep the zoom animation smooth: no tile requests mid-zoom, and
+            // hold the neighbouring levels so a zoom-out never shows blank
+            updateWhenZooming={false}
+            updateWhenIdle={false}
+            keepBuffer={6}
             eventHandlers={tileHandlers}
           />
         ) : (
@@ -182,39 +253,21 @@ export function RouteMap({
         )}
         <FitTo bounds={bounds} />
 
-        {/* routes; keys change with focus so the focused route is re-added on top */}
-        {lines.map(({ route, all }) => {
-          if (selected?.code === route.code) return null
-          const counted = route.peakPct !== null
-          const faded = !!selected
-          const hot = hover === route.code && !selected
-          return (
-            <Polyline
-              key={`${route.code}-${faded}`}
-              positions={all}
-              pathOptions={
-                counted
-                  ? { ...LINE, color: COLOUR[route.band], weight: hot ? 8 : 5, opacity: faded ? 0.15 : 1 }
-                  : { ...LINE, color: COLOUR.unknown, weight: hot ? 6 : 3.5, opacity: faded ? 0.2 : 0.95, dashArray: '7 5' }
-              }
-              eventHandlers={{
-                click: () => onSelect(route.code),
-                mouseover: () => setHover(route.code),
-                mouseout: () => setHover(null),
-              }}
-            >
-              {!faded && (
-                <Tooltip sticky>
-                  <b>{route.code}</b> · {route.name}
-                  <br />
-                  {loadText(route)}
-                  <br />
-                  <i>Click to see this route</i>
-                </Tooltip>
-              )}
-            </Polyline>
-          )
-        })}
+        {/* routes: keyed by code and never unmounted, so selecting or hovering a
+            route restyles one layer instead of rebuilding fifteen. The focused
+            route keeps its slot (hidden) so the detail layers stack above it. */}
+        {lines.map(({ route, all }) => (
+          <RouteLine
+            key={route.code}
+            route={route}
+            all={all}
+            hot={hover === route.code && !selected}
+            dimmed={!!selected}
+            hidden={selected?.code === route.code}
+            onSelect={onSelect}
+            onHover={setHover}
+          />
+        ))}
 
         {focus && selected && (
           <>
