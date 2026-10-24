@@ -1,0 +1,29 @@
+area,route_number,name,from_stop,to_stop,stops,fare_mvr,minibus,trips_per_day,departures_left_when_fetched,color,fetched_male_time
+Greater Malé,R1,West Park to HM Phase 1,Maafannu Bus Terminal,Maafannu Bus Terminal OPP,18,10.0,no,61,10,#e9222a,2026-10-10 19:53
+Greater Malé,R10,Orchid,Maafannu Madharusa,Social Centre,17,7.0,yes,,0,#841a4f,2026-10-10 19:53
+Greater Malé,R11,Ameenee,Raalhugandu (Mini Bus),Henveiru Stadium,19,7.0,yes,,0,#00a69c,2026-10-10 19:53
+Greater Malé,R12,Sosun,MTCC Sawmill,Henveiru Stadium,9,7.0,yes,,0,#cb7328,2026-10-10 19:53
+Greater Malé,R13,Villimale Internal,Villimale Ferry Terminal,Villimale Hospital	,13,5.0,yes,92,24,#6465ad,2026-10-10 19:53
+Greater Malé,R14,VILLIMALE INTERNAL 2,Villimale Ferry Terminal,Villimale' Ferry Termial Op,12,5.0,yes,105,24,#1fe8e3,2026-10-10 19:53
+Greater Malé,R15,West Park to Orange Hiya,Maafannu Madharusa,Social Centre,13,10.0,yes,,0,#890c15,2026-10-10 19:53
+Greater Malé,R2,Carnival to HM Phase 1,Carnival ,Artificial Beach,11,10.0,no,61,10,#1c54a3,2026-10-10 19:53
+Greater Malé,R3,West Park to VIA,Maafannu Bus Terminal,Maafannu Bus Terminal OPP,9,10.0,no,20,4,#0e9247,2026-10-10 19:53
+Greater Malé,R4,HM Phase 1 to VIA,Amin Avenue,Amin Avenue Opp,9,10.0,no,38,8,#c8d02d,2026-10-10 19:53
+Greater Malé,R5,HM Internal,Hiya Flats Stop 1,Masjid Ameel Jaleel,15,5.0,no,17,3,#f15a29,2026-10-10 19:53
+Greater Malé,R6,HM Phase 2 to HM Phase 1,Hiya Flats Stop 1,Masjid Ameel Jaleel,16,5.0,no,75,16,#90288c,2026-10-10 19:53
+Greater Malé,R7,HM Phase 2 to West Park,Hiya Flats Stop 2,H 16 Bus Stop,12,15.0,no,66,10,#26b473,2026-10-10 19:53
+Greater Malé,R8,HM Phase 2 to Carnival,Hiya Flats Stop 2,H 16 Bus Stop,11,15.0,no,61,10,#b1206d,2026-10-10 19:53
+Greater Malé,R9,HM Phase 2 to VIA,Hiya Flats Stop 1,Masjid Ameel Jaleel,10,15.0,no,38,8,#00adee,2026-10-10 19:53
+R.Dhuvaafaru,DF01,Dhuvaafaru Route,Baani,Furuqan Miskiy Stop,11,5.0,yes,,0,#ddb2f9,2026-10-10 19:53
+Ha.Dhidhdhoo,DH01,Ha Dhidhdhoo,Flat 40,Flat 40 OPP,19,5.0,yes,,0,#3dadc0,2026-10-10 19:53
+Fuvahmulah,FM01,Fuvahmulah 1,Fuvahmulah Terminal,Fuvahmulah Airport OP,25,5.0,yes,,0,#90288c,2026-10-10 19:53
+Addu City,HMD01,Hulhumeedhoo,Hulhumeedhoo Bus Terminal,Hulhumeedhoo Bus Terminal OPP,12,5.0,yes,,0,#b1206d,2026-10-10 19:53
+Addu City,LR01,Main Connector 1,Feydhoo Ferry Terminal,Feydhoo Ferry Terminal OPP,90,,yes,,0,#cc7205,2026-10-10 19:53
+Addu City,LR02,Main Connector 2,Feydhoo Ferry Terminal,Feydhoo Ferry Terminal OPP,90,,yes,,0,#6465ad,2026-10-10 19:53
+Laamu,IK01,Isdhoo Kalaidhoo,Afannu ,Mahafannu Stop 2,26,5.0,yes,,0,#f15a29,2026-10-10 19:53
+Laamu,LF01,Fonadhoo To Gan,Kurigam ,Kurigum Football Ground 2,38,,yes,,0,#0e9247,2026-10-10 19:53
+Laamu,LG01,Gan To Fonadhoo,Thundi Harbour Stop 1,Thundi Harbour Stop 1 OP,39,,yes,,0,#e9222a,2026-10-10 19:53
+Hdh. Kulhudhufushi,KC01,JS AEC Route,RW 30 Stop,RW 30 Stop OPP,17,5.0,yes,,0,#e4b851,2026-10-10 19:53
+Hdh. Kulhudhufushi,KC02,ASF Route,Raiybageechaage Bus Stop,Afeefudheen Bus Stop OPP,19,5.0,yes,,0,#aace54,2026-10-10 19:53
+N.Kendhikulhudhoo,KL01,Kulhudhoo01,Stadium Stop,Hospital stop,16,5.0,yes,,0,#9eca90,2026-10-10 19:53
+N.Kendhikulhudhoo,KN01,Kendhikolhu,Nivaas stop,Hospital stop,16,5.0,yes,,0,#de2020,2026-10-10 19:53

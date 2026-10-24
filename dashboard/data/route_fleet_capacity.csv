@@ -1,0 +1,16 @@
+route_code,bus_type,seats,capacity_source,live_trips_per_day_2026_10_10,fare_mvr,n_stops,corridor,daily_seat_capacity
+R1,Double decker,84,psmnews.mv/en/106008 (team-provided),61.0,10.0,18,male_hm1,5124.0
+R2,Double decker,84,psmnews.mv/en/106008 (team-provided),61.0,10.0,11,male_hm1,5124.0
+R6,Double decker,84,psmnews.mv/en/106008 (team-provided),75.0,5.0,16,hm1_hm2,6300.0
+R7,Double decker,84,psmnews.mv/en/106008 (team-provided),66.0,15.0,12,male_hm2,5544.0
+R8,Double decker,84,psmnews.mv/en/106008 (team-provided),61.0,15.0,11,male_hm2,5124.0
+R4,Airport bus,52,"psmnews.mv/en/106008 (team-provided, 50-54)",38.0,10.0,9,hm1_airport,1976.0
+R9,Airport bus,52,"psmnews.mv/en/106008 (team-provided, 50-54)",38.0,15.0,10,hm2_airport,1976.0
+R3,Airport bus,52,ASSUMED - confirm with MTCC,20.0,10.0,9,male_airport,1040.0
+R5,Regular bus,54,ASSUMED - confirm with MTCC,17.0,5.0,15,hm_internal,918.0
+R10,Minibus,21,Team Kandu minibus flag + psmnews.mv/en/106008 (20-22),,7.0,17,male_internal,
+R11,Minibus,21,Team Kandu minibus flag + psmnews.mv/en/106008 (20-22),,7.0,19,male_internal,
+R12,Minibus,21,Team Kandu minibus flag + psmnews.mv/en/106008 (20-22),,7.0,9,male_internal,
+R15,Minibus,21,Team Kandu minibus flag + psmnews.mv/en/106008 (20-22),,10.0,13,male_hm1,
+R13,E-minibus,11,ASSUMED eco e-minibus - confirm,92.0,5.0,13,villimale,1012.0
+R14,E-minibus,11,ASSUMED eco e-minibus - confirm,105.0,5.0,12,villimale,1155.0

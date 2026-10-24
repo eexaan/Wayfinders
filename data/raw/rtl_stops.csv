@@ -1,0 +1,150 @@
+code,name,atoll,island,lat,lon,routes,scheduled
+207,B.Dharavandhoo,B,Dharavandhoo,5.159260786,73.1340855,Z2R18,yes
+206,B.Dhonfanu,B,Dhonfanu,5.189286299,73.12291814,,no
+209,B.Eydhafushi,B,Eydhafushi,5.104212748,73.07224655,Z2R17 Z2R18,yes
+213,B.Fehendhoo,B,Fehendhoo,4.882214905,72.97456757,Z2R17,yes
+212,B.Fulhadhoo,B,Fulhadhoo,4.885053177,72.93802233,Z2R17,yes
+214,B.Goidhoo,B,Goidhoo,4.879102742,72.99641136,Z2R17,yes
+210,B.Hithaadhoo,B,Hithaadhoo,5.010559797,72.9229825,Z2R17,yes
+204,B.Kamadhoo,B,Kamadhoo,5.284034837,73.13864076,,no
+202,B.Kendhoo,B,Kendhoo,5.2770444253082,73.0085072248893,,no
+205,B.Kihaadhoo,B,Kihaadhoo,5.2175932102088,73.1231063524342,,no
+203,B.Kudarikilu,B,Kudarikilu,5.30043818397083,73.0685398611952,,no
+208,B.Maalhos,B,Maalhos,5.134668358,73.10516218,Z2R18,yes
+211,B.Thulhaadhoo,B,Thulhaadhoo,5.024399567,72.84212964,Z2R17,yes
+234,Dh.Bandidhoo,Dh,Bandidhoo,2.9376439045609564,72.98793134484558,Z4R8 Z4R9,yes
+237,Dh.Hulhudheli,Dh,Hulhudheli,2.8598283558021707,72.84796761765487,Z4R6,yes
+236,Dh.Kudahuvadhoo,Dh,Kudahuvadhoo,2.67535131666504,72.89480177481614,Z4R10 Z4R6 Z4R8 Z4R9,yes
+235,Dh.Maaenboodhoo,Dh,Maaenboodhoo,2.6977007033975124,72.96219485564573,Z4R8 Z4R9,yes
+233,Dh.Meedhoo,Dh,Meedhoo,2.99719969594014,73.00470362044682,Z4H1 Z4R10 Z4R6 Z4R8 Z4R9,yes
+238,Dh.Rinbudhoo,Dh,Rinbudhoo,2.922952528686733,72.89520050827863,Z4R6,yes
+229,F.Bilehdhoo,F,Bilehdhoo,3.117481319883007,72.9817422757136,Z4R7,yes
+231,F.Dharanboodhoo,F,Dharanboodhoo,3.064715227289682,72.92446928070522,Z4R7,yes
+228,F.Feeali,F,Feeali,3.269093,73.000161,Z4R7,yes
+230,F.Magoodhoo,F,Magoodhoo,3.0817364703291394,72.96455576096936,Z4R7,yes
+232,F.Nilandhoo,F,Nilandhoo,3.0589107193687597,72.89183780194227,Z4H1 Z4R7,yes
+168,Ga.Dhaandhoo,GA,Dhaandhoo,0.6197670819139716,73.4612167558625,,no
+166,Ga.Dhevvadhoo,GA,Dhevvadhoo,0.557625636263859,73.23997500638464,Z5R1,yes
+161,Ga.Gemanafushi,GA,Gemanafushi,0.44250070478161607,73.56654226878612,Z5R3 Z5R4,yes
+160,Ga.Kanduhulhudhoo,GA,Kanduhulhudhoo,0.351667,73.538393,Z5R3 Z5R4,yes
+167,Ga.Kolamaafushi,GA,Kolamaafushi,0.8380278203868764,73.18623968237799,Z5R9,yes
+162,Ga.Kondey,GA,Kondey,0.49746595068398575,73.54599208124313,Z5R3 Z5R4,yes
+165,Ga.Kooddoo,GA,Kooddoo,0.7331208641947223,73.43085927756488,Z5R3 Z5R8 Z5R9,yes
+163,Ga.Maamendhoo,GA,Maamendhoo,0.7159762741579466,73.43711947209606,,no
+169,Ga.Nilandhoo,GA,Nilandhoo,0.6338315571626555,73.44587791315939,,no
+164,Ga.Villingili,GA,Villingili,0.7513756402288727,73.43353257370646,Z5R1 Z5R3 Z5R8 Z5R9,yes
+156,Gdh.Faresmaathoda,GDh,Faresmaathoda,0.202087,73.187821,Z5R10 Z5R4 Z5R5 Z5R6,yes
+155,Gdh.Fiyori,GDh,Fiyori,0.224792,73.137913,Z5R5 Z5R6,yes
+158,Gdh.Gahdhoo,GDh,Gahdhoo,0.290440,73.454982,Z5R4,yes
+152,Gdh.Hon'dehdhoo,GDh,Hon'dehdhoo,0.441278,73.004474,Z5R6,yes
+150,Gdh.Kaadehdhoo,GDh,Kaadehdhoo,0.489627,72.998725,Z5R6 Z5R7,yes
+159,Gdh.Maavarulu,GDh,Maavarulu,0.3391604414110076,73.50919049617418,Z5R4,yes
+151,Gdh.Madaveli,GDh,Madaveli,0.459236,73.000467,Z5R6,yes
+154,Gdh.Nadella,GDh,Nadella,0.292733,73.044494,Z5R5 Z5R6,yes
+153,Gdh.Rathafandhoo,GDh,Rathafandhoo,0.254408,73.105485,Z5R5 Z5R6,yes
+149,Gdh.Thinadhoo,GDh,Thinadhoo,0.525797,72.997885,Z5R1 Z5R5 Z5R6 Z5R7,yes
+157,Gdh.Vaadhoo,GDh,Vaadhoo,0.231940,73.272506,Z5R10 Z5R4 Z5R5 Z5R6,yes
+170,Gn.Fuvahmulah,Gn,Fuvahmulah,-0.30782,73.44048,Z5R10 Z6R2,yes
+115,Ha.Baarah,HA,Baarah,6.81929,73.21018,,no
+116,Ha.Dhihdhoo,HA,Dhihdhoo,6.88810,73.11511,S1C1 S1C3 S1C6 S1V1,yes
+117,Ha.Filladhoo,HA,Filladhoo,6.87867,73.22120,,no
+118,Ha.Hoarafushi,HA,Hoarafushi,6.98168,72.89843,H1 S1C1,yes
+113,Ha.Ihavandhoo,HA,Ihavandhoo,6.94948,72.92802,H1 S1C1,yes
+119,Ha.Kelaa,HA,Kelaa,6.96197,73.21077,,no
+120,Ha.Maarandhoo,HA,Maarandhoo,6.85066,72.98527,H1 S1C3,yes
+121,Ha.Molhadhoo,HA,Molhadhoo,7.01394,72.99497,S1C1,yes
+122,Ha.Muraidhoo,HA,Muraidhoo,6.83852,73.16981,S1C3,yes
+123,Ha.Thakandhoo,HA,Thakandhoo,6.84480,72.99291,H1 S1C3,yes
+125,Ha.Thuraakunu,HA,Thuraakunu,7.10328,72.90084,S1C1,yes
+124,Ha.Uligamu,HA,Uligamu,7.08414,72.92395,S1C1,yes
+126,Ha.Utheemu,HA,Utheemu,6.83149,73.11205,S1C3,yes
+127,Ha.Vashafaru,HA,Vashafaru,6.89618,73.16241,,no
+102,Hdh.Finey,HDh,Finey,6.74586,73.05732,R1C4,yes
+103,Hdh.Hanimaadhoo,HDh,Hanimaadhoo,6.76686,73.17379,R1C4 R1C7 R1C9 S1C6,yes
+101,Hdh.Hirimaradhoo,HDh,Hirimaradhoo,6.72494,73.02631,R1C4,yes
+104,Hdh.Kulhudhuffushi,HDh,Kulhudhuffushi,6.61791,73.06470,H1 H2 R1C4 R1C6 R1C7 R1C9 R1V1 S1V1 S2C5,yes
+110,Hdh.Kumundhoo,HDh,Kumundhoo,6.56890,73.04944,R1C6,yes
+107,Hdh.Kurin'bee,HDh,Kurin'bee,6.66634,72.99916,,no
+114,Hdh.Makunudhoo,HDh,Makunudhoo,6.41142,72.70349,R1V1 R1V2,yes
+105,Hdh.Naivaadhoo,HDh,Naivaadhoo,6.74903,72.93718,,no
+106,Hdh.Nellaidhoo,HDh,Nellaidhoo,6.71341,72.94883,,no
+109,Hdh.Neykurendhoo,HDh,Neykurendhoo,6.54838,72.98294,R1V1,yes
+112,Hdh.Nolhivaram,HDh,Nolhivaram,6.66363,73.08724,R1C7,yes
+111,Hdh.Nolhivaranfaru,HDh,Nolhivaranfaru,6.70666,73.11883,R1C7,yes
+108,Hdh.Vaikaradhoo,HDh,Vaikaradhoo,6.55259,72.95171,R1V1 R1V2,yes
+241,L.Dhanbidhoo,L,Dhanbidhoo,2.0973772320498836,73.54450871993176,Z4R16,yes
+245,L.Fonadhoo,L,Fonadhoo,1.834911409462132,73.50004343106903,Z4R16 Z4R17,yes
+244,L.Gan,L,Gan,1.9340976963815828,73.53919019794427,Z4R16 Z4R17,yes
+247,L.Hithadhoo,L,Hithadhoo,1.8016757216767834,73.39028753836837,Z4R17,yes
+239,L.Isdhoo,L,Isdhoo,2.128012413628667,73.58056006872737,Z4R16,yes
+240,L.Kalaidhoo,L,Kalaidhoo,2.111312141758371,73.55430186677349,Z4R16,yes
+248,L.Kunahandhoo,L,Kunahandhoo,1.7875198624427862,73.36907013007256,Z4R17,yes
+242,L.Maabaidhoo,L,Maabaidhoo,2.0265446550754276,73.53086115801669,Z4R16,yes
+246,L.Maamendhoo,L,Maamendhoo,1.8210605439782335,73.38863467452538,Z4R17,yes
+249,L.Maavah,L,Maavah,1.8836320825522166,73.24646592154085,Z4R17,yes
+243,L.Mundoo,L,Mundoo,2.0147438243746447,73.532983335306,Z4R16,yes
+142,Lh.Felivaru,Lh,Felivaru,5.47676,73.38672,,no
+143,Lh.Hinnavaru,Lh,Hinnavaru,5.49101,73.41312,,no
+144,Lh.Kurendhoo,Lh,Kurendhoo,5.33507,73.46135,,no
+148,Lh.Maafilaafushi,Lh,Maafilaafushi,5.3626,73.4158,,no
+147,Lh.Madivaru,Lh,Madivaru,5.45594,73.36911,,no
+145,Lh.Naifaru,Lh,Naifaru,5.44125,73.36816,,no
+146,Lh.Olhuvelifushi,Lh,Olhuvelifushi,5.28015,73.60721,,no
+183,N.Fodhdhoo,N,Fodhdhoo,5.74469950,73.21681980,Z2R2,yes
+173,N.Henbadhoo,N,Henbadhoo,5.9673,73.3937,,no
+185,N.Holhudhoo,N,Holhudhoo,5.7549,73.2625,Z2R2,yes
+174,N.Kendhikulhudhoo,N,Kendhikulhudhoo,5.9433,73.4224,,no
+178,N.Kudafari,N,Kudafari,5.8822,73.3996,Z2R3,yes
+176,N.Landhoo,N,Landhoo,5.8811,73.4666,,no
+180,N.Lhohi,N,Lhohi,5.8168,73.3775,Z2R3,yes
+177,N.Maafaru,N,Maafaru,5.8248,73.4762,Z2R4,yes
+175,N.Maalhendhoo,N,Maalhendhoo,5.9030,73.4556,,no
+182,N.Magoodhoo,N,Magoodhoo,5.7764,73.3635,Z2R2,yes
+179,N.Manadhoo,N,Manadhoo,5.76687,73.4136,Z2H1 Z2R2 Z2R3 Z2R4,yes
+181,N.Miladhoo,N,Miladhoo,5.7909,73.3628,Z2R3,yes
+184,N.Velidhoo,N,Velidhoo,5.6622,73.2751,Z2R2,yes
+186,R.Alifushi,R,Alifushi,5.970225,72.950972,Z2R10,yes
+189,R.Angolhitheem,R,Angolhitheem,5.796844,73.00674,Z2R10,yes
+193,R.Dhuvaafaru,R,Dhuvaafaru,5.626308,73.03914,Z2R12 Z2UBC,yes
+197,R.Fainu,R,Fainu,5.465691,73.036902,Z2R11,yes
+190,R.Hulhudhuffaaru,R,Hulhudhuffaaru,5.7647,73.009601,Z2R10,yes
+191,R.Ifuru,R,Ifuru,5.704396,73.022304,Z2R10 Z2R13 Z2R14,yes
+196,R.Inguraidhoo,R,Inguraidhoo,5.477979,73.040368,Z2R11,yes
+195,R.Innamaadhoo,R,Innamaadhoo,5.547325,73.043974,Z2R12 Z2R14 Z2R15,yes
+198,R.Kinolhas,R,Kinolhas,5.450079,73.031214,Z2R11,yes
+194,R.Maakurathu,R,Maakurathu,5.608988,73.04223,Z2R12,yes
+200,R.Maduvvari,R,Maduvvari,5.484026,72.895191,Z2R11,yes
+199,R.Meedhoo,R,Meedhoo,5.45773,72.958531,Z2R11,yes
+188,R.Rasgetheem,R,Rasgetheem,5.806807,73.00069,Z2R10,yes
+201,R.Rasmaadhoo,R,Rasmaadhoo,5.56368,73.040284,Z2R12,yes
+192,R.Ungoofaaru,R,Ungoofaaru,5.667634,73.027272,Z2H1 Z2R10 Z2R11 Z2R12 Z2R13 Z2R14 Z2R15 Z2UBC,yes
+187,R.Vaadhoo,R,Vaadhoo,5.858621,72.992895,Z2R10,yes
+172,S.Feydhoo,S,Feydhoo,-0.68119,73.13771,Z6R2,yes
+171,S.Hulhumeedhoo,S,Hulhumeedhoo,-0.58953,73.2214,Z6R2,yes
+128,Sh.Bileyfahi,Sh,Bileyfahi,6.336084,72.976305,S2C5,yes
+130,Sh.Feevah,Sh,Feevah,6.34900,73.20527,H2 S2C2,yes
+131,Sh.Feydhoo,Sh,Feydhoo,6.360381,73.053146,S2C5,yes
+132,Sh.Foakaidhoo,Sh,Foakaidhoo,6.32748,73.14639,S2C2,yes
+129,Sh.Funadhoo,Sh,Funadhoo,6.14896,73.28789,H2 S2C2 S2C3,yes
+133,Sh.Goidhoo,Sh,Goidhoo,6.42742,72.93185,S2C5,yes
+134,Sh.Kan'ditheemu,Sh,Kan'ditheemu,6.44352,72.91629,S2C5,yes
+135,Sh.Komandoo,Sh,Komandoo,6.05296,73.05420,S2C3,yes
+136,Sh.Lhaimagu,Sh,Lhaimagu,6.16453,73.25420,S2C3,yes
+137,Sh.Maaun'goodhoo,Sh,Maaun'goodhoo,6.03530,73.28184,S2C3,yes
+138,Sh.Maroshi,Sh,Maroshi,6.20735,73.06076,,no
+139,Sh.Milandhoo,Sh,Milandhoo,6.28180,73.24251,S2C2,yes
+140,Sh.Narudhoo,Sh,Narudhoo,6.26675,73.21957,S2C2,yes
+141,Sh.Noomaraa,Sh,Noomaraa,6.432525,73.070402,S2C5,yes
+216,Th.Buruni,Th,Buruni,2.558735,73.105947,,no
+219,Th.Dhiyamigili,Th,Dhiyamigili,2.3404327,73.3380868,,no
+221,Th.Gaadhiffushi,Th,Gaadhiffushi,2.2529997,73.2132718,Z4R3 Z4R5,yes
+220,Th.Guraidhoo,Th,Guraidhoo,2.325307,73.317408,,no
+225,Th.Hirilandhoo,Th,Hirilandhoo,2.2697103,72.9319343,Z4R2,yes
+227,Th.Kandoodhoo,Th,Kandoodhoo,2.3204953,72.9169733,Z4R2,yes
+223,Th.Kinbidhoo,Th,Kinbidhoo,2.1680434,73.0649388,Z4R2,yes
+218,Th.Madifushi,Th,Madifushi,2.3572816,73.3558915,,no
+224,Th.Omadhoo,Th,Omadhoo,2.168128243662314,73.02508733676069,Z4R2,yes
+222,Th.Thimarafushi,Th,Thimarafushi,2.2095364,73.1488721,Z4R3,yes
+226,Th.Vandhoo,Th,Vandhoo,2.2916189,72.9418779,Z4R2,yes
+215,Th.Veymandoo,Th,Veymandoo,2.187433,73.095456,Z4R2 Z4R3 Z4R5,yes
+217,Th.Vilufushi,Th,Vilufushi,2.5023026,73.3092133,,no

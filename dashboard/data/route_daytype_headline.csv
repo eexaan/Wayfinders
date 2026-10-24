@@ -1,0 +1,11 @@
+route_code,bus_type,seats,day_type,trips_per_day,daily_seat_capacity,boardings_per_day,pax_per_trip,load_factor_peak_pct,load_factor_avg_pct,demand_source
+R1,Double decker,84,weekday,61.0,5124,5212.0,85.4,101.7,50.9,MTCC observed
+R1,Double decker,84,friday,42.6,3577,3192.0,74.9,89.2,44.6,MTCC observed
+R2,Double decker,84,weekday,61.0,5124,3818.0,62.6,74.5,37.3,MTCC observed
+R2,Double decker,84,friday,55.6,4669,2427.0,43.7,52.0,26.0,MTCC observed
+R3,Airport bus,52,friday,16.7,867,580.0,34.8,67.0,33.5,MTCC observed
+R3,Airport bus,52,sat_holiday,20.0,1040,828.0,41.4,79.7,39.8,MTCC observed
+R4,Airport bus,52,weekday,38.0,1976,1146.0,30.1,58.0,29.0,MTCC observed
+R4,Airport bus,52,friday,31.8,1656,722.0,22.7,43.6,21.8,MTCC observed
+R7,Double decker,84,weekday,66.0,5544,4185.0,63.4,75.5,37.7,MTCC observed
+R7,Double decker,84,friday,51.1,4289,2602.0,51.0,60.7,30.3,MTCC observed

@@ -1,0 +1,616 @@
+from_stop,to_stop,from_atoll,to_atoll,trips_per_day,first_departure,last_departure,shortest_minutes,routes
+B.Dharavandhoo,B.Eydhafushi,B,B,1,15:05,15:05,25,Z2R18
+B.Dharavandhoo,B.Maalhos,B,B,1,15:05,15:05,10,Z2R18
+B.Eydhafushi,B.Fehendhoo,B,B,1,15:45,15:45,100,Z2R17
+B.Eydhafushi,B.Fulhadhoo,B,B,1,15:45,15:45,85,Z2R17
+B.Eydhafushi,B.Goidhoo,B,B,1,15:45,15:45,110,Z2R17
+B.Eydhafushi,B.Hithaadhoo,B,B,1,15:45,15:45,30,Z2R17
+B.Eydhafushi,B.Thulhaadhoo,B,B,1,15:45,15:45,50,Z2R17
+B.Fehendhoo,B.Eydhafushi,B,B,1,06:20,06:20,105,Z2R17
+B.Fehendhoo,B.Fulhadhoo,B,B,1,06:20,06:20,15,Z2R17
+B.Fehendhoo,B.Goidhoo,B,B,1,17:25,17:25,10,Z2R17
+B.Fehendhoo,B.Hithaadhoo,B,B,1,06:20,06:20,70,Z2R17
+B.Fehendhoo,B.Thulhaadhoo,B,B,1,06:20,06:20,50,Z2R17
+B.Fulhadhoo,B.Eydhafushi,B,B,1,06:35,06:35,90,Z2R17
+B.Fulhadhoo,B.Fehendhoo,B,B,1,17:10,17:10,15,Z2R17
+B.Fulhadhoo,B.Goidhoo,B,B,1,17:10,17:10,25,Z2R17
+B.Fulhadhoo,B.Hithaadhoo,B,B,1,06:35,06:35,55,Z2R17
+B.Fulhadhoo,B.Thulhaadhoo,B,B,1,06:35,06:35,35,Z2R17
+B.Goidhoo,B.Eydhafushi,B,B,1,06:15,06:15,110,Z2R17
+B.Goidhoo,B.Fehendhoo,B,B,1,06:15,06:15,5,Z2R17
+B.Goidhoo,B.Fulhadhoo,B,B,1,06:15,06:15,20,Z2R17
+B.Goidhoo,B.Hithaadhoo,B,B,1,06:15,06:15,75,Z2R17
+B.Goidhoo,B.Thulhaadhoo,B,B,1,06:15,06:15,55,Z2R17
+B.Hithaadhoo,B.Eydhafushi,B,B,1,07:30,07:30,35,Z2R17
+B.Hithaadhoo,B.Fehendhoo,B,B,1,16:15,16:15,70,Z2R17
+B.Hithaadhoo,B.Fulhadhoo,B,B,1,16:15,16:15,55,Z2R17
+B.Hithaadhoo,B.Goidhoo,B,B,1,16:15,16:15,80,Z2R17
+B.Hithaadhoo,B.Thulhaadhoo,B,B,1,16:15,16:15,20,Z2R17
+B.Maalhos,B.Eydhafushi,B,B,1,15:15,15:15,15,Z2R18
+B.Thulhaadhoo,B.Eydhafushi,B,B,1,07:10,07:10,55,Z2R17
+B.Thulhaadhoo,B.Fehendhoo,B,B,1,16:35,16:35,50,Z2R17
+B.Thulhaadhoo,B.Fulhadhoo,B,B,1,16:35,16:35,35,Z2R17
+B.Thulhaadhoo,B.Goidhoo,B,B,1,16:35,16:35,60,Z2R17
+B.Thulhaadhoo,B.Hithaadhoo,B,B,1,07:10,07:10,20,Z2R17
+Dh.Bandidhoo,Dh.Kudahuvadhoo,Dh,Dh,1,08:25,08:25,70,Z4R8
+Dh.Bandidhoo,Dh.Maaenboodhoo,Dh,Dh,1,08:25,08:25,50,Z4R8
+Dh.Bandidhoo,Dh.Meedhoo,Dh,Dh,2,09:35,15:10,20,Z4R8 Z4R9
+Dh.Hulhudheli,Dh.Kudahuvadhoo,Dh,Dh,1,07:45,07:45,40,Z4R6
+Dh.Hulhudheli,Dh.Meedhoo,Dh,Dh,1,14:35,14:35,50,Z4R6
+Dh.Hulhudheli,Dh.Rinbudhoo,Dh,Dh,1,14:35,14:35,20,Z4R6
+Dh.Kudahuvadhoo,Dh.Bandidhoo,Dh,Dh,2,08:30,14:05,65,Z4R8 Z4R9
+Dh.Kudahuvadhoo,Dh.Hulhudheli,Dh,Dh,1,14:00,14:00,35,Z4R6
+Dh.Kudahuvadhoo,Dh.Maaenboodhoo,Dh,Dh,2,08:30,14:05,15,Z4R8 Z4R9
+Dh.Kudahuvadhoo,Dh.Meedhoo,Dh,Dh,3,08:30,14:05,85,Z4R6 Z4R8 Z4R9
+Dh.Kudahuvadhoo,Dh.Rinbudhoo,Dh,Dh,1,14:00,14:00,55,Z4R6
+Dh.Maaenboodhoo,Dh.Bandidhoo,Dh,Dh,2,08:45,14:20,50,Z4R8 Z4R9
+Dh.Maaenboodhoo,Dh.Kudahuvadhoo,Dh,Dh,1,09:15,09:15,20,Z4R8
+Dh.Maaenboodhoo,Dh.Meedhoo,Dh,Dh,2,08:45,14:20,70,Z4R8 Z4R9
+Dh.Meedhoo,Dh.Bandidhoo,Dh,Dh,1,08:10,08:10,15,Z4R8
+Dh.Meedhoo,Dh.Hulhudheli,Dh,Dh,1,07:00,07:00,45,Z4R6
+Dh.Meedhoo,Dh.Kudahuvadhoo,Dh,Dh,3,07:00,10:00,65,Z4R10 Z4R6 Z4R8
+Dh.Meedhoo,Dh.Maaenboodhoo,Dh,Dh,1,08:10,08:10,65,Z4R8
+Dh.Meedhoo,Dh.Rinbudhoo,Dh,Dh,1,07:00,07:00,25,Z4R6
+Dh.Meedhoo,F.Nilandhoo,Dh,F,1,15:35,15:35,25,Z4H1
+Dh.Rinbudhoo,Dh.Hulhudheli,Dh,Dh,1,07:25,07:25,20,Z4R6
+Dh.Rinbudhoo,Dh.Kudahuvadhoo,Dh,Dh,1,07:25,07:25,60,Z4R6
+Dh.Rinbudhoo,Dh.Meedhoo,Dh,Dh,1,14:55,14:55,30,Z4R6
+F.Bilehdhoo,F.Dharanboodhoo,F,F,1,06:55,06:55,30,Z4R7
+F.Bilehdhoo,F.Feeali,F,F,1,16:40,16:40,30,Z4R7
+F.Bilehdhoo,F.Magoodhoo,F,F,1,06:55,06:55,15,Z4R7
+F.Bilehdhoo,F.Nilandhoo,F,F,1,06:55,06:55,40,Z4R7
+F.Dharanboodhoo,F.Bilehdhoo,F,F,1,16:10,16:10,30,Z4R7
+F.Dharanboodhoo,F.Feeali,F,F,1,16:10,16:10,60,Z4R7
+F.Dharanboodhoo,F.Magoodhoo,F,F,1,16:10,16:10,15,Z4R7
+F.Dharanboodhoo,F.Nilandhoo,F,F,1,07:25,07:25,10,Z4R7
+F.Feeali,F.Bilehdhoo,F,F,1,06:30,06:30,25,Z4R7
+F.Feeali,F.Dharanboodhoo,F,F,1,06:30,06:30,55,Z4R7
+F.Feeali,F.Magoodhoo,F,F,1,06:30,06:30,40,Z4R7
+F.Feeali,F.Nilandhoo,F,F,1,06:30,06:30,65,Z4R7
+F.Magoodhoo,F.Bilehdhoo,F,F,1,16:25,16:25,15,Z4R7
+F.Magoodhoo,F.Dharanboodhoo,F,F,1,07:10,07:10,15,Z4R7
+F.Magoodhoo,F.Feeali,F,F,1,16:25,16:25,45,Z4R7
+F.Magoodhoo,F.Nilandhoo,F,F,1,07:10,07:10,25,Z4R7
+F.Nilandhoo,Dh.Meedhoo,F,Dh,1,07:40,07:40,25,Z4H1
+F.Nilandhoo,F.Bilehdhoo,F,F,1,16:05,16:05,35,Z4R7
+F.Nilandhoo,F.Dharanboodhoo,F,F,1,16:05,16:05,5,Z4R7
+F.Nilandhoo,F.Feeali,F,F,1,16:05,16:05,65,Z4R7
+F.Nilandhoo,F.Magoodhoo,F,F,1,16:05,16:05,20,Z4R7
+Ga.Dhevvadhoo,Ga.Villingili,GA,GA,1,15:40,15:40,55,Z5R1
+Ga.Dhevvadhoo,Gdh.Thinadhoo,GA,GDh,1,08:50,08:50,45,Z5R1
+Ga.Gemanafushi,Ga.Kanduhulhudhoo,GA,GA,2,06:15,18:10,25,Z5R3 Z5R4
+Ga.Gemanafushi,Ga.Kondey,GA,GA,2,06:20,17:35,20,Z5R3 Z5R4
+Ga.Gemanafushi,Ga.Kooddoo,GA,GA,1,06:20,06:20,75,Z5R3
+Ga.Gemanafushi,Ga.Villingili,GA,GA,1,06:20,06:20,90,Z5R3
+Ga.Gemanafushi,Gdh.Faresmaathoda,GA,GDh,1,06:15,06:15,125,Z5R4
+Ga.Gemanafushi,Gdh.Gahdhoo,GA,GDh,1,06:15,06:15,60,Z5R4
+Ga.Gemanafushi,Gdh.Maavarulu,GA,GDh,1,06:15,06:15,40,Z5R4
+Ga.Gemanafushi,Gdh.Vaadhoo,GA,GDh,1,06:15,06:15,100,Z5R4
+Ga.Kanduhulhudhoo,Ga.Gemanafushi,GA,GA,2,06:00,17:10,20,Z5R3 Z5R4
+Ga.Kanduhulhudhoo,Ga.Kondey,GA,GA,2,06:00,17:10,40,Z5R3 Z5R4
+Ga.Kanduhulhudhoo,Ga.Kooddoo,GA,GA,1,06:00,06:00,95,Z5R3
+Ga.Kanduhulhudhoo,Ga.Villingili,GA,GA,1,06:00,06:00,110,Z5R3
+Ga.Kanduhulhudhoo,Gdh.Faresmaathoda,GA,GDh,1,06:40,06:40,100,Z5R4
+Ga.Kanduhulhudhoo,Gdh.Gahdhoo,GA,GDh,1,06:40,06:40,35,Z5R4
+Ga.Kanduhulhudhoo,Gdh.Maavarulu,GA,GDh,1,06:40,06:40,15,Z5R4
+Ga.Kanduhulhudhoo,Gdh.Vaadhoo,GA,GDh,1,06:40,06:40,75,Z5R4
+Ga.Kolamaafushi,Ga.Kooddoo,GA,GA,1,06:30,06:30,55,Z5R9
+Ga.Kolamaafushi,Ga.Villingili,GA,GA,1,06:30,06:30,70,Z5R9
+Ga.Kondey,Ga.Gemanafushi,GA,GA,2,06:00,17:50,15,Z5R3 Z5R4
+Ga.Kondey,Ga.Kanduhulhudhoo,GA,GA,2,06:00,17:50,40,Z5R3 Z5R4
+Ga.Kondey,Ga.Kooddoo,GA,GA,1,06:40,06:40,55,Z5R3
+Ga.Kondey,Ga.Villingili,GA,GA,1,06:40,06:40,70,Z5R3
+Ga.Kondey,Gdh.Faresmaathoda,GA,GDh,1,06:00,06:00,140,Z5R4
+Ga.Kondey,Gdh.Gahdhoo,GA,GDh,1,06:00,06:00,75,Z5R4
+Ga.Kondey,Gdh.Maavarulu,GA,GDh,1,06:00,06:00,55,Z5R4
+Ga.Kondey,Gdh.Vaadhoo,GA,GDh,1,06:00,06:00,115,Z5R4
+Ga.Kooddoo,Ga.Gemanafushi,GA,GA,1,16:55,16:55,75,Z5R3
+Ga.Kooddoo,Ga.Kanduhulhudhoo,GA,GA,1,16:55,16:55,100,Z5R3
+Ga.Kooddoo,Ga.Kolamaafushi,GA,GA,1,17:00,17:00,60,Z5R9
+Ga.Kooddoo,Ga.Kondey,GA,GA,1,16:55,16:55,55,Z5R3
+Ga.Kooddoo,Ga.Villingili,GA,GA,3,07:25,09:30,10,Z5R3 Z5R8 Z5R9
+Ga.Villingili,Ga.Dhevvadhoo,GA,GA,1,08:00,08:00,50,Z5R1
+Ga.Villingili,Ga.Gemanafushi,GA,GA,1,16:45,16:45,85,Z5R3
+Ga.Villingili,Ga.Kanduhulhudhoo,GA,GA,1,16:45,16:45,110,Z5R3
+Ga.Villingili,Ga.Kolamaafushi,GA,GA,1,16:50,16:50,70,Z5R9
+Ga.Villingili,Ga.Kondey,GA,GA,1,16:45,16:45,65,Z5R3
+Ga.Villingili,Ga.Kooddoo,GA,GA,3,08:00,16:50,10,Z5R3 Z5R8 Z5R9
+Ga.Villingili,Gdh.Thinadhoo,GA,GDh,1,08:00,08:00,95,Z5R1
+Gdh.Faresmaathoda,Ga.Gemanafushi,GDh,GA,1,15:35,15:35,120,Z5R4
+Gdh.Faresmaathoda,Ga.Kanduhulhudhoo,GDh,GA,1,15:35,15:35,95,Z5R4
+Gdh.Faresmaathoda,Ga.Kondey,GDh,GA,1,15:35,15:35,140,Z5R4
+Gdh.Faresmaathoda,Gdh.Fiyori,GDh,GDh,2,06:40,16:10,20,Z5R5 Z5R6
+Gdh.Faresmaathoda,Gdh.Gahdhoo,GDh,GDh,1,15:35,15:35,60,Z5R4
+Gdh.Faresmaathoda,Gdh.Hon'dehdhoo,GDh,GDh,1,06:40,06:40,100,Z5R6
+Gdh.Faresmaathoda,Gdh.Kaadehdhoo,GDh,GDh,1,06:40,06:40,130,Z5R6
+Gdh.Faresmaathoda,Gdh.Maavarulu,GDh,GDh,1,15:35,15:35,80,Z5R4
+Gdh.Faresmaathoda,Gdh.Madaveli,GDh,GDh,1,06:40,06:40,115,Z5R6
+Gdh.Faresmaathoda,Gdh.Nadella,GDh,GDh,2,06:40,16:10,65,Z5R5 Z5R6
+Gdh.Faresmaathoda,Gdh.Rathafandhoo,GDh,GDh,2,06:40,16:10,40,Z5R5 Z5R6
+Gdh.Faresmaathoda,Gdh.Thinadhoo,GDh,GDh,2,06:40,07:35,95,Z5R5 Z5R6
+Gdh.Faresmaathoda,Gdh.Vaadhoo,GDh,GDh,4,07:25,17:40,20,Z5R10 Z5R4 Z5R5 Z5R6
+Gdh.Faresmaathoda,Gn.Fuvahmulah,GDh,Gn,1,08:30,08:30,100,Z5R10
+Gdh.Fiyori,Gdh.Faresmaathoda,GDh,GDh,2,07:15,17:20,20,Z5R5 Z5R6
+Gdh.Fiyori,Gdh.Hon'dehdhoo,GDh,GDh,1,07:00,07:00,80,Z5R6
+Gdh.Fiyori,Gdh.Kaadehdhoo,GDh,GDh,1,07:00,07:00,110,Z5R6
+Gdh.Fiyori,Gdh.Madaveli,GDh,GDh,1,07:00,07:00,95,Z5R6
+Gdh.Fiyori,Gdh.Nadella,GDh,GDh,2,07:00,16:30,45,Z5R5 Z5R6
+Gdh.Fiyori,Gdh.Rathafandhoo,GDh,GDh,2,07:00,16:30,20,Z5R5 Z5R6
+Gdh.Fiyori,Gdh.Thinadhoo,GDh,GDh,2,07:00,07:15,115,Z5R5 Z5R6
+Gdh.Fiyori,Gdh.Vaadhoo,GDh,GDh,2,07:15,17:20,40,Z5R5 Z5R6
+Gdh.Gahdhoo,Ga.Gemanafushi,GDh,GA,1,16:35,16:35,60,Z5R4
+Gdh.Gahdhoo,Ga.Kanduhulhudhoo,GDh,GA,1,16:35,16:35,35,Z5R4
+Gdh.Gahdhoo,Ga.Kondey,GDh,GA,1,16:35,16:35,80,Z5R4
+Gdh.Gahdhoo,Gdh.Faresmaathoda,GDh,GDh,1,07:15,07:15,65,Z5R4
+Gdh.Gahdhoo,Gdh.Maavarulu,GDh,GDh,1,16:35,16:35,20,Z5R4
+Gdh.Gahdhoo,Gdh.Vaadhoo,GDh,GDh,1,07:15,07:15,40,Z5R4
+Gdh.Hon'dehdhoo,Gdh.Faresmaathoda,GDh,GDh,1,16:00,16:00,100,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Fiyori,GDh,GDh,1,16:00,16:00,80,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Kaadehdhoo,GDh,GDh,1,08:20,08:20,30,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Madaveli,GDh,GDh,1,08:20,08:20,15,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Nadella,GDh,GDh,1,16:00,16:00,35,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Rathafandhoo,GDh,GDh,1,16:00,16:00,60,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Thinadhoo,GDh,GDh,1,08:20,08:20,50,Z5R6
+Gdh.Hon'dehdhoo,Gdh.Vaadhoo,GDh,GDh,1,16:00,16:00,125,Z5R6
+Gdh.Kaadehdhoo,Gdh.Faresmaathoda,GDh,GDh,1,15:30,15:30,130,Z5R6
+Gdh.Kaadehdhoo,Gdh.Fiyori,GDh,GDh,1,15:30,15:30,110,Z5R6
+Gdh.Kaadehdhoo,Gdh.Hon'dehdhoo,GDh,GDh,1,15:30,15:30,30,Z5R6
+Gdh.Kaadehdhoo,Gdh.Madaveli,GDh,GDh,1,15:30,15:30,15,Z5R6
+Gdh.Kaadehdhoo,Gdh.Nadella,GDh,GDh,1,15:30,15:30,65,Z5R6
+Gdh.Kaadehdhoo,Gdh.Rathafandhoo,GDh,GDh,1,15:30,15:30,90,Z5R6
+Gdh.Kaadehdhoo,Gdh.Thinadhoo,GDh,GDh,2,08:50,13:30,15,Z5R6 Z5R7
+Gdh.Kaadehdhoo,Gdh.Vaadhoo,GDh,GDh,1,15:30,15:30,155,Z5R6
+Gdh.Maavarulu,Ga.Gemanafushi,GDh,GA,1,16:55,16:55,40,Z5R4
+Gdh.Maavarulu,Ga.Kanduhulhudhoo,GDh,GA,1,16:55,16:55,15,Z5R4
+Gdh.Maavarulu,Ga.Kondey,GDh,GA,1,16:55,16:55,60,Z5R4
+Gdh.Maavarulu,Gdh.Faresmaathoda,GDh,GDh,1,06:55,06:55,85,Z5R4
+Gdh.Maavarulu,Gdh.Gahdhoo,GDh,GDh,1,06:55,06:55,20,Z5R4
+Gdh.Maavarulu,Gdh.Vaadhoo,GDh,GDh,1,06:55,06:55,60,Z5R4
+Gdh.Madaveli,Gdh.Faresmaathoda,GDh,GDh,1,15:45,15:45,115,Z5R6
+Gdh.Madaveli,Gdh.Fiyori,GDh,GDh,1,15:45,15:45,95,Z5R6
+Gdh.Madaveli,Gdh.Hon'dehdhoo,GDh,GDh,1,15:45,15:45,15,Z5R6
+Gdh.Madaveli,Gdh.Kaadehdhoo,GDh,GDh,1,08:35,08:35,15,Z5R6
+Gdh.Madaveli,Gdh.Nadella,GDh,GDh,1,15:45,15:45,50,Z5R6
+Gdh.Madaveli,Gdh.Rathafandhoo,GDh,GDh,1,15:45,15:45,75,Z5R6
+Gdh.Madaveli,Gdh.Thinadhoo,GDh,GDh,1,08:35,08:35,35,Z5R6
+Gdh.Madaveli,Gdh.Vaadhoo,GDh,GDh,1,15:45,15:45,140,Z5R6
+Gdh.Nadella,Gdh.Faresmaathoda,GDh,GDh,2,06:35,16:35,60,Z5R5 Z5R6
+Gdh.Nadella,Gdh.Fiyori,GDh,GDh,2,06:35,16:35,40,Z5R5 Z5R6
+Gdh.Nadella,Gdh.Hon'dehdhoo,GDh,GDh,1,07:45,07:45,35,Z5R6
+Gdh.Nadella,Gdh.Kaadehdhoo,GDh,GDh,1,07:45,07:45,65,Z5R6
+Gdh.Nadella,Gdh.Madaveli,GDh,GDh,1,07:45,07:45,50,Z5R6
+Gdh.Nadella,Gdh.Rathafandhoo,GDh,GDh,2,06:35,16:35,20,Z5R5 Z5R6
+Gdh.Nadella,Gdh.Thinadhoo,GDh,GDh,2,06:35,07:45,85,Z5R5 Z5R6
+Gdh.Nadella,Gdh.Vaadhoo,GDh,GDh,2,06:35,16:35,80,Z5R5 Z5R6
+Gdh.Rathafandhoo,Gdh.Faresmaathoda,GDh,GDh,2,06:55,17:00,40,Z5R5 Z5R6
+Gdh.Rathafandhoo,Gdh.Fiyori,GDh,GDh,2,06:55,17:00,20,Z5R5 Z5R6
+Gdh.Rathafandhoo,Gdh.Hon'dehdhoo,GDh,GDh,1,07:20,07:20,60,Z5R6
+Gdh.Rathafandhoo,Gdh.Kaadehdhoo,GDh,GDh,1,07:20,07:20,90,Z5R6
+Gdh.Rathafandhoo,Gdh.Madaveli,GDh,GDh,1,07:20,07:20,75,Z5R6
+Gdh.Rathafandhoo,Gdh.Nadella,GDh,GDh,2,07:20,16:50,25,Z5R5 Z5R6
+Gdh.Rathafandhoo,Gdh.Thinadhoo,GDh,GDh,2,06:55,07:20,110,Z5R5 Z5R6
+Gdh.Rathafandhoo,Gdh.Vaadhoo,GDh,GDh,2,06:55,17:00,60,Z5R5 Z5R6
+Gdh.Thinadhoo,Ga.Dhevvadhoo,GDh,GA,1,15:00,15:00,40,Z5R1
+Gdh.Thinadhoo,Ga.Villingili,GDh,GA,1,15:00,15:00,95,Z5R1
+Gdh.Thinadhoo,Gdh.Faresmaathoda,GDh,GDh,2,14:45,15:15,85,Z5R5 Z5R6
+Gdh.Thinadhoo,Gdh.Fiyori,GDh,GDh,2,14:45,15:15,105,Z5R5 Z5R6
+Gdh.Thinadhoo,Gdh.Hon'dehdhoo,GDh,GDh,1,15:15,15:15,45,Z5R6
+Gdh.Thinadhoo,Gdh.Kaadehdhoo,GDh,GDh,2,11:30,15:15,15,Z5R6 Z5R7
+Gdh.Thinadhoo,Gdh.Madaveli,GDh,GDh,1,15:15,15:15,30,Z5R6
+Gdh.Thinadhoo,Gdh.Nadella,GDh,GDh,2,14:45,15:15,80,Z5R5 Z5R6
+Gdh.Thinadhoo,Gdh.Rathafandhoo,GDh,GDh,2,14:45,15:15,105,Z5R5 Z5R6
+Gdh.Thinadhoo,Gdh.Vaadhoo,GDh,GDh,2,14:45,15:15,65,Z5R5 Z5R6
+Gdh.Vaadhoo,Ga.Gemanafushi,GDh,GA,1,15:55,15:55,100,Z5R4
+Gdh.Vaadhoo,Ga.Kanduhulhudhoo,GDh,GA,1,15:55,15:55,75,Z5R4
+Gdh.Vaadhoo,Ga.Kondey,GDh,GA,1,15:55,15:55,120,Z5R4
+Gdh.Vaadhoo,Gdh.Faresmaathoda,GDh,GDh,4,06:20,15:50,20,Z5R10 Z5R4 Z5R5 Z5R6
+Gdh.Vaadhoo,Gdh.Fiyori,GDh,GDh,2,06:20,15:50,40,Z5R5 Z5R6
+Gdh.Vaadhoo,Gdh.Gahdhoo,GDh,GDh,1,15:55,15:55,40,Z5R4
+Gdh.Vaadhoo,Gdh.Hon'dehdhoo,GDh,GDh,1,06:20,06:20,120,Z5R6
+Gdh.Vaadhoo,Gdh.Kaadehdhoo,GDh,GDh,1,06:20,06:20,150,Z5R6
+Gdh.Vaadhoo,Gdh.Maavarulu,GDh,GDh,1,15:55,15:55,60,Z5R4
+Gdh.Vaadhoo,Gdh.Madaveli,GDh,GDh,1,06:20,06:20,135,Z5R6
+Gdh.Vaadhoo,Gdh.Nadella,GDh,GDh,2,06:20,15:50,85,Z5R5 Z5R6
+Gdh.Vaadhoo,Gdh.Rathafandhoo,GDh,GDh,2,06:20,15:50,60,Z5R5 Z5R6
+Gdh.Vaadhoo,Gdh.Thinadhoo,GDh,GDh,2,06:20,07:55,75,Z5R5 Z5R6
+Gdh.Vaadhoo,Gn.Fuvahmulah,GDh,Gn,1,08:10,08:10,120,Z5R10
+Gn.Fuvahmulah,Gdh.Faresmaathoda,Gn,GDh,1,06:00,06:00,85,Z5R10
+Gn.Fuvahmulah,Gdh.Vaadhoo,Gn,GDh,1,06:00,06:00,115,Z5R10
+Gn.Fuvahmulah,S.Feydhoo,Gn,S,1,11:00,11:00,85,Z6R2
+Gn.Fuvahmulah,S.Hulhumeedhoo,Gn,S,1,11:00,11:00,60,Z6R2
+Ha.Dhihdhoo,Ha.Hoarafushi,HA,HA,1,15:30,15:30,50,S1C1
+Ha.Dhihdhoo,Ha.Ihavandhoo,HA,HA,1,15:30,15:30,35,S1C1
+Ha.Dhihdhoo,Ha.Maarandhoo,HA,HA,1,15:30,15:30,75,S1C3
+Ha.Dhihdhoo,Ha.Molhadhoo,HA,HA,1,15:30,15:30,70,S1C1
+Ha.Dhihdhoo,Ha.Muraidhoo,HA,HA,1,15:30,15:30,15,S1C3
+Ha.Dhihdhoo,Ha.Thakandhoo,HA,HA,1,15:30,15:30,65,S1C3
+Ha.Dhihdhoo,Ha.Thuraakunu,HA,HA,1,15:30,15:30,105,S1C1
+Ha.Dhihdhoo,Ha.Uligamu,HA,HA,1,15:30,15:30,95,S1C1
+Ha.Dhihdhoo,Ha.Utheemu,HA,HA,1,15:30,15:30,30,S1C3
+Ha.Dhihdhoo,Hdh.Hanimaadhoo,HA,HDh,1,11:00,11:00,25,S1C6
+Ha.Dhihdhoo,Hdh.Kulhudhuffushi,HA,HDh,1,08:30,08:30,55,S1V1
+Ha.Hoarafushi,Ha.Dhihdhoo,HA,HA,1,07:20,07:20,55,S1C1
+Ha.Hoarafushi,Ha.Ihavandhoo,HA,HA,2,07:20,16:20,15,H1 S1C1
+Ha.Hoarafushi,Ha.Maarandhoo,HA,HA,1,07:20,07:20,35,H1
+Ha.Hoarafushi,Ha.Molhadhoo,HA,HA,1,16:20,16:20,20,S1C1
+Ha.Hoarafushi,Ha.Thakandhoo,HA,HA,1,07:20,07:20,45,H1
+Ha.Hoarafushi,Ha.Thuraakunu,HA,HA,1,16:20,16:20,55,S1C1
+Ha.Hoarafushi,Ha.Uligamu,HA,HA,1,16:20,16:20,45,S1C1
+Ha.Hoarafushi,Hdh.Kulhudhuffushi,HA,HDh,1,07:20,07:20,90,H1
+Ha.Ihavandhoo,Ha.Dhihdhoo,HA,HA,1,07:35,07:35,40,S1C1
+Ha.Ihavandhoo,Ha.Hoarafushi,HA,HA,2,07:10,16:05,10,H1 S1C1
+Ha.Ihavandhoo,Ha.Maarandhoo,HA,HA,1,07:10,07:10,45,H1
+Ha.Ihavandhoo,Ha.Molhadhoo,HA,HA,1,16:05,16:05,35,S1C1
+Ha.Ihavandhoo,Ha.Thakandhoo,HA,HA,1,07:10,07:10,55,H1
+Ha.Ihavandhoo,Ha.Thuraakunu,HA,HA,1,16:05,16:05,70,S1C1
+Ha.Ihavandhoo,Ha.Uligamu,HA,HA,1,16:05,16:05,60,S1C1
+Ha.Ihavandhoo,Hdh.Kulhudhuffushi,HA,HDh,1,07:10,07:10,100,H1
+Ha.Maarandhoo,Ha.Dhihdhoo,HA,HA,1,07:00,07:00,75,S1C3
+Ha.Maarandhoo,Ha.Hoarafushi,HA,HA,1,15:45,15:45,35,H1
+Ha.Maarandhoo,Ha.Ihavandhoo,HA,HA,1,15:45,15:45,50,H1
+Ha.Maarandhoo,Ha.Muraidhoo,HA,HA,1,07:00,07:00,55,S1C3
+Ha.Maarandhoo,Ha.Thakandhoo,HA,HA,2,07:00,07:55,5,H1 S1C3
+Ha.Maarandhoo,Ha.Utheemu,HA,HA,1,07:00,07:00,40,S1C3
+Ha.Maarandhoo,Hdh.Kulhudhuffushi,HA,HDh,1,07:55,07:55,55,H1
+Ha.Molhadhoo,Ha.Dhihdhoo,HA,HA,1,07:00,07:00,75,S1C1
+Ha.Molhadhoo,Ha.Hoarafushi,HA,HA,1,07:00,07:00,20,S1C1
+Ha.Molhadhoo,Ha.Ihavandhoo,HA,HA,1,07:00,07:00,35,S1C1
+Ha.Molhadhoo,Ha.Thuraakunu,HA,HA,1,16:40,16:40,35,S1C1
+Ha.Molhadhoo,Ha.Uligamu,HA,HA,1,16:40,16:40,25,S1C1
+Ha.Muraidhoo,Ha.Dhihdhoo,HA,HA,1,07:55,07:55,20,S1C3
+Ha.Muraidhoo,Ha.Maarandhoo,HA,HA,1,15:45,15:45,60,S1C3
+Ha.Muraidhoo,Ha.Thakandhoo,HA,HA,1,15:45,15:45,50,S1C3
+Ha.Muraidhoo,Ha.Utheemu,HA,HA,1,15:45,15:45,15,S1C3
+Ha.Thakandhoo,Ha.Dhihdhoo,HA,HA,1,07:05,07:05,70,S1C3
+Ha.Thakandhoo,Ha.Hoarafushi,HA,HA,1,15:35,15:35,45,H1
+Ha.Thakandhoo,Ha.Ihavandhoo,HA,HA,1,15:35,15:35,60,H1
+Ha.Thakandhoo,Ha.Maarandhoo,HA,HA,2,15:35,16:35,10,H1 S1C3
+Ha.Thakandhoo,Ha.Muraidhoo,HA,HA,1,07:05,07:05,50,S1C3
+Ha.Thakandhoo,Ha.Utheemu,HA,HA,1,07:05,07:05,35,S1C3
+Ha.Thakandhoo,Hdh.Kulhudhuffushi,HA,HDh,1,08:05,08:05,45,H1
+Ha.Thuraakunu,Ha.Dhihdhoo,HA,HA,1,06:30,06:30,105,S1C1
+Ha.Thuraakunu,Ha.Hoarafushi,HA,HA,1,06:30,06:30,50,S1C1
+Ha.Thuraakunu,Ha.Ihavandhoo,HA,HA,1,06:30,06:30,65,S1C1
+Ha.Thuraakunu,Ha.Molhadhoo,HA,HA,1,06:30,06:30,30,S1C1
+Ha.Thuraakunu,Ha.Uligamu,HA,HA,1,06:30,06:30,5,S1C1
+Ha.Uligamu,Ha.Dhihdhoo,HA,HA,1,06:35,06:35,100,S1C1
+Ha.Uligamu,Ha.Hoarafushi,HA,HA,1,06:35,06:35,45,S1C1
+Ha.Uligamu,Ha.Ihavandhoo,HA,HA,1,06:35,06:35,60,S1C1
+Ha.Uligamu,Ha.Molhadhoo,HA,HA,1,06:35,06:35,25,S1C1
+Ha.Uligamu,Ha.Thuraakunu,HA,HA,1,17:05,17:05,10,S1C1
+Ha.Utheemu,Ha.Dhihdhoo,HA,HA,1,07:40,07:40,35,S1C3
+Ha.Utheemu,Ha.Maarandhoo,HA,HA,1,16:00,16:00,45,S1C3
+Ha.Utheemu,Ha.Muraidhoo,HA,HA,1,07:40,07:40,15,S1C3
+Ha.Utheemu,Ha.Thakandhoo,HA,HA,1,16:00,16:00,35,S1C3
+Hdh.Finey,Hdh.Hanimaadhoo,HDh,HDh,1,08:25,08:25,25,R1C4
+Hdh.Finey,Hdh.Hirimaradhoo,HDh,HDh,1,16:05,16:05,15,R1C4
+Hdh.Finey,Hdh.Kulhudhuffushi,HDh,HDh,1,08:25,08:25,60,R1C4
+Hdh.Hanimaadhoo,Ha.Dhihdhoo,HDh,HA,1,14:30,14:30,25,S1C6
+Hdh.Hanimaadhoo,Hdh.Finey,HDh,HDh,1,15:40,15:40,25,R1C4
+Hdh.Hanimaadhoo,Hdh.Hirimaradhoo,HDh,HDh,1,15:40,15:40,40,R1C4
+Hdh.Hanimaadhoo,Hdh.Kulhudhuffushi,HDh,HDh,4,07:00,14:00,30,R1C4 R1C7 R1C9
+Hdh.Hanimaadhoo,Hdh.Nolhivaram,HDh,HDh,2,07:00,14:00,30,R1C7
+Hdh.Hanimaadhoo,Hdh.Nolhivaranfaru,HDh,HDh,2,07:00,14:00,15,R1C7
+Hdh.Hirimaradhoo,Hdh.Finey,HDh,HDh,1,08:15,08:15,10,R1C4
+Hdh.Hirimaradhoo,Hdh.Hanimaadhoo,HDh,HDh,1,08:15,08:15,35,R1C4
+Hdh.Hirimaradhoo,Hdh.Kulhudhuffushi,HDh,HDh,1,08:15,08:15,70,R1C4
+Hdh.Kulhudhuffushi,Ha.Dhihdhoo,HDh,HA,1,14:15,14:15,55,S1V1
+Hdh.Kulhudhuffushi,Ha.Hoarafushi,HDh,HA,1,14:55,14:55,85,H1
+Hdh.Kulhudhuffushi,Ha.Ihavandhoo,HDh,HA,1,14:55,14:55,100,H1
+Hdh.Kulhudhuffushi,Ha.Maarandhoo,HDh,HA,1,14:55,14:55,50,H1
+Hdh.Kulhudhuffushi,Ha.Thakandhoo,HDh,HA,1,14:55,14:55,40,H1
+Hdh.Kulhudhuffushi,Hdh.Finey,HDh,HDh,1,15:10,15:10,55,R1C4
+Hdh.Kulhudhuffushi,Hdh.Hanimaadhoo,HDh,HDh,4,09:15,17:00,30,R1C4 R1C7 R1C9
+Hdh.Kulhudhuffushi,Hdh.Hirimaradhoo,HDh,HDh,1,15:10,15:10,70,R1C4
+Hdh.Kulhudhuffushi,Hdh.Kumundhoo,HDh,HDh,2,07:55,15:00,15,R1C6
+Hdh.Kulhudhuffushi,Hdh.Makunudhoo,HDh,HDh,1,15:00,15:00,90,R1V1
+Hdh.Kulhudhuffushi,Hdh.Neykurendhoo,HDh,HDh,1,15:00,15:00,20,R1V1
+Hdh.Kulhudhuffushi,Hdh.Nolhivaram,HDh,HDh,2,13:00,17:00,10,R1C7
+Hdh.Kulhudhuffushi,Hdh.Nolhivaranfaru,HDh,HDh,2,13:00,17:00,25,R1C7
+Hdh.Kulhudhuffushi,Hdh.Vaikaradhoo,HDh,HDh,1,15:00,15:00,35,R1V1
+Hdh.Kulhudhuffushi,Sh.Bileyfahi,HDh,Sh,1,15:45,15:45,80,S2C5
+Hdh.Kulhudhuffushi,Sh.Feevah,HDh,Sh,1,14:15,14:15,55,H2
+Hdh.Kulhudhuffushi,Sh.Feydhoo,HDh,Sh,1,15:45,15:45,100,S2C5
+Hdh.Kulhudhuffushi,Sh.Funadhoo,HDh,Sh,1,14:15,14:15,95,H2
+Hdh.Kulhudhuffushi,Sh.Goidhoo,HDh,Sh,1,15:45,15:45,55,S2C5
+Hdh.Kulhudhuffushi,Sh.Kan'ditheemu,HDh,Sh,1,15:45,15:45,40,S2C5
+Hdh.Kulhudhuffushi,Sh.Noomaraa,HDh,Sh,1,15:45,15:45,120,S2C5
+Hdh.Kumundhoo,Hdh.Kulhudhuffushi,HDh,HDh,2,08:15,15:20,15,R1C6
+Hdh.Makunudhoo,Hdh.Kulhudhuffushi,HDh,HDh,1,06:55,06:55,90,R1V1
+Hdh.Makunudhoo,Hdh.Neykurendhoo,HDh,HDh,1,06:55,06:55,65,R1V1
+Hdh.Makunudhoo,Hdh.Vaikaradhoo,HDh,HDh,2,06:55,16:35,50,R1V1 R1V2
+Hdh.Neykurendhoo,Hdh.Kulhudhuffushi,HDh,HDh,1,08:00,08:00,25,R1V1
+Hdh.Neykurendhoo,Hdh.Makunudhoo,HDh,HDh,1,15:20,15:20,70,R1V1
+Hdh.Neykurendhoo,Hdh.Vaikaradhoo,HDh,HDh,1,15:20,15:20,15,R1V1
+Hdh.Nolhivaram,Hdh.Hanimaadhoo,HDh,HDh,2,13:10,17:10,35,R1C7
+Hdh.Nolhivaram,Hdh.Kulhudhuffushi,HDh,HDh,2,07:30,14:30,15,R1C7
+Hdh.Nolhivaram,Hdh.Nolhivaranfaru,HDh,HDh,2,13:10,17:10,15,R1C7
+Hdh.Nolhivaranfaru,Hdh.Hanimaadhoo,HDh,HDh,2,13:25,17:25,20,R1C7
+Hdh.Nolhivaranfaru,Hdh.Kulhudhuffushi,HDh,HDh,2,07:15,14:15,30,R1C7
+Hdh.Nolhivaranfaru,Hdh.Nolhivaram,HDh,HDh,2,07:15,14:15,15,R1C7
+Hdh.Vaikaradhoo,Hdh.Kulhudhuffushi,HDh,HDh,1,07:45,07:45,40,R1V1
+Hdh.Vaikaradhoo,Hdh.Makunudhoo,HDh,HDh,2,06:00,15:35,50,R1V1 R1V2
+Hdh.Vaikaradhoo,Hdh.Neykurendhoo,HDh,HDh,1,07:45,07:45,15,R1V1
+L.Dhanbidhoo,L.Fonadhoo,L,L,1,07:15,07:15,70,Z4R16
+L.Dhanbidhoo,L.Gan,L,L,1,07:15,07:15,45,Z4R16
+L.Dhanbidhoo,L.Isdhoo,L,L,1,16:05,16:05,20,Z4R16
+L.Dhanbidhoo,L.Kalaidhoo,L,L,1,16:05,16:05,10,Z4R16
+L.Dhanbidhoo,L.Maabaidhoo,L,L,1,07:15,07:15,15,Z4R16
+L.Dhanbidhoo,L.Mundoo,L,L,1,07:15,07:15,25,Z4R16
+L.Fonadhoo,L.Dhanbidhoo,L,L,1,15:00,15:00,65,Z4R16
+L.Fonadhoo,L.Gan,L,L,2,08:15,15:00,20,Z4R16 Z4R17
+L.Fonadhoo,L.Hithadhoo,L,L,1,15:30,15:30,40,Z4R17
+L.Fonadhoo,L.Isdhoo,L,L,1,15:00,15:00,85,Z4R16
+L.Fonadhoo,L.Kalaidhoo,L,L,1,15:00,15:00,75,Z4R16
+L.Fonadhoo,L.Kunahandhoo,L,L,1,15:30,15:30,50,Z4R17
+L.Fonadhoo,L.Maabaidhoo,L,L,1,15:00,15:00,50,Z4R16
+L.Fonadhoo,L.Maamendhoo,L,L,1,15:30,15:30,30,Z4R17
+L.Fonadhoo,L.Maavah,L,L,1,15:30,15:30,80,Z4R17
+L.Fonadhoo,L.Mundoo,L,L,1,15:00,15:00,40,Z4R16
+L.Gan,L.Dhanbidhoo,L,L,1,15:20,15:20,45,Z4R16
+L.Gan,L.Fonadhoo,L,L,2,08:00,15:10,20,Z4R16 Z4R17
+L.Gan,L.Hithadhoo,L,L,1,15:10,15:10,60,Z4R17
+L.Gan,L.Isdhoo,L,L,1,15:20,15:20,65,Z4R16
+L.Gan,L.Kalaidhoo,L,L,1,15:20,15:20,55,Z4R16
+L.Gan,L.Kunahandhoo,L,L,1,15:10,15:10,70,Z4R17
+L.Gan,L.Maabaidhoo,L,L,1,15:20,15:20,30,Z4R16
+L.Gan,L.Maamendhoo,L,L,1,15:10,15:10,50,Z4R17
+L.Gan,L.Maavah,L,L,1,15:10,15:10,100,Z4R17
+L.Gan,L.Mundoo,L,L,1,15:20,15:20,20,Z4R16
+L.Hithadhoo,L.Fonadhoo,L,L,1,07:35,07:35,40,Z4R17
+L.Hithadhoo,L.Gan,L,L,1,07:35,07:35,65,Z4R17
+L.Hithadhoo,L.Kunahandhoo,L,L,1,16:10,16:10,10,Z4R17
+L.Hithadhoo,L.Maamendhoo,L,L,1,07:35,07:35,10,Z4R17
+L.Hithadhoo,L.Maavah,L,L,1,16:10,16:10,40,Z4R17
+L.Isdhoo,L.Dhanbidhoo,L,L,1,07:00,07:00,15,Z4R16
+L.Isdhoo,L.Fonadhoo,L,L,1,07:00,07:00,85,Z4R16
+L.Isdhoo,L.Gan,L,L,1,07:00,07:00,60,Z4R16
+L.Isdhoo,L.Kalaidhoo,L,L,1,07:00,07:00,5,Z4R16
+L.Isdhoo,L.Maabaidhoo,L,L,1,07:00,07:00,30,Z4R16
+L.Isdhoo,L.Mundoo,L,L,1,07:00,07:00,40,Z4R16
+L.Kalaidhoo,L.Dhanbidhoo,L,L,1,07:05,07:05,10,Z4R16
+L.Kalaidhoo,L.Fonadhoo,L,L,1,07:05,07:05,80,Z4R16
+L.Kalaidhoo,L.Gan,L,L,1,07:05,07:05,55,Z4R16
+L.Kalaidhoo,L.Isdhoo,L,L,1,16:15,16:15,10,Z4R16
+L.Kalaidhoo,L.Maabaidhoo,L,L,1,07:05,07:05,25,Z4R16
+L.Kalaidhoo,L.Mundoo,L,L,1,07:05,07:05,35,Z4R16
+L.Kunahandhoo,L.Fonadhoo,L,L,1,07:25,07:25,50,Z4R17
+L.Kunahandhoo,L.Gan,L,L,1,07:25,07:25,75,Z4R17
+L.Kunahandhoo,L.Hithadhoo,L,L,1,07:25,07:25,10,Z4R17
+L.Kunahandhoo,L.Maamendhoo,L,L,1,07:25,07:25,20,Z4R17
+L.Kunahandhoo,L.Maavah,L,L,1,16:20,16:20,30,Z4R17
+L.Maabaidhoo,L.Dhanbidhoo,L,L,1,15:50,15:50,15,Z4R16
+L.Maabaidhoo,L.Fonadhoo,L,L,1,07:30,07:30,55,Z4R16
+L.Maabaidhoo,L.Gan,L,L,1,07:30,07:30,30,Z4R16
+L.Maabaidhoo,L.Isdhoo,L,L,1,15:50,15:50,35,Z4R16
+L.Maabaidhoo,L.Kalaidhoo,L,L,1,15:50,15:50,25,Z4R16
+L.Maabaidhoo,L.Mundoo,L,L,1,07:30,07:30,10,Z4R16
+L.Maamendhoo,L.Fonadhoo,L,L,1,07:45,07:45,30,Z4R17
+L.Maamendhoo,L.Gan,L,L,1,07:45,07:45,55,Z4R17
+L.Maamendhoo,L.Hithadhoo,L,L,1,16:00,16:00,10,Z4R17
+L.Maamendhoo,L.Kunahandhoo,L,L,1,16:00,16:00,20,Z4R17
+L.Maamendhoo,L.Maavah,L,L,1,16:00,16:00,50,Z4R17
+L.Maavah,L.Fonadhoo,L,L,1,07:00,07:00,75,Z4R17
+L.Maavah,L.Gan,L,L,1,07:00,07:00,100,Z4R17
+L.Maavah,L.Hithadhoo,L,L,1,07:00,07:00,35,Z4R17
+L.Maavah,L.Kunahandhoo,L,L,1,07:00,07:00,25,Z4R17
+L.Maavah,L.Maamendhoo,L,L,1,07:00,07:00,45,Z4R17
+L.Mundoo,L.Dhanbidhoo,L,L,1,15:40,15:40,25,Z4R16
+L.Mundoo,L.Fonadhoo,L,L,1,07:40,07:40,45,Z4R16
+L.Mundoo,L.Gan,L,L,1,07:40,07:40,20,Z4R16
+L.Mundoo,L.Isdhoo,L,L,1,15:40,15:40,45,Z4R16
+L.Mundoo,L.Kalaidhoo,L,L,1,15:40,15:40,35,Z4R16
+L.Mundoo,L.Maabaidhoo,L,L,1,15:40,15:40,10,Z4R16
+N.Fodhdhoo,N.Holhudhoo,N,N,1,17:05,17:05,15,Z2R2
+N.Fodhdhoo,N.Magoodhoo,N,N,1,07:10,07:10,55,Z2R2
+N.Fodhdhoo,N.Manadhoo,N,N,1,07:10,07:10,70,Z2R2
+N.Fodhdhoo,N.Velidhoo,N,N,1,07:10,07:10,25,Z2R2
+N.Holhudhoo,N.Fodhdhoo,N,N,1,07:00,07:00,10,Z2R2
+N.Holhudhoo,N.Magoodhoo,N,N,1,07:00,07:00,65,Z2R2
+N.Holhudhoo,N.Manadhoo,N,N,1,07:00,07:00,80,Z2R2
+N.Holhudhoo,N.Velidhoo,N,N,1,07:00,07:00,35,Z2R2
+N.Kudafari,N.Lhohi,N,N,1,07:00,07:00,15,Z2R3
+N.Kudafari,N.Manadhoo,N,N,1,07:00,07:00,45,Z2R3
+N.Kudafari,N.Miladhoo,N,N,1,07:00,07:00,30,Z2R3
+N.Lhohi,N.Kudafari,N,N,1,16:25,16:25,20,Z2R3
+N.Lhohi,N.Manadhoo,N,N,1,07:15,07:15,30,Z2R3
+N.Lhohi,N.Miladhoo,N,N,1,07:15,07:15,15,Z2R3
+N.Maafaru,N.Manadhoo,N,N,1,13:30,13:30,15,Z2R4
+N.Magoodhoo,N.Fodhdhoo,N,N,1,16:10,16:10,55,Z2R2
+N.Magoodhoo,N.Holhudhoo,N,N,1,16:10,16:10,70,Z2R2
+N.Magoodhoo,N.Manadhoo,N,N,1,08:05,08:05,15,Z2R2
+N.Magoodhoo,N.Velidhoo,N,N,1,16:10,16:10,30,Z2R2
+N.Manadhoo,N.Fodhdhoo,N,N,1,16:00,16:00,65,Z2R2
+N.Manadhoo,N.Holhudhoo,N,N,1,16:00,16:00,80,Z2R2
+N.Manadhoo,N.Kudafari,N,N,1,16:00,16:00,45,Z2R3
+N.Manadhoo,N.Lhohi,N,N,1,16:00,16:00,25,Z2R3
+N.Manadhoo,N.Maafaru,N,N,1,11:15,11:15,15,Z2R4
+N.Manadhoo,N.Magoodhoo,N,N,1,16:00,16:00,10,Z2R2
+N.Manadhoo,N.Miladhoo,N,N,1,16:00,16:00,10,Z2R3
+N.Manadhoo,N.Velidhoo,N,N,1,16:00,16:00,40,Z2R2
+N.Manadhoo,R.Ungoofaaru,N,R,1,08:30,08:30,80,Z2H1
+N.Miladhoo,N.Kudafari,N,N,1,16:10,16:10,35,Z2R3
+N.Miladhoo,N.Lhohi,N,N,1,16:10,16:10,15,Z2R3
+N.Miladhoo,N.Manadhoo,N,N,1,07:30,07:30,15,Z2R3
+N.Velidhoo,N.Fodhdhoo,N,N,1,16:40,16:40,25,Z2R2
+N.Velidhoo,N.Holhudhoo,N,N,1,16:40,16:40,40,Z2R2
+N.Velidhoo,N.Magoodhoo,N,N,1,07:35,07:35,30,Z2R2
+N.Velidhoo,N.Manadhoo,N,N,1,07:35,07:35,45,Z2R2
+R.Alifushi,R.Angolhitheem,R,R,1,06:15,06:15,50,Z2R10
+R.Alifushi,R.Hulhudhuffaaru,R,R,1,06:15,06:15,65,Z2R10
+R.Alifushi,R.Ifuru,R,R,1,06:15,06:15,80,Z2R10
+R.Alifushi,R.Rasgetheem,R,R,1,06:15,06:15,40,Z2R10
+R.Alifushi,R.Ungoofaaru,R,R,1,06:15,06:15,90,Z2R10
+R.Alifushi,R.Vaadhoo,R,R,1,06:15,06:15,25,Z2R10
+R.Angolhitheem,R.Alifushi,R,R,1,17:00,17:00,55,Z2R10
+R.Angolhitheem,R.Hulhudhuffaaru,R,R,1,07:05,07:05,15,Z2R10
+R.Angolhitheem,R.Ifuru,R,R,1,07:05,07:05,30,Z2R10
+R.Angolhitheem,R.Rasgetheem,R,R,1,17:00,17:00,10,Z2R10
+R.Angolhitheem,R.Ungoofaaru,R,R,1,07:05,07:05,40,Z2R10
+R.Angolhitheem,R.Vaadhoo,R,R,1,17:00,17:00,25,Z2R10
+R.Dhuvaafaru,R.Innamaadhoo,R,R,1,15:20,15:20,35,Z2R12
+R.Dhuvaafaru,R.Maakurathu,R,R,1,15:20,15:20,10,Z2R12
+R.Dhuvaafaru,R.Rasmaadhoo,R,R,1,15:20,15:20,25,Z2R12
+R.Dhuvaafaru,R.Ungoofaaru,R,R,4,08:00,16:00,10,Z2R12 Z2UBC
+R.Fainu,R.Kinolhas,R,R,1,17:10,17:10,10,Z2R11
+R.Fainu,R.Maduvvari,R,R,1,17:10,17:10,45,Z2R11
+R.Fainu,R.Meedhoo,R,R,1,17:10,17:10,25,Z2R11
+R.Hulhudhuffaaru,R.Alifushi,R,R,1,16:45,16:45,70,Z2R10
+R.Hulhudhuffaaru,R.Angolhitheem,R,R,1,16:45,16:45,15,Z2R10
+R.Hulhudhuffaaru,R.Ifuru,R,R,1,07:20,07:20,15,Z2R10
+R.Hulhudhuffaaru,R.Rasgetheem,R,R,1,16:45,16:45,25,Z2R10
+R.Hulhudhuffaaru,R.Ungoofaaru,R,R,1,07:20,07:20,25,Z2R10
+R.Hulhudhuffaaru,R.Vaadhoo,R,R,1,16:45,16:45,40,Z2R10
+R.Ifuru,R.Alifushi,R,R,1,16:30,16:30,85,Z2R10
+R.Ifuru,R.Angolhitheem,R,R,1,16:30,16:30,30,Z2R10
+R.Ifuru,R.Hulhudhuffaaru,R,R,1,16:30,16:30,15,Z2R10
+R.Ifuru,R.Innamaadhoo,R,R,1,08:00,08:00,35,Z2R14
+R.Ifuru,R.Rasgetheem,R,R,1,16:30,16:30,40,Z2R10
+R.Ifuru,R.Ungoofaaru,R,R,3,07:35,14:30,5,Z2R10 Z2R13
+R.Ifuru,R.Vaadhoo,R,R,1,16:30,16:30,55,Z2R10
+R.Inguraidhoo,R.Fainu,R,R,1,17:00,17:00,10,Z2R11
+R.Inguraidhoo,R.Kinolhas,R,R,1,17:00,17:00,20,Z2R11
+R.Inguraidhoo,R.Maduvvari,R,R,1,17:00,17:00,55,Z2R11
+R.Inguraidhoo,R.Meedhoo,R,R,1,17:00,17:00,35,Z2R11
+R.Innamaadhoo,R.Dhuvaafaru,R,R,1,08:40,08:40,30,Z2R12
+R.Innamaadhoo,R.Maakurathu,R,R,1,08:40,08:40,20,Z2R12
+R.Innamaadhoo,R.Rasmaadhoo,R,R,1,08:40,08:40,5,Z2R12
+R.Innamaadhoo,R.Ungoofaaru,R,R,2,08:40,16:00,20,Z2R12 Z2R15
+R.Kinolhas,R.Maduvvari,R,R,1,17:20,17:20,35,Z2R11
+R.Kinolhas,R.Meedhoo,R,R,1,17:20,17:20,15,Z2R11
+R.Maakurathu,R.Dhuvaafaru,R,R,1,09:00,09:00,10,Z2R12
+R.Maakurathu,R.Innamaadhoo,R,R,1,15:30,15:30,25,Z2R12
+R.Maakurathu,R.Rasmaadhoo,R,R,1,15:30,15:30,15,Z2R12
+R.Maakurathu,R.Ungoofaaru,R,R,1,09:00,09:00,25,Z2R12
+R.Meedhoo,R.Maduvvari,R,R,1,17:35,17:35,20,Z2R11
+R.Rasgetheem,R.Alifushi,R,R,1,17:10,17:10,45,Z2R10
+R.Rasgetheem,R.Angolhitheem,R,R,1,06:55,06:55,10,Z2R10
+R.Rasgetheem,R.Hulhudhuffaaru,R,R,1,06:55,06:55,25,Z2R10
+R.Rasgetheem,R.Ifuru,R,R,1,06:55,06:55,40,Z2R10
+R.Rasgetheem,R.Ungoofaaru,R,R,1,06:55,06:55,50,Z2R10
+R.Rasgetheem,R.Vaadhoo,R,R,1,17:10,17:10,15,Z2R10
+R.Rasmaadhoo,R.Dhuvaafaru,R,R,1,08:45,08:45,25,Z2R12
+R.Rasmaadhoo,R.Innamaadhoo,R,R,1,15:45,15:45,10,Z2R12
+R.Rasmaadhoo,R.Maakurathu,R,R,1,08:45,08:45,15,Z2R12
+R.Rasmaadhoo,R.Ungoofaaru,R,R,1,08:45,08:45,40,Z2R12
+R.Ungoofaaru,N.Manadhoo,R,N,1,14:30,14:30,80,Z2H1
+R.Ungoofaaru,R.Alifushi,R,R,1,16:25,16:25,90,Z2R10
+R.Ungoofaaru,R.Angolhitheem,R,R,1,16:25,16:25,35,Z2R10
+R.Ungoofaaru,R.Dhuvaafaru,R,R,4,08:20,16:20,10,Z2R12 Z2UBC
+R.Ungoofaaru,R.Fainu,R,R,1,16:30,16:30,40,Z2R11
+R.Ungoofaaru,R.Hulhudhuffaaru,R,R,1,16:25,16:25,20,Z2R10
+R.Ungoofaaru,R.Ifuru,R,R,4,07:55,16:25,5,Z2R10 Z2R13 Z2R14
+R.Ungoofaaru,R.Inguraidhoo,R,R,1,16:30,16:30,30,Z2R11
+R.Ungoofaaru,R.Innamaadhoo,R,R,2,07:55,15:10,40,Z2R12 Z2R14
+R.Ungoofaaru,R.Kinolhas,R,R,1,16:30,16:30,50,Z2R11
+R.Ungoofaaru,R.Maakurathu,R,R,1,15:10,15:10,20,Z2R12
+R.Ungoofaaru,R.Maduvvari,R,R,1,16:30,16:30,85,Z2R11
+R.Ungoofaaru,R.Meedhoo,R,R,1,16:30,16:30,65,Z2R11
+R.Ungoofaaru,R.Rasgetheem,R,R,1,16:25,16:25,45,Z2R10
+R.Ungoofaaru,R.Rasmaadhoo,R,R,1,15:10,15:10,35,Z2R12
+R.Ungoofaaru,R.Vaadhoo,R,R,1,16:25,16:25,60,Z2R10
+R.Vaadhoo,R.Alifushi,R,R,1,17:25,17:25,30,Z2R10
+R.Vaadhoo,R.Angolhitheem,R,R,1,06:40,06:40,25,Z2R10
+R.Vaadhoo,R.Hulhudhuffaaru,R,R,1,06:40,06:40,40,Z2R10
+R.Vaadhoo,R.Ifuru,R,R,1,06:40,06:40,55,Z2R10
+R.Vaadhoo,R.Rasgetheem,R,R,1,06:40,06:40,15,Z2R10
+R.Vaadhoo,R.Ungoofaaru,R,R,1,06:40,06:40,65,Z2R10
+S.Feydhoo,Gn.Fuvahmulah,S,Gn,1,16:00,16:00,85,Z6R2
+S.Feydhoo,S.Hulhumeedhoo,S,S,1,16:00,16:00,20,Z6R2
+S.Hulhumeedhoo,Gn.Fuvahmulah,S,Gn,1,16:20,16:20,65,Z6R2
+S.Hulhumeedhoo,S.Feydhoo,S,S,1,12:00,12:00,25,Z6R2
+Sh.Bileyfahi,Hdh.Kulhudhuffushi,Sh,HDh,1,06:35,06:35,85,S2C5
+Sh.Bileyfahi,Sh.Feydhoo,Sh,Sh,1,17:05,17:05,20,S2C5
+Sh.Bileyfahi,Sh.Goidhoo,Sh,Sh,1,06:35,06:35,25,S2C5
+Sh.Bileyfahi,Sh.Kan'ditheemu,Sh,Sh,1,06:35,06:35,40,S2C5
+Sh.Bileyfahi,Sh.Noomaraa,Sh,Sh,1,17:05,17:05,40,S2C5
+Sh.Feevah,Hdh.Kulhudhuffushi,Sh,HDh,1,08:35,08:35,60,H2
+Sh.Feevah,Sh.Foakaidhoo,Sh,Sh,1,06:30,06:30,15,S2C2
+Sh.Feevah,Sh.Funadhoo,Sh,Sh,2,06:30,15:10,40,H2 S2C2
+Sh.Feevah,Sh.Milandhoo,Sh,Sh,1,06:30,06:30,55,S2C2
+Sh.Feevah,Sh.Narudhoo,Sh,Sh,1,06:30,06:30,40,S2C2
+Sh.Feydhoo,Hdh.Kulhudhuffushi,Sh,HDh,1,06:15,06:15,105,S2C5
+Sh.Feydhoo,Sh.Bileyfahi,Sh,Sh,1,06:15,06:15,20,S2C5
+Sh.Feydhoo,Sh.Goidhoo,Sh,Sh,1,06:15,06:15,45,S2C5
+Sh.Feydhoo,Sh.Kan'ditheemu,Sh,Sh,1,06:15,06:15,60,S2C5
+Sh.Feydhoo,Sh.Noomaraa,Sh,Sh,1,17:25,17:25,20,S2C5
+Sh.Foakaidhoo,Sh.Feevah,Sh,Sh,1,17:15,17:15,20,S2C2
+Sh.Foakaidhoo,Sh.Funadhoo,Sh,Sh,1,06:45,06:45,70,S2C2
+Sh.Foakaidhoo,Sh.Milandhoo,Sh,Sh,1,06:45,06:45,40,S2C2
+Sh.Foakaidhoo,Sh.Narudhoo,Sh,Sh,1,06:45,06:45,25,S2C2
+Sh.Funadhoo,Hdh.Kulhudhuffushi,Sh,HDh,1,08:00,08:00,95,H2
+Sh.Funadhoo,Sh.Feevah,Sh,Sh,2,08:00,16:10,35,H2 S2C2
+Sh.Funadhoo,Sh.Foakaidhoo,Sh,Sh,1,16:10,16:10,65,S2C2
+Sh.Funadhoo,Sh.Komandoo,Sh,Sh,1,16:00,16:00,80,S2C3
+Sh.Funadhoo,Sh.Lhaimagu,Sh,Sh,1,16:00,16:00,10,S2C3
+Sh.Funadhoo,Sh.Maaun'goodhoo,Sh,Sh,1,16:00,16:00,40,S2C3
+Sh.Funadhoo,Sh.Milandhoo,Sh,Sh,1,16:10,16:10,25,S2C2
+Sh.Funadhoo,Sh.Narudhoo,Sh,Sh,1,16:10,16:10,40,S2C2
+Sh.Goidhoo,Hdh.Kulhudhuffushi,Sh,HDh,1,07:00,07:00,60,S2C5
+Sh.Goidhoo,Sh.Bileyfahi,Sh,Sh,1,16:40,16:40,25,S2C5
+Sh.Goidhoo,Sh.Feydhoo,Sh,Sh,1,16:40,16:40,45,S2C5
+Sh.Goidhoo,Sh.Kan'ditheemu,Sh,Sh,1,07:00,07:00,15,S2C5
+Sh.Goidhoo,Sh.Noomaraa,Sh,Sh,1,16:40,16:40,65,S2C5
+Sh.Kan'ditheemu,Hdh.Kulhudhuffushi,Sh,HDh,1,07:15,07:15,45,S2C5
+Sh.Kan'ditheemu,Sh.Bileyfahi,Sh,Sh,1,16:25,16:25,40,S2C5
+Sh.Kan'ditheemu,Sh.Feydhoo,Sh,Sh,1,16:25,16:25,60,S2C5
+Sh.Kan'ditheemu,Sh.Goidhoo,Sh,Sh,1,16:25,16:25,15,S2C5
+Sh.Kan'ditheemu,Sh.Noomaraa,Sh,Sh,1,16:25,16:25,80,S2C5
+Sh.Komandoo,Sh.Funadhoo,Sh,Sh,1,06:30,06:30,80,S2C3
+Sh.Komandoo,Sh.Lhaimagu,Sh,Sh,1,06:30,06:30,65,S2C3
+Sh.Komandoo,Sh.Maaun'goodhoo,Sh,Sh,1,06:30,06:30,35,S2C3
+Sh.Lhaimagu,Sh.Funadhoo,Sh,Sh,1,07:35,07:35,15,S2C3
+Sh.Lhaimagu,Sh.Komandoo,Sh,Sh,1,16:10,16:10,70,S2C3
+Sh.Lhaimagu,Sh.Maaun'goodhoo,Sh,Sh,1,16:10,16:10,30,S2C3
+Sh.Maaun'goodhoo,Sh.Funadhoo,Sh,Sh,1,07:05,07:05,45,S2C3
+Sh.Maaun'goodhoo,Sh.Komandoo,Sh,Sh,1,16:40,16:40,40,S2C3
+Sh.Maaun'goodhoo,Sh.Lhaimagu,Sh,Sh,1,07:05,07:05,30,S2C3
+Sh.Milandhoo,Sh.Feevah,Sh,Sh,1,16:35,16:35,60,S2C2
+Sh.Milandhoo,Sh.Foakaidhoo,Sh,Sh,1,16:35,16:35,40,S2C2
+Sh.Milandhoo,Sh.Funadhoo,Sh,Sh,1,07:25,07:25,30,S2C2
+Sh.Milandhoo,Sh.Narudhoo,Sh,Sh,1,16:35,16:35,15,S2C2
+Sh.Narudhoo,Sh.Feevah,Sh,Sh,1,16:50,16:50,45,S2C2
+Sh.Narudhoo,Sh.Foakaidhoo,Sh,Sh,1,16:50,16:50,25,S2C2
+Sh.Narudhoo,Sh.Funadhoo,Sh,Sh,1,07:10,07:10,45,S2C2
+Sh.Narudhoo,Sh.Milandhoo,Sh,Sh,1,07:10,07:10,15,S2C2
+Sh.Noomaraa,Hdh.Kulhudhuffushi,Sh,HDh,1,06:00,06:00,120,S2C5
+Sh.Noomaraa,Sh.Bileyfahi,Sh,Sh,1,06:00,06:00,35,S2C5
+Sh.Noomaraa,Sh.Feydhoo,Sh,Sh,1,06:00,06:00,15,S2C5
+Sh.Noomaraa,Sh.Goidhoo,Sh,Sh,1,06:00,06:00,60,S2C5
+Sh.Noomaraa,Sh.Kan'ditheemu,Sh,Sh,1,06:00,06:00,75,S2C5
+Th.Gaadhiffushi,Th.Thimarafushi,Th,Th,1,08:25,08:25,15,Z4R3
+Th.Gaadhiffushi,Th.Veymandoo,Th,Th,2,08:25,14:00,15,Z4R3 Z4R5
+Th.Hirilandhoo,Th.Kandoodhoo,Th,Th,1,15:25,15:25,30,Z4R2
+Th.Hirilandhoo,Th.Kinbidhoo,Th,Th,1,06:55,06:55,45,Z4R2
+Th.Hirilandhoo,Th.Omadhoo,Th,Th,1,06:55,06:55,30,Z4R2
+Th.Hirilandhoo,Th.Vandhoo,Th,Th,1,15:25,15:25,15,Z4R2
+Th.Hirilandhoo,Th.Veymandoo,Th,Th,1,06:55,06:55,55,Z4R2
+Th.Kandoodhoo,Th.Hirilandhoo,Th,Th,1,06:30,06:30,25,Z4R2
+Th.Kandoodhoo,Th.Kinbidhoo,Th,Th,1,06:30,06:30,70,Z4R2
+Th.Kandoodhoo,Th.Omadhoo,Th,Th,1,06:30,06:30,55,Z4R2
+Th.Kandoodhoo,Th.Vandhoo,Th,Th,1,06:30,06:30,10,Z4R2
+Th.Kandoodhoo,Th.Veymandoo,Th,Th,1,06:30,06:30,80,Z4R2
+Th.Kinbidhoo,Th.Hirilandhoo,Th,Th,1,14:40,14:40,45,Z4R2
+Th.Kinbidhoo,Th.Kandoodhoo,Th,Th,1,14:40,14:40,75,Z4R2
+Th.Kinbidhoo,Th.Omadhoo,Th,Th,1,14:40,14:40,15,Z4R2
+Th.Kinbidhoo,Th.Vandhoo,Th,Th,1,14:40,14:40,60,Z4R2
+Th.Kinbidhoo,Th.Veymandoo,Th,Th,1,07:40,07:40,10,Z4R2
+Th.Omadhoo,Th.Hirilandhoo,Th,Th,1,14:55,14:55,30,Z4R2
+Th.Omadhoo,Th.Kandoodhoo,Th,Th,1,14:55,14:55,60,Z4R2
+Th.Omadhoo,Th.Kinbidhoo,Th,Th,1,07:25,07:25,15,Z4R2
+Th.Omadhoo,Th.Vandhoo,Th,Th,1,14:55,14:55,45,Z4R2
+Th.Omadhoo,Th.Veymandoo,Th,Th,1,07:25,07:25,25,Z4R2
+Th.Thimarafushi,Th.Gaadhiffushi,Th,Th,1,13:35,13:35,20,Z4R3
+Th.Thimarafushi,Th.Veymandoo,Th,Th,1,08:40,08:40,15,Z4R3
+Th.Vandhoo,Th.Hirilandhoo,Th,Th,1,06:40,06:40,15,Z4R2
+Th.Vandhoo,Th.Kandoodhoo,Th,Th,1,15:40,15:40,15,Z4R2
+Th.Vandhoo,Th.Kinbidhoo,Th,Th,1,06:40,06:40,60,Z4R2
+Th.Vandhoo,Th.Omadhoo,Th,Th,1,06:40,06:40,45,Z4R2
+Th.Vandhoo,Th.Veymandoo,Th,Th,1,06:40,06:40,70,Z4R2
+Th.Veymandoo,Th.Gaadhiffushi,Th,Th,2,07:55,13:25,25,Z4R3 Z4R5
+Th.Veymandoo,Th.Hirilandhoo,Th,Th,1,14:35,14:35,50,Z4R2
+Th.Veymandoo,Th.Kandoodhoo,Th,Th,1,14:35,14:35,80,Z4R2
+Th.Veymandoo,Th.Kinbidhoo,Th,Th,1,14:35,14:35,5,Z4R2
+Th.Veymandoo,Th.Omadhoo,Th,Th,1,14:35,14:35,20,Z4R2
+Th.Veymandoo,Th.Thimarafushi,Th,Th,1,13:25,13:25,10,Z4R3
+Th.Veymandoo,Th.Vandhoo,Th,Th,1,14:35,14:35,65,Z4R2

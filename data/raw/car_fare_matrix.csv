@@ -1,0 +1,7 @@
+city,from_zone \ to_zone,Male,Hulhumale Phase 1,Velana International Airport,Hulhumale Phase 2,Sea Plane,Domestic Terminal
+Male City,Male,30.0,85.0,70.0,100.0,110.0,80.0
+Male City,Hulhumale Phase 1,85.0,30.0,80.0,40.0,110.0,90.0
+Male City,Velana International Airport,70.0,80.0,30.0,85.0,60.0,30.0
+Male City,Hulhumale Phase 2,100.0,40.0,85.0,30.0,120.0,95.0
+Male City,Sea Plane,110.0,110.0,60.0,120.0,30.0,70.0
+Male City,Domestic Terminal,80.0,90.0,30.0,95.0,70.0,30.0

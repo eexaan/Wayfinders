@@ -1,0 +1,5 @@
+route_code,demand_friday_index_pct,service_friday_index_pct,service_minus_demand_pp,verdict
+R1,61.2,69.8,8.6,service falls slower than demand -> Friday over-served
+R2,63.6,91.1,27.5,service falls slower than demand -> Friday over-served
+R4,63.0,83.8,20.8,service falls slower than demand -> Friday over-served
+R7,62.2,77.4,15.2,service falls slower than demand -> Friday over-served
