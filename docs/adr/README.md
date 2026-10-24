@@ -21,15 +21,16 @@ one, add a new ADR that supersedes it; do not silently edit.
 | [0010](0010-capacity-from-team-table.md) | Capacity comes from the team capacity table, not the news article | Accepted | model, report |
 | [0011](0011-inferred-morning-service.md) | The morning is a bounded route-day **inference**, never hourly data | Accepted | report, pitch |
 | [0012](0012-working-hours-assumption.md) | Working hours assumed 08:00–16:00, published as a **band** | Accepted | report, dashboard |
-| [0013](0013-donor-ceiling.md) | **A trip move must not create a new over-capacity hour** | Accepted | model, dashboard |
+| [0013](0013-realtime-layer-deferred.md) | The **realtime layer is deferred**, with stated entry conditions | Accepted | report, pitch, roadmap |
+| [0014](0014-donor-ceiling.md) | **A trip move must not create a new over-capacity hour** | Accepted | model, dashboard |
 
 ## The six decisions most likely to be questioned
 
-If you only read five, read these. Each is a place where a reasonable person
+If you only read six, read these. Each is a place where a reasonable person
 could have gone the other way, and the record explains why we did not.
 
-1. **ADR-0003** — why R1 is described as 104% full in one place and 89.5% in
-   another.
+1. **ADR-0003** — why R1 is described as 104.4% full in one place and 90.1% in
+   another (route-day upper bound vs measured peak segment).
 2. **ADR-0005** — why the dashboard shows a gap before 11:00 instead of zeros.
 3. **ADR-0009** — why a finding that appeared in an earlier draft is gone.
 4. **ADR-0006** — why MACL is not used for airport demand levels.

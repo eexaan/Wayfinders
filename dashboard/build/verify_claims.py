@@ -386,6 +386,37 @@ def check_deliverables() -> None:
 
 
 # ---------------------------------------------------------------------------
+# GTFS structural checks. build_gtfs.py writes gtfs_validation.csv; until this
+# existed, the only thing asserted about the feed was that the zip was present,
+# so its best claim ("18/18, 0 errors") was taken on trust from the very script
+# that produced it. It is now re-derived like every other number here.
+# ---------------------------------------------------------------------------
+def check_gtfs() -> None:
+    report = ROOT / "data" / "derived" / "gtfs_validation.csv"
+    if not report.exists():
+        claim("GTFS validation report present", False, "MISSING")
+        return
+
+    d = pd.read_csv(report)
+    for row in d.itertuples():
+        detail = "" if pd.isna(row.detail) else str(row.detail)
+        claim(f"GTFS {row.check}", row.result == "PASS", detail)
+
+    # Every structural check passes vacuously on an empty feed, so pin the scale
+    # as well: a feed with zero trips is not a valid feed.
+    detail = d.set_index("check")["detail"].astype(str)
+    for name, (unit, minimum) in {
+        "unique_route_ids": ("routes", 11),
+        "unique_stop_ids": ("stops", 61),
+        "unique_trip_ids": ("trips", 450),
+    }.items():
+        raw = detail.get(name, "")
+        head = raw.split()[0] if raw.split() else ""
+        value = int(head) if head.isdigit() else 0
+        claim(f"GTFS {unit} count", value >= minimum, f"{value} (expected >= {minimum})")
+
+
+# ---------------------------------------------------------------------------
 def main() -> int:
     checks = [
         ("demand level", check_demand_level),
@@ -396,6 +427,7 @@ def main() -> int:
         ("airport reconciliation", check_airport),
         ("documented gaps", check_documented_gaps),
         ("deliverables", check_deliverables),
+        ("gtfs", check_gtfs),
     ]
 
     for label, fn in checks:

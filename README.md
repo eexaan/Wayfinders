@@ -122,6 +122,37 @@ python -m http.server 8000     # then open http://localhost:8000
 It runs entirely in the browser from committed data files — no server, no
 account, nothing to install.
 
+## The GTFS feed
+
+We publish **the first GTFS feed for the Greater Malé bus network** — the
+standard format every journey planner in the world already reads.
+
+**No public GTFS existed for Malé.** We built one from the official RTL
+timetable, so it describes the real 2026 schedule.
+
+| | |
+|---|---|
+| Routes | 11 (R1–R9, R13, R14) |
+| Stops | 61 |
+| Trips | 450 |
+| Stop times | 5,538 |
+| Validator errors | **0** (MobilityData `gtfs-validator` 6.0.0) |
+
+The timetable payload carries per-stop timings for each trip, so **our stop
+times are the observed schedule, not interpolated from an assumed bus speed.**
+The feed rebuilds byte-for-byte identically, and 18 structural checks are
+re-asserted on every `make check`.
+
+Why it matters beyond the file: it makes the network portable. OpenTripPlanner,
+MOTIS, Transitland, Google Transit and most trip-planning apps can route on it
+with no bespoke code — and GTFS is the format **GTFS-Realtime extends**, so it
+is the foundation for the live phase described in the roadmap.
+
+It is an honest snapshot, not a production feed: one Saturday, 11 of 15 routes,
+no minibus timings. Those limits are visible in the feed rather than hidden.
+
+Details, design decisions and how to load it: **[docs/GTFS.md](docs/GTFS.md)**.
+
 ## Data
 
 Every figure traces to a public source. Nothing private or restricted was used.
@@ -137,12 +168,26 @@ Every figure traces to a public source. Nothing private or restricted was used.
 
 Full links, licences and caveats: **[DATA_SOURCES.md](DATA_SOURCES.md)**.
 
-We also publish the first **GTFS feed** for the Greater Malé bus network, so the
-network can be loaded into standard journey-planning tools.
+## Where this goes next
+
+The tool is a projection built on history: it answers whether the buses matched
+demand on the day we measured, not whether they match now.
+
+The step after is realtime — automated people-counting at stops, live vehicle
+positions over GTFS-Realtime, and a loop that reallocates trips as queues build.
+That closes the model's own weakest point: our stop-level load factors are
+**allocated from taxi catchments, not measured**, so the finding we most want
+acted on is the one that most needs ground truth.
+
+It is deliberately not in this build. The plan, the sensor comparison, the pilot
+design, the costs and the claims we refuse to make are in
+**[docs/ROADMAP.md](docs/ROADMAP.md)**.
 
 ## For readers who want the detail
 
 - **[docs/METHODS.md](docs/METHODS.md)** — data sources, methods, assumptions, AI use and limits
+- **[docs/GTFS.md](docs/GTFS.md)** — the feed, its design decisions, and how to load it
+- **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, with costs and preconditions
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost

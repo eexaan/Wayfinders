@@ -1,4 +1,4 @@
-# ADR-0013 — A trip move must not create a new over-capacity hour
+# ADR-0014 — A trip move must not create a new over-capacity hour
 
 - **Status:** Accepted
 - **Date:** 2026-10-24

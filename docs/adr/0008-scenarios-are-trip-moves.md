@@ -1,6 +1,6 @@
 # ADR-0008 — Scenarios are explicit trip moves, not percentage factors
 
-- **Status:** Accepted; **donor eligibility superseded by [ADR-0013](0013-donor-ceiling.md)**
+- **Status:** Accepted; **donor eligibility superseded by [ADR-0014](0014-donor-ceiling.md)**
 - **Date:** 2026-10-24
 - **Affects:** `scenario_kpis.csv`, `scenario_corridor_kpis.csv`, dashboard
 
@@ -66,7 +66,7 @@ print(k[['scenario','boardings_over_capacity','trips_change']].to_string(index=F
 
 No scenario may have `trips_change != 0`. A non-zero value means a bus was
 added or removed, which is a bug, not a result. The donor eligibility rule in
-this ADR was replaced by the ceiling in ADR-0013.
+this ADR was replaced by the ceiling in ADR-0014.
 
 ## Related
 

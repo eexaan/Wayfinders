@@ -139,3 +139,18 @@ yearbook tables the team uploaded).
 | `scenario_modal_shift*.csv` | D2 taxi OD + Avas fare matrix + observed bus ride times |
 | `airport_demand_profile.csv` | D3 (hourly shape) + S4 (levels, incl. domestic) |
 | `taxi_od_by_hour.csv` | D2 |
+| `data/derived/rtl_greater_male_gtfs.zip` | S1 per-stop timings, converted to GTFS — see [docs/GTFS.md](docs/GTFS.md) |
+| `data/derived/gtfs_validation.csv` | the GTFS feed itself, 18 structural checks |
+| `data/derived/gtfs_validator_report.json` | the GTFS feed itself, MobilityData `gtfs-validator` 6.0.0 |
+
+### Attribution for the GTFS feed and basemap
+
+The GTFS feed is a **derived artefact**, not an official MTCC publication. It is
+our conversion of the official RTL timetable, published under the same terms as
+the underlying schedule, with the publisher recorded as *Team Wayfinders, MBS
+Maldives Datathon 2026* and a version string that names the source date. It must
+not be redistributed as MTCC's official timetable.
+
+The basemap, road network and any OSM-derived geometry in `route_lines.geojson`
+are © OpenStreetMap contributors, licensed **ODbL 1.0**. Any redistributed map
+must carry that attribution.
