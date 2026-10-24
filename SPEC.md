@@ -47,8 +47,8 @@ Not a dataset with a slide attached.
 ### 2.1 GTFS feed (deliverable)
 
 `data/derived/rtl_greater_male_gtfs.zip` is a synthesised GTFS feed for the
-Greater Malé bus network. **No public GTFS exists for Malé**, so this is the
-first one.
+Greater Malé bus network. **We could not find a public GTFS for Malé**, so we
+built one.
 
 Built by `dashboard/build/build_gtfs.py` directly from the official RTL 2026
 payload, which carries per-stop timings for every trip — so `stop_times` is
@@ -380,8 +380,8 @@ the acceptance criteria. This section is the summary.
 
 **Nice to have**
 6. A taxi-OD toggle on the map (the revealed-demand layer).
-7. A **synthesised GTFS feed** export for Greater Malé — no public GTFS
-   exists for Malé; ours would be the first.
+7. A **synthesised GTFS feed** export for Greater Malé — we could not find a
+   public GTFS for Malé.
 
 ## 7. Fleet and capacity
 
