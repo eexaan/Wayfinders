@@ -219,6 +219,7 @@ demand on the day we measured, not whether they match now.
 - **[docs/GTFS.md](docs/GTFS.md)** — the feed, its design decisions, and how to load it
 - **[docs/ROADMAP.md](docs/ROADMAP.md)** — the path to realtime, two extensions beyond it, and the costs and preconditions
 - **[docs/mockups/](docs/mockups/README.md)** — two design sketches: proposed new routes, and hour-by-hour re-timing
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** — how the static site is built, deployed and verified
 - **[SPEC.md](SPEC.md)** — what we built, how, and what we would do next
 - **[RESEARCH.md](RESEARCH.md)** — the full investigation, including what we tried and rejected
 - **[docs/adr/](docs/adr/)** — a record of each methodological decision and its cost

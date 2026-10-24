@@ -8,6 +8,7 @@
 #   make check    verify the committed outputs against the raw sources
 #   make web      build the dashboard (React app in web/) into web/dist
 #   make serve    build the dashboard and serve it on http://localhost:4444
+#   make deploy   build and rsync web/dist to a static webroot
 #   make test     run the unit tests (the reallocator guards)
 #   make all      data + figures + gtfs + check + test
 #   make clean    remove build caches only, never data/
@@ -19,8 +20,9 @@
 PY      := .venv/bin/python
 BUILD   := dashboard/build
 DATAOUT := dashboard/data
+OWNER   ?= www-data:www-data
 
-.PHONY: all setup data figures gtfs reroute check test clean validate-gtfs
+.PHONY: all setup data figures gtfs reroute check test clean validate-gtfs web serve deploy
 
 all: data figures gtfs reroute check test
 
@@ -66,6 +68,15 @@ web:
 
 serve: web
 	cd web/dist && python3 -m http.server 4444
+
+# Deploy the built bundle to a static webroot. Replaces the directory contents.
+#   make deploy HOST=root@<origin> DEST=/var/www/wayfinders
+deploy: web
+	@test -n "$(HOST)" || { echo "usage: make deploy HOST=user@server DEST=/var/www/wayfinders"; exit 1; }
+	@test -n "$(DEST)" || { echo "usage: make deploy HOST=user@server DEST=/var/www/wayfinders"; exit 1; }
+	ssh "$(HOST)" 'mkdir -p "$(DEST)"'
+	rsync -a --delete web/dist/ "$(HOST):$(DEST)/"
+	ssh "$(HOST)" 'chown -R $(OWNER) "$(DEST)" && find "$(DEST)" -type d -exec chmod 755 {} + && find "$(DEST)" -type f -exec chmod 644 {} +'
 
 test:
 	$(PY) -m pytest tests -q
