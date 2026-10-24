@@ -5,7 +5,7 @@ The interactive tool. **This is the deliverable.**
 ```bash
 npm ci
 npm run dev        # http://localhost:5173
-npm run build      # -> dist/, which `make serve` serves on :8000
+npm run build      # -> dist/, which `make serve` serves on :4444
 npm run lint
 ```
 

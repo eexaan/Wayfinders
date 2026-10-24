@@ -16,8 +16,8 @@ scraping, no data wrangling in the frontend — just read these tables.
 ```bash
 # 1. serve it (fetch() is blocked over file://, so always serve)
 cd dashboard
-python -m http.server 8000
-# open http://localhost:8000
+python -m http.server 4444
+# open http://localhost:4444
 ```
 
 The interface is implemented in **`web/`** — React + TypeScript + Vite:
@@ -32,7 +32,7 @@ dashboard/
   build/              <- the scripts that produced data/. ignore them.
 ```
 
-`make web` builds it; `make serve` builds and serves it on :8000.
+`make web` builds it; `make serve` builds and serves it on :4444.
 
 `src/data.ts` is the single reader of the contract. It joins on route code and
 never hard-codes a figure; if a number on screen is wrong, the bug is there or

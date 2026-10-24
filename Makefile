@@ -6,7 +6,7 @@
 #   make gtfs     rebuild the GTFS feed
 #   make check    verify the committed outputs against the raw sources
 #   make web      build the dashboard (React app in web/) into web/dist
-#   make serve    build the dashboard and serve it on http://localhost:8000
+#   make serve    build the dashboard and serve it on http://localhost:4444
 #   make test     run the unit tests (the reallocator guards)
 #   make all      data + figures + gtfs + check + test
 #   make clean    remove build caches only, never data/
@@ -55,7 +55,7 @@ web:
 	cd web && npm ci --silent && npm run build
 
 serve: web
-	cd web/dist && python3 -m http.server 8000
+	cd web/dist && python3 -m http.server 4444
 
 test:
 	$(PY) -m pytest tests -q

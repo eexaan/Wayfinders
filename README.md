@@ -9,8 +9,8 @@ Maldives Datathon 2026 · Team Wayfinders
 > waiting.
 
 ```bash
-make serve          # builds the dashboard and serves it on :8000
-# open http://localhost:8000
+make serve          # builds the dashboard and serves it on :4444
+# open http://localhost:4444
 
 # or, for live reload while editing:
 cd web && npm install && npm run dev      # http://localhost:5173
