@@ -273,7 +273,29 @@ The per-corridor generalised-cost comparison. Drives the F6 figure and the
 Use this for the "taxi capture" KPI tile: read
 `taxi_rides_capturable_per_day` for the selected scenario.
 
-### 2.16 Five traps that will silently break the UI
+### 2.16 `morning_service_inferred.csv` — 11 rows
+
+A **route-day inference**, not hourly data. Morning departures were not
+captured (the feed is server-clock filtered), so this bounds them instead.
+
+| Column | Example | Notes |
+|---|---|---|
+| `route_code`, `route_name` | `R1` | |
+| `trips_per_day` | `61` | official, complete |
+| `trips_captured` | `40` | observed |
+| `trips_before_capture` | `21` | **exact**: 61 − 40 |
+| `assumed_service_start` | `06:00` | an assumption, tested in ADR-0011 |
+| `morning_span_min` | `320` | first captured departure − 06:00 |
+| `morning_avg_headway_min` | `15.2` | |
+| `morning_avg_headway_min_low` / `_high` | `13.8` / `16.7` | band for a 06:30 / 05:30 start |
+| `method`, `status` | | `status` starts with `INFERRED` |
+
+> ⚠️ **Never plot this as hourly bars.** It is an average over 06:00–11:00 plus
+> an assumption. Use it as a text statistic or a single range, and say
+> "inferred". Putting it beside captured hourly bars would imply a resolution
+> that does not exist. See ADR-0011.
+
+### 2.17 Five traps that will silently break the UI
 
 Read this before you write the chart layer. Each one produces a plausible but
 wrong chart, which is worse than an error.
@@ -441,6 +463,8 @@ A collapsible drawer. Contents:
 - The dataset register (link to `DATA_SOURCES.md` in the repo).
 - The **load-factor band explanation** — why there are two numbers.
 - The **capture window**: which hours were captured and which were not, and why (the feed is time-filtered).
+- The **inferred morning** (`morning_service_inferred.csv`): one line stating
+  that 06:00–11:00 is inferred, not observed (ADR-0011).
 - The **coverage matrix**: route × what we have (demand data yes/no, live
   trip count yes/no, published schedule yes/no). This is a *feature* — the
   datathon asks for data-gap identification, so make the gaps visible.

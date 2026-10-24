@@ -107,6 +107,51 @@ AIRPORT_CORRIDORS = {"male_airport", "hm1_airport", "hm2_airport"}
 
 AIRCRAFT_DAY_NOTE = "Saturday 2026-10-24 service day (feed is time-filtered)"
 
+# The feed returns departures from the moment of the call onwards, so the
+# morning is not observed (ADR-0001, ADR-0005). We cannot change the server's
+# clock, but two facts ARE official and let us bound the morning WITHOUT
+# inventing hourly data:
+#   * trips_per_day (max trip order) - the complete daily trip count
+#   * capture_first_departure - the first remaining departure at the call time
+# Their difference is the exact number of morning trips. Combined with an
+# assumed service start we get a bounded AVERAGE morning headway. That is a
+# route-day statistic, not an hourly series, and it is emitted separately so it
+# can never be mistaken for observed data (ADR-0011).
+SERVICE_START_ASSUMED_MIN = 6 * 60      # 06:00, the assumption
+SERVICE_START_LOW_MIN = 5 * 60 + 30     # 05:30 -> upper bound on headway
+SERVICE_START_HIGH_MIN = 6 * 60 + 30    # 06:30 -> lower bound on headway
+
+
+def morning_inference(first_departure_time: str | None, trips_total, trips_captured):
+    """Exact morning trip count + bounded average headway. Nothing hourly."""
+    if not isinstance(first_departure_time, str) or not trips_total:
+        return None
+    if pd.isna(trips_total) or pd.isna(trips_captured):
+        return None
+    try:
+        hh, mm, _ = (int(x) for x in first_departure_time.split(":"))
+    except (ValueError, AttributeError):
+        return None
+    first = hh * 60 + mm
+    n = int(trips_total) - int(trips_captured or 0)
+    if n <= 0:
+        return None
+    spans = {
+        "assumed": first - SERVICE_START_ASSUMED_MIN,
+        "low": first - SERVICE_START_LOW_MIN,
+        "high": first - SERVICE_START_HIGH_MIN,
+    }
+    if spans["assumed"] <= 0:
+        return None
+    return {
+        "trips_before_capture": n,
+        "assumed_service_start": "06:00",
+        "morning_span_min": spans["assumed"],
+        "morning_avg_headway_min": round(spans["assumed"] / n, 1),
+        "morning_avg_headway_min_low": round(spans["high"] / n, 1),
+        "morning_avg_headway_min_high": round(spans["low"] / n, 1),
+    }
+
 
 def load_routes() -> list[dict]:
     payload = json.loads((OFFICIAL / "rtl" / "bus_routedetails_2026.json").read_text())
@@ -167,8 +212,8 @@ def build_master(
                 "n_stops": len(stops),
                 "trips_per_day": trips_total,
                 "trips_captured": trips_captured,
-                "capture_first_departure": dep_times[0]["timing"] if dep_times else None,
-                "capture_last_departure": dep_times[-1]["timing"] if dep_times else None,
+                "capture_first_departure": dep_times[0]["timing"] if dep_times else "",
+                "capture_last_departure": dep_times[-1]["timing"] if dep_times else "",
                 "bus_type": bus_type,
                 "bus_model": bus_model,
                 "seated_capacity": seated,
@@ -592,6 +637,32 @@ def main() -> None:
     gap, load = build_gap(master, hourly, demand, shapes)
     gap.to_csv(OUT / "demand_supply_gap.csv", index=False)
     load.to_csv(OUT / "route_load.csv", index=False)
+
+    # Inferred morning: a route-day statistic, kept out of the hourly table.
+    morning_rows = []
+    for r in master.itertuples():
+        m = morning_inference(
+            getattr(r, "capture_first_departure", None),
+            getattr(r, "trips_per_day", None),
+            getattr(r, "trips_captured", None),
+        )
+        if not m:
+            continue
+        morning_rows.append(
+            {
+                "route_code": r.route_code,
+                "route_name": r.route_name,
+                "trips_per_day": r.trips_per_day,
+                "trips_captured": r.trips_captured,
+                **m,
+                "method": (
+                    "trips_before_capture = official trips_per_day - captured trips; "
+                    "average headway = (first captured departure - assumed 06:00 start) / trips"
+                ),
+                "status": "INFERRED - not observed. Replace with a real capture if available.",
+            }
+        )
+    pd.DataFrame(morning_rows).to_csv(OUT / "morning_service_inferred.csv", index=False)
 
     kpis, corr = build_scenarios(gap)
     kpis.to_csv(OUT / "scenario_kpis.csv", index=False)

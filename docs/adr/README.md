@@ -19,6 +19,7 @@ one, add a new ADR that supersedes it; do not silently edit.
 | [0008](0008-scenarios-are-trip-moves.md) | Scenarios are explicit trip moves, not percentage factors | Accepted | model, dashboard |
 | [0009](0009-withdraw-friday-service-comparison.md) | The Friday service-vs-demand finding is withdrawn | Accepted | report, pitch |
 | [0010](0010-capacity-from-team-table.md) | Capacity comes from the team capacity table, not the news article | Accepted | model, report |
+| [0011](0011-inferred-morning-service.md) | The morning is a bounded route-day **inference**, never hourly data | Accepted | report, pitch |
 
 ## The five decisions most likely to be questioned
 
