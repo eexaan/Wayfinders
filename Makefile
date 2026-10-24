@@ -22,9 +22,11 @@ all: data figures gtfs check
 
 setup:
 	python3 -m venv .venv
-	$(PY) -m pip install --quiet --upgrade pip
-	$(PY) -m pip install --quiet -r requirements.txt
-	@echo "ready: $(PY)"
+	$(PY) -m pip install --quiet --upgrade pip || true
+	$(PY) -m pip install --quiet -r requirements.txt || 	  uv pip install --python $(PY) -r requirements.txt
+	@$(PY) -c "import pandas, numpy, openpyxl, matplotlib; \
+	  print('ready:', '$(PY)')" || \
+	  { echo "install incomplete: run 'python3 -m pip install -r requirements.txt'"; exit 1; }
 
 # Each step runs separately so a failure names the script that broke.
 data:
