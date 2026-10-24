@@ -12,7 +12,7 @@
 // keeps only the tiles actually viewed (LRU by insertion order).
 
 const TILE_CACHE = 'wf-tiles-v3'
-const DATA_CACHE = 'wf-data-v3'
+const DATA_CACHE = 'wf-data-v4'
 const MAX_TILES = 900
 
 const TILE_HOST = 'tile.openstreetmap.org'
