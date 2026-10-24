@@ -91,6 +91,7 @@ dashboard/
   build/build_data.py       rebuilds every table from the official inputs
   build/build_stop_demand.py  stop-level demand + segment load (runs AFTER build_data.py)
   build/build_validation.py holdout MAPE + airport reconciliation; rebuilds the airport profile
+  build/build_gtfs.py       synthesises a GTFS feed from the official per-stop timings
   build/build_figures.py    rebuilds F1..F6
   data/                     the tables the dashboard reads (see DASHBOARD_SPEC §2)
 data/
@@ -98,6 +99,9 @@ data/
   official/
     rtl/                    official RTL 2026 bus feed
     mbs/                    MBS yearbook tables, population, LFS report
+  derived/
+    rtl_greater_male_gtfs.zip   synthesised GTFS feed (0 validator errors)
+    gtfs/                       the same feed unzipped, for inspection
 ```
 
 ## Where the numbers come from

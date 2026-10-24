@@ -43,6 +43,36 @@ RAJJE REBALANCER
 **Success = a planner can open it, move 6 trips, and read the consequence.**
 Not a dataset with a slide attached.
 
+### 2.1 GTFS feed (deliverable)
+
+`data/derived/rtl_greater_male_gtfs.zip` is a synthesised GTFS feed for the
+Greater Malé bus network. **No public GTFS exists for Malé**, so this is the
+first one.
+
+Built by `dashboard/build/build_gtfs.py` directly from the official RTL 2026
+payload, which carries per-stop timings for every trip — so `stop_times` is
+**rounded to the observed schedule, not interpolated from an assumed speed**.
+
+| | |
+|---|---|
+| Service day | Saturday 2026-10-24 (single day, from ~11:00 — the capture window) |
+| Routes with service | 11 of 15 (R10/R11/R12/R15 return no timings) |
+| Trips | 450 |
+| Stops | 61 distinct (official RTL stop codes) |
+| `stop_times` | 5,538 |
+| Drop-off-only stops | 112, encoded as `pickup_type=1` |
+
+**Validated with the official MobilityData `gtfs-validator` 6.0.0: 0 errors,
+2 warnings.** Both warnings are inherent to a one-day feed rather than defects:
+`feed_expiration_date7_days` and `trip_coverage_not_active_for_next7_days`. The
+full report is committed as `data/derived/gtfs_validator_report.json`.
+
+Honest limitations, all visible in the feed rather than hidden: the morning
+peak is absent because the source endpoint is filtered from the moment of the
+call; 32 trips are only partially timed and ship with only the stops that have a
+real timestamp; and four routes have no service in the feed at all because the
+operator publishes no timings for them through this endpoint.
+
 ---
 
 ## 3. Architecture

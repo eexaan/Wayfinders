@@ -1,0 +1,451 @@
+route_id,service_id,trip_id,direction_id,trip_headsign,trip_short_name,wheelchair_accessible,bikes_allowed
+R1,SAT_20261024,R1_018,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_019,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_020,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_021,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_022,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_023,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_024,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_025,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_026,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_027,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_028,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_029,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_030,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_031,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_032,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_033,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_034,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_035,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_036,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_037,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_038,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_039,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_040,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_041,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_042,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_043,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_044,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_045,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_046,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_047,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_048,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_049,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_050,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_051,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_052,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_053,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_054,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_055,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_056,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_057,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_058,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_059,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_060,0,Maafannu Bus Terminal OPP,,0,0
+R1,SAT_20261024,R1_061,0,Maafannu Bus Terminal OPP,,0,0
+R2,SAT_20261024,R2_019,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_020,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_021,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_022,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_023,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_024,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_025,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_026,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_027,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_028,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_029,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_030,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_031,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_032,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_033,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_034,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_035,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_036,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_037,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_038,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_039,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_040,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_041,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_042,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_043,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_044,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_045,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_046,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_047,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_048,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_049,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_050,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_051,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_052,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_053,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_054,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_055,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_056,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_057,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_058,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_059,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_060,0,Artificial Beach,,0,0
+R2,SAT_20261024,R2_061,0,Artificial Beach,,0,0
+R3,SAT_20261024,R3_007,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_008,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_009,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_010,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_011,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_012,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_013,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_014,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_015,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_016,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_017,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_018,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_019,0,Maafannu Bus Terminal OPP,,0,0
+R3,SAT_20261024,R3_020,0,Maafannu Bus Terminal OPP,,0,0
+R4,SAT_20261024,R4_012,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_013,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_014,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_015,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_016,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_017,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_018,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_019,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_020,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_021,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_022,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_023,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_024,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_025,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_026,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_027,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_028,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_029,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_030,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_031,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_032,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_033,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_034,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_035,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_036,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_037,0,Amin Avenue Opp,,0,0
+R4,SAT_20261024,R4_038,0,Amin Avenue Opp,,0,0
+R5,SAT_20261024,R5_006,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_007,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_008,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_009,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_010,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_011,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_012,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_013,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_014,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_015,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_016,0,Masjid Ameel Jaleel,,0,0
+R5,SAT_20261024,R5_017,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_022,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_023,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_024,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_025,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_026,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_027,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_028,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_029,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_030,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_031,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_032,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_033,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_034,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_035,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_036,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_037,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_038,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_039,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_040,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_041,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_042,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_043,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_044,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_045,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_046,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_047,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_048,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_049,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_050,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_051,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_052,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_053,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_054,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_055,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_056,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_057,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_058,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_059,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_060,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_061,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_062,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_063,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_064,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_065,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_066,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_067,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_068,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_069,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_070,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_071,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_072,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_073,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_074,0,Masjid Ameel Jaleel,,0,0
+R6,SAT_20261024,R6_075,0,Masjid Ameel Jaleel,,0,0
+R7,SAT_20261024,R7_021,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_022,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_023,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_024,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_025,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_026,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_027,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_028,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_029,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_030,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_031,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_032,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_033,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_034,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_035,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_036,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_037,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_038,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_039,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_040,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_041,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_042,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_043,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_044,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_045,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_046,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_047,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_048,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_049,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_050,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_051,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_052,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_053,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_054,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_055,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_056,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_057,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_058,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_059,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_060,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_061,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_062,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_063,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_064,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_065,0,H 16 Bus Stop,,0,0
+R7,SAT_20261024,R7_066,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_020,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_021,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_022,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_023,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_024,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_025,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_026,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_027,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_028,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_029,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_030,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_031,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_032,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_033,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_034,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_035,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_036,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_037,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_038,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_039,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_040,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_041,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_042,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_043,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_044,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_045,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_046,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_047,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_048,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_049,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_050,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_051,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_052,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_053,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_054,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_055,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_056,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_057,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_058,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_059,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_060,0,H 16 Bus Stop,,0,0
+R8,SAT_20261024,R8_061,0,H 16 Bus Stop,,0,0
+R9,SAT_20261024,R9_013,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_014,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_015,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_016,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_017,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_018,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_019,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_020,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_021,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_022,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_023,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_024,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_025,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_026,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_027,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_028,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_029,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_030,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_031,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_032,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_033,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_034,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_035,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_036,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_037,0,Masjid Ameel Jaleel,,0,0
+R9,SAT_20261024,R9_038,0,Masjid Ameel Jaleel,,0,0
+R13,SAT_20261024,R13_029,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_030,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_031,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_032,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_033,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_034,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_035,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_036,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_037,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_038,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_039,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_040,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_041,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_042,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_043,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_044,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_045,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_046,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_047,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_048,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_049,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_050,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_051,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_052,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_053,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_054,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_055,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_056,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_057,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_058,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_059,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_060,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_061,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_062,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_063,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_064,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_065,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_066,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_067,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_068,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_069,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_070,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_071,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_072,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_073,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_074,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_075,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_076,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_077,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_078,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_079,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_080,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_081,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_082,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_083,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_084,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_085,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_086,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_087,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_088,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_089,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_090,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_091,0,Villimale Hospital,,0,0
+R13,SAT_20261024,R13_092,0,Villimale Hospital,,0,0
+R14,SAT_20261024,R14_028,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_029,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_030,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_031,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_032,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_033,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_034,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_035,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_036,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_037,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_038,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_039,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_040,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_041,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_042,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_043,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_044,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_045,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_046,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_047,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_048,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_049,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_050,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_051,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_052,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_053,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_054,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_055,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_056,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_057,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_058,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_059,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_060,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_061,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_062,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_063,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_064,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_065,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_066,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_067,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_068,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_069,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_070,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_071,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_072,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_073,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_074,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_075,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_076,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_077,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_078,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_079,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_080,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_081,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_082,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_083,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_084,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_085,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_086,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_087,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_088,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_089,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_090,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_091,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_092,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_093,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_094,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_095,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_096,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_097,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_098,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_099,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_100,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_101,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_102,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_103,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_104,0,Villimale' Ferry Termial Op,,0,0
+R14,SAT_20261024,R14_105,0,Villimale' Ferry Termial Op,,0,0
