@@ -1,6 +1,6 @@
 # Data sources register
 
-**Maldives Datathon 2026 · Team Wayfinders · Raajje Rebalancer**
+**Maldives Datathon 2026 · Team Wayfinders · Pathways**
 
 Every dataset used in this project is listed here with a direct link, its
 publisher, how it is used, and its licence/provenance. The datathon rules

@@ -1,12 +1,12 @@
-# SPEC — *Raajje Rebalancer*
+# SPEC — *Pathways*
 ## A data-driven bus supply decision tool for Greater Malé
 
 **Maldives Datathon 2026 · Team Wayfinders (3 dev + 1 report) · 10-hour build**
 
-> *Raajje* is the Dhivehi name for the Maldives. The bottleneck under most of
-> what follows is the **Sinamalé Bridge**. It is the
-> bottleneck under every number in this document, and it is the reason this
-> project is not about fares.
+> The name is literal: this is a tool about paths — which ones exist, how full
+> they run, and which trips should move between them. The bottleneck under most
+> of what follows is the **Sinamalé Bridge**. It is the bottleneck under every
+> number in this document, and it is the reason this project is not about fares.
 
 ---
 
@@ -33,7 +33,7 @@ committing a single vehicle.
 ## 2. What we are building
 
 ```
-RAJJE REBALANCER
+PATHWAYS
 ├── RECONCILED DATASET   route × day-type × hour demand vs supply, with
 │                        per-row provenance (observed / derived / modelled)
 ├── SCENARIO ENGINE      6 named scenarios, each producing passenger KPIs

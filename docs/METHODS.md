@@ -1,6 +1,6 @@
 # Methods note
 
-**Raajje Rebalancer — Greater Malé bus demand and supply**
+**Pathways — Greater Malé bus demand and supply**
 Maldives Datathon 2026 · Team Wayfinders · 24 October 2026
 
 This note records what data we used, how we processed it, what we assumed, where

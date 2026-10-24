@@ -11,7 +11,7 @@ and how to check any number for yourself in under a minute.
 |---|---|---|---|
 | **Raaish** | Data owner + validation | `data/`, `dashboard/build/build_data.py`, `dashboard/data/`, validation results | UI code, the report text |
 | **Dev B** | Modelling | `build_data.py` demand/scenario functions, `docs/adr/` proposals for model changes | UI code, `data/` sources |
-| **Dev C** | UI | `dashboard/index.html`, `app.js`, `styles.css` | anything in `dashboard/data/` |
+| **Dev C** | UI | `web/src/`, `web/index.html`, `web/src/index.css` | anything in `dashboard/data/` |
 | **Member 4** | Report | `docs/report/`, the deck, the dataset register prose | source data, model code |
 
 **Rule:** one owner per file. If you need a change in someone else's area,

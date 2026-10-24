@@ -1,7 +1,6 @@
 # Dashboard (React + TypeScript + Vite)
 
-The interactive tool. **This is the deliverable**; `dashboard/index.html` at the
-repo root is an earlier static prototype and is not used.
+The interactive tool. **This is the deliverable.**
 
 ```bash
 npm ci
