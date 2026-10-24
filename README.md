@@ -64,15 +64,17 @@ service can fix (16–20 min to shed) and which needs the causeway solved
 
 A reconciled demand–supply dataset (route × day-type × hour, every row
 labelled *observed* / *derived* / *modelled*) feeding a scenario engine that
-recomputes passenger-level KPIs for six named schedule changes, wrapped in an
+recomputes passenger-level KPIs for named schedule changes, wrapped in an
 interactive GIS dashboard.
 
 ```
-S0 baseline             360 boardings over capacity   3.68% unmet   162 trips
-S5 recommended package  242                           2.48%          176 trips
+S0 baseline             381 boardings over capacity   3.79% unmet   162 trips
+S5 recommended package   91                           0.91%         162 trips
+                        (18 trips moved, none added)
 ```
 
-Every change in S5 is a **re-timing**, not a new bus.
+Every scenario is **fleet-neutral**: trips are moved between hours, never added.
+`trips_change` is 0 in all five scenarios and the build asserts it.
 
 ---
 

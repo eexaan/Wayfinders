@@ -239,22 +239,54 @@ A scenario edits the service pattern; the engine recomputes passenger KPIs.
 | `taxi_rides_capturable` | taxi trips that switch to the bus (logit on generalised cost) |
 | `break_even_ride_min` | ride time the bus needs to match a shared taxi |
 
-### Scenarios and results
+### Scenarios and results — every scenario is fleet-neutral
 
-| # | Scenario | What it does | Over-capacity | Unmet | Trips captured |
+**A planner cannot add a bus.** So no scenario adds one. Each is a set of
+**trip moves**: a trip is taken from a named route-hour and given to another
+route-hour on the same service day. `trips_change` is **0 in every scenario by
+construction**, and the build asserts it, so a non-zero value is a bug rather
+than a result.
+
+| # | Scenario | What moves | Trips moved | Over-capacity | Unmet |
 |---|---|---|---|---|---|
-| S0 | Baseline | — | 360 | 3.68% | 162 |
-| S2 | Airport re-timed | +1 departure per hour for R3/R4/R9 in 11:00–15:00, −1 in 22:00–23:00 | **355** | 3.63% | 168 |
-| S3 | Rebalanced to the corridor | 6 trips off the airport routes in the 13:00–14:00 lull, 6 onto R1/R2 at 16:00–18:00 | **349** | 3.61% | 164 |
-| S4 | Express peak | one extra R1/R2 departure in each hour 15:00–18:00 (faster cycle from skipping stops) | **248** | **2.53%** | 170 |
-| **S5** | **Recommended package** | **S2 + S4** | **242 (−118)** | **2.48%** | **176** |
+| S0 | Baseline | — | 0 | 381 | 3.79% |
+| S2 | Airport re-timed | 3 late-night airport trips → airport hours with unmet demand | 3 | 372 (−9) | 3.70% |
+| S3 | Rebalanced to the corridor | 8 trips off the airport afternoon lull → R1/R2 wherever it is over capacity | 8 | **95 (−286)** | 0.94% |
+| S4 | Express peak | 10 off-peak R1/R2 trips → R1/R2 peak hours | 10 | 132 (−249) | 1.31% |
+| **S5** | **Recommended package** | **S3 then S4** | **18** | **91 (−290)** | **0.91%** |
 
-S5 removes **118 boardings from over-capacity** and cuts the unmet share by
-1.2 points with 14 extra trips, all inside the captured window — every change
-is a *re-timing*, not a new bus.
+Total trips stay at **162 in every scenario** (430 network-wide; the KPI is
+scoped to the five routes with ridership data). No donor is ever taken above
+79% load, and every move is logged in `scenario_moves.csv` with the unmet
+demand at the receiver before and after — so the effect of each individual trip
+is auditable, not just the aggregate.
+
+**Donors are chosen by lowest load, receivers by largest unmet demand, one trip
+at a time, with the load recomputed after every move.** Receivers are chosen by
+the data, not by a hand-picked hour window: an earlier version restricted them
+to 15:00–20:00 and therefore refused to relieve R1 at 22:00, where the load is
+152%. The model was hiding its own best answer.
+
+> **Two findings came out of enforcing fleet neutrality.**
+>
+> **1. Re-timing the airport buses alone barely helps (−9 boardings).** At
+> route-hour level the airport routes are *not* over capacity — their crowding
+> is concentrated on one segment (STELCO→VIA at 104%), and adding a trip to an
+> hour whose route average is 70% removes almost no unmet demand as measured
+> here. This is a limitation of a route-hour KPI, not evidence that the airport
+> bus is fine. It is why S3/S4 carry the capacity story and S2 is reported as a
+> near-null result rather than dropped.
+>
+> **2. The recommended package changed.** It used to be S2 + S4, which relieved
+> 118 boardings on an additive model. Under a fixed fleet the two changes that
+> do measurable work are **S3 and S4**, and S2 is no longer part of it.
+>
+> **3. You cannot fine-tune with an 84-seat vehicle.** One trip into an hour
+> with 70 unmet passengers overshoots it to zero. The optimum is a small number
+> of large moves, not many small ones — which is also what a depot faces.
 
 **Caveat to state honestly:** the network-wide mean wait barely moves
-(11.6 min) because the changes are concentrated on a few corridors. The
+(10.8 → 10.8 min) because the changes are concentrated on a few corridors. The
 corridor-level table is the one that matters, and it is reported separately
 (`scenario_corridor_kpis.csv`).
 

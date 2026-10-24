@@ -174,8 +174,17 @@ def fig_scenarios() -> None:
     axes[1].set_xticks(x, labels)
     axes[1].set_ylabel("% of demand unmet")
     axes[1].set_title("unmet demand", loc="left", fontweight="bold")
-    fig.suptitle("F5  Scenarios on the captured service window (S5 = airport re-timing + express peak)",
+    for ax in axes:
+        ax.set_xlabel("trips moved (no new buses)")
+    for i, n in enumerate(k["trips_moved"]):
+        axes[0].text(i, k["boardings_over_capacity"].iloc[i] + 6, f"{int(n)}",
+                     ha="center", fontsize=7.5, color="#333333")
+    fig.suptitle("F5  Every scenario moves trips, none adds one (S5 = reallocate + express peak)",
                  x=0.02, ha="left", fontweight="bold")
+    fig.text(0.02, 0.005,
+             "Total trips are 162 in all five scenarios; the number above each bar is trips moved. "
+             "Trips are taken from low-load hours and given to over-capacity ones.",
+             fontsize=7, color="#555555")
     fig.savefig(FIGS / "F5_scenario_kpis.png")
     plt.close(fig)
 

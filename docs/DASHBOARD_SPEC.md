@@ -212,11 +212,36 @@ proof that the morning was not captured — show it, do not hide it.
 `scenario` (`S0_baseline`, `S2_airport_retimed`, `S3_rebalanced_to_corridor`,
 `S4_express_peak`, `S5_recommended_package`), `mean_wait_min_captured`,
 `boardings_over_capacity`, `unmet_share_pct`, `total_trips_captured`,
-`demand_pax_captured`, `over_capacity_change`, `wait_change_min`,
+`demand_pax_captured`, `trips_moved`, `over_capacity_change`, `wait_change_min`,
 `trips_change`.
+
+> ⚠️ **Changed 2026-10-24 — scenarios are now fleet-neutral.** Every scenario
+> *moves* trips instead of adding them, so **`trips_change` is 0 for all five**
+> and `total_trips_captured` is 162 everywhere. Do not show a "trips added"
+> figure: show **`trips_moved`**, which is 0 / 3 / 8 / 10 / 18. The build
+> asserts neutrality, so a non-zero `trips_change` means a bug, not a result.
+
+> ⚠️ **The recommended package changed content.** S5 was `S2 + S4`; it is now
+> `S3 + S4`, because on measured data airport re-timing alone relieves only 9
+> boardings while cross-corridor reallocation relieves 286. If any copy says
+> "S5 = airport re-timing + express peak", update it.
+
+> `total_trips_captured` counts only the **five routes with ridership data**
+> (162 of the 430 trips captured network-wide). Label it "trips on evaluated
+> routes" if space allows.
 
 > The Friday scenario (`S1`) has been **removed** — the feed returns a single
 > service day, so a Friday service pattern cannot be observed. Do not add it.
+
+### 2.8.1 `scenario_moves.csv` — one row per individual trip move (NEW)
+
+`scenario`, `from_route`, `from_hour`, `to_route`, `to_hour`, `trips`,
+`donor_load_pct`, `donor_unmet_before`, `receiver_unmet_before`,
+`receiver_unmet_after`.
+
+This is the audit trail and the best animation source: each row is one bus
+being taken off one hour and put on another, with what it fixed. Use it for the
+"trips reassigned" table rather than inventing numbers.
 
 ### 2.9 `scenario_corridor_kpis.csv`
 

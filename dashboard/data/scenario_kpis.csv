@@ -1,6 +1,6 @@
-scenario,mean_wait_min_captured,boardings_over_capacity,unmet_share_pct,total_trips_captured,demand_pax_captured,over_capacity_change,wait_change_min,trips_change
-S0_baseline,10.9,360,3.68,162,9805.0,0,0.0,0
-S2_airport_retimed,10.4,355,3.63,168,9786.0,-5,-0.5,6
-S3_rebalanced_to_corridor,10.6,349,3.61,164,9696.0,-11,-0.3,2
-S4_express_peak,10.5,248,2.53,170,9805.0,-112,-0.4,8
-S5_recommended_package,10.0,242,2.48,176,9786.0,-118,-0.9,14
+scenario,mean_wait_min_captured,boardings_over_capacity,unmet_share_pct,total_trips_captured,demand_pax_captured,trips_moved,over_capacity_change,wait_change_min,trips_change
+S0_baseline,10.8,381,3.79,162,10055.0,0,0,0.0,0
+S2_airport_retimed,10.7,372,3.7,162,10055.0,3,-9,-0.1,0
+S3_rebalanced_to_corridor,10.8,95,0.94,162,10055.0,8,-286,0.0,0
+S4_express_peak,10.8,132,1.31,162,10055.0,10,-249,0.0,0
+S5_recommended_package,10.8,91,0.91,162,10055.0,18,-290,0.0,0

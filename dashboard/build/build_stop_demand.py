@@ -64,7 +64,9 @@ OUTPUTS (dashboard/data/)
 
 from __future__ import annotations
 
+import importlib.util
 import pathlib
+import sys
 
 import numpy as np
 import pandas as pd
@@ -474,6 +476,20 @@ def main() -> None:
         for d, c in zip(gap["demand_pax_est"], gap["seat_capacity_hour"])
     ]
     gap.drop(columns=["demand_pax_est_stop_allocated"]).to_csv(OUT / "demand_supply_gap.csv", index=False)
+
+    # Scenarios were computed by build_data.py on the corridor-shape demand this
+    # script has just replaced. Recompute them on the stop-allocated demand so
+    # the scenario KPIs and demand_supply_gap.csv cannot disagree.
+    spec = importlib.util.spec_from_file_location(
+        "build_data", pathlib.Path(__file__).resolve().parent / "build_data.py"
+    )
+    build_data = importlib.util.module_from_spec(spec)
+    sys.modules["build_data"] = build_data
+    spec.loader.exec_module(build_data)
+    kpis_s, corr_s, moves_s = build_data.build_scenarios(pd.read_csv(OUT / "demand_supply_gap.csv"))
+    kpis_s.to_csv(OUT / "scenario_kpis.csv", index=False)
+    corr_s.to_csv(OUT / "scenario_corridor_kpis.csv", index=False)
+    moves_s.to_csv(OUT / "scenario_moves.csv", index=False)
 
     # ---- report ----
     pd.set_option("display.width", 220)
